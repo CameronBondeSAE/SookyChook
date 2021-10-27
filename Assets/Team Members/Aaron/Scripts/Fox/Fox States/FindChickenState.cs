@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 
-public class FindChickenState : AntAIState
+namespace Aaron
 {
-    public GameObject owner;
-    
-    public override void Create(GameObject aGameObject)
+    public class FindChickenState : AntAIState
     {
-        base.Create(aGameObject);
+        public GameObject owner;
+        
+        public override void Create(GameObject aGameObject)
+        {
+            base.Create(aGameObject);
 
-        owner = aGameObject;
-    }
+            owner = aGameObject;
+        }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
+        public override void Enter()
+        {
+            base.Enter();
+        }
 
-    public override void Execute(float aDeltaTime, float aTimeScale)
-    {
-        base.Execute(aDeltaTime, aTimeScale);
-    }
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+        }
 
-    public override void Exit()
-    {
-        base.Exit();
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }
+
