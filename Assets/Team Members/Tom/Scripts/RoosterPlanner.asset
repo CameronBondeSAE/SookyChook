@@ -30,12 +30,16 @@ MonoBehaviour:
       name: isDay
     - id: 7
       name: inCoop
+    - id: 8
+      name: canSeeChicken
+    - id: 9
+      name: chickenUnderAttack
   actions:
   - name: Move to Food
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5163532507073098029, guid: 78faf5784ce027749bd37e64a0f2d4c0, type: 3}
     cost: 0
-    position: {x: 257, y: 231}
+    position: {x: 260, y: 260}
     pre:
     - id: 0
       value: 1
@@ -46,9 +50,9 @@ MonoBehaviour:
       value: 1
   - name: Eat Food
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 7784703468561543898, guid: 650444deccb476242a78ef599e31afd7, type: 3}
     cost: 0
-    position: {x: 254, y: 470}
+    position: {x: 260, y: 520}
     pre:
     - id: 0
       value: 1
@@ -57,40 +61,50 @@ MonoBehaviour:
     post: []
   - name: Patrol
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 4477861139392217575, guid: 6b722aadf27abc045affbd40f842ecb4, type: 3}
     cost: 0
-    position: {x: 488, y: 24}
-    pre: []
+    position: {x: 480, y: 40}
+    pre:
+    - id: 2
+      value: 0
+    - id: 9
+      value: 0
     post: []
   - name: Move to Enemy
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 312701414751266710, guid: ed80d3b7ebc7c504283e21939d31b2ae, type: 3}
     cost: 0
-    position: {x: 487, y: 232}
+    position: {x: 480, y: 260}
     pre:
     - id: 2
       value: 1
     - id: 3
       value: 0
+    - id: 9
+      value: 1
     post:
     - id: 3
       value: 1
   - name: Attack Enemy
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 1559015483753033875, guid: b86bef4adc1eb3a4d8ec8692c2c03556, type: 3}
     cost: 0
-    position: {x: 487, y: 470}
+    position: {x: 480, y: 520}
     pre:
     - id: 3
       value: 1
     - id: 2
       value: 1
-    post: []
+    - id: 9
+      value: 1
+    post:
+    - id: 9
+      value: 0
   - name: Move to Chicken
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 6380970111144934406, guid: 2a01ea630279e6c4c96028590370d863, type: 3}
     cost: 0
-    position: {x: 721, y: 238}
+    position: {x: 700, y: 260}
     pre:
     - id: 4
       value: 1
@@ -101,9 +115,9 @@ MonoBehaviour:
       value: 1
   - name: Mate with Chicken
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 8953463220581284441, guid: f14d91b293e87054683f3a9259d54dc1, type: 3}
     cost: 0
-    position: {x: 718, y: 470}
+    position: {x: 700, y: 520}
     pre:
     - id: 4
       value: 1
@@ -112,9 +126,9 @@ MonoBehaviour:
     post: []
   - name: Move to Coop
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 1715445531738829502, guid: e7b6b4d6e92cd4941a62e1d002c62209, type: 3}
     cost: 0
-    position: {x: 946, y: 234}
+    position: {x: 920, y: 260}
     pre:
     - id: 7
       value: 0
@@ -125,9 +139,9 @@ MonoBehaviour:
       value: 1
   - name: Move to Yard
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 190255346875608976, guid: c7b76e52482ab984db567256782923e6, type: 3}
     cost: 0
-    position: {x: 948, y: 473}
+    position: {x: 920, y: 520}
     pre:
     - id: 6
       value: 1
@@ -136,9 +150,47 @@ MonoBehaviour:
     post:
     - id: 7
       value: 0
+  - name: Find Chicken
+    isDefault: 0
+    state: {fileID: 4477861139392217575, guid: 6b29d02f0f9e4404aba114a5fe9ce879, type: 3}
+    cost: 0
+    position: {x: 700, y: 40}
+    pre:
+    - id: 8
+      value: 0
+    post:
+    - id: 8
+      value: 1
   goals:
   - name: Protect Chickens
-    isDefault: 0
-    position: {x: 255, y: 701}
-    conditions: []
-  worldStates: []
+    isDefault: 1
+    position: {x: 260, y: 780}
+    conditions:
+    - id: 9
+      value: 0
+    - id: 8
+      value: 1
+  worldStates:
+  - position: {x: 476, y: 785}
+    isAutoUpdate: 1
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    - id: 2
+      value: 1
+    - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 1
+    - id: 7
+      value: 0
+    - id: 9
+      value: 1
+    - id: 8
+      value: 1
