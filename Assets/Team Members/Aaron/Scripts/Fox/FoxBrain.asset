@@ -1,0 +1,170 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: FoxBrain
+  m_EditorClassIdentifier: 
+  conditions:
+    list:
+    - id: 0
+      name: isNight
+    - id: 1
+      name: isInHidingSpot
+    - id: 2
+      name: canSeeChicken
+    - id: 3
+      name: canSeePlayer
+    - id: 4
+      name: isDawn
+    - id: 5
+      name: isVisibleToPlayer
+    - id: 6
+      name: gotChicken
+    - id: 7
+      name: chickenDead
+    - id: 8
+      name: inRangeOfChicken
+    - id: 9
+      name: canSeeHidingSpot
+  actions:
+  - name: Find Hiding Spot
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 420, y: 140}
+    pre:
+    - id: 1
+      value: 0
+    - id: 5
+      value: 1
+    post:
+    - id: 9
+      value: 1
+  - name: Move to Hiding Spot
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 620, y: 140}
+    pre:
+    - id: 1
+      value: 0
+    - id: 9
+      value: 1
+    post:
+    - id: 1
+      value: 1
+  - name: Hide in Spot
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 820, y: 140}
+    pre:
+    - id: 1
+      value: 1
+    post:
+    - id: 5
+      value: 0
+  - name: Find Chicken
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 420, y: 360}
+    pre:
+    - id: 0
+      value: 1
+    - id: 2
+      value: 0
+    - id: 6
+      value: 0
+    - id: 5
+      value: 0
+    post:
+    - id: 2
+      value: 1
+  - name: Move to Chicken
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 620, y: 360}
+    pre:
+    - id: 8
+      value: 0
+    - id: 5
+      value: 0
+    - id: 2
+      value: 1
+    - id: 6
+      value: 0
+    post:
+    - id: 8
+      value: 1
+  - name: Attacking
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 820, y: 360}
+    pre:
+    - id: 8
+      value: 1
+    - id: 6
+      value: 0
+    post:
+    - id: 6
+      value: 1
+  - name: Eat Chicken
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1020, y: 360}
+    pre:
+    - id: 6
+      value: 1
+    post:
+    - id: 7
+      value: 1
+  - name: Fleeing
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 420, y: 620}
+    pre: []
+    post: []
+  goals:
+  - name: Get Chicken
+    isDefault: 1
+    position: {x: 420, y: 820}
+    conditions:
+    - id: 7
+      value: 1
+  worldStates:
+  - position: {x: 420, y: 939}
+    isAutoUpdate: 1
+    list:
+    - id: 0
+      value: 1
+    - id: 1
+      value: 1
+    - id: 2
+      value: 0
+    - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+    - id: 7
+      value: 0
+    - id: 8
+      value: 0
+    - id: 9
+      value: 0
