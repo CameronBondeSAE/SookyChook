@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c7329c12b35c3458b9b265dd00d23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPhase: 7
+  currentTime: 7
+  timeDilation: 10
