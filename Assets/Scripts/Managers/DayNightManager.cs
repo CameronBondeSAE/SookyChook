@@ -15,6 +15,7 @@ public class DayNightManager : MonoBehaviour
     // NOTE: Does not work with non-whole-hour times (e.g. 7:30)
     public enum DayPhase
     {
+        Midnight = 0,
         Morning = 7,
         Noon = 12,
         Evening = 17,
@@ -41,14 +42,17 @@ public class DayNightManager : MonoBehaviour
         if (currentTime >= 24f)
         {
             currentTime = 0;
+            currentPhase = DayPhase.Midnight;
+            PhaseChangeEvent?.Invoke(currentPhase);
         }
 
         foreach (DayPhase phase in Enum.GetValues(typeof(DayPhase)))
         {
-            if (currentTime >= (float) phase && phase != currentPhase)
+            if (currentTime >= (float) phase && (int)phase > (int)currentPhase)
             {
                 currentPhase = phase;
-                PhaseChangeEvent?.Invoke(phase);
+                PhaseChangeEvent?.Invoke(currentPhase);
+                print(currentPhase);
             }
         }
     }
