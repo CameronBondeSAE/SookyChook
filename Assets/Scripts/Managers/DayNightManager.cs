@@ -41,19 +41,23 @@ public class DayNightManager : MonoBehaviour
         // Wraps time back to 0 when it hits midnight
         if (currentTime >= 24f)
         {
-            currentTime = 0;
-            currentPhase = DayPhase.Midnight;
-            PhaseChangeEvent?.Invoke(currentPhase);
+            ChangePhase(DayPhase.Midnight);
         }
 
         foreach (DayPhase phase in Enum.GetValues(typeof(DayPhase)))
         {
             if (currentTime >= (float) phase && (int)phase > (int)currentPhase)
             {
-                currentPhase = phase;
-                PhaseChangeEvent?.Invoke(currentPhase);
-                print(currentPhase);
+                ChangePhase(phase);
             }
         }
+    }
+
+    public void ChangePhase(DayPhase newPhase)
+    {
+        currentPhase = newPhase;
+        currentTime = (float) newPhase;
+        PhaseChangeEvent?.Invoke(newPhase);
+        print(newPhase);
     }
 }
