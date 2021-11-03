@@ -123,6 +123,71 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &989700449
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4968138018486730030, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: timeRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968138018486730030, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: currentPhase
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684037111711766385, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009633579397858368, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
+      propertyPath: m_Name
+      value: Day Night Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
 --- !u!1 &1372275024
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +542,10 @@ PrefabInstance:
     - target: {fileID: 6557673940817428339, guid: 0963c207d6323364e96e6a234ae00349, type: 3}
       propertyPath: m_Name
       value: Rooster
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557673940817428339, guid: 0963c207d6323364e96e6a234ae00349, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0963c207d6323364e96e6a234ae00349, type: 3}
