@@ -21,13 +21,21 @@ namespace Rob
         public Transform[] spawnPoints;
         public List<GameObject> animalsSpawned;
 
-         
+        
+        
+        //will delete this part eventually 
+        public GameObject animal;
+        public Transform spawnPoint;
+        // ^^
 
         
+        
+        private WildLife currentWildLife;
+        private WildLife currentAnimal;
+
 
         private void Awake()
         {
-            
         }
 
         private void Start()
@@ -35,35 +43,42 @@ namespace Rob
             FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
         }
 
+        
         private void ChangePhase(DayNightManager.DayPhase timeOfDay)
         {
-             if (timeOfDay == DayNightManager.DayPhase.Morning)
-             {
-                 //insert spawn logic here?
-                 foreach (WildLife animal in animalsToSpawn)
-                 {
-                     
-                 }
-                 Debug.Log(" its " + timeOfDay);
-             }
+            if (timeOfDay == DayNightManager.DayPhase.Midnight)
+            {
+                Instantiate(animal, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log(" its " + timeOfDay);
+            }
             
-             if (timeOfDay == DayNightManager.DayPhase.Noon)
-             {
-                 //insert spawn logic here?
-                 Debug.Log(" its " + timeOfDay);
-             }
-            
-             if (timeOfDay == DayNightManager.DayPhase.Evening)
-             {
-                 //insert spawn logic here?
-                 Debug.Log(" its " + timeOfDay);
-             }
-            
-             if (timeOfDay == DayNightManager.DayPhase.Night)
-             {
-                 //insert spawn logic here?
-                 Debug.Log(" its " + timeOfDay);
-             }
+            if (timeOfDay == DayNightManager.DayPhase.Morning)
+            {
+                //insert spawn logic here?
+                Instantiate(animal, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log(" its " + timeOfDay);
+            }
+
+            if (timeOfDay == DayNightManager.DayPhase.Noon)
+            {
+                //insert spawn logic here?
+                Instantiate(animal, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log(" its " + timeOfDay);
+            }
+
+            if (timeOfDay == DayNightManager.DayPhase.Evening)
+            {
+                //insert spawn logic here?
+                Instantiate(animal, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log(" its " + timeOfDay);
+            }
+
+            if (timeOfDay == DayNightManager.DayPhase.Night)
+            {
+                //insert spawn logic here?
+                Instantiate(animal, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log(" its " + timeOfDay);
+            }
         }
     }
 }
