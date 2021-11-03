@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayNightManager : MonoBehaviour
+public class DayNightManager : ManagerBase<DayNightManager>
 {
     // Set the value of each phase to the time it should start
     // NOTE: Does not work with non-whole-hour times (e.g. 7:30)

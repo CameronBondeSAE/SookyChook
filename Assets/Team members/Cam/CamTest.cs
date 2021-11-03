@@ -7,7 +7,8 @@ public class CamTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<Rigidbody>();
+        // Instantiate(thingToSpawn);
     }
 
     // Update is called once per frame
