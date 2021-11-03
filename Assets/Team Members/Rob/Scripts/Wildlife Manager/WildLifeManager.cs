@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WildLifeManager : MonoBehaviour
+namespace Rob
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class WildLifeManager : MonoBehaviour
     {
+        [System.Serializable]
+        public class WildLife
+        {
+            public GameObject[] wildlife;
+            public int count;
+            public float timeBetweenSpawns;
+        }
         
+        public WildLife[] animalsToSpawn;
+        public Transform[] spawnPoints;
+        public List<GameObject> animalsSpawned;
+
+
+
+
+
+
     }
 }
