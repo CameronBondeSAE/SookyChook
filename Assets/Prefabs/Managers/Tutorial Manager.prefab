@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8621796136488353215}
   m_Layer: 0
-  m_Name: TutorialManager
+  m_Name: Tutorial Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
