@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3538844419382843856}
-  speed: 5
-  turnRadius: 10
-  frictionAmount: 5
+  speed: 2
+  turnRadius: 50
+  frictionAmount: 1
   acceleration: 0
   steering: 0
   localVelocity: {x: 0, y: 0, z: 0}
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myVehicle: {fileID: 3538844419382843858}
+  playerInput: {x: 0, y: 0}
 --- !u!1001 &158764201867259447
 PrefabInstance:
   m_ObjectHideFlags: 0
