@@ -27,7 +27,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3538844419490889431}
+  - {fileID: 4394796345311082372}
   - {fileID: 158764202582030093}
   - {fileID: 158764201656862807}
   - {fileID: 158764202337794848}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3538844419382843858}
   - component: {fileID: 3538844419382843859}
   m_Layer: 0
-  m_Name: VehiclePrefab
+  m_Name: TractorPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,12 +77,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3538844419382843860}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5bb2eb2321ca27c4d973d6cabda7b3c9, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4886986, z: 1.8759155}
-  m_Center: {x: 0, y: -0.34870356, z: 0.034908295}
+  m_Size: {x: 2.95, y: 2.6525083, z: 3.78}
+  m_Center: {x: 0, y: 0.5454395, z: 0}
 --- !u!54 &3538844419382843856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3538844419382843860}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3538844419382843856}
-  speed: 2
+  speed: 1000
   turnRadius: 50
   frictionAmount: 1
   acceleration: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   localVelocity: {x: 0, y: 0, z: 0}
   xVelocity: 0
   steeringWheels:
-  - {fileID: 3538844419490889431}
+  - {fileID: 4394796345311082372}
   - {fileID: 158764202582030093}
   drivingWheels:
   - {fileID: 158764201656862807}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myVehicle: {fileID: 3538844419382843858}
   playerInput: {x: 0, y: 0}
---- !u!1001 &158764201867259447
+--- !u!1001 &1141091796626679652
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -156,11 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.41
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.571
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalRotation.w
@@ -194,20 +194,16 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 3538844419382843856}
-    - target: {fileID: 3686349181686386913, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
-      propertyPath: suspensionLength
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
-      value: ThrusterPoint
+      value: FrontRightWheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
---- !u!4 &3538844419490889431 stripped
+--- !u!4 &4394796345311082372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
-  m_PrefabInstance: {fileID: 158764201867259447}
+  m_PrefabInstance: {fileID: 1141091796626679652}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3538844418726111213
 PrefabInstance:
@@ -226,11 +222,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.41
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.571
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalRotation.w
@@ -266,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 3538844419382843856}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
-      value: ThrusterPoint (1)
+      value: FrontLeftWheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
@@ -285,6 +281,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
       propertyPath: m_LocalPosition.x
@@ -354,11 +362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.41
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.45600045
+      value: -0.7699996
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalRotation.w
@@ -394,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 3538844419382843856}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
-      value: ThrusterPoint (3)
+      value: BackLeftWheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
@@ -420,11 +428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.41
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.456
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386912, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_LocalRotation.w
@@ -460,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 3538844419382843856}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
-      value: ThrusterPoint (2)
+      value: BackRightWheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
