@@ -40,7 +40,7 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""id"": ""482ae73e-6934-4184-920b-e82d1fe550ae"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
