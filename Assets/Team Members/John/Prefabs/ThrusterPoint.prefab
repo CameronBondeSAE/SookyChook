@@ -47,7 +47,7 @@ MonoBehaviour:
   suspensionLength: 1
   maxHeight: 0.5
   force: 0
-  maxForce: 10
+  maxForce: 50000
   suspensionCurve:
     serializedVersion: 2
     m_Curve:
