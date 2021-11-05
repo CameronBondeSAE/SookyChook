@@ -15,4 +15,9 @@ public class Test : MonoBehaviour
     {
         
     }
+
+    public void TestDoThing()
+    {
+        Debug.Log("TestDoThing");
+    }
 }
