@@ -39,7 +39,6 @@ namespace Rob
         private void Start()
         {
             FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
-            
         }
 
         public void ChangePhase(DayNightManager.DayPhase timeOfDay)
@@ -53,12 +52,15 @@ namespace Rob
                     for (int j = 0; j < wildLife[i].animalCount; j++)
                     {
                         Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                        Vector3 position = randomTransform.position;
-                        position = Random.insideUnitCircle * 5;
-                        //randomTransform.position = position;
+                        Vector3 spawnPos = randomTransform.position;
+                        spawnPos = new Vector3(spawnPos.x, spawnPos.y+ 5, spawnPos.z);
+                        Vector3 randomSpot = Random.insideUnitCircle * 5;
+                        randomSpot.z = randomSpot.y; //hack, im sure there is an easier way to do this
+                        randomSpot.y = spawnPos.y; //hack, im sure there is an easier way to do this
+                        Debug.Log(randomSpot);
                         GameObject randomWildlife =
                             currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
-                        GameObject spawnedWildlife = Instantiate(randomWildlife, position + new Vector3(position.x, 50, position.z),
+                        GameObject spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
                             randomTransform.rotation);
                         animalsSpawned.Add(spawnedWildlife);
                     }
@@ -85,7 +87,6 @@ namespace Rob
                 Handles.color = Color.green;
                 Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, 5);
 #endif
-                
             }
         }
     }
