@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 47.651154, g: 46.62805, b: 55.98462, a: 1}
+  m_IndirectSpecularColor: {r: 50.87256, g: 53.1073, b: 77.307495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4816,7 +4816,7 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491072406}
-  m_Material: {fileID: 13400000, guid: 5bb2eb2321ca27c4d973d6cabda7b3c9, type: 2}
+  m_Material: {fileID: 0}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 585aa9d056cd51544b2d44d9e0620646, type: 2}
   m_EnableTreeColliders: 1
