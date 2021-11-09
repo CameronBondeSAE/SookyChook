@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +16,8 @@ public class DayNightManager : ManagerBase<DayNightManager>
         Night = 21
     }
 
+    
+    
     [Tooltip("Set this to the starting state, it will overwrite the time and call the phase's event")]
     public DayPhase currentPhase = DayPhase.Morning;
 
@@ -31,6 +33,7 @@ public class DayNightManager : ManagerBase<DayNightManager>
     /// E.g. "if phase == DayNightManager.DayPhase.Morning" for morning functions
     /// </summary>
     public event Action<DayPhase> PhaseChangeEvent;
+    
 
     private void Start()
     {
