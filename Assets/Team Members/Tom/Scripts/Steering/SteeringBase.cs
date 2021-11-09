@@ -9,6 +9,8 @@ namespace Tom
     {
         protected Rigidbody rb;
 
+        public float neighbourRadius = 5f;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -21,7 +23,7 @@ namespace Tom
 
         public List<Transform> GetNeighbours()
         {
-            Collider[] cols = Physics.OverlapSphere(transform.position, 5f);
+            Collider[] cols = Physics.OverlapSphere(transform.position, neighbourRadius);
             List<Transform> neighbours = new List<Transform>();
 
             foreach (Collider c in cols)
@@ -33,6 +35,11 @@ namespace Tom
             }
 
             return neighbours;
+        }
+
+        public void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, neighbourRadius);
         }
     }
 }
