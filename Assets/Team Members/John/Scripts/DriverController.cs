@@ -8,6 +8,7 @@ public class DriverController : MonoBehaviour
     [Header("Vehicle Reference")]
     public VehicleModel myVehicle;
 
+    [Header("For Reference Only")]
     public Vector2 playerInput;
 
     private void Start()
