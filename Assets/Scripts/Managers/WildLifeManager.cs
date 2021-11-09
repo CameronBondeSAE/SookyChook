@@ -53,10 +53,12 @@ namespace Rob
                     for (int j = 0; j < wildLife[i].animalCount; j++)
                     {
                         Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                        randomTransform.position = Random.insideUnitCircle * 5;
+                        Vector3 position = randomTransform.position;
+                        position = Random.insideUnitCircle * 5;
+                        //randomTransform.position = position;
                         GameObject randomWildlife =
                             currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
-                        GameObject spawnedWildlife = Instantiate(randomWildlife, randomTransform.position,
+                        GameObject spawnedWildlife = Instantiate(randomWildlife, position + new Vector3(position.x, 50, position.z),
                             randomTransform.rotation);
                         animalsSpawned.Add(spawnedWildlife);
                     }
