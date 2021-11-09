@@ -11,31 +11,37 @@ namespace Tom
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
-            if (GUILayout.Button("Change to Morning"))
+            
+            GUILayout.BeginHorizontal();
+            
+            GUILayout.Label("Set Phase");
+            
+            if (GUILayout.Button("Morning"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Morning);
             }
         
-            if (GUILayout.Button("Change to Noon"))
+            if (GUILayout.Button("Noon"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Noon);
             }
         
-            if (GUILayout.Button("Change to Evening"))
+            if (GUILayout.Button("Evening"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Evening);
             }
         
-            if (GUILayout.Button("Change to Night"))
+            if (GUILayout.Button("Night"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Night);
             }
         
-            if (GUILayout.Button("Change to Midnight"))
+            if (GUILayout.Button("Midnight"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Midnight);
             }
+            
+            GUILayout.EndHorizontal();
         }
     }
 }
