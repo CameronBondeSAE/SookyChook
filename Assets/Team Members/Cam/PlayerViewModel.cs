@@ -41,7 +41,8 @@ public class PlayerViewmodel : MonoBehaviour
     {
         animator.SetFloat("LookDirectionActive", characterModel.lookMovementDirection.magnitude);
         animator.SetFloat("Velocity",            characterModel.rb.velocity.magnitude);
-        
-        particleSystem.Emit((int)(characterModel.rb.velocity.magnitude * Time.deltaTime));
+
+        int velocityMagnitude = (int)(characterModel.rb.velocity.magnitude * Time.deltaTime);
+        particleSystem.Emit(velocityMagnitude);
     }
 }
