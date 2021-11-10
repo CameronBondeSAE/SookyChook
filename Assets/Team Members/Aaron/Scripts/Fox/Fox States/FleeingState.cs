@@ -8,7 +8,9 @@ namespace Aaron
     public class FleeingState : AntAIState
     {
         public GameObject owner;
-    
+        
+        private bool isDawn;
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -19,11 +21,16 @@ namespace Aaron
         public override void Enter()
         {
             base.Enter();
+            
+            //Find den point, Get position
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            //Move directly towards den (pahtfinding)
+            //Steering behaviour to avoid player sight
         }
 
         public override void Exit()
