@@ -44,7 +44,7 @@ public class AtmosphereManager : MonoBehaviour
         }
         
         // if time is morning
-        if ((sunPosition = 285) !=0)
+        if (sunPosition >= 285)
         {
             //Sun = Sun.GetComponent<Light>().enabled;
             //currentState = Sun;
@@ -56,13 +56,13 @@ public class AtmosphereManager : MonoBehaviour
         }
         
         // if time is noon  
-        if (sunPosition == 0)
+        if (sunPosition >= 0)
         {
             currentState = Sun;
         } 
             
         // if time is evening
-        if ((sunPosition = 75) !=0)
+        if (sunPosition >= 75)
         {
             currentState = Moon;
             Sun.SetActive(false);
@@ -70,13 +70,13 @@ public class AtmosphereManager : MonoBehaviour
         }
         
         // if time is night
-        if ((sunPosition = 135) != 0)
+        if (sunPosition>=135)
         {
             //currentState = Moon;
         }
         
         // if time is midnight
-        if ((sunPosition = 180) !=0)
+        if (sunPosition >=180)
         {
             //currentState = Moon;
         }
