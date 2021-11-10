@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VehicleModel : MonoBehaviour
+public class VehicleModel : MonoBehaviour, IVehicleBase
 {
     [Header("Vehicle Attributes")]
     public Rigidbody rb;
@@ -27,11 +27,11 @@ public class VehicleModel : MonoBehaviour
     private void Update()
     {
         //This vehicles velocity
-        localVelocity = transform.InverseTransformDirection(rb.velocity);
-        xVelocity = localVelocity.x;
+        //localVelocity = transform.InverseTransformDirection(rb.velocity);
+        //xVelocity = localVelocity.x;
 
         //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
-        rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
+        //rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
     }
     void FixedUpdate()
     {
@@ -48,5 +48,25 @@ public class VehicleModel : MonoBehaviour
             //rb.AddRelativeForce(Input.GetAxis("Vertical") * driveWheel.forward * speed);
             rb.AddForceAtPosition(driveWheel.forward * acceleration * speed, driveWheel.position);
         }
+    }
+
+    public void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Exit()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Steer(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Accelerate(float amount)
+    {
+        acceleration = amount;
     }
 }

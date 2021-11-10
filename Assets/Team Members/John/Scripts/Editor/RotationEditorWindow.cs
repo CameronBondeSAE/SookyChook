@@ -6,14 +6,20 @@ using UnityEditor;
 public class RotationEditorWindow : EditorWindow
 {
     //Variables
-    int pitch;
-    int yaw;
-    int roll;
+    List<float> pitches = new List<float>();
+    List<float> yaws = new List<float>();
+    List<int> rolls = new List<int>();
     int defaultRotation = 0;
 
     bool usePitch = true;
     bool useYaw = true;
     bool useRoll = true;
+
+    int pitch;
+    int yaw;
+    int roll;
+
+    int indexCounter = 0;
 
 
     // Add menu named "My Window" to the Window menu
@@ -27,36 +33,58 @@ public class RotationEditorWindow : EditorWindow
 
     void OnGUI()
     {
+        //Get Menu Data
+        //PlayerPrefs.SetBool?
+
         GUILayout.Label("Options", EditorStyles.boldLabel);
 
         usePitch = EditorGUILayout.Toggle("Pitch", usePitch);
         if(usePitch)
         {
-            pitch = Random.Range(0, 361);
+            foreach (Transform t in Selection.transforms)
+            {
+                pitches.Add(Random.Range(0, 361));
+            }
         }
-        else
+        else if(!usePitch)
         {
-            pitch = defaultRotation;
+            foreach (Transform t in Selection.transforms)
+            {
+                pitches.Add(0);
+            }
         }
 
         useYaw = EditorGUILayout.Toggle("Yaw", useYaw);
         if (useYaw)
         {
-            yaw = Random.Range(0, 361);
+            foreach (Transform t in Selection.transforms)
+            {
+                yaws.Add(Random.Range(0, 361));
+            }
         }
-        else
+        else if(!useYaw)
         {
-            yaw = defaultRotation;
+            foreach (Transform t in Selection.transforms)
+            {
+                yaws.Add(0);
+            }
+
         }
 
         useRoll = EditorGUILayout.Toggle("Roll", useRoll);
         if (useRoll)
         {
-            roll = Random.Range(0, 361);
+            foreach (Transform t in Selection.transforms)
+            {
+                rolls.Add(Random.Range(0, 361));
+            }
         }
-        else
+        else if(!useRoll)
         {
-            roll = defaultRotation;
+            foreach (Transform t in Selection.transforms)
+            {
+                rolls.Add(0);
+            }
         }
 
         //EditorGUILayout.EndToggleGroup();
@@ -65,7 +93,24 @@ public class RotationEditorWindow : EditorWindow
         {
             foreach (Transform t in Selection.transforms)
             {
-                t.rotation = Quaternion.Euler(pitch, yaw, roll);
+                t.rotation = Quaternion.Euler(pitches[indexCounter], yaws[indexCounter], rolls[indexCounter]);
+                indexCounter++;
+            }
+        }
+
+        if (GUILayout.Button("Test"))
+        {
+            foreach (Transform t in Selection.transforms)
+            {
+                t.rotation = Quaternion.Euler(Random.Range(0, 361), Random.Range(0, 361), Random.Range(0, 361));
+            }
+        }
+
+        if (GUILayout.Button("Reset Rotation"))
+        {
+            foreach (Transform t in Selection.transforms)
+            {
+                t.rotation = Quaternion.Euler(defaultRotation, defaultRotation, defaultRotation);
             }
         }
     }

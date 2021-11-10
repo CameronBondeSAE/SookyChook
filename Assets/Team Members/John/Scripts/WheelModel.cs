@@ -10,6 +10,11 @@ public class WheelModel : MonoBehaviour
     public float maxHeight = 1f;
     public float force = 0;
     public float maxForce = 1f;
+    public float frictionAmount = 5f;
+
+    [Space]
+    public Vector3 localVelocity;
+    public float xVelocity;
 
     [Space]
     public AnimationCurve suspensionCurve;
@@ -20,6 +25,15 @@ public class WheelModel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //This vehicles velocity
+        localVelocity = transform.InverseTransformDirection(rb.velocity);
+        xVelocity = localVelocity.x;
+
+        //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
+        rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
+
+
         // Container for useful info coming from casting functions (note ‘out’ below)
         RaycastHit hitinfo;
         hitinfo = new RaycastHit();

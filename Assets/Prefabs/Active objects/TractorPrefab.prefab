@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3538844419382843856}
-  speed: 1000
+  speed: 750
   turnRadius: 50
   frictionAmount: 1
   acceleration: 0
@@ -194,6 +194,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 3538844419382843856}
+    - target: {fileID: 3686349181686386913, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
+      propertyPath: frictionAmount
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
       value: FrontRightWheel
@@ -260,6 +264,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 3538844419382843856}
+    - target: {fileID: 3686349181686386913, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
+      propertyPath: frictionAmount
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
       value: FrontLeftWheel
@@ -400,6 +408,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 3538844419382843856}
+    - target: {fileID: 3686349181686386913, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
+      propertyPath: frictionAmount
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
       value: BackLeftWheel
@@ -466,6 +478,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 3538844419382843856}
+    - target: {fileID: 3686349181686386913, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
+      propertyPath: frictionAmount
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3686349181686386927, guid: fc53bbd0007ba0346b2b63c0e6b86281, type: 3}
       propertyPath: m_Name
       value: BackRightWheel

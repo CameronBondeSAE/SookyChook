@@ -14,6 +14,8 @@ public class CharacterModel : MonoBehaviour
     private float turnSpeed = 15f;
 
     public Vector3 lookMovementDirection;
+    [SerializeField]
+    bool onGround = true;
 
     public event Action JumpEvent;
     public event Action LandedEvent;
@@ -22,6 +24,9 @@ public class CharacterModel : MonoBehaviour
     // Start is called before the first frame update
     public void Jump()
     {
+        if (!onGround)
+            return;
+        
         rb.AddForce(0,jumpHeight,0, ForceMode.VelocityChange);
         JumpEvent?.Invoke();
     }
@@ -29,6 +34,9 @@ public class CharacterModel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!onGround)
+            return;
+        
         Vector3 movementDirectionFinal = new Vector3(movementDirection.x, 0, movementDirection.y);
         rb.AddForce(movementDirectionFinal * speed, ForceMode.Acceleration);
         lookMovementDirection = movementDirectionFinal;
@@ -54,16 +62,19 @@ public class CharacterModel : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        onGround = true;
         LandedEvent?.Invoke();
     }
 
     void OnCollisionExit(Collision other)
     {
+        onGround = false;
         OnGroundEvent?.Invoke(false);
     }
 
     void OnCollisionStay(Collision other)
     {
+        onGround = true;
         OnGroundEvent?.Invoke(true);
     }
 }
