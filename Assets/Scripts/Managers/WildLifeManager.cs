@@ -31,10 +31,6 @@ namespace Rob
 
         public List<GameObject> animalsSpawned;
 
-        private void Awake()
-        {
-        }
-
         private void Start()
         {
             FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
@@ -42,15 +38,15 @@ namespace Rob
 
         public void ChangePhase(DayNightManager.DayPhase timeOfDay)
         {
-            for (int i = 0; i < wildLife.Length; i++)
+            for (int i = 0; i < wildLife.Length; i++) //searches through all of wildLife aray
             {
-                if (wildLife[i].phaseTime == timeOfDay)
+                if (wildLife[i].phaseTime == timeOfDay) //if the wildlife dayPhase inside the array matches current day phase
                 {
                     currentWildLife = wildLife[i];
 
-                    for (int j = 0; j < wildLife[i].animalCount; j++)
+                    for (int j = 0; j < currentWildLife.animalCount; j++)
                     {
-                        Transform randomTransform = wildLife[i].spawnPoints[Random.Range(0, wildLife[i].spawnPoints.Length)];
+                        Transform randomTransform = currentWildLife.spawnPoints[Random.Range(0, currentWildLife.spawnPoints.Length)];
                         Vector3 spawnPos = randomTransform.position;
                         spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
                         Vector3 randomSpot = Random.insideUnitCircle * 5;
