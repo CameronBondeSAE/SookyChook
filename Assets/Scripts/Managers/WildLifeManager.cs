@@ -16,26 +16,20 @@ namespace Rob
         public class WildLife
         {
             public GameObject[] animals;
+            public Transform[] spawnPoints;
             public int animalCount;
-            public bool maintainNumberSpawned;
-            public int timeBetweenSpawns;
             public DayNightManager.DayPhase phaseTime;
         }
 
 
         public WildLife[] wildLife;
-        public bool clearList;
         public float groundOffset;
         private WildLife currentWildLife;
 
         // add as many as you need for the animals needed to spawn
-        public Transform[] spawnPoints;
+        
 
         public List<GameObject> animalsSpawned;
-
-        private void Awake()
-        {
-        }
 
         private void Start()
         {
@@ -44,15 +38,15 @@ namespace Rob
 
         public void ChangePhase(DayNightManager.DayPhase timeOfDay)
         {
-            for (int i = 0; i < wildLife.Length; i++)
+            for (int i = 0; i < wildLife.Length; i++) //searches through all of wildLife aray
             {
-                if (wildLife[i].phaseTime == timeOfDay)
+                if (wildLife[i].phaseTime == timeOfDay) //if the wildlife dayPhase inside the array matches current day phase
                 {
                     currentWildLife = wildLife[i];
 
-                    for (int j = 0; j < wildLife[i].animalCount; j++)
+                    for (int j = 0; j < currentWildLife.animalCount; j++)
                     {
-                        Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                        Transform randomTransform = currentWildLife.spawnPoints[Random.Range(0, currentWildLife.spawnPoints.Length)];
                         Vector3 spawnPos = randomTransform.position;
                         spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
                         Vector3 randomSpot = Random.insideUnitCircle * 5;
@@ -62,16 +56,18 @@ namespace Rob
                             currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
                         GameObject spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
                             randomTransform.rotation);
-                        RaycastHit hit;
-                        
-                        if (Physics.Raycast(spawnedWildlife.transform.position, Vector3.down, out hit, 20))
+
+                        if (Physics.Raycast(spawnedWildlife.transform.position, Vector3.down, out RaycastHit hit, 20))
                         {
-                            Debug.DrawRay(spawnedWildlife.transform.position, Vector3.down * hit.distance, Color.blue);
+                            Vector3 newSpawnPos = spawnedWildlife.transform.position;
+                            Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
                             Debug.Log(hit.distance);
-                            spawnedWildlife.transform.position = new Vector3(spawnedWildlife.transform.position.x,
-                                spawnedWildlife.transform.position.y - (hit.distance - groundOffset) ,
-                                spawnedWildlife.transform.position.z);
+                            newSpawnPos = new Vector3(newSpawnPos.x,
+                                newSpawnPos.y - (hit.distance - groundOffset),
+                                newSpawnPos.z);
+                            spawnedWildlife.transform.position = newSpawnPos;
                         }
+                        
                         animalsSpawned.Add(spawnedWildlife);
                     }
                 }
@@ -89,14 +85,15 @@ namespace Rob
 
         private void OnDrawGizmos()
         {
-            foreach (Transform spawnPoint in spawnPoints)
+            if (currentWildLife != null)
             {
-                // Gizmos.color = Color.green;
-                // Gizmos.DrawSphere(spawnPoint.position, 5);
+                foreach (Transform spawnPoint in currentWildLife.spawnPoints)
+                {
 #if UNITY_EDITOR || UNITY_EDITOR_64
-                Handles.color = Color.green;
-                Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, 5);
+                    Handles.color = Color.green;
+                    Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, 5);
 #endif
+                }
             }
         }
     }
