@@ -17,6 +17,11 @@ public class CharacterModel : MonoBehaviour
     [SerializeField]
     bool onGround = true;
 
+    [SerializeField]
+    Vector3 interactRayOffset = new Vector3(0,-0.8f,0);
+
+    public float interactDistance = 1f;
+
     public event Action JumpEvent;
     public event Action LandedEvent;
     public event Action<bool> OnGroundEvent;
@@ -57,7 +62,21 @@ public class CharacterModel : MonoBehaviour
 
     public void Interact()
     {
+        RaycastHit hit;
+        // Physics.Raycast(new Ray(transform.position + interactRayOffset, transform.forward), out hit, interactDistance);
+        Ray ray = new Ray(transform.position + interactRayOffset, transform.forward);
         
+        Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.green);
+        if (Physics.Raycast(ray, out hit, interactDistance))
+        {
+            Collider     hitCollider = hit.collider;
+            IVehicleBase vehicleBase = hitCollider?.gameObject.GetComponent<IVehicleBase>();
+            if (vehicleBase != null)
+            {
+                vehicleBase.Accelerate(50f);
+            }
+        }
+
     }
 
     void OnCollisionEnter(Collision other)
