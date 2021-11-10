@@ -10,48 +10,77 @@ public class AtmosphereManager : MonoBehaviour
     
     // Sun and Moon Objects
     public GameObject Sun;
+    private Light sunLight;
     public GameObject Moon;
+    private Light moonLight;
+    public GameObject currentState;
     
     // Start is called before the first frame update
     void Start()
     {
-        // 360 degrees / 24hrs = 15 to calculate day-night cycle
-        sunPosition = FindObjectOfType<DayNightManager>().currentTime * 15.0f;
-        Quaternion.Euler(sunPosition, 0, 0);
-
+        //sunLight = Sun.GetComponent<Light>();
+        //moonLight = Sun.GetComponent<Light>();
+        
+        //sunLight = GetComponent<Light>();
+        //moonLight = GetComponent<Light>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if time is morning
-        if (sunPosition >= 105)
+        // 360 degrees / 24hrs = 15 to calculate day-night cycle. Then - 180 as zero is noon
+        sunPosition = FindObjectOfType<DayNightManager>().currentTime * 15.0f-180.0f;
+        
+        // Sun Rotation
+        transform.rotation=Quaternion.Euler(sunPosition, 0, 0);
+        //Quaternion.Euler(sunPosition, 0, 0);
+        if (Sun == true && Moon==false)
         {
-            
+            Sun = currentState;
+        }
+        if (Moon == true && Sun ==false)
+        {
+            Moon = currentState;
+        }
+        
+        // if time is morning
+        if ((sunPosition = 285) !=0)
+        {
+            //Sun = Sun.GetComponent<Light>().enabled;
+            //currentState = Sun;
+            Moon.SetActive(false);
+            Sun.SetActive(true);
+            currentState = Sun;
+            //sunLight.enabled = true;
+            //moonLight.enabled = false;
         }
         
         // if time is noon  
-        if (sunPosition >= 180)
+        if (sunPosition == 0)
         {
-            
+            currentState = Sun;
         } 
             
         // if time is evening
-        if (sunPosition >= 255)
+        if ((sunPosition = 75) !=0)
         {
-            
+            currentState = Moon;
+            Sun.SetActive(false);
+            Moon.SetActive(true);
         }
         
         // if time is night
-        if (sunPosition >= 315)
+        if ((sunPosition = 135) != 0)
         {
-            
+            //currentState = Moon;
         }
         
         // if time is midnight
-        if (sunPosition >= 0)
+        if ((sunPosition = 180) !=0)
         {
-            
+            //currentState = Moon;
         }
     }
 }
+
+
