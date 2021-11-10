@@ -15,8 +15,8 @@ namespace Aaron
         
         public List<GameObject> chickensList;
         public List<GameObject> roostersList;
-        public List<GameObject> eggsList;
-        
+        public List<GameObject> fertilisedEggsList;
+
         private string[] UnlovedNames;
         private string[] LovedNames;
         private string[] RoosterNames;
@@ -35,8 +35,8 @@ namespace Aaron
         {
             chickensList = new List<GameObject>();
             roostersList = new List<GameObject>();
-            eggsList = new List<GameObject>();
-            
+            fertilisedEggsList = new List<GameObject>();
+
             UnlovedNames = new string[]
             {
                 "Farm To Table", "Two Piece Feed", "Pluckhead", "Cock", "Yolks On You", "Pie", "Bucket",
@@ -50,19 +50,11 @@ namespace Aaron
             };
             RoosterNames = new string[]
                 {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel"};
-            
-            
+
             //On Game Setup
             /*SpawnChickens();
             SpawnRoosters();
-            SpawnEggs();*/
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
+            */            
         }
 
         public void SpawnChickens()
@@ -92,21 +84,6 @@ namespace Aaron
             
             roostersList.Add(copy);
         }
-
-        public void SpawnEggs()
-        {
-            GameObject copy = egg;
-            spawnRangeX = Random.Range(spawnRangeXMin, spawnRangeXMax);
-            spawnRangeZ = Random.Range(spawnRangeZMin, spawnRangeZMax);
-            
-            //Instantiate Eggs
-            Instantiate(copy, new Vector3(spawnRangeX, spawnHeight, spawnRangeZ), copy.transform.rotation);
-
-            eggsList.Add(copy);
-        }
-        
         //Change Name if chicken becomes attached; change nametag object and name shown
-        
-        
     }
 }
