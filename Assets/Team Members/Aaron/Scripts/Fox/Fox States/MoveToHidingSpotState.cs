@@ -8,7 +8,10 @@ namespace Aaron
     public class MoveToHidingSpotState : AntAIState
     {
         public GameObject owner;
-    
+
+        private bool isInHidingSpot;
+        private bool canSeeHidingSpot;
+        
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -19,11 +22,15 @@ namespace Aaron
         public override void Enter()
         {
             base.Enter();
+            
+            //Find hiding spot, Get position
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            //Move directly towards hiding spot (pathfinding)
         }
 
         public override void Exit()

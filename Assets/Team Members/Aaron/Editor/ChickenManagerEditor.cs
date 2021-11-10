@@ -24,11 +24,6 @@ namespace Aaron
                 {
                     ((ChickenManager)target).SpawnRoosters();
                 }
-
-                if (GUILayout.Button("Spawn Egg"))
-                {
-                    ((ChickenManager)target).SpawnEggs();
-                }
             }
 
             
