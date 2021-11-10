@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     MainActions mainActions;
 
-    public PlayerModel playerModel;
+    public CharacterModel characterModel;
 
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
         mainActions = new MainActions();
         mainActions.InGame.Enable();
 
-        mainActions.InGame.Jump.performed += aContext => playerModel.Jump();
-        mainActions.InGame.Interact.performed += aContext => playerModel.Interact();
+        mainActions.InGame.Jump.performed += aContext => characterModel.Jump();
+        mainActions.InGame.Interact.performed += aContext => characterModel.Interact();
+        
         mainActions.InGame.Movement.performed += OnMovementOnperformed;
         mainActions.InGame.Movement.canceled += OnMovementOnperformed;
     }
@@ -25,11 +26,11 @@ public class PlayerController : MonoBehaviour
     {
         if (aContext.phase == InputActionPhase.Performed)
         {
-            playerModel.movementDirection = aContext.ReadValue<Vector2>();
+            characterModel.movementDirection = aContext.ReadValue<Vector2>();
         }
         else if(aContext.phase == InputActionPhase.Canceled)
         {
-            playerModel.movementDirection = Vector2.zero;
+            characterModel.movementDirection = Vector2.zero;
         }
     }
 }
