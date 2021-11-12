@@ -6,20 +6,21 @@ using UnityEditor;
 public class RotationEditorWindow : EditorWindow
 {
     //Variables
-    List<float> pitches = new List<float>();
-    List<float> yaws = new List<float>();
-    List<int> rolls = new List<int>();
-    int defaultRotation = 0;
+    //List<int> pitches = new List<int>();
+    //List<int> yaws = new List<int>();
+    //List<int> rolls = new List<int>();
+    float defaultRotation = 0f;
 
     bool usePitch = true;
     bool useYaw = true;
     bool useRoll = true;
 
-    int pitch;
-    int yaw;
-    int roll;
+    //bool groupEnabled = false;
+    //bool keepRotation = false;
 
-    int indexCounter = 0;
+    float pitch;
+    float yaw;
+    float roll;
 
 
     // Add menu named "My Window" to the Window menu
@@ -39,70 +40,45 @@ public class RotationEditorWindow : EditorWindow
         GUILayout.Label("Options", EditorStyles.boldLabel);
 
         usePitch = EditorGUILayout.Toggle("Pitch", usePitch);
-        if(usePitch)
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                pitches.Add(Random.Range(0, 361));
-            }
-        }
-        else if(!usePitch)
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                pitches.Add(0);
-            }
-        }
-
         useYaw = EditorGUILayout.Toggle("Yaw", useYaw);
-        if (useYaw)
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                yaws.Add(Random.Range(0, 361));
-            }
-        }
-        else if(!useYaw)
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                yaws.Add(0);
-            }
-
-        }
-
         useRoll = EditorGUILayout.Toggle("Roll", useRoll);
-        if (useRoll)
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                rolls.Add(Random.Range(0, 361));
-            }
-        }
-        else if(!useRoll)
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                rolls.Add(0);
-            }
-        }
 
+        //TESTING
+        //groupEnabled = EditorGUILayout.BeginToggleGroup("Optional Settings", groupEnabled);
+        //keepRotation = EditorGUILayout.Toggle("Keep Rotation", keepRotation);
         //EditorGUILayout.EndToggleGroup();
 
-        if(GUILayout.Button("Set Random Rotation"))
-        {
-            foreach (Transform t in Selection.transforms)
-            {
-                t.rotation = Quaternion.Euler(pitches[indexCounter], yaws[indexCounter], rolls[indexCounter]);
-                indexCounter++;
-            }
-        }
+        //Editor Buttons:
 
-        if (GUILayout.Button("Test"))
+        if (GUILayout.Button("Set Random Rotation"))
         {
+            //For each selected object
             foreach (Transform t in Selection.transforms)
             {
-                t.rotation = Quaternion.Euler(Random.Range(0, 361), Random.Range(0, 361), Random.Range(0, 361));
+                //Set Pitch - Yaw - Roll to always equal 0 (default rotation)
+                pitch = defaultRotation;
+                yaw = defaultRotation;
+                roll = defaultRotation;
+
+                //Only if Pitch - Yaw - Roll are true, do we change their value to a random value
+                if(usePitch)
+                {
+                    pitch = Random.Range(0, 360);
+                }
+
+                if(useYaw)
+                {
+                    yaw = Random.Range(0, 360);
+                }
+
+                if(useRoll)
+                {
+                    roll = Random.Range(0, 360);
+                }
+
+                //Set objects transform to a random rotation using Pitch - Yaw - Roll values
+                t.rotation = Quaternion.Euler(pitch, yaw, roll);
+                Debug.Log(t.name + "'s new rotation is: " + pitch + " " + yaw + " " + roll);
             }
         }
 

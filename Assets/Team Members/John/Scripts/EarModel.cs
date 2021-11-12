@@ -19,7 +19,7 @@ public class EarModel : MonoBehaviour
 
     void HearNoise(GameObject objectRef)
     {
-        float noiseDistance = Vector3.Distance(transform.localPosition, objectRef.transform.localPosition);
+        float noiseDistance = Vector3.Distance(transform.position, objectRef.transform.position);
         //If Noise Within Hear Radius
         if(noiseDistance < maxHearDistance)
         {
