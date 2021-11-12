@@ -14,8 +14,8 @@ public class ReplaceSelectionEditor : EditorWindow
     GameObject newObject;
     GameObject oldObject;
 
-    //List<GameObject> oldObjects = new List<GameObject>();
-    //int counter = 0;
+    List<GameObject> oldObjects = new List<GameObject>();
+    List<GameObject> newObjects = new List<GameObject>();
 
 
     // Add menu named "My Window" to the Window menu
@@ -48,7 +48,8 @@ public class ReplaceSelectionEditor : EditorWindow
 
         //Editor Buttons:
 
-
+        //Replace Selected Objects Without Destroying Them (Only Turning GO's off) - this allows you to undo
+        GUILayout.Label("Replace Selection By Turning Off GO's (Can be Undone)", EditorStyles.boldLabel);
         if (GUILayout.Button("Replace Selected Objects"))
         {
             if (prefab == null)
@@ -59,13 +60,14 @@ public class ReplaceSelectionEditor : EditorWindow
 
             foreach (GameObject obj in Selection.gameObjects)
             {
-                //Store old object in a variable
-                oldObject = obj;
-                //oldObjects.Insert(counter, obj);
-                //counter+=1;
+                //Store all old objects in a list
+                oldObjects.Add(obj);
 
                 //Instaniate selected prefab
                 newObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+
+                //Store each new object instance in a list
+                newObjects.Add(newObject);
 
                 //Set the new prefab to the old object's position/scale/rotation
                 newObject.transform.position = obj.transform.position;
@@ -85,7 +87,23 @@ public class ReplaceSelectionEditor : EditorWindow
             }
         }
 
-        if(GUILayout.Button("Replace & Delete Selected Objects"))
+        //Revert GO's Back to Old GO's (Only Works if GO's havent been destroyed)
+        if (GUILayout.Button("Undo"))
+        {
+            foreach (GameObject obj in oldObjects)
+            {
+                obj.SetActive(true);
+            }
+
+            foreach (GameObject obj in newObjects)
+            {
+                Destroy(obj);
+            }
+        }
+
+        //Destroy & Replace All GO's With New GO's
+        GUILayout.Label("Cannot Be Undone!", EditorStyles.boldLabel);
+        if (GUILayout.Button("Replace & Delete Selected Objects"))
         {
             if (prefab == null)
             {
@@ -111,11 +129,6 @@ public class ReplaceSelectionEditor : EditorWindow
 
                 DestroyImmediate(obj, true);
             }
-        }
-
-        if (GUILayout.Button("Undo"))
-        {
-            Debug.Log("Undo");
         }
     }
 }
