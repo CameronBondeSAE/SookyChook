@@ -10,6 +10,7 @@ public class ChickenModel : MonoBehaviour
 {
     public int maxHunger;
     public float hungerLevel;
+    //public float growth;
 
     public bool isFull;
     
@@ -24,7 +25,7 @@ public class ChickenModel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       //if eats food, increase scale size by growth until localScale == 1
     }
     
     //HONESTLY PROBS A HACK, PLEASE SHOW ME ANOTHER CLEANER WAY TO DO THIS!
@@ -40,10 +41,8 @@ public class ChickenModel : MonoBehaviour
         StartCoroutine("ReduceHungerTime");
     }
     
-    
     public void ReduceHunger(float reduction)
     {
         hungerLevel -= reduction;
-        Debug.Log("reduction = " + reduction);
     }
 }

@@ -2,41 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Aaron;
+using Sirenix.Utilities.Editor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
 public class EggModel : MonoBehaviour
 {
-    private bool isFertilised;
+    private ChickenManager chickenManager;
+    public GameObject chicken;
 
-    private float hatchTimer;
+    public bool isFertilised;
+
+    public float hatchTimer;
     
     // Start is called before the first frame update
     private void Awake()
     {
+        chickenManager = FindObjectOfType<ChickenManager>();
+        
         int randomNumber = Random.Range(0, 19);
         if (randomNumber < 9)
         {
             isFertilised = true;
         }
-        isFertilised = false;
+        if (randomNumber >= 10)
+        {
+            isFertilised = false; 
+        }
 
         if (isFertilised)
         {
             //add to fertilised egg list in chicken manager
-            
+            chickenManager.fertilisedEggsList.Add(this.gameObject);
             //start timer for hatching
             StartCoroutine("HatchingTimer");
         }
-    }
-    
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private IEnumerator HatchingTimer()
@@ -52,7 +54,15 @@ public class EggModel : MonoBehaviour
     void HatchEgg()
     {
         //instantiate chicken
+        GameObject copy = chicken;
+        copy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Instantiate(copy, this.transform.position, copy.transform.rotation);
+
         //add to chicken list in chicken manager
+        chickenManager.chickensList.Add(copy);
+        
         //remove this object
+        chickenManager.fertilisedEggsList.Remove(this.gameObject);
+        Destroy(this.gameObject);
     }
 }
