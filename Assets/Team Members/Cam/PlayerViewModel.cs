@@ -41,7 +41,7 @@ public class PlayerViewModel : MonoBehaviour
     {
         audioSource.clip = jumpClip;
         audioSource.Play();
-        particleSystem.Emit(100);
+        particleSystem.Emit(10);
     }
 
     void CharacterModelOnOnGroundEvent(bool onGround)
