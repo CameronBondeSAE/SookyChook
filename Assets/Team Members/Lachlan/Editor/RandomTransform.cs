@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class RandomTransforms : EditorWindow
+public class RandomTransform : EditorWindow
 {
     public Vector3 scaleChange;
 
     // Add menu named "My Window" to the Window menu
-    [MenuItem("Tools/Random Transforms")]
+    [MenuItem("Tools/Random Transform")]
     static void Init()
     {
         // Get existing open window or if none, make a new one:
-        RandomTransforms window = (RandomTransforms)EditorWindow.GetWindow(typeof(RandomTransforms));
+        RandomTransform window = (RandomTransform)EditorWindow.GetWindow(typeof(RandomTransform));
         window.Show();
     }
 
@@ -33,7 +33,7 @@ public class RandomTransforms : EditorWindow
 
         if (GUILayout.Button("JSON Format Text"))
         {
-            //Debug.Log(JsonUtility.ToJson(myWindow));
+            Debug.Log(JsonUtility.ToJson(this));
         }
 
     }
