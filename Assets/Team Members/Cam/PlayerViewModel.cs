@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerViewmodel : MonoBehaviour
+public class PlayerViewModel : MonoBehaviour
 {
     public CharacterModel characterModel;
-    public Animator       animator;
+    public Animator animator;
     public ParticleSystem particleSystem;
-    public AudioSource    audioSource;
-    public AudioClip      jumpClip;
-    
+    public AudioSource audioSource;
+    public AudioClip jumpClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,9 +59,12 @@ public class PlayerViewmodel : MonoBehaviour
     void Update()
     {
         animator.SetFloat("LookDirectionActive", characterModel.lookMovementDirection.magnitude);
-        animator.SetFloat("Velocity",            characterModel.rb.velocity.magnitude);
+        animator.SetFloat("Velocity", characterModel.rb.velocity.magnitude);
 
-        int velocityMagnitude = (int)(characterModel.rb.velocity.magnitude * Time.deltaTime);
-        particleSystem.Emit(velocityMagnitude*10);
+        if (characterModel.onGround)
+        {
+            int velocityMagnitude = (int) (characterModel.rb.velocity.magnitude * 10f * Time.deltaTime);
+            particleSystem.Emit(velocityMagnitude);
+        }
     }
 }

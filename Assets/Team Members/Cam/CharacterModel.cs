@@ -145,6 +145,7 @@ public class CharacterModel : MonoBehaviour
 		rb.AddForce(transform.forward * exitVehicleForce, ForceMode.Acceleration);
 		onGround = true;
 		Jump();
+		onGround = false;
 
 		vehicleBase.Exit();
 	}
