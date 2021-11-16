@@ -9,8 +9,9 @@ public class TractorModel : MonoBehaviour, IVehicleBase
     public Rigidbody rb;
     public float speed = 5f;
     public float turnRadius = 10f;
-    public float frictionAmount = 5f;
+    //public float frictionAmount = 5f;
     public Transform exitPoint;
+    public GameObject wheels;
     public float acceleration;
     public float steering;
 
@@ -29,6 +30,10 @@ public class TractorModel : MonoBehaviour, IVehicleBase
     public event Action EnterTractorEvent;
     public event Action ExitTractorEvent;
 
+    void Start()
+    {
+        wheels.SetActive(false);
+    }
 
     private void Update()
     {
@@ -58,12 +63,19 @@ public class TractorModel : MonoBehaviour, IVehicleBase
 
     public void Enter()
     {
+        //Invoke event for all view related functionality
         EnterTractorEvent?.Invoke();
+
+        //Model Functionality
+        wheels.SetActive(true);
+        rb.isKinematic = false;
     }
 
     public void Exit()
     {
         ExitTractorEvent?.Invoke();
+        wheels.SetActive(false);
+        rb.isKinematic = true;
     }
 
     public void Steer(float amount)
