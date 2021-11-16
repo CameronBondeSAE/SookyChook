@@ -3,25 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+[System.Serializable]
+public class RotationVariables
+{
+    //Data we want saved
+    public bool usePitch = true;
+    public bool useYaw = true;
+    public bool useRoll = true;
+}
+
+[System.Serializable]
 public class RotationEditorWindow : EditorWindow
 {
     //Variables
-    //List<int> pitches = new List<int>();
-    //List<int> yaws = new List<int>();
-    //List<int> rolls = new List<int>();
-    float defaultRotation = 0f;
-
-    bool usePitch = true;
-    bool useYaw = true;
-    bool useRoll = true;
-
-    //bool groupEnabled = false;
-    //bool keepRotation = false;
-
     float pitch;
     float yaw;
     float roll;
+    float defaultRotation = 0f;
+    RotationVariables rotationVariables = new RotationVariables();
+    string variableData;
 
+    private void Awake()
+    {
+        string loadData = PlayerPrefs.GetString("variableData");
+        JsonUtility.FromJsonOverwrite(loadData, rotationVariables);
+    }
 
     // Add menu named "My Window" to the Window menu
     [MenuItem("Tools/Random Rotation Window")]
@@ -39,9 +45,9 @@ public class RotationEditorWindow : EditorWindow
 
         GUILayout.Label("Options", EditorStyles.boldLabel);
 
-        usePitch = EditorGUILayout.Toggle("Pitch", usePitch);
-        useYaw = EditorGUILayout.Toggle("Yaw", useYaw);
-        useRoll = EditorGUILayout.Toggle("Roll", useRoll);
+        rotationVariables.usePitch = EditorGUILayout.Toggle("Pitch", rotationVariables.usePitch);
+        rotationVariables.useYaw = EditorGUILayout.Toggle("Yaw", rotationVariables.useYaw);
+        rotationVariables.useRoll = EditorGUILayout.Toggle("Roll", rotationVariables.useRoll);
 
         //TESTING
         //groupEnabled = EditorGUILayout.BeginToggleGroup("Optional Settings", groupEnabled);
@@ -61,17 +67,17 @@ public class RotationEditorWindow : EditorWindow
                 roll = defaultRotation;
 
                 //Only if Pitch - Yaw - Roll are true, do we change their value to a random value
-                if(usePitch)
+                if(rotationVariables.usePitch)
                 {
                     pitch = Random.Range(0, 360);
                 }
 
-                if(useYaw)
+                if(rotationVariables.useYaw)
                 {
                     yaw = Random.Range(0, 360);
                 }
 
-                if(useRoll)
+                if(rotationVariables.useRoll)
                 {
                     roll = Random.Range(0, 360);
                 }
@@ -89,6 +95,11 @@ public class RotationEditorWindow : EditorWindow
                 t.rotation = Quaternion.Euler(defaultRotation, defaultRotation, defaultRotation);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetString("variableData", JsonUtility.ToJson(rotationVariables));
     }
 
 }

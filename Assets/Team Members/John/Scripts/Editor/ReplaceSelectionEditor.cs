@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class ReplaceSelectionEditor : EditorWindow
+[System.Serializable]
+public class ReplaceSelectionVariables
 {
     //Variables
-    bool keepScale = true;
-    bool keepRotation = true;
-    bool groupEnabled = false;
+    public bool keepScale = true;
+    public bool keepRotation = true;
+    public bool groupEnabled = false;
+}
+public class ReplaceSelectionEditor : EditorWindow
+{
+    ReplaceSelectionVariables selectionVariables = new ReplaceSelectionVariables();
+    string variableData;
 
     public Object prefab;
     GameObject newObject;
@@ -17,6 +23,11 @@ public class ReplaceSelectionEditor : EditorWindow
     List<GameObject> oldObjects = new List<GameObject>();
     List<GameObject> newObjects = new List<GameObject>();
 
+    private void Awake()
+    {
+        string load = PlayerPrefs.GetString("variableData");
+        JsonUtility.FromJsonOverwrite(load, selectionVariables);
+    }
 
     // Add menu named "My Window" to the Window menu
     [MenuItem("Tools/Replace Selection")]
@@ -27,13 +38,15 @@ public class ReplaceSelectionEditor : EditorWindow
         window.Show();
     }
 
+
+
     void OnGUI()
     {
         GUILayout.Label("Prefab", EditorStyles.boldLabel);
 
-        groupEnabled = EditorGUILayout.BeginToggleGroup("More Options", groupEnabled);
-        keepRotation = EditorGUILayout.Toggle("Keep Rotation", keepRotation);
-        keepScale = EditorGUILayout.Toggle("Keep Scale", keepScale);
+        selectionVariables.groupEnabled = EditorGUILayout.BeginToggleGroup("More Options", selectionVariables.groupEnabled);
+        selectionVariables.keepRotation = EditorGUILayout.Toggle("Keep Rotation", selectionVariables.keepRotation);
+        selectionVariables.keepScale = EditorGUILayout.Toggle("Keep Scale", selectionVariables.keepScale);
         EditorGUILayout.EndToggleGroup();
 
         if (prefab != null)
@@ -73,12 +86,12 @@ public class ReplaceSelectionEditor : EditorWindow
                 newObject.transform.position = obj.transform.position;
 
                 //Only set scale & rotation if set to true
-                if (keepScale)
+                if (selectionVariables.keepScale)
                 {
                     newObject.transform.localScale = obj.transform.localScale;
                 }
 
-                if(keepRotation)
+                if(selectionVariables.keepRotation)
                 {
                     newObject.transform.rotation = obj.transform.rotation;
                 }
@@ -117,12 +130,12 @@ public class ReplaceSelectionEditor : EditorWindow
 
                 newObject.transform.position = obj.transform.position;
 
-                if (keepScale)
+                if (selectionVariables.keepScale)
                 {
                     newObject.transform.localScale = obj.transform.localScale;
                 }
 
-                if (keepRotation)
+                if (selectionVariables.keepRotation)
                 {
                     newObject.transform.rotation = obj.transform.rotation;
                 }
@@ -130,5 +143,11 @@ public class ReplaceSelectionEditor : EditorWindow
                 DestroyImmediate(obj, true);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        //JsonUtility.ToJson(selectionVariables);
+        PlayerPrefs.SetString("variableData", JsonUtility.ToJson(selectionVariables));
     }
 }

@@ -3,32 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class LachlanWindow : EditorWindow
+public class RandomTransform : EditorWindow
 {
-    string myString = "Hello World";
-    bool groupEnabled;
-    bool myBool = true;
-    float myFloat = 1.23f;
     public Vector3 scaleChange;
 
     // Add menu named "My Window" to the Window menu
-    [MenuItem("Tools/Lachlan Window")]
+    [MenuItem("Tools/Random Transform")]
     static void Init()
     {
         // Get existing open window or if none, make a new one:
-        LachlanWindow window = (LachlanWindow)EditorWindow.GetWindow(typeof(LachlanWindow));
+        RandomTransform window = (RandomTransform)EditorWindow.GetWindow(typeof(RandomTransform));
         window.Show();
     }
 
     void OnGUI()
     {
-        GUILayout.Label("Base Settings", EditorStyles.boldLabel);
-        myString = EditorGUILayout.TextField("Text Field", myString);
-
-        groupEnabled = EditorGUILayout.BeginToggleGroup("Optional Settings", groupEnabled);
-        myBool = EditorGUILayout.Toggle("Toggle", myBool);
-        myFloat = EditorGUILayout.Slider("Slider", myFloat, -3, 3);
-        EditorGUILayout.EndToggleGroup();
 
         if (GUILayout.Button("Random Scale!!"))
         {
@@ -44,7 +33,7 @@ public class LachlanWindow : EditorWindow
 
         if (GUILayout.Button("JSON Format Text"))
         {
-            //Debug.Log(JsonUtility.ToJson(myWindow));
+            Debug.Log(JsonUtility.ToJson(this));
         }
 
     }
