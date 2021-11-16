@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEditor;
 
+[Serializable]
 public class MyWindow : EditorWindow
 {
-	string myString = "Hello World";
-	bool   groupEnabled;
-	bool   myBool  = true;
-	float  myFloat = 1.23f;
+	public string myString = "Hello World";
+	public bool   groupEnabled;
+	public bool   myBool  = true;
+	public float  myFloat = 1.23f;
+	public double  myFloatDouble = 1.23;
 
 	// Add menu named "My Window" to the Window menu
 	[MenuItem("Tools/Cams Window")]
@@ -33,6 +36,11 @@ public class MyWindow : EditorWindow
 			{
 				DestroyImmediate(t.gameObject);
 			}
+		}
+		
+		if(GUILayout.Button("SAVE TEST"))
+		{
+			Debug.Log(JsonUtility.ToJson(this, true));
 		}
 	}
 }

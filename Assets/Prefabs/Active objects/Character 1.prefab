@@ -5106,11 +5106,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f737785713864bacc5702591c9ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 25
   jumpHeight: 4
   movementDirection: {x: 0, y: 0}
-  rb: {fileID: 564635139153438467}
+  exitVehicleForce: 300
   turnSpeed: 15
+  interactDistance: 2
+  rb: {fileID: 564635139153438467}
+  interactRayOffset: {x: 0, y: 0.5, z: 0}
+  onGroundDrag: 1
+  onGround: 1
+  inVehicle: 0
   lookMovementDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &2458002238894678267
 MonoBehaviour:
