@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tanks;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Random = UnityEngine.Random;
 
 namespace Aaron
 {
@@ -20,12 +23,11 @@ namespace Aaron
         private string[] UnlovedNames;
         private string[] LovedNames;
         private string[] RoosterNames;
-        
+
         public int spawnRangeXMin;
         public int spawnRangeXMax;
         public int spawnRangeZMin;
         public int spawnRangeZMax;
-        public int spawnHeight;
         
         float spawnRangeX;
         float spawnRangeZ;
@@ -51,10 +53,7 @@ namespace Aaron
             RoosterNames = new string[]
                 {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel"};
 
-            //On Game Setup
-            /*SpawnChickens();
-            SpawnRoosters();
-            */            
+            //TODO On Game Setup - SpawnChickens(), SpawnRoosters();
         }
 
         
@@ -67,9 +66,9 @@ namespace Aaron
             spawnRangeZ = Random.Range(spawnRangeZMin, spawnRangeZMax);
             
             //Instantiate Chickens
-            Instantiate(copy, new Vector3(spawnRangeX,spawnHeight,spawnRangeZ), copy.transform.rotation);
+            Instantiate(copy, new Vector3(spawnRangeX,0.2f,spawnRangeZ), copy.transform.rotation);
             
-            //assign UnlovedName, show on nametag
+            //TODO assign UnlovedName, show on nametag
 
             chickensList.Add(copy);
         }
@@ -83,9 +82,9 @@ namespace Aaron
             spawnRangeZ = Random.Range(spawnRangeZMin, spawnRangeZMax);
             
             //Instantiate Roosters
-            Instantiate(copy, new Vector3(spawnRangeX, spawnHeight, spawnRangeZ), copy.transform.rotation);
+            Instantiate(copy, new Vector3(spawnRangeX, 0.2f, spawnRangeZ), copy.transform.rotation);
             
-            //assign RoosterName, show on nametag
+            //TODO assign RoosterName, show on nametag
             
             roostersList.Add(copy);
         }
