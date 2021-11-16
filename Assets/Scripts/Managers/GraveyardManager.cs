@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tanks;
@@ -9,27 +10,44 @@ public class GraveyardManager : MonoBehaviour
 
     public GameObject ghost;
 
-    //TODO link to day/night cycle
-    
     //TODO sub to chicken murder event from somewhere; instantiate (to be enabled/disabled per relevant time cycle)
     private void spawnGhosts()
     {
         GameObject copy = ghost;
         Instantiate(copy, new Vector3(), copy.transform.rotation);
+        ghostChickens.Add(copy);
+    }
+
+    private void Update()
+    {
+        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Night || DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Midnight)
+        {
+            releaseGhosts();
+        }
+
+        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Morning)
+        {
+            clearGhostChickens();
+        }
     }
 
     //On night cycle begin
     void releaseGhosts()
     {
+        Debug.Log("Release Ghosts");
         foreach (var ghost in ghostChickens)
         {
-            enabled = true;
-        }   
+            ghost.SetActive(true);
+        }
     }
 
     //On morning/dawn cycle begin
     void clearGhostChickens()
     {
-        enabled = false;
+        Debug.Log("Clear Ghosts");
+        foreach (var ghost in ghostChickens)
+        {
+            ghost.SetActive(false);
+        }
     }
 }
