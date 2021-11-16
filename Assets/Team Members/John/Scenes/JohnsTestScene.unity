@@ -3877,27 +3877,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9206662063521292218, guid: f5546eadd994d8c46bde3dfc73690f7f, type: 3}
---- !u!1 &1410029660 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2355180640313070091, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-  m_PrefabInstance: {fileID: 1719839243}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1410029662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410029660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b6d63376c002140999a53e961d8809, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tractorModel: {fileID: 1514793071}
-  audioSource: {fileID: 1719839244}
-  enterTractor: {fileID: 8300000, guid: 0a1df69c7bae61b4bb0cf299d93d2470, type: 3}
-  exitTractor: {fileID: 8300000, guid: 07f01c5838d2a0540a8aefc6ef131e6d, type: 3}
 --- !u!1 &1512241448
 GameObject:
   m_ObjectHideFlags: 0
@@ -4115,17 +4094,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1514793071 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3538844419382843858, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-  m_PrefabInstance: {fileID: 1719839243}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ac649222e9b40247be84749d0796220, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1542580890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4390,10 +4358,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2233473929980595635, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3538844419382843854, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4438,25 +4402,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3538844419382843858, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-      propertyPath: exitPoint
-      value: 
-      objectReference: {fileID: 1731392356}
     - target: {fileID: 3538844419382843860, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
       propertyPath: m_Name
       value: TractorPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 8273427687562081177, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-      propertyPath: m_Name
-      value: ExitPoint
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
---- !u!82 &1719839244 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2233473929980595635, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-  m_PrefabInstance: {fileID: 1719839243}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1728232688
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,11 +4625,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1731392356 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3226161710308081780, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
-  m_PrefabInstance: {fileID: 1719839243}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1823688464
 GameObject:
   m_ObjectHideFlags: 0
