@@ -57,6 +57,9 @@ namespace Aaron
             */            
         }
 
+        
+        //Spawn chickens on game setup
+        //TODO add to game setup
         public void SpawnChickens()
         {
             GameObject copy = chicken;
@@ -71,6 +74,8 @@ namespace Aaron
             chickensList.Add(copy);
         }
 
+        //Spawn on game setup
+        //TODO add to game setup
         public void SpawnRoosters()
         {
             GameObject copy = rooster;
