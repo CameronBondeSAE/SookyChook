@@ -47,12 +47,12 @@ namespace Tom
             {
                 for (int z = gridStartY; z < gridEndY; z++)
                 {
-                    nodes[x, z] = new Node(); // Nodes need to be initialised before you can set variables
-                    nodes[x, z].coordinates = new Vector2Int(x, z);
+                    nodes[x - gridStartX, z - gridStartY] = new Node(); // Nodes need to be initialised before you can set variables
+                    nodes[x - gridStartX, z - gridStartY].coordinates = new Vector2Int(x, z);
 
                     if (Physics.CheckBox(new Vector3(x, 0, z), Vector3.one, Quaternion.identity, obstacles))
                     {
-                        nodes[x, z].blocked = true;
+                        nodes[x - gridStartX, z - gridStartY].blocked = true;
                     }
                 }
             }
@@ -66,15 +66,15 @@ namespace Tom
                 {
                     for (int z = gridStartY; z < gridEndY; z++)
                     {
-                        if (nodes[x, z] != null)
+                        if (nodes[x - gridStartX, z - gridStartY] != null)
                         {
-                            if (nodes[x, z].blocked)
+                            if (nodes[x - gridStartX, z - gridStartY].blocked)
                             {
-                                Gizmos.color = Color.red;
+                                Gizmos.color = new Color(1,0,0,0.1f);
                             }
                             else
                             {
-                                Gizmos.color = Color.green;
+                                Gizmos.color = new Color(0,1,0,0.1f);
                             }
 
                             Gizmos.DrawCube(new Vector3(x, 0.5f, z), Vector3.one);

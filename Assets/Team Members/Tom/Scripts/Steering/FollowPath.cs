@@ -17,6 +17,7 @@ namespace Tom
             turn = GetComponent<TurnToward>();
             targetNode = pathfinding.path[pathfinding.path.Count - 1];
             turn.target = new Vector3(targetNode.coordinates.x, 0, targetNode.coordinates.y);
+            turn.turning = true;
         }
 
         public void Update()

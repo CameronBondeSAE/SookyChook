@@ -19,6 +19,9 @@ namespace Tom
         public override void Enter()
         {
             base.Enter();
+            
+            FindObjectOfType<PathfindingGrid>().CalculateGrid();
+            
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
