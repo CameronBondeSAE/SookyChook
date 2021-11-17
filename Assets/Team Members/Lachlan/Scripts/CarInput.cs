@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class CarInput : MonoBehaviour
 {
     public float speed;
+    public float rotationalSpeed;
     Rigidbody rb;
     Vector3 localVelocity;
     
@@ -64,11 +65,11 @@ public class CarInput : MonoBehaviour
     {
         if (LookLeft == true)
         {
-            rb.AddRelativeTorque(0,-1,0);
+            rb.AddRelativeTorque(0,-rotationalSpeed,0);
         }
         if (LookRight == true)
         {
-            rb.AddRelativeTorque(0,1,0);
+            rb.AddRelativeTorque(0,rotationalSpeed,0);
         }
     }
 }
