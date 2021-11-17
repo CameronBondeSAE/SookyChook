@@ -9,11 +9,15 @@ public class FOV : MonoBehaviour
     public float maxDistance;
     public float minDistance;
     public LayerMask obstacle;
+    private int obs;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         //CheckDistance();
+        
+        
     }
 
     private void Update()
@@ -26,11 +30,12 @@ public class FOV : MonoBehaviour
             if (Physics.Raycast(transform.position, item.transform.position - transform.position, out RaycastHit hit,
                 maxDistance))
             {
-                if (hit.collider.gameObject.layer == 3)
+                
+                if (hit.collider.gameObject.layer == LayerMask.GetMask("obstacle"))
                 {
                     Debug.DrawRay(transform.position, item.transform.position - transform.position, Color.red, .5f);
                 }
-
+        
                 if (hit.collider.gameObject.layer != 3)
                 {
                     Debug.DrawRay(transform.position, item.transform.position - transform.position, Color.green,

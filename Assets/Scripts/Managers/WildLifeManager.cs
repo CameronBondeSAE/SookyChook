@@ -21,7 +21,7 @@ namespace Rob
             public DayNightManager.DayPhase phaseTime;
         }
 
-
+        
         public WildLife[] wildLife;
         public float groundOffset;
         private WildLife currentWildLife;
