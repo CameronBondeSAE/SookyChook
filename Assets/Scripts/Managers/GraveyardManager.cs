@@ -11,9 +11,10 @@ public class GraveyardManager : MonoBehaviour
     public GameObject ghost;
 
     //TODO sub to chicken murder event from somewhere; instantiate (to be enabled/disabled per relevant time cycle)
-    private void spawnGhosts()
+    private void SpawnGhosts()
     {
         GameObject copy = ghost;
+        //TODO set spawn point
         Instantiate(copy, new Vector3(), copy.transform.rotation);
         ghostChickens.Add(copy);
     }
@@ -22,17 +23,17 @@ public class GraveyardManager : MonoBehaviour
     {
         if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Night || DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Midnight)
         {
-            releaseGhosts();
+            ReleaseGhosts();
         }
 
         if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Morning)
         {
-            clearGhostChickens();
+            ClearGhostChickens();
         }
     }
 
     //On night cycle begin
-    void releaseGhosts()
+    void ReleaseGhosts()
     {
         Debug.Log("Release Ghosts");
         foreach (var ghost in ghostChickens)
@@ -42,7 +43,7 @@ public class GraveyardManager : MonoBehaviour
     }
 
     //On morning/dawn cycle begin
-    void clearGhostChickens()
+    void ClearGhostChickens()
     {
         Debug.Log("Clear Ghosts");
         foreach (var ghost in ghostChickens)

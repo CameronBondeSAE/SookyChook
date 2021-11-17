@@ -24,11 +24,6 @@ namespace Aaron
         private string[] LovedNames;
         private string[] RoosterNames;
 
-        public int spawnRangeXMin;
-        public int spawnRangeXMax;
-        public int spawnRangeZMin;
-        public int spawnRangeZMax;
-        
         float spawnRangeX;
         float spawnRangeZ;
 
@@ -52,42 +47,7 @@ namespace Aaron
             };
             RoosterNames = new string[]
                 {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel"};
-
-            //TODO On Game Setup - SpawnChickens(), SpawnRoosters();
         }
-
         
-        //Spawn chickens on game setup
-        //TODO add to game setup
-        public void SpawnChickens()
-        {
-            GameObject copy = chicken;
-            spawnRangeX = Random.Range(spawnRangeXMin, spawnRangeXMax);
-            spawnRangeZ = Random.Range(spawnRangeZMin, spawnRangeZMax);
-            
-            //Instantiate Chickens
-            Instantiate(copy, new Vector3(spawnRangeX,0.2f,spawnRangeZ), copy.transform.rotation);
-            
-            //TODO assign UnlovedName, show on nametag
-
-            chickensList.Add(copy);
-        }
-
-        //Spawn on game setup
-        //TODO add to game setup
-        public void SpawnRoosters()
-        {
-            GameObject copy = rooster;
-            spawnRangeX = Random.Range(spawnRangeXMin, spawnRangeXMax);
-            spawnRangeZ = Random.Range(spawnRangeZMin, spawnRangeZMax);
-            
-            //Instantiate Roosters
-            Instantiate(copy, new Vector3(spawnRangeX, 0.2f, spawnRangeZ), copy.transform.rotation);
-            
-            //TODO assign RoosterName, show on nametag
-            
-            roostersList.Add(copy);
-        }
-        //Change Name if chicken becomes attached; change nametag object and name shown
     }
 }
