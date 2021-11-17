@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Aaron
 {
-    public class ChickenManager : MonoBehaviour
+    public class ChickenManager : ManagerBase<ChickenManager>
     {
         public GameObject chicken;
         public GameObject rooster;
