@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Rob;
 using Tanks;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -12,9 +13,7 @@ namespace Aaron
 {
     public class ChickenManager : ManagerBase<ChickenManager>
     {
-        public GameObject chicken;
-        public GameObject rooster;
-        public GameObject egg;
+        public Spawner spawner;
         
         public List<GameObject> chickensList;
         public List<GameObject> roostersList;
@@ -24,13 +23,14 @@ namespace Aaron
         private string[] LovedNames;
         private string[] RoosterNames;
 
-        float spawnRangeX;
-        float spawnRangeZ;
-
-        // Start is called before the first frame update
         void Start()
         {
+            spawner = GetComponent<Spawner>();
+            spawner.Spawn();
+            
             chickensList = new List<GameObject>();
+            chickensList = spawner.spawned;
+            
             roostersList = new List<GameObject>();
             fertilisedEggsList = new List<GameObject>();
 
@@ -46,8 +46,7 @@ namespace Aaron
                 "Peep"
             };
             RoosterNames = new string[]
-                {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel"};
+                {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel", "Henlord"};
         }
-        
     }
 }
