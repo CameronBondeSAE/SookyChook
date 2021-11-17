@@ -155,7 +155,7 @@ public class CharacterModel : MonoBehaviour
 			pickupable.PickUp();
 			holdingObject.transform.parent        = holdingMount;
 			holdingObject.transform.localPosition = Vector3.zero;
-			// holdingObject.transform.rotation = holdingMount.rotation;
+			holdingObject.transform.rotation = holdingMount.rotation;
 		}
 	}
 
