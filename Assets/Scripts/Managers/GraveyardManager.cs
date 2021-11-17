@@ -35,7 +35,6 @@ public class GraveyardManager : MonoBehaviour
     //On night cycle begin
     void ReleaseGhosts()
     {
-        Debug.Log("Release Ghosts");
         foreach (var ghost in ghostChickens)
         {
             ghost.SetActive(true);
