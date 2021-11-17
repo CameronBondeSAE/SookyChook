@@ -23,3 +23,14 @@ public interface IVehicleBase
 	/// <returns></returns>
 	Transform GetVehicleExitPoint();
 }
+
+public interface IInteractable
+{
+	void Interact();
+}
+
+public interface IPickupable
+{
+	void PickUp();
+	void PutDown();
+}

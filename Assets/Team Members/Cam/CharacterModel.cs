@@ -148,6 +148,9 @@ public class CharacterModel : MonoBehaviour
 		onGround = false;
 
 		vehicleBase.Exit();
+
+		StopCoroutine(Cry());
+		StartCoroutine(Cry());
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -166,5 +169,13 @@ public class CharacterModel : MonoBehaviour
 	{
 		onGround = true;
 		OnGroundEvent?.Invoke(true);
+	}
+
+	public IEnumerator Cry()
+	{
+		// Start crying
+		Debug.Log("Started crying");
+		yield return new WaitForSeconds(4f);
+		Debug.Log("Stopped crying");
 	}
 }

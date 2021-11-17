@@ -12,7 +12,7 @@ namespace Rob
 	public class Spawner : MonoBehaviour
 	{
 		[System.Serializable]
-		public struct GroupInfo
+		public class GroupInfo
 		{
 			public GameObject[] prefabs;
 
@@ -88,7 +88,7 @@ namespace Rob
 
 		private void OnDrawGizmos()
 		{
-			// if (_currentGroupInfo != null)
+			if (_currentGroupInfo != null)
 			{
 				foreach (Transform spawnPoint in _currentGroupInfo.spawnPoints)
 				{

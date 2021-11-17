@@ -59,7 +59,7 @@ public class PlayerViewModel : MonoBehaviour
     void Update()
     {
         animator.SetFloat("LookDirectionActive", characterModel.lookMovementDirection.magnitude);
-        animator.SetFloat("Velocity", characterModel.rb.velocity.magnitude);
+        // animator.SetFloat("Velocity", characterModel.rb.velocity.magnitude);
 
         if (characterModel.onGround)
         {
