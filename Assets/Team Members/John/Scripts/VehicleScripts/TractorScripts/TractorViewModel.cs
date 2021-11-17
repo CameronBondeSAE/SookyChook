@@ -19,13 +19,13 @@ public class TractorViewModel : MonoBehaviour
     {
         audioSource.clip = enterTractor;
         audioSource.Play();
-        Debug.Log("Entered Tractor");
+        //Debug.Log("Entered Tractor");
     }
 
     void OnTractorExit()
     {
         audioSource.clip = exitTractor;
         audioSource.Play();
-        Debug.Log("Exited Tractor");
+        //Debug.Log("Exited Tractor");
     }
 }
