@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3.542558, g: 3.6295507, b: 4.385001, a: 1}
+  m_IndirectSpecularColor: {r: 3.827097, g: 4.1934433, b: 6.1783066, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -791,7 +791,7 @@ PrefabInstance:
     - target: {fileID: 855770627430267644, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: wildLife.Array.data[0].animals.Array.data[2]
       value: 
-      objectReference: {fileID: 1648933817718183396, guid: 2bc8eb8ba687d764787093a9705f5a2a, type: 3}
+      objectReference: {fileID: 1183116927532342443, guid: e7d573778231a184dab1409727679248, type: 3}
     - target: {fileID: 855770627430267644, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: wildLife.Array.data[0].animals.Array.data[3]
       value: 
@@ -3426,7 +3426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049785888}
-  m_LocalRotation: {x: 0.27465674, y: -0.15385646, z: 0.044570655, w: 0.94810617}
+  m_LocalRotation: {x: 0.27465677, y: -0.15385649, z: 0.044570666, w: 0.94810617}
   m_LocalPosition: {x: 12.769925, y: 20, z: -29.292223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4244,7 +4244,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2158055, y: 1}
+    m_SensorSize: {x: 1.6063218, y: 1}
     Iso: 200
     ShutterSpeed: 0.68
     Aperture: 17.2
@@ -4267,7 +4267,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494798398}
-  m_LocalRotation: {x: 0.27465674, y: -0.15385646, z: 0.044570655, w: 0.94810617}
+  m_LocalRotation: {x: 0.27465677, y: -0.15385649, z: 0.044570666, w: 0.94810617}
   m_LocalPosition: {x: 12.769925, y: 20, z: -29.292223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4766,6 +4766,10 @@ PrefabInstance:
     - target: {fileID: 3089574081396512542, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959899489888807531, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
+      propertyPath: interactRayOffset.z
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8909449322511247403, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
       propertyPath: m_Name

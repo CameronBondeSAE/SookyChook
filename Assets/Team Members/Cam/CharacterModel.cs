@@ -78,6 +78,8 @@ public class CharacterModel : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		CheckWhatsInFrontOfMe();
+			
 		if (!onGround)
 		{
 			rb.drag = 0f;
@@ -233,7 +235,10 @@ public class CharacterModel : MonoBehaviour
 		// Check what's in front of me. TODO: Make it scan the area or something less precise
 		RaycastHit hit;
 		// Ray        ray = new Ray(transform.position + transform.TransformPoint(interactRayOffset), transform.forward);
-		Ray ray = new Ray(transform.position + interactRayOffset, transform.forward);
+		// NOTE: TransformPoint I THINK includes the main position, so you don't have to add world position to the final
+		Vector3 transformPoint = transform.TransformPoint(interactRayOffset);
+		Debug.Log(transformPoint);
+		Ray ray = new Ray(transformPoint, transform.forward);
 
 		Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.green, 2f);
 
