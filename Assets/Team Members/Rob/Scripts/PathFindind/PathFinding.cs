@@ -7,8 +7,10 @@ using UnityEngine.InputSystem;
 
 namespace Rob
 {
+    
     public class PathFinding : MonoBehaviour
     {
+        [SerializeField]
         private WorldScan grid;
 
         private List<WorldScan.Node> openNodes = new List<WorldScan.Node>();
@@ -19,7 +21,7 @@ namespace Rob
 
         private void Awake()
         {
-            grid = FindObjectOfType<WorldScan>();
+            // grid = FindObjectOfType<WorldScan>();
         }
 
         private void Start()
@@ -35,15 +37,16 @@ namespace Rob
             WorldScan.Node currentNode = grid.gridNodeReference[currentPos.x, currentPos.z];
             openNodes.Add(currentNode);
 
-            while (currentNode != grid.gridNodeReference[grid.endPos.x, grid.endPos.z])
+            // while (currentNode != grid.gridNodeReference[grid.endPos.x, grid.endPos.z])
             {
-                
+                // Neighbours
                 for (int neighbourX = currentNode.gridPos.x - 1; neighbourX < currentNode.gridPos.x + 2; neighbourX++)
                 {
                     for (int neighbourZ = currentNode.gridPos.z - 1;
                         neighbourZ < currentNode.gridPos.z + 2;
                         neighbourZ++)
                     {
+                        // Check edges
                         if (neighbourX >= 0 && neighbourX <= grid.gridSpacing.x && neighbourZ >= 0 &&
                             neighbourZ <= grid.gridSpacing.z)
                         {
@@ -56,6 +59,11 @@ namespace Rob
                         }
                     }
                 }
+                
+                // Remove current from open. Add current to closed
+                // Open nodes foreach looper
+                //      Find closest to endpos
+                //      Make that the new CurrentNode
             }
         }
 
@@ -64,6 +72,15 @@ namespace Rob
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawCube(currentPos, Vector3.one);
+
+            foreach (WorldScan.Node openNode in openNodes)
+            {
+                Gizmos.DrawCube(openNode.gridPos, Vector3.one);
+            }
+            foreach (WorldScan.Node closedNode in closedNodes)
+            {
+                Gizmos.DrawCube(closedNode.gridPos, Vector3.one);
+            }
         }
     }
 }

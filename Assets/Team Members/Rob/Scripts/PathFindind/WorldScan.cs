@@ -27,7 +27,7 @@ namespace Rob
         public List<Node> open;
 
 
-        private void Start()
+        private void Awake()
         {
             gridNodeReference = new Node[maxSizeofGrid.x, maxSizeofGrid.z];
             ScanWorld();
@@ -54,6 +54,12 @@ namespace Rob
 
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawCube(startPos, Vector3.one);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(endPos, Vector3.one);
+            
             if (gridNodeReference != null)
             {
                 for (int x = 0; x < maxSizeofGrid.x; x++)
@@ -67,12 +73,6 @@ namespace Rob
                         }
                         else
                         {
-                            Gizmos.color = Color.magenta;
-                            Gizmos.DrawCube(startPos, Vector3.one);
-
-                            Gizmos.color = Color.blue;
-                            Gizmos.DrawCube(endPos, Vector3.one);
-
                             Gizmos.color = Color.green;
                             Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
                         }

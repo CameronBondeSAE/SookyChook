@@ -17,6 +17,7 @@ public class CharacterModel : MonoBehaviour
 
 	[Header("Setup")]
 	public Rigidbody rb;
+
 	public Vector3 interactRayOffset = new Vector3(0, 0.5f, 0);
 	public float   onGroundDrag      = 5f;
 
@@ -26,8 +27,6 @@ public class CharacterModel : MonoBehaviour
 	public bool         inVehicle = false;
 	public IVehicleBase vehicleBase;
 	public Vector3      lookMovementDirection;
-
-	
 
 
 	public event Action       JumpEvent;
@@ -42,6 +41,15 @@ public class CharacterModel : MonoBehaviour
 	public float maxDistance = 1.8f;
 	public float cryTimer = 3f;
 
+	[SerializeField]
+	GameObject holdingObject;
+
+	[SerializeField]
+	Transform holdingMount;
+
+	[SerializeField]
+	float throwForce = 3f;
+
 	// Start is called before the first frame update
 	public void Jump()
 	{
@@ -52,6 +60,20 @@ public class CharacterModel : MonoBehaviour
 		rb.AddForce(0, jumpHeight, 0, ForceMode.VelocityChange);
 		JumpEvent?.Invoke();
 	}
+
+	// void Update()
+	// {
+	// 	RaycastHit hit;
+	// 	Ray        ray = new Ray(transform.position + interactRayOffset, transform.forward);
+	//
+	// 	Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.red, 2f);
+	//
+	// 	// if (Physics.Raycast(ray, out hit, interactDistance))
+	// 	if (Physics.SphereCast(ray, 0.5f, out hit, interactDistance))
+	// 	{
+	// 		Debug.DrawLine(ray.origin, hit.point, Color.green, 1f);
+	// 	}
+	// }
 
 	// Update is called once per frame
 	void FixedUpdate()
@@ -92,23 +114,48 @@ public class CharacterModel : MonoBehaviour
 			return;
 		}
 
-		// Check what's in front of me. TODO: Make it scan the area or something less precise
-		RaycastHit hit;
-		Ray        ray = new Ray(transform.position + interactRayOffset, transform.forward);
+		RaycastHit hit = CheckWhatsInFrontOfMe();
 
-		Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.green, 2f);
-
-		if (Physics.Raycast(ray, out hit, interactDistance))
+		// Vehicles?
+		vehicleBase = hit.collider.gameObject.GetComponent<IVehicleBase>();
+		if (vehicleBase != null)
 		{
-			Collider hitCollider = hit.collider;
+			if (!inVehicle)
+				GetInVehicle();
+		}
 
-			// Vehicles?
-			vehicleBase = hitCollider?.gameObject.GetComponent<IVehicleBase>();
-			if (vehicleBase != null)
-			{
-				if (!inVehicle)
-					GetInVehicle();
-			}
+		IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+		if (interactable != null)
+		{
+			interactable.Interact();
+		}
+	}
+
+
+	public void PickUp()
+	{
+		// Already holding something, so drop it
+		if (holdingObject != null)
+		{
+			holdingObject.transform.parent                   = null;
+			holdingObject.transform.rotation                 = transform.rotation;
+			holdingObject.GetComponent<IPickupable>().PutDown();
+			holdingObject.GetComponent<Rigidbody>().velocity = rb.velocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
+			holdingObject = null;
+			return;
+		}
+
+		// Pickup?
+		RaycastHit  hit        = CheckWhatsInFrontOfMe();
+		IPickupable pickupable = hit.collider.gameObject.GetComponent<IPickupable>();
+
+		if (pickupable != null)
+		{
+			holdingObject = hit.collider.gameObject;
+			pickupable.PickUp();
+			holdingObject.transform.parent        = holdingMount;
+			holdingObject.transform.localPosition = Vector3.zero;
+			// holdingObject.transform.rotation = holdingMount.rotation;
 		}
 	}
 
@@ -154,8 +201,46 @@ public class CharacterModel : MonoBehaviour
 
 		vehicleBase.Exit();
 
+		// HACK: TODO: Detect favorite chicken death!
 		StopCoroutine(Cry());
 		StartCoroutine(Cry());
+	}
+
+	public IEnumerator Cry()
+	{
+		// Start crying
+		CryingEvent?.Invoke(true);
+
+		//Shoot raycast down & store what we hit in hitinfo
+		RaycastHit hitinfo;
+		hitinfo = new RaycastHit();
+		Physics.Raycast(transform.position, -transform.up, out hitinfo, maxDistance, 255, QueryTriggerInteraction.Ignore);
+
+		//if we hit something, spawn grass at that hit position (should check if dirt?)
+		if (hitinfo.collider)
+		{
+			GameObject newGrass = Instantiate(grass, hitinfo.point, Quaternion.identity);
+		}
+
+		yield return new WaitForSeconds(cryTimer);
+
+		Debug.Log("Stopped crying");
+		CryingEvent?.Invoke(false);
+	}
+
+	RaycastHit CheckWhatsInFrontOfMe()
+	{
+		// Check what's in front of me. TODO: Make it scan the area or something less precise
+		RaycastHit hit;
+		// Ray        ray = new Ray(transform.position + transform.TransformPoint(interactRayOffset), transform.forward);
+		Ray ray = new Ray(transform.position + interactRayOffset, transform.forward);
+
+		Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.green, 2f);
+
+		// if (Physics.Raycast(ray, out hit, interactDistance))
+		Physics.SphereCast(ray, 0.5f, out hit, interactDistance);
+
+		return hit;
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -174,27 +259,5 @@ public class CharacterModel : MonoBehaviour
 	{
 		onGround = true;
 		OnGroundEvent?.Invoke(true);
-	}
-
-	public IEnumerator Cry()
-	{
-		// Start crying
-		CryingEvent?.Invoke(true);
-
-		//Shoot raycast down & store what we hit in hitinfo
-		RaycastHit hitinfo;
-		hitinfo = new RaycastHit();
-		Physics.Raycast(transform.position, -transform.up, out hitinfo, maxDistance, 255, QueryTriggerInteraction.Ignore);
-
-		//if we hit something, spawn grass at that hit position (should check if dirt?)
-		if(hitinfo.collider)
-        {
-			GameObject newGrass = Instantiate(grass, hitinfo.point, Quaternion.identity);
-		}
-
-		yield return new WaitForSeconds(cryTimer);
-
-		Debug.Log("Stopped crying");
-		CryingEvent?.Invoke(false);
 	}
 }

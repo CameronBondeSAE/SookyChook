@@ -42,7 +42,7 @@ namespace Rob
 		}
 
 		// public void ChangePhase(DayNightManager.DayPhase timeOfDay)
-		public void Spawn()
+		public List<GameObject> Spawn()
 		{
 			for (int i = 0; i < groupInfos.Length; i++) //searches through all of wildLife aray
 			{
@@ -84,6 +84,8 @@ namespace Rob
 					}
 				}
 			}
+
+			return spawned;
 		}
 
 		private void OnDrawGizmos()

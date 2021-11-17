@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
         mainActions.InGame.Jump.performed += aContext => characterModel.Jump();
         mainActions.InGame.Interact.performed += aContext => characterModel.Interact();
+        mainActions.InGame.Pickup.performed += aContext => characterModel.PickUp();
         
         mainActions.InGame.Movement.performed += OnMovementOnperformed;
         mainActions.InGame.Movement.canceled += OnMovementOnperformed;

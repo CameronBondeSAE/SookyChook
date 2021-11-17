@@ -27,6 +27,14 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Pickup"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fe6c25e-4992-414d-847e-43444f010da0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""a1e0a328-c3c2-4f0c-addf-2be3760347c7"",
@@ -120,6 +128,17 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbc69333-8789-4bfd-a8a2-c867b08b1570"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pickup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -156,6 +175,7 @@ public class @MainActions : IInputActionCollection, IDisposable
         // In Game
         m_InGame = asset.FindActionMap("In Game", throwIfNotFound: true);
         m_InGame_Interact = m_InGame.FindAction("Interact", throwIfNotFound: true);
+        m_InGame_Pickup = m_InGame.FindAction("Pickup", throwIfNotFound: true);
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
         m_InGame_Movement = m_InGame.FindAction("Movement", throwIfNotFound: true);
         // In Menu
@@ -211,6 +231,7 @@ public class @MainActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_InGame;
     private IInGameActions m_InGameActionsCallbackInterface;
     private readonly InputAction m_InGame_Interact;
+    private readonly InputAction m_InGame_Pickup;
     private readonly InputAction m_InGame_Jump;
     private readonly InputAction m_InGame_Movement;
     public struct InGameActions
@@ -218,6 +239,7 @@ public class @MainActions : IInputActionCollection, IDisposable
         private @MainActions m_Wrapper;
         public InGameActions(@MainActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_InGame_Interact;
+        public InputAction @Pickup => m_Wrapper.m_InGame_Pickup;
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
         public InputAction @Movement => m_Wrapper.m_InGame_Movement;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
@@ -232,6 +254,9 @@ public class @MainActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnInteract;
+                @Pickup.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnPickup;
+                @Pickup.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnPickup;
+                @Pickup.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnPickup;
                 @Jump.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnJump;
@@ -245,6 +270,9 @@ public class @MainActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Pickup.started += instance.OnPickup;
+                @Pickup.performed += instance.OnPickup;
+                @Pickup.canceled += instance.OnPickup;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -291,6 +319,7 @@ public class @MainActions : IInputActionCollection, IDisposable
     public interface IInGameActions
     {
         void OnInteract(InputAction.CallbackContext context);
+        void OnPickup(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
     }

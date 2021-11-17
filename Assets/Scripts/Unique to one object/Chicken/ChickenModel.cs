@@ -6,19 +6,22 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.Events;
 
-public class ChickenModel : MonoBehaviour
+public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
 {
     public int maxHunger;
     public float hungerLevel;
     //public float growth;
 
     public bool isFull;
-    
+
+    public event Action InteractEvent;
+    public event Action<bool> PickUpEvent;
+
     // Start is called before the first frame update
     void Start()
     {
         maxHunger = 10;
-        hungerLevel = maxHunger / 2;
+        hungerLevel = maxHunger / 2f;
         StartCoroutine("ReduceHungerTime");
     }
 
@@ -44,5 +47,24 @@ public class ChickenModel : MonoBehaviour
     public void ReduceHunger(float reduction)
     {
         hungerLevel -= reduction;
+    }
+
+    public void Interact()
+    {
+        InteractEvent?.Invoke();
+    }
+
+    public void PickUp()
+    {
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Collider>().enabled      = false;
+        PickUpEvent?.Invoke(true);
+    }
+
+    public void PutDown()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Collider>().enabled      = true;
+        PickUpEvent?.Invoke(false);
     }
 }

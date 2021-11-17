@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Pickup",
+                    "type": "Button",
+                    "id": "7fe6c25e-4992-414d-847e-43444f010da0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "a1e0a328-c3c2-4f0c-addf-2be3760347c7",
@@ -105,6 +113,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbc69333-8789-4bfd-a8a2-c867b08b1570",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pickup",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
