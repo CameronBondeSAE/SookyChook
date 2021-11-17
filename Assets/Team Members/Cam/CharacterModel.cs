@@ -35,7 +35,11 @@ public class CharacterModel : MonoBehaviour
 	public event Action<bool> OnGroundEvent;
 
 	public event Action<bool> GetInVehicleEvent;
+	public event Action<bool> CryingEvent;
 
+	[Header("Cry Variables")]
+	public GameObject grass;
+	public float cryTimer = 3f;
 
 	// Start is called before the first frame update
 	public void Jump()
@@ -174,8 +178,22 @@ public class CharacterModel : MonoBehaviour
 	public IEnumerator Cry()
 	{
 		// Start crying
-		Debug.Log("Started crying");
-		yield return new WaitForSeconds(4f);
+		CryingEvent?.Invoke(true);
+
+		//Shoot raycast down & store what we hit in hitinfo
+		RaycastHit hitinfo;
+		hitinfo = new RaycastHit();
+		Physics.Raycast(transform.position, -transform.up, out hitinfo, 5, 255, QueryTriggerInteraction.Ignore);
+
+		//if we hit something, spawn grass at that hit position (should check if dirt?)
+		if(hitinfo.collider)
+        {
+			GameObject newGrass = Instantiate(grass, hitinfo.point, Quaternion.identity);
+		}
+
+		yield return new WaitForSeconds(cryTimer);
+
 		Debug.Log("Stopped crying");
+		CryingEvent?.Invoke(false);
 	}
 }
