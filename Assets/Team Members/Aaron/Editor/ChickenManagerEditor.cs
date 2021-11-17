@@ -11,7 +11,7 @@ namespace Aaron
     [CustomEditor(typeof(ChickenManager))]
         public class ChickenManagerEditor : Editor
         {
-            public override void OnInspectorGUI()
+            /*public override void OnInspectorGUI()
             {
                 base.OnInspectorGUI();
 
@@ -24,7 +24,7 @@ namespace Aaron
                 {
                     ((ChickenManager)target).SpawnRoosters();
                 }
-            }
+            }*/
 
             
         }
