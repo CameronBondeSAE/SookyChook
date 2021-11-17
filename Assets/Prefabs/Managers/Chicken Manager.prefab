@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 944056727484603384}
   - component: {fileID: 239450592114366785}
+  - component: {fileID: 8252217912057601022}
   m_Layer: 0
   m_Name: Chicken Manager
   m_TagString: Untagged
@@ -43,3 +44,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd9275fe30f1ee42ac8f7b907810d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  chicken: {fileID: 0}
+  rooster: {fileID: 0}
+  egg: {fileID: 0}
+  chickensList: []
+  roostersList: []
+  fertilisedEggsList: []
+--- !u!114 &8252217912057601022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365065500615544012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42342a0b9409a3e46bc706a39c1adee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoStart: 0
+  groupInfos:
+  - prefabs:
+    - {fileID: 1648933817718183396, guid: 2bc8eb8ba687d764787093a9705f5a2a, type: 3}
+    spawnPoints: []
+    countPerGroup: 0
+  groundOffset: 0
+  spawned: []
