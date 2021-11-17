@@ -44,7 +44,6 @@ public class GraveyardManager : MonoBehaviour
     //On morning/dawn cycle begin
     void ClearGhostChickens()
     {
-        Debug.Log("Clear Ghosts");
         foreach (var ghost in ghostChickens)
         {
             ghost.SetActive(false);
