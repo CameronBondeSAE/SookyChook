@@ -39,6 +39,7 @@ public class CharacterModel : MonoBehaviour
 
 	[Header("Cry Variables")]
 	public GameObject grass;
+	public float maxDistance = 1.8f;
 	public float cryTimer = 3f;
 
 	// Start is called before the first frame update
@@ -183,7 +184,7 @@ public class CharacterModel : MonoBehaviour
 		//Shoot raycast down & store what we hit in hitinfo
 		RaycastHit hitinfo;
 		hitinfo = new RaycastHit();
-		Physics.Raycast(transform.position, -transform.up, out hitinfo, 5, 255, QueryTriggerInteraction.Ignore);
+		Physics.Raycast(transform.position, -transform.up, out hitinfo, maxDistance, 255, QueryTriggerInteraction.Ignore);
 
 		//if we hit something, spawn grass at that hit position (should check if dirt?)
 		if(hitinfo.collider)
