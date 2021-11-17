@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class EggProduction : MonoBehaviour
 {
     private ChickenModel chicken;
     public GameObject egg;
+    private bool layingEggs;
     
     public int layTime = 10;
     
@@ -22,16 +24,30 @@ public class EggProduction : MonoBehaviour
         layTimeMulitplier = (chicken.maxHunger - chicken.hungerLevel) / 10;
     }
 
-    private IEnumerator LayTimer()
+    private void Update()
     {
-        for (int i = 0; i < layTime; i++)
+        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Morning)
         {
-            yield return new WaitForSeconds(1 + layTimeMulitplier);
+            layingEggs = true;
         }
 
-        LayEgg();
-        //restarts the coroutine/timer thing. Need a nicer way to do this
-        StartCoroutine("LayTimer");
+        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Night)
+        {
+            layingEggs = false;
+        }
+    }
+
+    private IEnumerator LayTimer()
+    {
+        while (layingEggs)
+        {
+            for (int i = 0; i < layTime; i++)
+            {
+                yield return new WaitForSeconds(1 + layTimeMulitplier);
+            }
+
+            LayEgg();
+        }
     }
 
     void LayEgg()
@@ -42,9 +58,7 @@ public class EggProduction : MonoBehaviour
 
         //Instantiate Eggs
         Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
-
-        //Instantiate Egg
-        Debug.Log("PLOOP!");
+        
         //laying an egg uses food reserves
         chicken.ReduceHunger(0.25f);
     }

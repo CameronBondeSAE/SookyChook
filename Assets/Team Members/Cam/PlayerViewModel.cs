@@ -7,17 +7,22 @@ public class PlayerViewModel : MonoBehaviour
     public CharacterModel characterModel;
     public Animator animator;
     public ParticleSystem particleSystem;
+    public ParticleSystem cryParticles;
     public AudioSource audioSource;
     public AudioClip jumpClip;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Hack for now while particles keep playing
+        cryParticles.Stop();
+
         characterModel.JumpEvent += OnCharacterModelOnJumpEvent;
         characterModel.OnGroundEvent += CharacterModelOnOnGroundEvent;
         characterModel.LandedEvent += CharacterModelOnLandedEvent;
 
         characterModel.GetInVehicleEvent += EnableView;
+        characterModel.CryingEvent += Cry;
     }
 
     /// <summary>
@@ -53,6 +58,18 @@ public class PlayerViewModel : MonoBehaviour
     {
         animator.SetTrigger("Jump");
         //animator.SetBool("OnGround", false); // CHECK
+    }
+
+    void Cry(bool isCrying)
+    {
+        if(isCrying)
+        {
+            cryParticles.Play();
+        }
+        else
+        {
+            cryParticles.Stop();
+        }
     }
 
     // Update is called once per frame
