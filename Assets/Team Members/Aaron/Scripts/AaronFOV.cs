@@ -11,9 +11,11 @@ namespace Aaron
     public class AaronFOV : MonoBehaviour
     {
         public GameObject target;
-        public float distance;
-        
+
+        public bool canSeeTarget;
+
         private float fov = 45;
+        public float distance = 10;
         
         void Update()
         {
@@ -24,19 +26,21 @@ namespace Aaron
         void CheckFOV()
         {
             Vector3 directionToEnemy = target.transform.position - transform.position;
-            float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
             
-            if (angleToEnemy < fov)
+            float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
+            float distanceToEnemy = Vector3.Distance(transform.position, target.transform.position);
+            
+            if (angleToEnemy < fov && distanceToEnemy < distance)
             {
-                Debug.DrawLine(transform.position, target.transform.position, Color.green);
-                //checking for obstruction
-                if (Physics.Linecast(transform.position, target.transform.position))
+                if (Physics.Raycast(transform.position, directionToEnemy, distance))
                 {
-                    Debug.DrawLine(transform.position, target.transform.position, Color.cyan);
+                    canSeeTarget = true;
+                    Debug.DrawRay(transform.position, directionToEnemy, Color.cyan);
                 }
             }
             else
             {
+                canSeeTarget = false;
                 Debug.DrawLine(transform.position, target.transform.position, Color.red);
             }
         }
