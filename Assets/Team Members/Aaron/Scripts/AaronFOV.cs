@@ -11,6 +11,7 @@ namespace Aaron
     public class AaronFOV : MonoBehaviour
     {
         public GameObject target;
+        public float distance;
         
         private float fov = 45;
         
@@ -29,7 +30,7 @@ namespace Aaron
             {
                 Debug.DrawLine(transform.position, target.transform.position, Color.green);
                 //checking for obstruction
-                if (Physics.Raycast(transform.position, target.transform.position))
+                if (Physics.Linecast(transform.position, target.transform.position))
                 {
                     Debug.DrawLine(transform.position, target.transform.position, Color.cyan);
                 }
