@@ -5,7 +5,10 @@ using UnityEngine;
 public class ChickenRunMode : GameModeBase
 {
     public List<CharacterModel> Players;
+    
     public Transform[] SpawnPoints;
+    public Transform[] RaceCheckPoints;
+    
     public override void Activate()
     {
         base.Activate();
@@ -14,9 +17,10 @@ public class ChickenRunMode : GameModeBase
         {
             if (SpawnPoints != null)
             {
-                //TODO below
-                //Instantiate(Players[i], SpawnPoints[i], Players[i].transform.rotation);
+                Instantiate(Players[i], SpawnPoints[i].transform.position, Players[i].transform.rotation);
             }
         }
+        
+        //Function to Instantiate checkpoint indicators at RaceCheckPoints I suppose?
     }
 }
