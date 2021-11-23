@@ -85,12 +85,12 @@ namespace Aaron
                                 continue;
                             }
 
-                            int GCostToNextNeighbour =
+                            int gCostToNextNeighbour =
                                 (currentNode.gCost + GetDistance(currentNode.coords, neighbour.coords));
 
-                            if (GCostToNextNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                            if (gCostToNextNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                             {
-                                neighbour.gCost = GCostToNextNeighbour;
+                                neighbour.gCost = gCostToNextNeighbour;
                                 neighbour.hCost = GetDistance(neighbour.coords, end);
 
                                 neighbour.parent = currentNode;
