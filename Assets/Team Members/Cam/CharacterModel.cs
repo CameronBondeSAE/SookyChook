@@ -25,7 +25,7 @@ public class CharacterModel : MonoBehaviour
 	public bool onGround = true;
 
 	public bool     inVehicle = false;
-	public IVehicle vehicleBase;
+	public IVehicle vehicle;
 	public Vector3  lookMovementDirection;
 
 
@@ -79,8 +79,6 @@ public class CharacterModel : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		CheckWhatsInFrontOfMe();
-
 		if (!onGround)
 		{
 			rb.drag = 0f;
@@ -109,6 +107,19 @@ public class CharacterModel : MonoBehaviour
 		}
 	}
 
+	public void MoveDirection(Vector2 direction)
+	{
+		if (inVehicle)
+		{
+			vehicle.Accelerate(direction.y);
+			vehicle.Steer(direction.x);
+		}
+		else
+		{
+			movementDirection = direction;
+		}
+	}
+
 	public void Interact()
 	{
 		if (inVehicle)
@@ -120,8 +131,8 @@ public class CharacterModel : MonoBehaviour
 		RaycastHit hit = CheckWhatsInFrontOfMe();
 
 		// Vehicles?
-		vehicleBase = hit.collider.gameObject.GetComponent<IVehicle>();
-		if (vehicleBase != null)
+		vehicle = hit.collider.gameObject.GetComponent<IVehicle>();
+		if (vehicle != null)
 		{
 			if (!inVehicle)
 				GetInVehicle();
@@ -172,11 +183,11 @@ public class CharacterModel : MonoBehaviour
 
 
 		// Lock me to the vehicle, just so the camera doesn't need to retarget anything. I don't actually need to be a child
-		MonoBehaviour vehicleComponent = vehicleBase as MonoBehaviour;
+		MonoBehaviour vehicleComponent = vehicle as MonoBehaviour;
 		transform.parent        = vehicleComponent.transform;
 		transform.localPosition = Vector3.zero;
 
-		vehicleBase.Enter();
+		vehicle.Enter();
 	}
 
 	public void GetOutOfVehicle()
@@ -192,8 +203,8 @@ public class CharacterModel : MonoBehaviour
 		transform.parent = null;
 
 		// Put player at exit point on vehicle
-		transform.position = vehicleBase.GetVehicleExitPoint().position;
-		transform.rotation = vehicleBase.GetVehicleExitPoint().rotation;
+		transform.position = vehicle.GetVehicleExitPoint().position;
+		transform.rotation = vehicle.GetVehicleExitPoint().rotation;
 
 		// HACK: Just make the animation look better, fake a jump!
 		rb.drag = 0f;
@@ -202,7 +213,7 @@ public class CharacterModel : MonoBehaviour
 		Jump();
 		onGround = false;
 
-		vehicleBase.Exit();
+		vehicle.Exit();
 
 		// HACK: TODO: Detect favorite chicken death!
 		StopCoroutine(Cry());

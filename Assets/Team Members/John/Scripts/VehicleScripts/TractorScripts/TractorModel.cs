@@ -80,7 +80,7 @@ public class TractorModel : MonoBehaviour, IVehicle
 
     public void Steer(float amount)
     {
-        //throw new System.NotImplementedException();
+        steering = amount;
     }
 
     public void Accelerate(float amount)

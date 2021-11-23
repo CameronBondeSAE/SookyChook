@@ -27,11 +27,13 @@ public class PlayerController : MonoBehaviour
     {
         if (aContext.phase == InputActionPhase.Performed)
         {
-            characterModel.movementDirection = aContext.ReadValue<Vector2>();
+            characterModel.MoveDirection(aContext.ReadValue<Vector2>());
+            // characterModel.movementDirection = aContext.ReadValue<Vector2>();
         }
         else if(aContext.phase == InputActionPhase.Canceled)
         {
-            characterModel.movementDirection = Vector2.zero;
+            characterModel.MoveDirection(Vector2.zero);
+            // characterModel.movementDirection = Vector2.zero;
         }
     }
 }
