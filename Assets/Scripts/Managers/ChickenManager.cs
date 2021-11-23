@@ -19,9 +19,9 @@ namespace Aaron
         public List<GameObject> roostersList;
         public List<GameObject> fertilisedEggsList;
 
-        private string[] UnlovedNames;
-        private string[] LovedNames;
-        private string[] RoosterNames;
+        public string[] UnlovedNames;
+        public string[] LovedNames;
+        public string[] RoosterNames;
 
         void Start()
         {
