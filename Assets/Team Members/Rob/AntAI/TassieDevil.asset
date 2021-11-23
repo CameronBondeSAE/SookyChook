@@ -13,7 +13,137 @@ MonoBehaviour:
   m_Name: TassieDevil
   m_EditorClassIdentifier: 
   conditions:
-    list: []
-  actions: []
-  goals: []
-  worldStates: []
+    list:
+    - id: 0
+      name: seeChicken
+    - id: 1
+      name: seeRosster
+    - id: 2
+      name: pathClear
+    - id: 3
+      name: devilNear
+    - id: 4
+      name: seePlayer
+    - id: 5
+      name: returnHome
+    - id: 6
+      name: isLooking
+    - id: 7
+      name: fightingDevil
+    - id: 8
+      name: isHungry
+  actions:
+  - name: Attack Chicken
+    isDefault: 0
+    state: {fileID: 7380115231377463841, guid: 6b727379019b5a04299c7fb02da06021, type: 3}
+    cost: 1
+    position: {x: 281, y: 337}
+    pre:
+    - id: 0
+      value: 0
+    - id: 8
+      value: 1
+    post:
+    - id: 0
+      value: 1
+  - name: Attack Rooster
+    isDefault: 0
+    state: {fileID: 8605171985727481684, guid: 36977ef27c0b36340be0c8e15dadae2b, type: 3}
+    cost: 2
+    position: {x: 275, y: 54}
+    pre:
+    - id: 1
+      value: 0
+    - id: 8
+      value: 1
+    post:
+    - id: 1
+      value: 1
+  - name: Fight Other Devil
+    isDefault: 0
+    state: {fileID: 8531050007860474022, guid: cdfeda8a9adc1594b9829e89599ede0f, type: 3}
+    cost: 0
+    position: {x: 281, y: 570}
+    pre:
+    - id: 3
+      value: 1
+    - id: 7
+      value: 0
+    post:
+    - id: 7
+      value: 1
+  - name: Run Away
+    isDefault: 0
+    state: {fileID: 4079306869741866049, guid: aed1e72fb8bc56b418801bd9e5dc63b9, type: 3}
+    cost: 0
+    position: {x: 724, y: 288}
+    pre:
+    - id: 4
+      value: 1
+    post:
+    - id: 5
+      value: 1
+  - name: Take Chicken
+    isDefault: 0
+    state: {fileID: 7714846803375238466, guid: fb86bc997f2ee884883a2f2a6f45d29e, type: 3}
+    cost: 1
+    position: {x: 489, y: 336}
+    pre:
+    - id: 0
+      value: 1
+    post:
+    - id: 5
+      value: 1
+  - name: Take Rooster
+    isDefault: 0
+    state: {fileID: 4538777190289985416, guid: 93c237ec67a64614baf4d19002b77280, type: 3}
+    cost: 2
+    position: {x: 477, y: 53}
+    pre:
+    - id: 1
+      value: 1
+    - id: 0
+      value: 0
+    - id: 4
+      value: 0
+    post:
+    - id: 5
+      value: 1
+  - name: Idle
+    isDefault: 1
+    state: {fileID: 6045964989547240190, guid: a684264e64a08424ebaca441b5c1e90a, type: 3}
+    cost: 0
+    position: {x: 488, y: 575}
+    pre:
+    - id: 6
+      value: 1
+    post: []
+  goals:
+  - name: Return Home
+    isDefault: 1
+    position: {x: 722, y: 177}
+    conditions:
+    - id: 5
+      value: 1
+  worldStates:
+  - position: {x: 725, y: 553}
+    isAutoUpdate: 1
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 3
+      value: 1
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+    - id: 7
+      value: 0
+    - id: 8
+      value: 0

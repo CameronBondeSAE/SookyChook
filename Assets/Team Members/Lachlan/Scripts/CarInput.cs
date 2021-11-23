@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CarInput : MonoBehaviour
 {
-    public float speed;
-    public float rotationalSpeed;
+    public float speed = 20.0f;
+    public float rotationalSpeed = 10.0f;
     Rigidbody rb;
     Vector3 localVelocity;
     
