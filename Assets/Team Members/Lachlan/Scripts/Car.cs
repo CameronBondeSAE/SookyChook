@@ -44,7 +44,7 @@ public class Car : MonoBehaviour
             rb.AddForceAtPosition(transform.up * springStrength, transform.position);
         }
         
-        Debug.DrawLine(transform.position, hitInfo.point , Color.green);
+        Debug.DrawLine(transform.localPosition, hitInfo.point , Color.green);
         
     }
 

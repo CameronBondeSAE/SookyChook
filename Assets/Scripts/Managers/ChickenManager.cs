@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace Aaron
 {
+    [Serializable]
     public class ChickenManager : ManagerBase<ChickenManager>
     {
         public Spawner spawner;
@@ -47,6 +48,8 @@ namespace Aaron
             };
             RoosterNames = new string[]
                 {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel", "Henlord"};
+
         }
+        
     }
 }
