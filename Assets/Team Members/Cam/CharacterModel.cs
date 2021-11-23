@@ -24,9 +24,9 @@ public class CharacterModel : MonoBehaviour
 	[Header("Info. Don't edit")]
 	public bool onGround = true;
 
-	public bool         inVehicle = false;
-	public IVehicleBase vehicleBase;
-	public Vector3      lookMovementDirection;
+	public bool     inVehicle = false;
+	public IVehicle vehicleBase;
+	public Vector3  lookMovementDirection;
 
 
 	public event Action       JumpEvent;
@@ -38,8 +38,9 @@ public class CharacterModel : MonoBehaviour
 
 	[Header("Cry Variables")]
 	public GameObject grass;
+
 	public float maxDistance = 1.8f;
-	public float cryTimer = 3f;
+	public float cryTimer    = 3f;
 
 	[SerializeField]
 	GameObject holdingObject;
@@ -79,7 +80,7 @@ public class CharacterModel : MonoBehaviour
 	void FixedUpdate()
 	{
 		CheckWhatsInFrontOfMe();
-			
+
 		if (!onGround)
 		{
 			rb.drag = 0f;
@@ -119,7 +120,7 @@ public class CharacterModel : MonoBehaviour
 		RaycastHit hit = CheckWhatsInFrontOfMe();
 
 		// Vehicles?
-		vehicleBase = hit.collider.gameObject.GetComponent<IVehicleBase>();
+		vehicleBase = hit.collider.gameObject.GetComponent<IVehicle>();
 		if (vehicleBase != null)
 		{
 			if (!inVehicle)
@@ -139,11 +140,11 @@ public class CharacterModel : MonoBehaviour
 		// Already holding something, so drop it
 		if (holdingObject != null)
 		{
-			holdingObject.transform.parent                   = null;
-			holdingObject.transform.rotation                 = transform.rotation;
+			holdingObject.transform.parent   = null;
+			holdingObject.transform.rotation = transform.rotation;
 			holdingObject.GetComponent<IPickupable>().PutDown();
 			holdingObject.GetComponent<Rigidbody>().velocity = rb.velocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
-			holdingObject = null;
+			holdingObject                                    = null;
 			return;
 		}
 
@@ -157,7 +158,7 @@ public class CharacterModel : MonoBehaviour
 			pickupable.PickUp();
 			holdingObject.transform.parent        = holdingMount;
 			holdingObject.transform.localPosition = Vector3.zero;
-			holdingObject.transform.rotation = holdingMount.rotation;
+			holdingObject.transform.rotation      = holdingMount.rotation;
 		}
 	}
 

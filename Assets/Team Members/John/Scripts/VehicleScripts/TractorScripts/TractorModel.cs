@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TractorModel : MonoBehaviour, IVehicleBase
+public class TractorModel : MonoBehaviour, IVehicle
 {
     [Header("Vehicle Attributes")]
     public Rigidbody rb;

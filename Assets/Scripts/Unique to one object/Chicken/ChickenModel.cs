@@ -49,6 +49,8 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
         hungerLevel -= reduction;
     }
 
+    #region Interface implementation
+    
     public void Interact()
     {
         InteractEvent?.Invoke();
@@ -67,4 +69,6 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
         GetComponent<Collider>().enabled      = true;
         PickUpEvent?.Invoke(false);
     }
+    
+    #endregion
 }

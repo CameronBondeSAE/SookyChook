@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IVehicleBase
+public interface IVehicle
 {
 	void Enter();
 	void Exit();
