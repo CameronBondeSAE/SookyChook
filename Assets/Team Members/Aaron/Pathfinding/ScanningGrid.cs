@@ -108,23 +108,11 @@ public class ScanningGrid : MonoBehaviour
                     Gizmos.color = Color.magenta;
                     Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (nodeSize - 0.1f));
                 }
-                else
+                /*else
                 {
                     Gizmos.color = Color.white;
                     Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (nodeSize - 0.1f));
-                }
-
-                foreach (var node in grid)
-                {
-                    if (path != null)
-                    {
-                        if (path.Contains(node))
-                        {
-                            Gizmos.color = Color.cyan;
-                            Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (nodeSize - 0.1f));
-                        }
-                    }
-                }
+                }*/
             }
         }
     }

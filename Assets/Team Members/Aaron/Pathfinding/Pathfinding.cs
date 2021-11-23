@@ -21,12 +21,19 @@ namespace Aaron
         public List<ScanningGrid.Node> openSet = new List<ScanningGrid.Node>();
         public List<ScanningGrid.Node> closedSet = new List<ScanningGrid.Node>();
 
+        public List<ScanningGrid.Node> path = new List<ScanningGrid.Node>();
+
         private ScanningGrid grid;
 
         private void Start()
         {
             grid = GetComponent<ScanningGrid>();
             FindPath(beginning, finish);
+        }
+
+        private void Update()
+        {
+            //TODO get coords from node world position; use to create paths on the go
         }
 
         //get start and finish points in Node Space
@@ -39,14 +46,13 @@ namespace Aaron
             currentNode.coords = new Vector2Int(start.x, start.y);
             currentNode.gCost = 0;
             currentNode.hCost = GetDistance(currentNode.coords, end);
-
-            //loop seems not to function properly. Unity crashes
+            
             while (currentNode != grid.grid[end.x, end.y])
             {
                 int currentLowestFCost = currentNode.fCost;
                 foreach (var node in openSet)
                 {
-                    if (node.fCost <= currentNode.fCost)
+                    if (node.fCost <= currentLowestFCost)
                     {
                         {
                             currentLowestFCost = node.fCost;
@@ -68,43 +74,43 @@ namespace Aaron
                 {
                     for (int y = (currentNode.coords.y - 1); y < (currentNode.coords.y + 2); y++)
                     {
-                        /*if (x > 0 && x <= grid.gridSizeX && y > 0 && y <= grid.gridSizeY)
-                        {*/
+                        if (x > 0 && x <= grid.gridSizeX && y > 0 && y <= grid.gridSizeY)
+                        {
                             //neighbour location
-                            ScanningGrid.Node neighbour = grid.grid[currentNode.gridX, currentNode.gridY];
-                            neighbour.coords = new Vector2Int(currentNode.coords.x + x, currentNode.coords.y + y);
+                            ScanningGrid.Node neighbour = grid.grid[x,y];
+                            neighbour.coords = new Vector2Int(x, y);
 
-                            /*if (neighbour.isBlocked || closedSet.Contains(neighbour))
+                            if (neighbour.isBlocked || closedSet.Contains(neighbour))
                             {
                                 continue;
-                            }*/
+                            }
 
-                            //
+                            int GCostToNextNeighbour =
+                                (currentNode.gCost + GetDistance(currentNode.coords, neighbour.coords));
 
-                            int newGCostToNeighbour =
-                                currentNode.gCost + GetDistance(currentNode.coords, neighbour.coords);
-
-
-                            if (newGCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                            if (GCostToNextNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                             {
-                                //current gCost set to previous gCost plus (movement to neighbour) cost
-                                neighbour.gCost = newGCostToNeighbour;
+                                neighbour.gCost = GCostToNextNeighbour;
                                 neighbour.hCost = GetDistance(neighbour.coords, end);
 
-                                currentNode.hCost = GetDistance(currentNode.coords, end);
-
                                 neighbour.parent = currentNode;
-                                
-                                //set new current node
-                                currentNode = neighbour;
 
                                 if (!openSet.Contains(neighbour))
                                 {
                                     openSet.Add(neighbour);
                                 }
                             }
-                        //}
+                        }
                     }
+                }
+
+                path.Clear();
+                
+                //in place of the RetracePath() function
+                while (currentNode != grid.grid[beginning.x, beginning.y])
+                {
+                    path.Add(currentNode);
+                    currentNode = currentNode.parent;
                 }
             }
         }
@@ -114,20 +120,19 @@ namespace Aaron
         {
             Vector2Int distance = end - start;
 
-
             distance = new Vector2Int(Mathf.Abs(distance.x), Mathf.Abs(distance.y));
 
-            if (distance.x < distance.y)
+            if (distance.x > distance.y)
             {
-                return (14 * distance.y) + (10 * distance.x);
+                return distance.y * 14 + 10 * (distance.x - distance.y);
             }
 
-            return 14 * distance.x + 10 * distance.y;
+            return distance.x * 14 + 10 * (distance.y-distance.x);
         }
 
-        void RetracePath(ScanningGrid.Node startNode, ScanningGrid.Node endNode)
+        //possibly reintroduce if using coords from world space?
+        /*void RetracePath(ScanningGrid.Node startNode, ScanningGrid.Node endNode)
         {
-            List<ScanningGrid.Node> path = new List<ScanningGrid.Node>();
             ScanningGrid.Node currentNode = endNode;
 
             while (currentNode != startNode)
@@ -137,7 +142,7 @@ namespace Aaron
             }
 
             path.Reverse();
-        }
+        }*/
 
         private void OnDrawGizmos()
         {
@@ -146,16 +151,25 @@ namespace Aaron
                 {
                     for (int y = 0; y < grid.gridSizeY; y++)
                     {
-                        /*if (grid.grid[x, y] != null)
-                        {*/
                         if (openSet.Contains(grid.grid[x, y]))
                         {
                             Gizmos.color = Color.yellow;
                             Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (1 - 0.1f));
                         }
-                        //}
 
-                        Gizmos.color = Color.green;
+                        if (closedSet.Contains(grid.grid[x, y]))
+                        {
+                            Gizmos.color = Color.red;
+                            Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (01 - .01f));
+                        }
+
+                        /*if (path.Contains(grid.grid[x, y]))
+                        {
+                            Gizmos.color = Color.green;
+                            Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (01 - .01f));
+                        }*/
+
+                        Gizmos.color = Color.white;
                         Gizmos.DrawCube(new Vector3(beginning.x, beginning.y, 0), Vector3.one * (01 - .01f));
 
                         Gizmos.color = Color.black;
