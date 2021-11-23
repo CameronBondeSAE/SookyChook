@@ -32,13 +32,13 @@ public class ScanningGrid : MonoBehaviour
         public Vector2Int coords;
 
         public int gCost;
-        public int heuristicCost;
+        public int hCost;
 
         public Node parent;
 
         public int fCost
         {
-            get { return gCost + heuristicCost; }
+            get { return gCost + hCost; }
         }
     }
 
