@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 452179141776461428}
   - component: {fileID: 273595528668330429}
   - component: {fileID: 8083766479097493389}
+  - component: {fileID: 699882490}
   m_Layer: 0
   m_Name: Fence Gate
   m_TagString: Untagged
@@ -174,6 +175,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9100001, y: 1.1728415, z: 0.25}
   m_Center: {x: 1.05, y: 0.5600567, z: 0}
+--- !u!114 &699882490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850558756148664229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94298da371ebfb54eacd8522b6a60107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 452179141776461428}
+  collider:
+  - {fileID: 8083766479097493389}
+  - {fileID: 273595528668330429}
+  offset: 1
 --- !u!1 &8961492653852308432
 GameObject:
   m_ObjectHideFlags: 0
