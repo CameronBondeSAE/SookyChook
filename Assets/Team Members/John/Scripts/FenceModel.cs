@@ -52,7 +52,7 @@ public class FenceModel : MonoBehaviour, IPickupable
         //Place fence at raycast hit point
         if (hitinfo.collider)
         {
-            rb.velocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
             transform.position = hitinfo.point;
         }
 

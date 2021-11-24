@@ -12,12 +12,14 @@ public class TractorModel : MonoBehaviour, IVehicle
     //public float frictionAmount = 5f;
     public Transform exitPoint;
     public GameObject wheels;
-    public float acceleration;
-    public float steering;
 
-    [Space]
-    public Vector3 localVelocity;
-    public float xVelocity;
+    bool playerInTractor = false;
+    float acceleration;
+    float steering;
+
+    //[Space]
+    //public Vector3 localVelocity;
+    //public float xVelocity;
     
     [Space]
     [Header("Turning Wheels Only")]
@@ -43,6 +45,17 @@ public class TractorModel : MonoBehaviour, IVehicle
 
         //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
         //rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
+
+        if (rb.velocity.magnitude < 1f && !playerInTractor)
+        {
+            wheels.SetActive(false);
+            rb.isKinematic = true;
+        }
+
+        if(!playerInTractor)
+        {
+            acceleration = 0;
+        }
     }
     void FixedUpdate()
     {
@@ -51,13 +64,13 @@ public class TractorModel : MonoBehaviour, IVehicle
         foreach (Transform steeringWheel in steeringWheels)
         {
             steeringWheel.localRotation = Quaternion.Euler(0, steeringAngle, 0);
-            rb.AddForceAtPosition(steeringWheel.forward * acceleration * speed, steeringWheel.position);
+            rb.AddForceAtPosition(steeringWheel.forward * acceleration * speed, steeringWheel.position, ForceMode.Force);
         }
 
         foreach (Transform driveWheel in drivingWheels)
         {
             //rb.AddRelativeForce(Input.GetAxis("Vertical") * driveWheel.forward * speed);
-            rb.AddForceAtPosition(driveWheel.forward * acceleration * speed, driveWheel.position);
+            rb.AddForceAtPosition(driveWheel.forward * acceleration * speed, driveWheel.position, ForceMode.Force);
         }
     }
 
@@ -69,13 +82,16 @@ public class TractorModel : MonoBehaviour, IVehicle
         //Model Functionality
         wheels.SetActive(true);
         rb.isKinematic = false;
+        playerInTractor = true;
     }
 
     public void Exit()
     {
         ExitTractorEvent?.Invoke();
-        wheels.SetActive(false);
-        rb.isKinematic = true;
+
+        playerInTractor = false;
+        //wheels.SetActive(false);
+        //rb.isKinematic = true;
     }
 
     public void Steer(float amount)

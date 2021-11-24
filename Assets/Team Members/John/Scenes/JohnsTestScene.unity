@@ -4383,11 +4383,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3538844419382843856, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538844419382843856, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3538844419382843860, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
       propertyPath: m_Name
       value: TractorPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3538844419382843859, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bd8aed476968b6348bbfc99b6ae273ae, type: 3}
 --- !u!1 &1728232688
 GameObject:
@@ -5708,10 +5717,6 @@ MonoBehaviour:
   turnRadius: 50
   exitPoint: {fileID: 0}
   wheels: {fileID: 0}
-  acceleration: 0
-  steering: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
   steeringWheels:
   - {fileID: 2920758528495913750}
   - {fileID: 1990614557346923212}
