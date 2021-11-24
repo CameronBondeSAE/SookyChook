@@ -21,10 +21,16 @@ namespace Aaron
         public List<GameObject> roostersList;
         public List<GameObject> fertilisedEggsList;
 
-        public string[] UnlovedNames;
-        public string[] LovedNames;
-        public string[] RoosterNames;
-        
+        [Serializable]
+        public class Names
+        {
+            public string[] UnlovedNames;
+            public string[] LovedNames;
+            public string[] RoosterNames;
+        }
+
+        public Names names = new Names();
+
         void Start()
         {
 
@@ -39,19 +45,19 @@ namespace Aaron
             roostersList = new List<GameObject>();
             fertilisedEggsList = new List<GameObject>();
 
-            UnlovedNames = new string[]
-            {
-                "Farm To Table", "Two Piece Feed", "Pluckhead", "Cock", "Yolks On You", "Pie", "Bucket",
-                "Battery", "Nicolas In A Cage", "Schnitty", "Peri-Peri",  "Chick-Fil-E",
-                "Atilla the Hen"
-            };
-            LovedNames = new string[]
+            names.UnlovedNames = new string[]
+                                {
+                                    "Farm To Table", "Two Piece Feed", "Pluckhead", "Cock", "Yolks On You", "Pie", "Bucket",
+                                    "Battery", "Nicolas In A Cage", "Schnitty", "Peri-Peri",  "Chick-Fil-E",
+                                    "Atilla the Hen"
+                                };
+            names.LovedNames = new string[]
             {
                 "Bum Nuggets", "Chico Roll","Tyrannosaurus Pecks", "Dora The Eggsplorer", "Gwyneth Poultry", "Clucky Cheese",
                 "Peep"
             };
-            RoosterNames = new string[]
-                {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel", "Henlord"};
+            names.RoosterNames = new string[]
+                                 {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel", "Henlord"};
 
             
             //TODO: Try and fix this up (Lachlan Stuff)
