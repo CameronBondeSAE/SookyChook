@@ -13,6 +13,12 @@ public class TractorModel : MonoBehaviour, IVehicle
     public Transform exitPoint;
     public GameObject wheels;
 
+    [Header("Ragdoll Physics - when jumping out of tractor")]
+    [SerializeField]
+    float reductionSpeed = 0.05f;
+    [SerializeField]
+    float reductionTimer = 0.5f;
+
     bool playerInTractor = false;
     float acceleration;
     float steering;
@@ -46,17 +52,34 @@ public class TractorModel : MonoBehaviour, IVehicle
         //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
         //rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
 
-        if (rb.velocity.magnitude < 1f && !playerInTractor)
+        //Only reduce speed when the player is not in the tractor & the tractor is moving
+        if(!playerInTractor)
+        {
+            if(acceleration > 0)
+            {
+                StartCoroutine(ReduceSpeed());
+            }
+        }
+
+        //Once the player has stopped moving and player is not in tractor - lock it back up
+        if (rb.velocity.magnitude < 0.1f && !playerInTractor)
         {
             wheels.SetActive(false);
             rb.isKinematic = true;
         }
+    }
 
-        if(!playerInTractor)
+    //Using a coroutine to reduce speed so the function can pause after each speed reduction - allows the tractor to keep moving before reaching zero
+    IEnumerator ReduceSpeed()
+    {
+        if(acceleration > 0)
         {
-            acceleration = 0;
+            acceleration -= reductionSpeed;
+            yield return new WaitForSeconds(reductionTimer);
         }
     }
+
+
     void FixedUpdate()
     {
         float steeringAngle = steering * turnRadius;
