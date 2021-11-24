@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93fa5982088a4f1409fb4a7d312d37f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggParticle: {fileID: 0}
 --- !u!1 &9064495301548624989
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c5dbff3cad48842b0d617c7262d9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chicken: {fileID: 1648933817718183396, guid: 2bc8eb8ba687d764787093a9705f5a2a, type: 3}
+  chicken: {fileID: 1648933817718183396, guid: 192fa124a1e5ab94fb102b31187dd616, type: 3}
   isFertilised: 1
   hatchTimer: 5
 --- !u!1001 &2054227034364045028
