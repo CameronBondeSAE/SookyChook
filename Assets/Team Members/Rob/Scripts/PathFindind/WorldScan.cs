@@ -11,7 +11,7 @@ namespace Rob
         {
             public Vector3Int gridPos;
             public bool isBlocked;
-            public int fCost;
+            public int fCost = int.MaxValue;
             public int gCost;
             public int hCost;
             public Node parent;
