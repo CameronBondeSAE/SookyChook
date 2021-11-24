@@ -14,6 +14,7 @@ namespace Aaron
     [Serializable]
     public class ChickenManager : ManagerBase<ChickenManager>
     {
+
         public Spawner spawner;
         
         public List<GameObject> chickensList;
@@ -23,9 +24,12 @@ namespace Aaron
         public string[] UnlovedNames;
         public string[] LovedNames;
         public string[] RoosterNames;
-
+        
         void Start()
         {
+
+            ChickenManager chickenData = new ChickenManager();
+            
             spawner = GetComponent<Spawner>();
             spawner.Spawn();
             
@@ -48,6 +52,20 @@ namespace Aaron
             };
             RoosterNames = new string[]
                 {"Il Jefe", "Henedict Cluckerbatch", "Cluck Norris", "Chickolas Cage", "The Colonel", "Henlord"};
+
+            
+            //TODO: Try and fix this up (Lachlan Stuff)
+            // JSON SAVE AND LOAD
+            string json = JsonUtility.ToJson(chickenData);
+            
+            
+            chickenData = JsonUtility.FromJson<ChickenManager>(json);
+            //string chickenNames = this.ToString();
+            //JsonUtility.FromJson<ChickenManager>(chickenNames);
+
+            Debug.Log(JsonUtility.ToJson(this));
+
+
 
         }
         

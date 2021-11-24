@@ -63,6 +63,8 @@ public class CarInput : MonoBehaviour
 
     void LookRotation()
     {
+        //use transform.rotate
+        
         if (LookLeft == true)
         {
             rb.AddRelativeTorque(0,-rotationalSpeed,0);
