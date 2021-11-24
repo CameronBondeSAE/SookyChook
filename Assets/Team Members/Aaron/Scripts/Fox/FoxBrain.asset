@@ -37,7 +37,7 @@ MonoBehaviour:
   actions:
   - name: Find Hiding Spot
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 6321450779783225908, guid: cf02a94b43e3b554c95df16babfa964a, type: 3}
     cost: 0
     position: {x: 420, y: 140}
     pre:
@@ -50,7 +50,7 @@ MonoBehaviour:
       value: 1
   - name: Move to Hiding Spot
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 535523342837545032, guid: 9ae159747c4eec5459756b238a362e8b, type: 3}
     cost: 0
     position: {x: 620, y: 140}
     pre:
@@ -63,7 +63,7 @@ MonoBehaviour:
       value: 1
   - name: Hide in Spot
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 4487553317047808274, guid: 2447e2f616704e04abe918d176f39dc2, type: 3}
     cost: 0
     position: {x: 820, y: 140}
     pre:
@@ -74,7 +74,7 @@ MonoBehaviour:
       value: 0
   - name: Find Chicken
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 8636870344005334192, guid: c7c23263d58587643b7775fe9d58ba48, type: 3}
     cost: 0
     position: {x: 420, y: 360}
     pre:
@@ -91,7 +91,7 @@ MonoBehaviour:
       value: 1
   - name: Move to Chicken
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 7235900917391254370, guid: 23e8e581a1fc8b5448df8892a8161705, type: 3}
     cost: 0
     position: {x: 620, y: 360}
     pre:
@@ -108,7 +108,7 @@ MonoBehaviour:
       value: 1
   - name: Attacking
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5509765540849849095, guid: c37baab741c1880418c1d89479b63268, type: 3}
     cost: 0
     position: {x: 820, y: 360}
     pre:
@@ -121,7 +121,7 @@ MonoBehaviour:
       value: 1
   - name: Eat Chicken
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 4375888048723676311, guid: 98da40a4aea42a14b813d4f6eaa2ee6c, type: 3}
     cost: 0
     position: {x: 1020, y: 360}
     pre:
@@ -132,7 +132,7 @@ MonoBehaviour:
       value: 1
   - name: Fleeing
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 4099555966861951076, guid: 123ca8772c362934ba56e085a6c4193b, type: 3}
     cost: 0
     position: {x: 420, y: 620}
     pre: []

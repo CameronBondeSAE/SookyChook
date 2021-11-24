@@ -24,11 +24,12 @@ namespace Aaron
         public List<ScanningGrid.Node> path = new List<ScanningGrid.Node>();
 
         private ScanningGrid grid;
+        private ScanningGrid.Node currentNode;
 
         private void Start()
         {
             grid = GetComponent<ScanningGrid>();
-            FindPath(beginning, finish);
+            StartCoroutine(FindPath(beginning, finish));
         }
 
         private void Update()
@@ -37,10 +38,10 @@ namespace Aaron
         }
 
         //get start and finish points in Node Space
-        void FindPath(Vector2Int start, Vector2Int end)
+        IEnumerator FindPath(Vector2Int start, Vector2Int end)
         {
             ScanningGrid.Node endNode = grid.grid[end.x, end.y];
-            ScanningGrid.Node currentNode = grid.grid[start.x, start.y];
+            currentNode = grid.grid[start.x, start.y];
 
             openSet.Add(currentNode);
             currentNode.coords = new Vector2Int(start.x, start.y);
@@ -103,15 +104,19 @@ namespace Aaron
                         }
                     }
                 }
-
-                path.Clear();
                 
-                //in place of the RetracePath() function
-                while (currentNode != grid.grid[beginning.x, beginning.y])
-                {
-                    path.Add(currentNode);
-                    currentNode = currentNode.parent;
-                }
+                yield return new WaitForEndOfFrame();
+            }
+            
+            path.Clear();
+            
+            //in place of the RetracePath() function
+            while (currentNode != grid.grid[beginning.x, beginning.y])
+            {
+                path.Add(currentNode);
+                currentNode = currentNode.parent;
+
+                yield return new WaitForEndOfFrame();
             }
         }
 
@@ -147,35 +152,37 @@ namespace Aaron
         private void OnDrawGizmos()
         {
             if (grid != null)
-                for (int x = 0; x < grid.gridSizeX; x++)
+            {
+
+                foreach (var node in openSet)
                 {
-                    for (int y = 0; y < grid.gridSizeY; y++)
-                    {
-                        if (openSet.Contains(grid.grid[x, y]))
-                        {
-                            Gizmos.color = Color.yellow;
-                            Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (1 - 0.1f));
-                        }
-
-                        if (closedSet.Contains(grid.grid[x, y]))
-                        {
-                            Gizmos.color = Color.red;
-                            Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (01 - .01f));
-                        }
-
-                        /*if (path.Contains(grid.grid[x, y]))
-                        {
-                            Gizmos.color = Color.green;
-                            Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (01 - .01f));
-                        }*/
-
-                        Gizmos.color = Color.white;
-                        Gizmos.DrawCube(new Vector3(beginning.x, beginning.y, 0), Vector3.one * (01 - .01f));
-
-                        Gizmos.color = Color.black;
-                        Gizmos.DrawCube(new Vector3(finish.x, finish.y, 0), Vector3.one * (1 - 0.1f));
-                    }
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, 0), Vector3.one * (1 - 0.1f));
                 }
+
+                foreach (var node in closedSet)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, 0), Vector3.one * (01 - .01f));
+                }
+
+                /*if (path.Contains(grid.grid[x, y]))
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (01 - .01f));
+                }*/
+
+                Gizmos.color = Color.white;
+                Gizmos.DrawCube(new Vector3(beginning.x, beginning.y, 0), Vector3.one * (01 - .01f));
+
+                Gizmos.color = Color.black;
+                Gizmos.DrawCube(new Vector3(finish.x, finish.y, 0), Vector3.one * (1 - 0.1f));
+            }
+            if (currentNode != null)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawCube(new Vector3(currentNode.coords.x, currentNode.coords.y, 0), Vector3.one);
+            }
         }
     }
 }

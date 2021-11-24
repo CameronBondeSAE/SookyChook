@@ -34,3 +34,8 @@ public interface IPickupable
 	void PickUp();
 	void PutDown();
 }
+
+public interface IWaterable
+{
+	void BeingWatered(float amount);
+}

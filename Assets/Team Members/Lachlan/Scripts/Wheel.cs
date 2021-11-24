@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Car : MonoBehaviour
+public class Wheel : MonoBehaviour
 {
-    Rigidbody rb;
+    public Rigidbody rb;
     public float springStrength=6f;
     public float suspensionLength=1f;
     public float height;
+    public float force = 0.0f;
 
     public float xVelocity;
     public float friction = 5f;
+
+    public Vector3 localVelocity;
     
     // Start is called before the first frame update
     void Start()
@@ -20,12 +23,13 @@ public class Car : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //Frictional Force for lateral movement
-        var localVelocity = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
+        
+        localVelocity = transform.InverseTransformDirection(rb.velocity);
         xVelocity = localVelocity.x;
         
+        //Frictional Force for lateral movement
         rb.AddRelativeForce(Vector3.right*xVelocity*-friction);
         
         //RayCasting
@@ -40,7 +44,10 @@ public class Car : MonoBehaviour
 
         if (hitInfo.collider==true)
         {
-            float force = suspensionLength - height;
+            height = hitInfo.distance;
+            force = maxHeight - height;
+            force *= maxForce;
+            //float force = suspensionLength - height;
             rb.AddForceAtPosition(transform.up * springStrength, transform.position);
         }
         

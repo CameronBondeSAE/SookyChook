@@ -25,17 +25,17 @@ namespace Aaron
 
         void CheckFOV()
         {
-            Vector3 directionToEnemy = target.transform.position - transform.position;
+            Vector3 directionToTarget = target.transform.position - transform.position;
             
-            float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
-            float distanceToEnemy = Vector3.Distance(transform.position, target.transform.position);
+            float angleToEnemy = Vector3.Angle(transform.forward, directionToTarget);
+            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
             
-            if (angleToEnemy < fov && distanceToEnemy < distance)
+            if (angleToEnemy < fov && distanceToTarget < distance)
             {
-                if (Physics.Raycast(transform.position, directionToEnemy, distance))
+                if (Physics.Raycast(transform.position, directionToTarget, distance))
                 {
                     canSeeTarget = true;
-                    Debug.DrawRay(transform.position, directionToEnemy, Color.cyan);
+                    Debug.DrawRay(transform.position, directionToTarget, Color.cyan);
                 }
             }
             else

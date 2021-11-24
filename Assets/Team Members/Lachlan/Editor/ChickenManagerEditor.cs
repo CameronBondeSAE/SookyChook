@@ -20,12 +20,18 @@ namespace Lachlan
             
             GUILayout.Label("JSON Format Data");
             
+            if (GUILayout.Button("JSON TEXT"))
+            {
+                Debug.Log(JsonUtility.ToJson(FindObjectOfType<ChickenManager>()));
+            }
+            
             if (GUILayout.Button("Save Names"))
             {
                 //string json = JsonUtility.ToJson(ChickenManager);
                 string json = JsonUtility.ToJson(FindObjectOfType<ChickenManager>());
             }
         
+            // TODO: Still need to work on fixing this code...
             if (GUILayout.Button("Load Names"))
             {
                 //string chickenNames = this.chickensList.ToString();

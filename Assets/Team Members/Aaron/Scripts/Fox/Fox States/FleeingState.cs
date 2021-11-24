@@ -8,8 +8,13 @@ namespace Aaron
     public class FleeingState : AntAIState
     {
         public GameObject owner;
-        
-        private bool isDawn;
+        public GameObject foxDen;
+
+        private AaronFOV fov;
+
+        public List<GameObject> Dens = new List<GameObject>();
+
+        public bool isDawn;
 
         public override void Create(GameObject aGameObject)
         {
@@ -21,7 +26,7 @@ namespace Aaron
         public override void Enter()
         {
             base.Enter();
-            
+
             //Find den point, Get position
         }
 
