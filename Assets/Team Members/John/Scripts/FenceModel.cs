@@ -18,11 +18,6 @@ public class FenceModel : MonoBehaviour, IPickupable
     //Fence Events
     public event Action<bool> PickedUpEvent;
 
-    void Start()
-    {
-        //GlobalEvents.levelStaticsUpdated += 
-    }
-
     public void PickUp()
     {
         //Send event for all view related functionality
@@ -47,7 +42,7 @@ public class FenceModel : MonoBehaviour, IPickupable
             c.enabled = true;
         }
         rb.useGravity = true;
-        rb.isKinematic = false;
+        //rb.isKinematic = false;
 
         //Raycasting to find where to place fence
         RaycastHit hitinfo;
@@ -60,5 +55,8 @@ public class FenceModel : MonoBehaviour, IPickupable
             rb.velocity = Vector3.zero;
             transform.position = hitinfo.point;
         }
+
+        //Invoke event to update pathfinding algorithms
+        GlobalEvents.OnLevelStaticsUpdated(gameObject);
     }
 }
