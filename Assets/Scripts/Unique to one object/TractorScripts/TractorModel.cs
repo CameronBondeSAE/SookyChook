@@ -34,6 +34,9 @@ public class TractorModel : MonoBehaviour, IVehicle
     [Header("Driving Wheels Only")]
     public List<Transform> drivingWheels = new List<Transform>();
 
+    [Header("For Reference Only")]
+    public float steeringAngle;
+
     //Events
     public event Action EnterTractorEvent;
     public event Action ExitTractorEvent;
@@ -82,7 +85,7 @@ public class TractorModel : MonoBehaviour, IVehicle
 
     void FixedUpdate()
     {
-        float steeringAngle = steering * turnRadius;
+        steeringAngle = steering * turnRadius;
 
         foreach (Transform steeringWheel in steeringWheels)
         {

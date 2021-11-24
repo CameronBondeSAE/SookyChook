@@ -80,6 +80,10 @@ MonoBehaviour:
   audioSource: {fileID: 2233473929980595635}
   enterTractor: {fileID: 8300000, guid: 0a1df69c7bae61b4bb0cf299d93d2470, type: 3}
   exitTractor: {fileID: 8300000, guid: 07f01c5838d2a0540a8aefc6ef131e6d, type: 3}
+  wheelGraphic:
+  - {fileID: 5872496443150274451}
+  - {fileID: 3580152153552489133}
+  turnSpeed: 0.8
 --- !u!1 &3538844418092670271
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +130,6 @@ GameObject:
   - component: {fileID: 3538844419382843855}
   - component: {fileID: 3538844419382843856}
   - component: {fileID: 3538844419382843858}
-  - component: {fileID: 3538844419382843859}
   m_Layer: 0
   m_Name: TractorPrefab
   m_TagString: Untagged
@@ -174,7 +177,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1000
   m_Drag: 1
-  m_AngularDrag: 1
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -197,30 +200,15 @@ MonoBehaviour:
   turnRadius: 75
   exitPoint: {fileID: 3226161710308081780}
   wheels: {fileID: 3538844418092670271}
-  acceleration: 0
-  steering: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
+  reductionSpeed: 0.05
+  reductionTimer: 0.5
   steeringWheels:
   - {fileID: 4394796345311082372}
   - {fileID: 158764202582030093}
   drivingWheels:
   - {fileID: 158764201656862807}
   - {fileID: 158764202337794848}
---- !u!114 &3538844419382843859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538844419382843860}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87042abc79aa69d4d92a176287993c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myVehicle: {fileID: 3538844419382843858}
-  playerInput: {x: 0, y: 0}
+  steeringAngle: 0
 --- !u!1 &8273427687562081177
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +578,16 @@ PrefabInstance:
 --- !u!4 &3933394282921838214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
+  m_PrefabInstance: {fileID: 3538844418996347245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5872496443150274451 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
+  m_PrefabInstance: {fileID: 3538844418996347245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3580152153552489133 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 50596594197605312, guid: 7c2016242ae8eae4e84862bb398cd880, type: 3}
   m_PrefabInstance: {fileID: 3538844418996347245}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3538844419020843968
