@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 4301735083417580258}
   - component: {fileID: 525671604475063043}
   - component: {fileID: 3139659806725499562}
+  - component: {fileID: 7230645710583350255}
   m_Layer: 0
   m_Name: DeliveryTruck
   m_TagString: Untagged
@@ -498,6 +499,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 750
   rotationalSpeed: 250
+--- !u!114 &7230645710583350255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880129374932396767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02a40d73290ee8428256bd48de94a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 2572529917681694738}
 --- !u!1 &7741078112623420157
 GameObject:
   m_ObjectHideFlags: 0
