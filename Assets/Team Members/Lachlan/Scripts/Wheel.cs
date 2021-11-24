@@ -45,8 +45,8 @@ public class Wheel : MonoBehaviour
         if (hitInfo.collider==true)
         {
             height = hitInfo.distance;
-            force = maxHeight - height;
-            force *= maxForce;
+            //force = maxHeight - height;
+            //force *= maxForce;
             //float force = suspensionLength - height;
             rb.AddForceAtPosition(transform.up * springStrength, transform.position);
         }
