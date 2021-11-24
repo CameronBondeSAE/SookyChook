@@ -4215,7 +4215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3089574081396512542, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2220078
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 3089574081396512542, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4223,7 +4223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3089574081396512542, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.88184637
+      value: -23.13
       objectReference: {fileID: 0}
     - target: {fileID: 3089574081396512542, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5708,16 +5708,15 @@ MonoBehaviour:
   turnRadius: 50
   exitPoint: {fileID: 0}
   wheels: {fileID: 0}
-  acceleration: 0
-  steering: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
+  reductionSpeed: 0.05
+  reductionTimer: 0.5
   steeringWheels:
   - {fileID: 2920758528495913750}
   - {fileID: 1990614557346923212}
   drivingWheels:
   - {fileID: 1990614557162208662}
   - {fileID: 1990614557591457505}
+  steeringAngle: 0
 --- !u!1 &2920758528570403861
 GameObject:
   m_ObjectHideFlags: 0

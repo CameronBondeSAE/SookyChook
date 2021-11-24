@@ -41,6 +41,8 @@ public class CharacterModel : MonoBehaviour
 
 	public float maxDistance = 1.8f;
 	public float cryTimer    = 3f;
+	public Vector3 heightOffset = new Vector3(0, 0.5f, 0);
+	float cryTimerValue;
 
 	[SerializeField]
 	GameObject holdingObject;
@@ -224,21 +226,32 @@ public class CharacterModel : MonoBehaviour
 	{
 		// Start crying
 		CryingEvent?.Invoke(true);
+		cryTimerValue = cryTimer;
 
-		//Shoot raycast down & store what we hit in hitinfo
-		RaycastHit hitinfo;
-		hitinfo = new RaycastHit();
-		Physics.Raycast(transform.position, -transform.up, out hitinfo, maxDistance, 255, QueryTriggerInteraction.Ignore);
+		for(int i = 0; i <= cryTimerValue; i++)
+        {
+			//Shoot raycast down & store what we hit in hitinfo
+			RaycastHit hitinfo;
+			hitinfo = new RaycastHit();
 
-		//if we hit something, spawn grass at that hit position (should check if dirt?)
-		if (hitinfo.collider)
-		{
-			GameObject newGrass = Instantiate(grass, hitinfo.point, Quaternion.identity);
+			//Using height offset to make sure raycase isn't shooting under ground
+			Physics.Raycast(transform.position + heightOffset, -transform.up, out hitinfo, maxDistance, 255, QueryTriggerInteraction.Ignore);
+
+			//if we hit something, spawn grass at that hit position (should check if dirt?)
+			if (hitinfo.collider)
+			{
+				GameObject newGrass = Instantiate(grass, hitinfo.point, Quaternion.identity);
+			}
+
+			//This causes the for loop to pause at the end of each loop
+			yield return new WaitForSeconds(1f);
+
 		}
 
-		yield return new WaitForSeconds(cryTimer);
+		//Only pauses once the entire for loop is completed
+		yield return new WaitForSeconds(cryTimer - cryTimerValue);
 
-		Debug.Log("Stopped crying");
+		//Debug.Log("Stopped crying");
 		CryingEvent?.Invoke(false);
 	}
 

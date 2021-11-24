@@ -30,7 +30,7 @@ public class DriverController : MonoBehaviour
     void FixedUpdate()
     {
         //Sending inputs to the vehicle
-        myVehicle.steering = playerInput.x;
-        myVehicle.acceleration = playerInput.y;
+        //myVehicle.steering = playerInput.x;
+        //myVehicle.acceleration = playerInput.y;
     }
 }
