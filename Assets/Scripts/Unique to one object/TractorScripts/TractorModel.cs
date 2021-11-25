@@ -12,6 +12,8 @@ public class TractorModel : MonoBehaviour, IVehicle
     //public float frictionAmount = 5f;
     public Transform exitPoint;
     public GameObject wheels;
+    public GameObject attachment;
+    public Transform attachmentMount;
 
     [Header("Ragdoll Physics - when jumping out of tractor")]
     [SerializeField]
@@ -40,6 +42,7 @@ public class TractorModel : MonoBehaviour, IVehicle
     //Events
     public event Action EnterTractorEvent;
     public event Action ExitTractorEvent;
+    public event Action<bool> TractorAttachableEvent;
 
     void Start()
     {
@@ -97,6 +100,19 @@ public class TractorModel : MonoBehaviour, IVehicle
         {
             //rb.AddRelativeForce(Input.GetAxis("Vertical") * driveWheel.forward * speed);
             rb.AddForceAtPosition(driveWheel.forward * acceleration * speed, driveWheel.position, ForceMode.Force);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Hack For now - can change this to check for an interface for modula attachments ie IF IAttachable etc
+        if(other.GetComponent<SeedPlanterModel>() != null)
+        {
+            attachment = other.gameObject;
+            attachment.transform.parent = attachmentMount;
+            attachment.transform.localPosition = new Vector3(0, 0, 1f);
+            attachment.transform.rotation = attachmentMount.rotation;
+            TractorAttachableEvent?.Invoke(true);
         }
     }
 
