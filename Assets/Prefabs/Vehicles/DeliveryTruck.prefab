@@ -32,7 +32,7 @@ Transform:
   - {fileID: 5751210231967860061}
   - {fileID: 4877628317643685222}
   m_Father: {fileID: 3238419068143333281}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &546176028486250516
 GameObject:
@@ -60,13 +60,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546176028486250516}
-  m_LocalRotation: {x: 1, y: -0, z: -0, w: 6.123234e-17}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.093703, y: -0.38863575, z: 0.15637016}
-  m_LocalScale: {x: -1, y: -1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878705337936668935}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 7.0167096e-15, y: 180, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4689307674114628954
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -131,13 +131,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
-  springStrength: 1000
-  suspensionLength: 2
+  springStrength: 8000
+  suspensionLength: 0.5
   height: 0.5
   force: 0
   xVelocity: 0
   friction: 50
   localVelocity: {x: 0, y: 0, z: 0}
+--- !u!1 &2448866210499573649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4870549095524928171}
+  m_Layer: 0
+  m_Name: ExitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4870549095524928171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448866210499573649}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.683, y: 1.199, z: 0.512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3238419068143333281}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2651877444929173031
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
-  springStrength: 1000
-  suspensionLength: 2
+  springStrength: 8000
+  suspensionLength: 0.5
   height: 0.5
   force: 0
   xVelocity: 0
@@ -268,13 +298,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2772847378464089296}
-  m_LocalRotation: {x: 1, y: -0, z: -0, w: 6.123234e-17}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.093703, y: -0.38863575, z: 3.39637}
-  m_LocalScale: {x: -1, y: -1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878705337936668935}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 7.0167096e-15, y: 180, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7386725114012847230
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -339,8 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
-  springStrength: 1000
-  suspensionLength: 2
+  springStrength: 8000
+  suspensionLength: 0.5
   height: 0.5
   force: 0
   xVelocity: 0
@@ -375,7 +405,7 @@ Transform:
   m_Children:
   - {fileID: 2401720081851672706}
   m_Father: {fileID: 3238419068143333281}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6880129374932396767
 GameObject:
@@ -409,6 +439,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4870549095524928171}
   - {fileID: 4878705337936668935}
   - {fileID: 5684285174154133943}
   m_Father: {fileID: 0}
@@ -422,7 +453,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6880129374932396767}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -497,8 +528,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f70d119acf32c43999fa8bbc017ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 750
-  rotationalSpeed: 250
+  speed: 3000
+  rotationalSpeed: 2000
 --- !u!114 &7230645710583350255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,8 +640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
-  springStrength: 1000
-  suspensionLength: 2
+  springStrength: 8000
+  suspensionLength: 0.5
   height: 0.5
   force: 0
   xVelocity: 0

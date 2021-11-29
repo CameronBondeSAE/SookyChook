@@ -36,11 +36,12 @@ public class Wheel : MonoBehaviour
         Ray ray = new Ray();
         ray.origin = transform.position;
         ray.direction = Vector3.down;
-        RaycastHit hitInfo = new RaycastHit();
-        Physics.Raycast(ray, out hitInfo, suspensionLength);
+        RaycastHit hitInfo;
+        hitInfo = new RaycastHit();
+        Physics.Raycast(transform.position, -transform.up, out hitInfo, suspensionLength, 255, QueryTriggerInteraction.Ignore);
 
         height = hitInfo.distance;
-        //height = Vector3.Distance (ray.origin, hitInfo.point);
+        height = Vector3.Distance (ray.origin, hitInfo.point);
 
         if (hitInfo.collider==true)
         {
