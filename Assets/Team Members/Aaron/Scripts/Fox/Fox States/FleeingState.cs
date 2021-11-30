@@ -27,6 +27,8 @@ namespace Aaron
         {
             base.Enter();
 
+            
+            Debug.Log("Fleeing State");
             //Find den point, Get position
         }
 

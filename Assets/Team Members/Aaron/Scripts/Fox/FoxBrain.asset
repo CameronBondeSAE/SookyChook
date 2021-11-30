@@ -15,24 +15,22 @@ MonoBehaviour:
   conditions:
     list:
     - id: 0
-      name: isNight
-    - id: 1
       name: isInHidingSpot
-    - id: 2
+    - id: 1
       name: canSeeChicken
-    - id: 3
+    - id: 2
       name: canSeePlayer
-    - id: 4
+    - id: 3
       name: isDawn
-    - id: 5
+    - id: 4
       name: isVisibleToPlayer
-    - id: 6
+    - id: 5
       name: gotChicken
-    - id: 7
+    - id: 6
       name: chickenDead
-    - id: 8
+    - id: 7
       name: inRangeOfChicken
-    - id: 9
+    - id: 8
       name: canSeeHidingSpot
   actions:
   - name: Find Hiding Spot
@@ -41,12 +39,12 @@ MonoBehaviour:
     cost: 0
     position: {x: 420, y: 140}
     pre:
-    - id: 1
+    - id: 0
       value: 0
-    - id: 5
+    - id: 4
       value: 1
     post:
-    - id: 9
+    - id: 8
       value: 1
   - name: Move to Hiding Spot
     isDefault: 0
@@ -54,12 +52,12 @@ MonoBehaviour:
     cost: 0
     position: {x: 620, y: 140}
     pre:
-    - id: 1
+    - id: 0
       value: 0
-    - id: 9
+    - id: 8
       value: 1
     post:
-    - id: 1
+    - id: 0
       value: 1
   - name: Hide in Spot
     isDefault: 0
@@ -67,44 +65,42 @@ MonoBehaviour:
     cost: 0
     position: {x: 820, y: 140}
     pre:
-    - id: 1
+    - id: 0
       value: 1
     post:
-    - id: 5
+    - id: 4
       value: 0
   - name: Find Chicken
-    isDefault: 0
+    isDefault: 1
     state: {fileID: 8636870344005334192, guid: c7c23263d58587643b7775fe9d58ba48, type: 3}
     cost: 0
     position: {x: 420, y: 360}
     pre:
-    - id: 0
-      value: 1
-    - id: 2
-      value: 0
-    - id: 6
+    - id: 1
       value: 0
     - id: 5
       value: 0
+    - id: 4
+      value: 0
     post:
-    - id: 2
+    - id: 1
       value: 1
   - name: Move to Chicken
     isDefault: 0
     state: {fileID: 7235900917391254370, guid: 23e8e581a1fc8b5448df8892a8161705, type: 3}
     cost: 0
-    position: {x: 620, y: 360}
+    position: {x: 618, y: 362}
     pre:
-    - id: 8
+    - id: 7
       value: 0
+    - id: 4
+      value: 0
+    - id: 1
+      value: 1
     - id: 5
       value: 0
-    - id: 2
-      value: 1
-    - id: 6
-      value: 0
     post:
-    - id: 8
+    - id: 7
       value: 1
   - name: Attacking
     isDefault: 0
@@ -112,12 +108,12 @@ MonoBehaviour:
     cost: 0
     position: {x: 820, y: 360}
     pre:
-    - id: 8
+    - id: 7
       value: 1
-    - id: 6
+    - id: 5
       value: 0
     post:
-    - id: 6
+    - id: 5
       value: 1
   - name: Eat Chicken
     isDefault: 0
@@ -125,10 +121,10 @@ MonoBehaviour:
     cost: 0
     position: {x: 1020, y: 360}
     pre:
-    - id: 6
+    - id: 5
       value: 1
     post:
-    - id: 7
+    - id: 6
       value: 1
   - name: Fleeing
     isDefault: 0
@@ -140,18 +136,18 @@ MonoBehaviour:
   goals:
   - name: Get Chicken
     isDefault: 1
-    position: {x: 420, y: 820}
+    position: {x: 419, y: 819}
     conditions:
-    - id: 7
+    - id: 6
       value: 1
   worldStates:
   - position: {x: 420, y: 939}
     isAutoUpdate: 1
     list:
     - id: 0
-      value: 1
+      value: 0
     - id: 1
-      value: 1
+      value: 0
     - id: 2
       value: 0
     - id: 3
@@ -165,6 +161,4 @@ MonoBehaviour:
     - id: 7
       value: 0
     - id: 8
-      value: 0
-    - id: 9
       value: 0

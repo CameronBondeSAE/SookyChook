@@ -19,6 +19,8 @@ namespace Aaron
         public override void Enter()
         {
             base.Enter();
+
+            Debug.Log("Attacking State");
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

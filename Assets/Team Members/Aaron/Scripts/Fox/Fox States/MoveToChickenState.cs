@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Anthill.AI;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Aaron
         private bool inRangeOfChicken;
         private bool canSeeChicken;
         private bool isVisibleToPlayer;
+        
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -23,8 +25,9 @@ namespace Aaron
         {
             base.Enter();
             
-            //Find chicken, get position
+            Debug.Log("Moving to Chicken State");
 
+            //Find chicken, get position
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

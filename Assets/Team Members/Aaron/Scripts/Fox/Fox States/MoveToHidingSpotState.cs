@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Anthill.AI;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Aaron
         {
             base.Enter();
             
+            Debug.Log("Moving to Hide State");
             //Find hiding spot, Get position
         }
 
