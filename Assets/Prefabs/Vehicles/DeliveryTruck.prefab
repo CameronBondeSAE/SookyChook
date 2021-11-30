@@ -61,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546176028486250516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.093703, y: -0.38863575, z: 0.15637016}
+  m_LocalPosition: {x: 12.757, y: -0.7, z: 0.156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878705337936668935}
@@ -82,7 +82,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546176028486250516}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   height: 0.5
   force: 0
   xVelocity: 0
-  friction: 50
+  friction: 350
   localVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &2448866210499573649
 GameObject:
@@ -195,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651877444929173031}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.493703, y: -0.38863575, z: 3.39637}
+  m_LocalPosition: {x: 14.827, y: -0.7, z: 3.39637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878705337936668935}
@@ -216,7 +216,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651877444929173031}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
   height: 0.5
   force: 0
   xVelocity: 0
-  friction: 50
+  friction: 350
   localVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &2772847378464089296
 GameObject:
@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2772847378464089296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.093703, y: -0.38863575, z: 3.39637}
+  m_LocalPosition: {x: 12.757, y: -0.7, z: 3.39637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878705337936668935}
@@ -320,7 +320,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2772847378464089296}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -374,7 +374,7 @@ MonoBehaviour:
   height: 0.5
   force: 0
   xVelocity: 0
-  friction: 50
+  friction: 350
   localVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &6225499893661594976
 GameObject:
@@ -454,8 +454,8 @@ Rigidbody:
   m_GameObject: {fileID: 6880129374932396767}
   serializedVersion: 2
   m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -523,13 +523,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6880129374932396767}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f70d119acf32c43999fa8bbc017ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10000
-  rotationalSpeed: 5000
+  speed: 100000
+  rotationalSpeed: 50000
 --- !u!114 &7230645710583350255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +543,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
+  speed: 0
+  exitPoint: {fileID: 0}
+  drivingWheels:
+  - {fileID: 4708201011296710898}
+  - {fileID: 6495975845209465710}
+  steeringWheels:
+  - {fileID: 6505953674972923304}
+  - {fileID: 7420961522087419049}
 --- !u!1 &7741078112623420157
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741078112623420157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.493703, y: -0.38863575, z: 0.15637016}
+  m_LocalPosition: {x: 14.827, y: -0.7, z: 0.156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878705337936668935}
@@ -591,7 +599,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741078112623420157}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -645,7 +653,7 @@ MonoBehaviour:
   height: 0.5
   force: 0
   xVelocity: 0
-  friction: 50
+  friction: 350
   localVelocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &2800718684309262185
 PrefabInstance:

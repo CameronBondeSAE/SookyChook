@@ -13,8 +13,7 @@ namespace Aaron
     public class AaronFOV : MonoBehaviour
     {
         public GameObject target;
-
-        [FormerlySerializedAs("targets")]
+        
         public List<GameObject> chickensInWorld = new List<GameObject>();
 
         public bool canSeeTarget;
@@ -29,7 +28,7 @@ namespace Aaron
 
         void Update()
         {
-            foreach (var chicken in chickensInWorld)
+            /*foreach (var chicken in chickensInWorld)
             {
                 Vector3 directionToTarget = chicken.transform.position - transform.position;
             
@@ -52,7 +51,7 @@ namespace Aaron
                 {
                     target = chicken;
                 }
-            }
+            }*/
         }
         
         

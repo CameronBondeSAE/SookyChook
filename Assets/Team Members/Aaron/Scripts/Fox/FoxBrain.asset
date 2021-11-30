@@ -25,13 +25,15 @@ MonoBehaviour:
     - id: 4
       name: isVisibleToPlayer
     - id: 5
-      name: gotChicken
+      name: eatingChicken
     - id: 6
-      name: chickenDead
+      name: chickenGone
     - id: 7
       name: inRangeOfChicken
     - id: 8
       name: canSeeHidingSpot
+    - id: 9
+      name: isHunting
   actions:
   - name: Find Hiding Spot
     isDefault: 0
@@ -71,17 +73,17 @@ MonoBehaviour:
     - id: 4
       value: 0
   - name: Find Chicken
-    isDefault: 1
+    isDefault: 0
     state: {fileID: 8636870344005334192, guid: c7c23263d58587643b7775fe9d58ba48, type: 3}
     cost: 0
     position: {x: 420, y: 360}
     pre:
     - id: 1
       value: 0
-    - id: 5
-      value: 0
     - id: 4
       value: 0
+    - id: 9
+      value: 1
     post:
     - id: 1
       value: 1
@@ -97,8 +99,6 @@ MonoBehaviour:
       value: 0
     - id: 1
       value: 1
-    - id: 5
-      value: 0
     post:
     - id: 7
       value: 1
@@ -110,8 +110,6 @@ MonoBehaviour:
     pre:
     - id: 7
       value: 1
-    - id: 5
-      value: 0
     post:
     - id: 5
       value: 1
@@ -126,12 +124,23 @@ MonoBehaviour:
     post:
     - id: 6
       value: 1
+    - id: 9
+      value: 0
   - name: Fleeing
     isDefault: 0
     state: {fileID: 4099555966861951076, guid: 123ca8772c362934ba56e085a6c4193b, type: 3}
     cost: 0
     position: {x: 420, y: 620}
     pre: []
+    post: []
+  - name: Idle
+    isDefault: 1
+    state: {fileID: 3993048098494218905, guid: ce1fe20e6d82f0344875cd73cbdbca52, type: 3}
+    cost: 0
+    position: {x: 1286, y: 365}
+    pre:
+    - id: 9
+      value: 0
     post: []
   goals:
   - name: Get Chicken
@@ -162,3 +171,5 @@ MonoBehaviour:
       value: 0
     - id: 8
       value: 0
+    - id: 9
+      value: 1

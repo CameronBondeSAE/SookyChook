@@ -7,13 +7,12 @@ namespace Tom
 {
     public class TurnToward : MonoBehaviour
     {
-        public float maxSpeed = 5f;
         public Vector3 target;
         public float turnSpeed = 5f;
-        public bool turning = false;
 
         private Rigidbody rb;
         private Vector3 cross;
+        public Vector3 targetLocalPosition;
 
         private void Awake()
         {
@@ -22,20 +21,11 @@ namespace Tom
 
         public void FixedUpdate()
         {
-            if (turning)
-            {
-                Vector3 direction = target - transform.position;
-                cross = Vector3.Cross(direction, transform.forward);
-                cross = new Vector3(0, cross.y, 0); // Need to limit rotation to y axis
+            targetLocalPosition = transform.InverseTransformPoint(target);
+            float turnDirection = targetLocalPosition.x;
 
-                rb.AddRelativeTorque(-cross * turnSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-                rb.AddForce(transform.forward * maxSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-            }
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawLine(transform.position, transform.position + cross);
+            rb.AddTorque(Vector3.up * turnDirection * turnSpeed * Time.fixedDeltaTime,
+                ForceMode.VelocityChange);
         }
     }
 }

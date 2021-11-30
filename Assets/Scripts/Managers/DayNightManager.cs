@@ -10,13 +10,12 @@ public class DayNightManager : ManagerBase<DayNightManager>
     public enum DayPhase
     {
         Midnight = 0,
+        Dawn = 5,
         Morning = 7,
         Noon = 12,
         Evening = 17,
         Night = 21
     }
-
-    
     
     [Tooltip("Set this to the starting state, it will overwrite the time and call the phase's event")]
     public DayPhase currentPhase = DayPhase.Morning;
@@ -25,15 +24,13 @@ public class DayNightManager : ManagerBase<DayNightManager>
     public float currentTime = 7f;
 
     [Tooltip("How many real-time seconds it takes for 1 in-game hour")]
-    public float timeRate = 10f;
-
-
+    public float timeDilation = 10f;
+    
     /// <summary>
     /// Use if statement to check what phase has just started
     /// E.g. "if phase == DayNightManager.DayPhase.Morning" for morning functions
     /// </summary>
     public event Action<DayPhase> PhaseChangeEvent;
-    
 
     private void Start()
     {
@@ -43,9 +40,9 @@ public class DayNightManager : ManagerBase<DayNightManager>
     private void Update()
     {
         // Check to ensure no divide by zero errors
-        if (timeRate > 0)
+        if (timeDilation > 0)
         {
-            currentTime += Time.deltaTime / timeRate;
+            currentTime += Time.deltaTime / timeDilation;
         }
 
         // Wraps time back to 0 when it hits midnight
@@ -53,9 +50,11 @@ public class DayNightManager : ManagerBase<DayNightManager>
         {
             ChangePhase(DayPhase.Midnight);
         }
-
+        
         foreach (DayPhase phase in Enum.GetValues(typeof(DayPhase)))
         {
+            // Checks if time has passed the phase time and that phase is next in the sequence
+            // More modular than a bunch of if statements, just add a phase to the enum and this will include it
             if (currentTime >= (float) phase && (int) phase > (int) currentPhase)
             {
                 ChangePhase(phase);

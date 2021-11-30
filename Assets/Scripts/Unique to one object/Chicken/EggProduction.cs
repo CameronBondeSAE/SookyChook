@@ -55,8 +55,7 @@ public class EggProduction : MonoBehaviour
         GameObject copy = egg;
         Vector3 chickenLocation = this.transform.position;
         //need lay offset
-
-        //Instantiate Eggs
+        
         Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
         
         //laying an egg uses food reserves
