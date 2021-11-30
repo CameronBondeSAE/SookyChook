@@ -15,6 +15,8 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     public GameObject attachment;
     public Transform attachmentMount;
     public bool hasAttachment = false;
+    //[SerializeField]
+    //float detachOffset = 3f;
 
     [Header("Ragdoll Physics - when jumping out of tractor")]
     [SerializeField]
@@ -47,7 +49,6 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     //Events
     public event Action EnterTractorEvent;
     public event Action ExitTractorEvent;
-    public event Action<bool> TractorAttachableEvent;
 
     void Start()
     {
@@ -66,7 +67,7 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         //Only reduce speed when the player is not in the tractor & the tractor is moving
         if(!playerInTractor)
         {
-            if(acceleration > 0)
+            if (acceleration > 0)
             {
                 StartCoroutine(ReduceSpeed());
             }
@@ -110,20 +111,17 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
     private void OnTriggerEnter(Collider other)
     {
-        //Hack For now - can change this to check for an interface for modula attachments ie IF IAttachable etc
+        //Check if the tractor is colliding with an attachment
         tractorAttachment = other.GetComponent<ITractorAttachment>();
         if (tractorAttachment != null)
         {
             currentAttachment = tractorAttachment as MonoBehaviour;
-            Attach();
-            /*
-            attachment = currentAttachment.gameObject;
-            attachment.transform.parent = attachmentMount;
-            attachment.transform.localPosition = new Vector3(0, 0, 1f);
-            attachment.transform.rotation = attachmentMount.rotation;
-            tractorAttachment.Attach();
-            //TractorAttachableEvent?.Invoke(true);
-            */
+
+            //Only attach if there is not already an attachment
+            if(!hasAttachment)
+            {
+                Attach();
+            }
         }
     }
 
@@ -142,9 +140,13 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     {
         ExitTractorEvent?.Invoke();
 
+        if(hasAttachment)
+        {
+            currentAttachment.GetComponent<SeedPlanterModel>().Dettach();
+            //Dettach();
+        }
+
         playerInTractor = false;
-        //wheels.SetActive(false);
-        //rb.isKinematic = true;
 
         //Update pathfinding on tractor exit
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
@@ -180,9 +182,17 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     {
         attachment.transform.parent = null;
         attachment.transform.rotation = transform.rotation;
-        tractorAttachment.Dettach();
+        currentAttachment.transform.position = attachment.transform.position;
+        //attachment.transform.position = transform.localPosition + (-transform.forward * detachOffset);
+        currentAttachment.GetComponent<SeedPlanterModel>().Dettach();
         attachment = null;
 
+        Invoke("ResetAttachment", 2f);
+    }
+
+    //Hack for now to prevent attachment being instantly reattached to the tractor
+    private void ResetAttachment()
+    {
         hasAttachment = false;
     }
 }

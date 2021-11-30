@@ -7,6 +7,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
     //public TractorModel tractorModel;
 
     public GameObject seed;
+    bool isAttached = false;
     Vector3 offset = new Vector3(0, 0.5f, 0);
 
     [SerializeField]
@@ -25,7 +26,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
     }
     */
 
-    IEnumerator PlantSeeds(bool planting)
+    IEnumerator PlantSeeds()
     {
         //Wait before planting first grass for attachment to stablise onto tractor
         yield return new WaitForSeconds(1f);
@@ -52,17 +53,19 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
             Debug.DrawLine(transform.position + offset, hitinfo.point, Color.green);
             yield return new WaitForSeconds(1f);
         }
-        while (planting == true);
+        while (isAttached);
 	}
 
     public void Attach()
     {
-        StartCoroutine(PlantSeeds(true));
+        isAttached = true;
+        StartCoroutine(PlantSeeds());
     }
 
     public void Dettach()
     {
-        StartCoroutine(PlantSeeds(false));
+        isAttached = false;
+        StopCoroutine(PlantSeeds());
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
