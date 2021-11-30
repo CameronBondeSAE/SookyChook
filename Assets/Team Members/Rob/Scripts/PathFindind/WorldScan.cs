@@ -11,10 +11,19 @@ namespace Rob
         {
             public Vector3Int gridPos;
             public bool isBlocked;
-            public int fCost = int.MaxValue;
+
+            public int fCost
+            {
+                get
+                {
+                    return gCost + hCost;
+                }
+            }
             public int gCost;
             public int hCost;
             public Node parent;
+            
+            
         }
 
         public Node[,] gridNodeReference;
@@ -52,25 +61,25 @@ namespace Rob
         private void OnDrawGizmos()
         {
 
-            if (gridNodeReference != null)
-            {
-                for (int x = 0; x < maxSizeofGrid.x; x++)
-                {
-                    for (int z = 0; z < maxSizeofGrid.z; z++)
-                    {
-                        if (gridNodeReference[x, z].isBlocked)
-                        {
-                            Gizmos.color = Color.red;
-                            Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
-                        }
-                        else
-                        {
-                            Gizmos.color = Color.green;
-                            Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
-                        }
-                    }
-                }
-            }
+            // if (gridNodeReference != null)
+            // {
+            //     for (int x = 0; x < maxSizeofGrid.x; x++)
+            //     {
+            //         for (int z = 0; z < maxSizeofGrid.z; z++)
+            //         {
+            //             if (gridNodeReference[x, z].isBlocked)
+            //             {
+            //                 Gizmos.color = Color.red;
+            //                 Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
+            //             }
+            //             else
+            //             {
+            //                 Gizmos.color = Color.green;
+            //                 Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 }

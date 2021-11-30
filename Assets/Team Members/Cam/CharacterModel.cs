@@ -25,7 +25,7 @@ public class CharacterModel : MonoBehaviour
 	public bool onGround = true;
 
 	public bool     inVehicle = false;
-	public IVehicle vehicle;
+	public IVehicle IVehicleReference;
 	public Vector3  lookMovementDirection;
 
 
@@ -113,8 +113,8 @@ public class CharacterModel : MonoBehaviour
 	{
 		if (inVehicle)
 		{
-			vehicle.Accelerate(direction.y);
-			vehicle.Steer(direction.x);
+			IVehicleReference.Accelerate(direction.y);
+			IVehicleReference.Steer(direction.x);
 		}
 		else
 		{
@@ -133,8 +133,8 @@ public class CharacterModel : MonoBehaviour
 		RaycastHit hit = CheckWhatsInFrontOfMe();
 
 		// Vehicles?
-		vehicle = hit.collider.gameObject.GetComponent<IVehicle>();
-		if (vehicle != null)
+		IVehicleReference = hit.collider.gameObject.GetComponent<IVehicle>();
+		if (IVehicleReference != null)
 		{
 			if (!inVehicle)
 				GetInVehicle();
@@ -151,17 +151,21 @@ public class CharacterModel : MonoBehaviour
 	public void PickUp()
 	{
 		// Already holding something, so drop it
-		if (holdingObject != null)
+		if (holdingObject != null && !inVehicle)
 		{
-			holdingObject.transform.parent   = null;
-			holdingObject.transform.rotation = transform.rotation;
-			holdingObject.GetComponent<IPickupable>().PutDown();
-			holdingObject.GetComponent<Rigidbody>().velocity = rb.velocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
-			holdingObject                                    = null;
+			Drop();
 			return;
 		}
 
-		// Pickup?
+		// HACK: Hardcoded to tractor. Should be able to use interface
+		ITractorAttachment ITractorAttachment = IVehicleReference as ITractorAttachment;
+		if (inVehicle && (IVehicleReference as TractorModel).hasAttachment)
+		{
+			ITractorAttachment.Dettach();
+			return;
+		}
+		
+		// Pickup? NOT in vehicle, NOT holding something already
 		RaycastHit  hit        = CheckWhatsInFrontOfMe();
 		IPickupable pickupable = hit.collider.gameObject.GetComponent<IPickupable>();
 
@@ -175,6 +179,15 @@ public class CharacterModel : MonoBehaviour
 		}
 	}
 
+	void Drop()
+	{
+		holdingObject.transform.parent   = null;
+		holdingObject.transform.rotation = transform.rotation;
+		holdingObject.GetComponent<IPickupable>().PutDown();
+		holdingObject.GetComponent<Rigidbody>().velocity = rb.velocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
+		holdingObject                                    = null;
+	}
+
 	public void GetInVehicle()
 	{
 		// TODO: This only works if there's one collider on root
@@ -185,11 +198,11 @@ public class CharacterModel : MonoBehaviour
 
 
 		// Lock me to the vehicle, just so the camera doesn't need to retarget anything. I don't actually need to be a child
-		MonoBehaviour vehicleComponent = vehicle as MonoBehaviour;
+		MonoBehaviour vehicleComponent = IVehicleReference as MonoBehaviour;
 		transform.parent        = vehicleComponent.transform;
 		transform.localPosition = Vector3.zero;
 
-		vehicle.Enter();
+		IVehicleReference.Enter();
 	}
 
 	public void GetOutOfVehicle()
@@ -205,8 +218,8 @@ public class CharacterModel : MonoBehaviour
 		transform.parent = null;
 
 		// Put player at exit point on vehicle
-		transform.position = vehicle.GetVehicleExitPoint().position;
-		transform.rotation = vehicle.GetVehicleExitPoint().rotation;
+		transform.position = IVehicleReference.GetVehicleExitPoint().position;
+		transform.rotation = IVehicleReference.GetVehicleExitPoint().rotation;
 
 		// HACK: Just make the animation look better, fake a jump!
 		rb.drag = 0f;
@@ -215,7 +228,7 @@ public class CharacterModel : MonoBehaviour
 		Jump();
 		onGround = false;
 
-		vehicle.Exit();
+		IVehicleReference.Exit();
 
 		// HACK: TODO: Detect favorite chicken death!
 		StopCoroutine(Cry());
