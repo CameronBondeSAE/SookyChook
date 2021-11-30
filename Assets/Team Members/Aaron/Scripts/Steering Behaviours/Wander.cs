@@ -10,6 +10,7 @@ namespace Aaron
     {
         public Rigidbody rb;
 
+        public float speed = 10f;
         public float turn;
         public float turnMultiplier;
         private float startOffset;
@@ -24,6 +25,7 @@ namespace Aaron
         // Update is called once per frame
         void FixedUpdate()
         {
+            rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.VelocityChange);
             turn = Mathf.PerlinNoise(0, Time.time+startOffset) * 2 - 1;
 
             rb.AddRelativeTorque(0, turn * turnMultiplier, 0);

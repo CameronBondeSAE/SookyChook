@@ -13,7 +13,7 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
     //public float growth;
 
     public bool isFull;
-
+    
     public event Action InteractEvent;
     public event Action<bool> PickUpEvent;
 
@@ -31,7 +31,6 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
        //if eats food, increase scale size by growth until localScale == 1
     }
     
-    //HONESTLY PROBS A HACK, PLEASE SHOW ME ANOTHER CLEANER WAY TO DO THIS!
     private IEnumerator ReduceHungerTime()
     {
         for (int i = 0; i < 3; i++)
@@ -40,7 +39,6 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
         }
         
         ReduceHunger(0.1f);
-        //restarts the coroutine/timer thing. Need a new way to so this
         StartCoroutine("ReduceHungerTime");
     }
     

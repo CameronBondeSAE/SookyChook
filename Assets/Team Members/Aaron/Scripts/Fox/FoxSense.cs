@@ -9,17 +9,17 @@ public class FoxSense : MonoBehaviour, ISense
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
         aWorldState.BeginUpdate(aAgent.planner);
-
-        aWorldState.Set("isNight", false);
+        
         aWorldState.Set("isInHidingSpot", false);
-        aWorldState.Set("canSeeChicken", false);
+        aWorldState.Set("canSeeChicken", aAgent.GetComponent<FoxModel>().canSeeChicken);
         aWorldState.Set("canSeePlayer", false);
         aWorldState.Set("isSDawn", false);
         aWorldState.Set("isVisibleToPlayer", false);
-        aWorldState.Set("gotChicken", false);
-        aWorldState.Set("chickenDead", false);
-        aWorldState.Set("inRangeOfChicken", false);
+        aWorldState.Set("eatingChicken", aAgent.GetComponent<FoxModel>().eatingChicken);
+        aWorldState.Set("chickenGone", aAgent.GetComponent<FoxModel>().chickenGone);
+        aWorldState.Set("inRangeOfChicken", aAgent.GetComponent<FoxModel>().inRange);
         aWorldState.Set("canSeeHidingSpot", false);
+        aWorldState.Set("isHunting", aAgent.GetComponent<FoxModel>().isHunting);
 
         aWorldState.EndUpdate();
     }
