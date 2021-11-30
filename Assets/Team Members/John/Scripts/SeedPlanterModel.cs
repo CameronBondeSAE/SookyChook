@@ -43,6 +43,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
             //if we hit something, spawn grass at that hit position (should check if dirt?)
             if (hitinfo.collider)
             {
+                //plant the desired amount of seeds per plant cycle
                 for(int i = 0; i < seedAmountPerPlant; i++)
                 {
                     GameObject newSeed = Instantiate(seed, hitinfo.point, Quaternion.identity);

@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class WheelModel : MonoBehaviour
 {
-    [Header("Vehicle Attributes")]
+    [Header("Vehicle Attributes - Update all values per vehicle instance")]
     public Rigidbody rb;
-    public float suspensionLength = 10f;
+    public float suspensionLength = 2f;
     public float maxHeight = 1f;
-    public float force = 0;
-    public float maxForce = 1f;
-    public float frictionAmount = 5f;
+    float force = 0;
+    public float maxForce = 500f;
+    public float frictionAmount = 50f;
 
-    [Space]
+    [Header("Optional - Use Anim Curve")]
+    public AnimationCurve suspensionCurve;
+    float suspensionValue;
+    public bool useAnimCurve;
+
+    [Header("Reference Only")]
     public Vector3 localVelocity;
     public float xVelocity;
-
-    [Space]
-    public AnimationCurve suspensionCurve;
-    public float suspensionValue;
-    public bool useAnimCurve;
 
 
     // Update is called once per frame
@@ -60,6 +60,12 @@ public class WheelModel : MonoBehaviour
 
 
             Debug.DrawLine(transform.position, hitinfo.point, Color.green);
+        }
+
+        //Draw red line if nothing is being hit
+        if(hitinfo.collider == null)
+        {
+            Debug.DrawLine(transform.position, hitinfo.point, Color.red);
         }
     }
 }

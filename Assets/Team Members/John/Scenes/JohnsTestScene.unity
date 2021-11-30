@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 15.659508, g: 16.41507, b: 23.95279, a: 1}
+  m_IndirectSpecularColor: {r: 15.662949, g: 16.418732, b: 23.955444, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5303,11 +5303,8 @@ MonoBehaviour:
   rb: {fileID: 2920758528570403857}
   suspensionLength: 1
   maxHeight: 0.5
-  force: 0
   maxForce: 10
   frictionAmount: 5
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
   suspensionCurve:
     serializedVersion: 2
     m_Curve:
@@ -5341,8 +5338,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  suspensionValue: 0
   useAnimCurve: 0
+  localVelocity: {x: 0, y: 0, z: 0}
+  xVelocity: 0
 --- !u!1 &1990614557162208665
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,11 +5404,8 @@ MonoBehaviour:
   rb: {fileID: 2920758528570403857}
   suspensionLength: 1
   maxHeight: 0.5
-  force: 0
   maxForce: 10
   frictionAmount: 5
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
   suspensionCurve:
     serializedVersion: 2
     m_Curve:
@@ -5444,8 +5439,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  suspensionValue: 0
   useAnimCurve: 0
+  localVelocity: {x: 0, y: 0, z: 0}
+  xVelocity: 0
 --- !u!114 &1990614557591457504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5461,11 +5457,8 @@ MonoBehaviour:
   rb: {fileID: 2920758528570403857}
   suspensionLength: 1
   maxHeight: 0.5
-  force: 0
   maxForce: 10
   frictionAmount: 5
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
   suspensionCurve:
     serializedVersion: 2
     m_Curve:
@@ -5499,8 +5492,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  suspensionValue: 0
   useAnimCurve: 0
+  localVelocity: {x: 0, y: 0, z: 0}
+  xVelocity: 0
 --- !u!4 &1990614557591457505
 Transform:
   m_ObjectHideFlags: 0
@@ -5561,11 +5555,8 @@ MonoBehaviour:
   rb: {fileID: 2920758528570403857}
   suspensionLength: 1
   maxHeight: 0.5
-  force: 0
   maxForce: 10
   frictionAmount: 5
-  localVelocity: {x: 0, y: 0, z: 0}
-  xVelocity: 0
   suspensionCurve:
     serializedVersion: 2
     m_Curve:
@@ -5599,8 +5590,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  suspensionValue: 0
   useAnimCurve: 0
+  localVelocity: {x: 0, y: 0, z: 0}
+  xVelocity: 0
 --- !u!1 &2920758528495913753
 GameObject:
   m_ObjectHideFlags: 0
