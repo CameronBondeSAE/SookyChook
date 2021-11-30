@@ -10,6 +10,7 @@ public class DayNightManager : ManagerBase<DayNightManager>
     public enum DayPhase
     {
         Midnight = 0,
+        Dawn = 5,
         Morning = 7,
         Noon = 12,
         Evening = 17,
