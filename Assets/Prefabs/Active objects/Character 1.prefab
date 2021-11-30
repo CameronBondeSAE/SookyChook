@@ -9952,7 +9952,7 @@ MonoBehaviour:
   turnSpeed: 15
   interactDistance: 2
   rb: {fileID: 564635139153438467}
-  interactRayOffset: {x: 0, y: 0.5, z: 0}
+  interactRayOffset: {x: 0, y: 0.5, z: -0.5}
   onGroundDrag: 1.5
   onGround: 1
   inVehicle: 0
@@ -9960,6 +9960,7 @@ MonoBehaviour:
   grass: {fileID: 4060154509995794622, guid: dc2532809acbf4648b6bed39ae7ba71a, type: 3}
   maxDistance: 1.8
   cryTimer: 4
+  heightOffset: {x: 0, y: 0.5, z: 0}
   holdingObject: {fileID: 0}
   holdingMount: {fileID: 2507894514881146547}
   throwForce: 3
