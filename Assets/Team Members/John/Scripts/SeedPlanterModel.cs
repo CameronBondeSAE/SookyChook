@@ -11,7 +11,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
     Vector3 offset = new Vector3(0, 0.5f, 0);
 
     [SerializeField]
-    int seedAmount = 3;
+    int seedAmountPerPlant = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,6 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
 
         do
         {
-            Debug.Log("Test");
             //Shoot raycast down & store what we hit in hitinfo
             RaycastHit hitinfo;
             hitinfo = new RaycastHit();
@@ -44,13 +43,13 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
             //if we hit something, spawn grass at that hit position (should check if dirt?)
             if (hitinfo.collider)
             {
-                for(int i = 0; i < seedAmount; i++)
+                for(int i = 0; i < seedAmountPerPlant; i++)
                 {
                     GameObject newSeed = Instantiate(seed, hitinfo.point, Quaternion.identity);
                 }
             }
 
-            Debug.DrawLine(transform.position + offset, hitinfo.point, Color.green);
+            //Debug.DrawLine(transform.position + offset, hitinfo.point, Color.green);
             yield return new WaitForSeconds(1f);
         }
         while (isAttached);

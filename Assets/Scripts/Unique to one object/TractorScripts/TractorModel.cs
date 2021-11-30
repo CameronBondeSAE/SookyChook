@@ -134,19 +134,26 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         wheels.SetActive(true);
         rb.isKinematic = false;
         playerInTractor = true;
+
+        //If an attachment has been left on the tractor
+        if (hasAttachment)
+        {
+            currentAttachment.GetComponent<SeedPlanterModel>().Attach();
+            //Dettach();
+        }
     }
 
     public void Exit()
     {
         ExitTractorEvent?.Invoke();
+        playerInTractor = false;
 
-        if(hasAttachment)
+        if (hasAttachment)
         {
             currentAttachment.GetComponent<SeedPlanterModel>().Dettach();
             //Dettach();
         }
 
-        playerInTractor = false;
 
         //Update pathfinding on tractor exit
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
