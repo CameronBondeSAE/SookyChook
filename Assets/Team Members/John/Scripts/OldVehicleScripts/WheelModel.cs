@@ -8,7 +8,6 @@ public class WheelModel : MonoBehaviour
     public Rigidbody rb;
     public float suspensionLength = 2f;
     public float maxHeight = 1f;
-    float force = 0;
     public float maxForce = 500f;
     public float frictionAmount = 50f;
 
@@ -20,10 +19,12 @@ public class WheelModel : MonoBehaviour
     [Header("Reference Only")]
     public Vector3 localVelocity;
     public float xVelocity;
+    [SerializeField]
+    float force = 0;
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         //This vehicles velocity
