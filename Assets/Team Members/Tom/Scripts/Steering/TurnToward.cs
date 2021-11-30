@@ -13,6 +13,7 @@ namespace Tom
         public bool turning = false;
 
         private Rigidbody rb;
+        private Vector3 cross;
 
         private void Awake()
         {
@@ -24,12 +25,17 @@ namespace Tom
             if (turning)
             {
                 Vector3 direction = target - transform.position;
-                Vector3 cross = Vector3.Cross(direction, transform.forward);
+                cross = Vector3.Cross(direction, transform.forward);
                 cross = new Vector3(0, cross.y, 0); // Need to limit rotation to y axis
 
                 rb.AddRelativeTorque(-cross * turnSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-                rb.AddRelativeForce(transform.forward * maxSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.AddForce(transform.forward * maxSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawLine(transform.position, transform.position + cross);
         }
     }
 }

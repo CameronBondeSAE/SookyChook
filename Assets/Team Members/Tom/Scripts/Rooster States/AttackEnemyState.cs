@@ -24,6 +24,9 @@ namespace Tom
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            // Used for testing until enemy health is in
+            transform.root.Rotate(Vector3.up, 360 * Time.deltaTime);
         }
 
         public override void Exit()

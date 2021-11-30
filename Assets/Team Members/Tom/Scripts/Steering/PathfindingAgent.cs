@@ -35,11 +35,11 @@ namespace Tom
             openNodes.Clear();
             closedNodes.Clear();
         
-            PathfindingGrid.Node currentNode = grid.nodes[start.x, start.y];
+            PathfindingGrid.Node currentNode = grid.nodes[start.x - grid.gridStartX, start.y - grid.gridStartY];
             openNodes.Add(currentNode);
 
             // Loops until destination has been found
-            while (currentNode != grid.nodes[destination.x, destination.y])
+            while (openNodes.Count > 0)
             {
                 // Find neighbour with lowest f cost
                 int lowestFCost = openNodes[0].fCost;
@@ -56,7 +56,7 @@ namespace Tom
                 openNodes.Remove(currentNode);
                 closedNodes.Add(currentNode);
 
-                if (currentNode == grid.nodes[destination.x, destination.y])
+                if (currentNode == grid.nodes[destination.x - grid.gridStartX, destination.y - grid.gridStartY])
                 {
                     break;
                 }
@@ -68,7 +68,7 @@ namespace Tom
                     {
                         if (i >= grid.gridStartX && i <= grid.gridEndX && j >= grid.gridStartY && j <= grid.gridEndY)
                         {
-                            PathfindingGrid.Node neighbour = grid.nodes[i, j];
+                            PathfindingGrid.Node neighbour = grid.nodes[i - grid.gridStartX, j - grid.gridStartY];
                             // Ignore neighbour if blocked or closed
                             if (neighbour.blocked || closedNodes.Contains(neighbour))
                             {
@@ -78,7 +78,7 @@ namespace Tom
                             int neighbourDistance = currentNode.gCost +
                                                     CalculateDistance(currentNode.coordinates, neighbour.coordinates);
 
-                            if (neighbourDistance < neighbour.gCost || !openNodes.Contains(grid.nodes[i, j]))
+                            if (neighbourDistance < neighbour.gCost || !openNodes.Contains(grid.nodes[i - grid.gridStartX, j - grid.gridStartY]))
                             {
                                 neighbour.gCost = neighbourDistance;
                                 neighbour.hCost = CalculateDistance(neighbour.coordinates, destination);
@@ -98,7 +98,7 @@ namespace Tom
             path.Clear();
 
             // Generate path based on best nodes' parents
-            while (currentNode != grid.nodes[start.x, start.y])
+            while (currentNode != grid.nodes[start.x - grid.gridStartX, start.y - grid.gridStartY])
             {
                 path.Add(currentNode);
                 currentNode = currentNode.parent;
@@ -117,6 +117,11 @@ namespace Tom
             return distance.x * 14 + 10 * (distance.y - distance.x);
         }
 
+        public Vector2Int ConvertPositionToNodeCoordinates(Vector3 position)
+        {
+            return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
+        }
+
         private void OnDrawGizmosSelected()
         {
             if (grid != null)
@@ -125,19 +130,19 @@ namespace Tom
                 {
                     for (int z = grid.gridStartY; z < grid.gridEndY; z++)
                     {
-                        if (grid.nodes[x, z] != null)
+                        if (grid.nodes[x - grid.gridStartX, z - grid.gridStartY] != null)
                         {
-                            if (openNodes.Contains(grid.nodes[x, z]))
+                            if (openNodes.Contains(grid.nodes[x - grid.gridStartX, z - grid.gridStartY]))
                             {
                                 Gizmos.color = Color.green;
                                 Gizmos.DrawCube(new Vector3(x, 0.5f, z), Vector3.one);
                             }
-                            if (closedNodes.Contains(grid.nodes[x, z]))
+                            if (closedNodes.Contains(grid.nodes[x - grid.gridStartX, z - grid.gridStartY]))
                             {
                                 Gizmos.color = Color.yellow;
                                 Gizmos.DrawCube(new Vector3(x, 0.5f, z), Vector3.one);
                             }
-                            if (path.Contains(grid.nodes[x,z]))
+                            if (path.Contains(grid.nodes[x - grid.gridStartX, z - grid.gridStartY]))
                             {
                                 Gizmos.color = Color.blue;
                                 Gizmos.DrawCube(new Vector3(x, 0.5f, z), Vector3.one);
