@@ -5,16 +5,18 @@ using UnityEngine.InputSystem;
 
 public class Wheel : MonoBehaviour
 {
+    [Header("Vehicle Attributes")]
     public Rigidbody rb;
-    public float springStrength=6f;
-    public float suspensionLength=1f;
-    public float height;
-    public float force = 0.0f;
+    [Tooltip("Amount of force repelling ground")]
+    public float springStrength=2000f;
+    public float suspensionLength=0.5f;
+    public float height =0.5f;
 
+    [Header("ReadOnly Attributes")]
     public float xVelocity;
-    public float friction = 5f;
-
+    public float friction = 50.0f;
     public Vector3 localVelocity;
+    public float force = 0.0f;
     
     // Start is called before the first frame update
     void Start()

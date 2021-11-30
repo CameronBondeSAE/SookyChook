@@ -29,19 +29,19 @@ public class AtmosphereManager : MonoBehaviour
     void Update()
     {
         // 360 degrees / 24hrs = 15 to calculate day-night cycle. Then - 180 as zero is noon
-        sunPosition = FindObjectOfType<DayNightManager>().currentTime * 15.0f-180.0f;
+        sunPosition=DayNightManager.Instance.currentTime* 15.0f-180.0f;
         
         // Sun Rotation
         transform.rotation=Quaternion.Euler(sunPosition, 0, 0);
         //Quaternion.Euler(sunPosition, 0, 0);
         //if (Sun == true && Moon==false)
-        {
-            Sun = currentState;
-        }
+        //{
+            //Sun = currentState;
+        //}
         //if (Moon == true && Sun ==false)
-        {
-            Moon = currentState;
-        }
+        //{
+            //Moon = currentState;
+        //}
         
         // if time is morning
         if (sunPosition >= 285)
