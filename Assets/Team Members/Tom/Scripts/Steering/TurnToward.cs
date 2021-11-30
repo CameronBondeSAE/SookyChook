@@ -12,7 +12,7 @@ namespace Tom
 
         private Rigidbody rb;
         private Vector3 cross;
-        public Vector3 targetLocalPosition;
+        private Vector3 targetLocalPosition;
 
         private void Awake()
         {

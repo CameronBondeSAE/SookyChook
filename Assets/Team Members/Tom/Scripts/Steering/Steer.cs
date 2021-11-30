@@ -7,10 +7,11 @@ namespace Tom
 {
     public class Steer : MonoBehaviour
     {
-        private Rigidbody rb;
+        public Rigidbody rb;
     
         public float detectRange = 3f;
         public float turnForce = 5f;
+        public float proximityMultiplier = 10f;
     
         public enum Direction
         {
@@ -20,16 +21,13 @@ namespace Tom
 
         public Direction direction;
 
-        private void Awake()
+        void FixedUpdate()
         {
-            rb = GetComponentInParent<Rigidbody>();
-        }
-
-        void Update()
-        {
-            if (Physics.Raycast(transform.position, transform.forward, detectRange))
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, detectRange))
             {
-                rb.AddRelativeTorque(new Vector3(0f, turnForce * (float)direction, 0f), ForceMode.Acceleration);
+                float proximity = (detectRange - hit.distance) * proximityMultiplier;
+                rb.AddTorque(new Vector3(0f, turnForce * (float)direction * proximity, 0f), ForceMode.Acceleration);
             }
         }
 

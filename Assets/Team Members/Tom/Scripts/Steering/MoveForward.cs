@@ -5,18 +5,12 @@ using UnityEngine;
 
 namespace Tom
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class MoveForward : MonoBehaviour
     {
-        private Rigidbody rb;
-        public float speed = 5f;
+        public Rigidbody rb;
+        public float speed = 20f;
 
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
-
-        void Update()
+        private void FixedUpdate()
         {
             rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.VelocityChange);
         }
