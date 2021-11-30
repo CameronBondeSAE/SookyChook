@@ -12,17 +12,19 @@ namespace Aaron
 
         public float turn;
         public float turnMultiplier;
+        private float startOffset;
 
         // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            startOffset = Random.Range(0, 100000);
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            turn = Mathf.PerlinNoise(0, Time.time) * 2 - 1;
+            turn = Mathf.PerlinNoise(0, Time.time+startOffset) * 2 - 1;
 
             rb.AddRelativeTorque(0, turn * turnMultiplier, 0);
         }
