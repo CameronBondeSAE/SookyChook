@@ -55,7 +55,7 @@ public class EggModel : MonoBehaviour
     {
         //instantiate chicken
         GameObject copy = chicken;
-        copy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //copy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         Instantiate(copy, this.transform.position, copy.transform.rotation);
 
         //add to chicken list in chicken manager

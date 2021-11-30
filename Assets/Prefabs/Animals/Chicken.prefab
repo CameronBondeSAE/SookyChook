@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 1086741024555083841}
   - component: {fileID: 3438443056123701457}
   - component: {fileID: 2942669957788344390}
-  - component: {fileID: 7164347228950813253}
   - component: {fileID: 5562533064459475679}
   m_Layer: 0
   m_Name: Chicken
@@ -341,19 +340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   egg: {fileID: 9064495301548624989, guid: ab9561320e347af4bab2d8b3d2370f46, type: 3}
   layTime: 10
---- !u!114 &7164347228950813253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648933817718183396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 450573aa7e2821148b81da6d9e329e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!114 &5562533064459475679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1086741024555083841}
+  speed: 10
   turn: 0
   turnMultiplier: 15
 --- !u!1 &1648991387308690618

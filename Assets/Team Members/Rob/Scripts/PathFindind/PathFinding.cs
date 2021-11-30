@@ -17,15 +17,24 @@ namespace Rob
 
         [SerializeField] private WorldScan grid;
 
-        private List<WorldScan.Node> openNodes = new List<WorldScan.Node>();
-        private List<WorldScan.Node> closedNodes = new List<WorldScan.Node>();
+        public List<WorldScan.Node> openNodes = new List<WorldScan.Node>();
+        public List<WorldScan.Node> closedNodes = new List<WorldScan.Node>();
+        List<WorldScan.Node> path = new List<WorldScan.Node>();
 
         private int endCost;
         //private int lowestFCost;
 
 
         [SerializeField] private Vector3Int startPos;
+        
 
+        private WorldScan.Node endNode;
+        WorldScan.Node startNode;
+        WorldScan.Node currentNode;
+        WorldScan.Node neighbour;
+
+        [SerializeField] private bool debug;
+        
         private void Awake()
         {
             // grid = FindObjectOfType<WorldScan>();
@@ -34,42 +43,71 @@ namespace Rob
         private void Start()
         {
             //currentPos = startPos;
+            endNode = grid.gridNodeReference[endPos.x, endPos.z];
             openNodes.Clear();
             closedNodes.Clear();
             if (autoStart)
             {
-                StartCoroutine(FindPath());
+                //StartCoroutine(FindPath());
+                FindPath();
             }
         }
 
-        IEnumerator FindPath()
+        //IEnumerator FindPath()
+        public void FindPath()
         {
-            WorldScan.Node currentNode = grid.gridNodeReference[startPos.x, startPos.z];
-            openNodes.Add(currentNode);
+            startNode = grid.gridNodeReference[startPos.x, startPos.z];
+            openNodes.Add(startNode);
 
-            currentNode.fCost = Int32.MaxValue;
+            //int lowestFCost = Int32.MaxValue;
+            //currentNode.fCost = Int32.MaxValue;
+            //currentNode.hCost = Int32.MaxValue;
+            //currentNode.gCost = Int32.MaxValue;
 
             while (openNodes.Count > 0)
             {
+                currentNode = openNodes[0];
+                for (int i = 1; i < openNodes.Count; i++)
+                {
+                    //lowestFCost = Int32.MaxValue;
+                    if (openNodes[i].fCost < currentNode.fCost || openNodes[i].fCost == currentNode.fCost &&
+                        openNodes[i].hCost < currentNode.hCost)
+                    {
+                        //lowestFCost = openNodes[i].fCost;
+                        currentNode = openNodes[i];
+                    }
+                }
+
                 openNodes.Remove(currentNode);
                 closedNodes.Add(currentNode);
 
 
-                Debug.Log(currentNode.gridPos);
+                if (currentNode == endNode)
+                {
+                    Debug.Log("Reached End");
+                    RetracePath(startNode, endNode);
+                    break;
+                }
 
 
                 // Neighbours
-                for (int neighbourX = currentNode.gridPos.x - 1; neighbourX < currentNode.gridPos.x + 2; neighbourX++)
+
+
+                for (int neighbourX = currentNode.gridPos.x - 1;
+                    neighbourX < currentNode.gridPos.x + 2;
+                    neighbourX++)
                 {
                     for (int neighbourZ = currentNode.gridPos.z - 1;
                         neighbourZ < currentNode.gridPos.z + 2;
                         neighbourZ++)
                     {
                         // Check edges
-                        if (neighbourX >= 0 && neighbourX <= grid.maxSizeofGrid.x && neighbourZ >= 0 &&
-                            neighbourZ <= grid.maxSizeofGrid.z)
+                        if (neighbourX >= 0 && neighbourX < grid.maxSizeofGrid.x && neighbourZ >= 0 &&
+                            neighbourZ < grid.maxSizeofGrid.z)
                         {
-                            WorldScan.Node neighbour = grid.gridNodeReference[neighbourX, neighbourZ];
+                            neighbour = grid.gridNodeReference[neighbourX, neighbourZ];
+
+
                             if (neighbour == currentNode)
                             {
                                 continue;
@@ -80,29 +118,24 @@ namespace Rob
                                 continue;
                             }
 
-                            int neDistance = currentNode.gCost + (int)(10 * Vector3.Distance(currentNode.gridPos, neighbour.gridPos));
-                            Debug.Log(neDistance + " neighbour distance for " + neighbour.gridPos);
 
+                            int neDistance = (int)(10 * Vector3.Distance(currentNode.gridPos, neighbour.gridPos));
+                            int gCost = currentNode.gCost + neDistance;
+                            
 
-                            if (neDistance < neighbour.gCost  || !openNodes.Contains(neighbour))
+                            if (gCost < neighbour.gCost || !openNodes.Contains(neighbour))
                             {
-                                neighbour.gCost = neDistance;
+                                neighbour.gCost = gCost;
                                 neighbour.hCost = (int)(10 * Vector3.Distance(neighbour.gridPos, endPos));
-                                neighbour.fCost = neighbour.gCost + neighbour.hCost;
                                 neighbour.parent = currentNode;
+                            }
 
-                                if (!openNodes.Contains(neighbour))
-                                {
-                                    openNodes.Add(neighbour);
-                                }
+                            if (!openNodes.Contains(neighbour))
+                            {
+                                openNodes.Add(neighbour);
                             }
                         }
                     }
-
-                    // if (currentNode == grid.gridNodeReference[endPos.x, endPos.z])
-                    // {
-                    //     break;
-                    // }
 
 
                     // Remove current from open. Add current to closed
@@ -110,35 +143,24 @@ namespace Rob
                     //      Find closest to endpos
                     //      Make that the new CurrentNode
                 }
-
-                for (int i = 0; i < openNodes.Count; i++)
-                {
-                    if (openNodes[i].fCost < currentNode.fCost)
-                    {
-                        currentNode = openNodes[i];
-                    }
-                }
-
-                openNodes.Remove(currentNode);
-                closedNodes.Add(currentNode);
-
-                yield return new WaitForSeconds(1);
+                
+                //yield return new WaitForSeconds(.2f);
             }
         }
 
-        // public int GetDistance(Vector3Int start, Vector3Int end)
-        // {
-        //     // Vector3Int distance = end - start;
-        //     // distance = new Vector3Int(Mathf.Abs(distance.x), 0, Mathf.Abs(distance.z));
-        //     // if (distance.x > distance.z)
-        //     // {
-        //     //     return distance.z * 14 + 10 * (distance.x - distance.z);
-        //     // }
-        //     //
-        //     // return distance.x * 14 + 10 * (distance.z - distance.x);
-        //    
-        //       
-        // }
+        void RetracePath(WorldScan.Node start, WorldScan.Node end)
+        {
+            currentNode = end;
+
+            while (currentNode != start)
+            {
+                path.Add(currentNode);
+                currentNode = currentNode.parent;
+            }
+
+            path.Reverse();
+        }
+        
 
 
         void OnDrawGizmos()
@@ -146,7 +168,7 @@ namespace Rob
             Gizmos.color = Color.magenta;
             Gizmos.DrawCube(startPos, Vector3.one);
 
-            Gizmos.color = Color.black;
+            Gizmos.color = Color.grey;
             Gizmos.DrawCube(endPos, Vector3.one);
 
             foreach (WorldScan.Node openNode in openNodes)
@@ -161,6 +183,18 @@ namespace Rob
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawCube(closedNode.gridPos, Vector3.one);
             }
+
+            foreach (WorldScan.Node nodePath in path)
+            {
+                Gizmos.color = Color.black;
+                Gizmos.DrawCube(nodePath.gridPos, Vector3.one);
+            }
+
+            Gizmos.color = Color.green;
+            if (currentNode != null) Gizmos.DrawCube(currentNode.gridPos, Vector3.one);
+
+            Gizmos.color = Color.magenta;
+            if (neighbour != null) Gizmos.DrawCube(neighbour.gridPos, Vector3.one);
         }
     }
 }

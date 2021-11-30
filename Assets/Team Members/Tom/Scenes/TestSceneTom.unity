@@ -530,6 +530,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1363325444270567866, guid: 0963c207d6323364e96e6a234ae00349, type: 3}
+      propertyPath: turnSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1537690455749544048, guid: 0963c207d6323364e96e6a234ae00349, type: 3}
       propertyPath: m_Enabled
       value: 0

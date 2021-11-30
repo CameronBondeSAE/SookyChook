@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Anthill.AI;
+using Tanks;
+using UnityEditor.MPE;
 using UnityEngine;
 
 namespace Aaron
@@ -9,10 +11,9 @@ namespace Aaron
     public class MoveToChickenState : AntAIState
     {
         public GameObject owner;
+        public GameObject chickenTarget;
 
-        private bool inRangeOfChicken;
-        private bool canSeeChicken;
-        private bool isVisibleToPlayer;
+        public float speed = 1;
         
         public override void Create(GameObject aGameObject)
         {
@@ -27,16 +28,27 @@ namespace Aaron
             
             Debug.Log("Moving to Chicken State");
 
-            //Find chicken, get position
+            chickenTarget = owner.GetComponent<FoxModel>().target;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+
+            //TODO rotate towards target
+            //move towards chicken
+            owner.transform.position = Vector3.MoveTowards(owner.transform.position, chickenTarget.transform.position, speed*Time.deltaTime);
             
-            //Steering behaviour to avoid player's sight
-            //Move towards chicken
-            
+            owner.GetComponent<Wander>().enabled = false;
+
+            if (Vector3.Distance(owner.transform.position, chickenTarget.transform.position) < 0.5f)
+            {
+                owner.GetComponent<FoxModel>().inRange = true;
+            }
+            else
+            {
+                owner.GetComponent<FoxModel>().inRange = false;
+            }
         }
 
         public override void Exit()

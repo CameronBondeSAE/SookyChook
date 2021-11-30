@@ -20,6 +20,11 @@ namespace Tom
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Morning);
             }
+            
+            if (GUILayout.Button("Dawn"))
+            {
+                ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Dawn);
+            }
         
             if (GUILayout.Button("Noon"))
             {

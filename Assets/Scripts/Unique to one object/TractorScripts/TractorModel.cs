@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TractorModel : MonoBehaviour, IVehicle
+public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 {
     [Header("Vehicle Attributes")]
     public Rigidbody rb;
@@ -14,6 +14,7 @@ public class TractorModel : MonoBehaviour, IVehicle
     public GameObject wheels;
     public GameObject attachment;
     public Transform attachmentMount;
+    public bool hasAttachment = false;
 
     [Header("Ragdoll Physics - when jumping out of tractor")]
     [SerializeField]
@@ -25,10 +26,14 @@ public class TractorModel : MonoBehaviour, IVehicle
     float acceleration;
     float steering;
 
+    //Attachment References
+    ITractorAttachment tractorAttachment;
+    MonoBehaviour currentAttachment;
+
     //[Space]
     //public Vector3 localVelocity;
     //public float xVelocity;
-    
+
     [Space]
     [Header("Turning Wheels Only")]
     public List<Transform> steeringWheels = new List<Transform>();
@@ -106,13 +111,19 @@ public class TractorModel : MonoBehaviour, IVehicle
     private void OnTriggerEnter(Collider other)
     {
         //Hack For now - can change this to check for an interface for modula attachments ie IF IAttachable etc
-        if(other.GetComponent<SeedPlanterModel>() != null)
+        tractorAttachment = other.GetComponent<ITractorAttachment>();
+        if (tractorAttachment != null)
         {
-            attachment = other.gameObject;
+            currentAttachment = tractorAttachment as MonoBehaviour;
+            Attach();
+            /*
+            attachment = currentAttachment.gameObject;
             attachment.transform.parent = attachmentMount;
             attachment.transform.localPosition = new Vector3(0, 0, 1f);
             attachment.transform.rotation = attachmentMount.rotation;
-            TractorAttachableEvent?.Invoke(true);
+            tractorAttachment.Attach();
+            //TractorAttachableEvent?.Invoke(true);
+            */
         }
     }
 
@@ -134,6 +145,9 @@ public class TractorModel : MonoBehaviour, IVehicle
         playerInTractor = false;
         //wheels.SetActive(false);
         //rb.isKinematic = true;
+
+        //Update pathfinding on tractor exit
+        GlobalEvents.OnLevelStaticsUpdated(gameObject);
     }
 
     public void Steer(float amount)
@@ -149,5 +163,26 @@ public class TractorModel : MonoBehaviour, IVehicle
     public Transform GetVehicleExitPoint()
     {
         return exitPoint;
+    }
+
+    public void Attach()
+    {
+        attachment = currentAttachment.gameObject;
+        attachment.transform.parent = attachmentMount;
+        attachment.transform.localPosition = new Vector3(0, 0, 1f);
+        attachment.transform.rotation = attachmentMount.rotation;
+        tractorAttachment.Attach();
+
+        hasAttachment = true;
+    }
+
+    public void Dettach()
+    {
+        attachment.transform.parent = null;
+        attachment.transform.rotation = transform.rotation;
+        tractorAttachment.Dettach();
+        attachment = null;
+
+        hasAttachment = false;
     }
 }
