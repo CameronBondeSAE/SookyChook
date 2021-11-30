@@ -26,6 +26,8 @@ namespace Rob
         public float groundOffset;
         private WildLife currentWildLife;
 
+        public bool randomSpawnRotation;
+
         // add as many as you need for the animals needed to spawn
         
 
@@ -54,8 +56,17 @@ namespace Rob
                         Debug.Log(randomSpot);
                         GameObject randomWildlife =
                             currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
-                        GameObject spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
-                            randomTransform.rotation);
+                        GameObject spawnedWildlife;
+                        if (randomSpawnRotation)
+                        {
+                            spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
+                                Quaternion.Euler(0,Random.Range(0,360),0));
+                        }
+                        else
+                        {
+                            spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
+                                randomTransform.rotation);
+                        }
 
                         if (Physics.Raycast(spawnedWildlife.transform.position, Vector3.down, out RaycastHit hit, 20))
                         {
