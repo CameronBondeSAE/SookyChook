@@ -10,14 +10,9 @@ namespace Tom
         public Vector3 target;
         public float turnSpeed = 5f;
 
-        private Rigidbody rb;
+        public Rigidbody rb;
         private Vector3 cross;
         private Vector3 targetLocalPosition;
-
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
 
         public void FixedUpdate()
         {

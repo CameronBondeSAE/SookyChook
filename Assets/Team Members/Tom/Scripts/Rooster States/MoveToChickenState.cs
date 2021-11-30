@@ -12,10 +12,11 @@ namespace Tom
         private Rigidbody rb;
         private PathfindingAgent agent;
         private TurnToward turn;
+        private MoveForward move;
         public float speed = 50f;
         private PathfindingGrid.Node targetNode;
         public float followRange = 1.5f;
-    
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -24,7 +25,8 @@ namespace Tom
             rooster = owner.GetComponent<Rooster_Model>();
             rb = owner.GetComponent<Rigidbody>();
             agent = owner.GetComponent<PathfindingAgent>();
-            turn = owner.GetComponent<TurnToward>();
+            turn = owner.GetComponentInChildren<TurnToward>();
+            move = owner.GetComponentInChildren<MoveForward>();
 
             GlobalEvents.levelStaticsUpdated += FindNewPath;
         }
@@ -34,17 +36,15 @@ namespace Tom
             base.Enter();
 
             turn.enabled = true;
+            move.enabled = true;
             FindNewPath(gameObject);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
+
             Vector2 position = new Vector2(transform.root.position.x, transform.root.position.z);
-            // Vector3 targetRotation = new Vector3(targetNode.coordinates.x, transform.root.position.y,
-            //     targetNode.coordinates.y);
-            // transform.root.LookAt(targetRotation);
 
             if (Vector2.Distance(targetNode.coordinates, position) < followRange)
             {
@@ -61,22 +61,29 @@ namespace Tom
                     Finish();
                 }
             }
-            
-            rb.AddForce(transform.root.forward * speed * Time.deltaTime, ForceMode.VelocityChange);
+
+            if (rooster.targetChicken != null &&
+                Vector2.Distance(position, agent.ConvertPositionToNodeCoordinates(rooster.targetChicken.position))
+                < 1.5f)
+            {
+                rooster.targetChicken = null;
+                Finish();
+            }
         }
 
         public override void Exit()
         {
             base.Exit();
-            
+
             turn.enabled = false;
+            move.enabled = false;
         }
 
         public void FindNewPath(GameObject go)
         {
-            agent.FindPath(agent.ConvertPositionToNodeCoordinates(transform.position), 
+            agent.FindPath(agent.ConvertPositionToNodeCoordinates(transform.position),
                 agent.ConvertPositionToNodeCoordinates(rooster.targetChicken.position));
-            
+
             targetNode = agent.path[agent.path.Count - 1];
             turn.target = new Vector3(targetNode.coordinates.x, 0, targetNode.coordinates.y);
         }
