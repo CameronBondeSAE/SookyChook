@@ -34,11 +34,11 @@ public class AtmosphereManager : MonoBehaviour
         // Sun Rotation
         transform.rotation=Quaternion.Euler(sunPosition, 0, 0);
         //Quaternion.Euler(sunPosition, 0, 0);
-        if (Sun == true && Moon==false)
+        //if (Sun == true && Moon==false)
         {
             Sun = currentState;
         }
-        if (Moon == true && Sun ==false)
+        //if (Moon == true && Sun ==false)
         {
             Moon = currentState;
         }
@@ -80,6 +80,8 @@ public class AtmosphereManager : MonoBehaviour
         {
             //currentState = Moon;
         }
+        
+        //TODO: Change the values, as it never goes to 360, it changes between 180 and -180
     }
 }
 
