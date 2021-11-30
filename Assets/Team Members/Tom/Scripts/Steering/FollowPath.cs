@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Tom
 {
+    [RequireComponent(typeof(TurnToward))]
     public class FollowPath : MonoBehaviour
     {
         private TurnToward turn;
@@ -12,7 +13,7 @@ namespace Tom
         private PathfindingGrid.Node targetNode;
         public float followRange = 1f;
 
-        public void Start()
+        public void OnEnable()
         {
             turn = GetComponent<TurnToward>();
             targetNode = pathfinding.path[pathfinding.path.Count - 1];

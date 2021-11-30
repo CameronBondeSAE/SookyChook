@@ -17,8 +17,8 @@ namespace Tom
             public Node parent;
         }
 
-        [SerializeField] private Vector2Int gridStart;
-        [SerializeField] private Vector2Int gridEnd;
+        [SerializeField] private Vector2Int gridStart = new Vector2Int(-30,-30);
+        [SerializeField] private Vector2Int gridEnd = new Vector2Int(30,30);
         public Node[,] nodes;
         [SerializeField] private LayerMask obstacles;
 
