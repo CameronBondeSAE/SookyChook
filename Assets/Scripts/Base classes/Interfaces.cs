@@ -39,3 +39,9 @@ public interface IWaterable
 {
 	void BeingWatered(float amount);
 }
+
+public interface ITractorAttachment
+{
+	void Attach();
+	void Dettach();
+}
