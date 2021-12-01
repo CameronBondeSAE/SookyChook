@@ -44,4 +44,5 @@ public interface ITractorAttachment
 {
 	void Attach();
 	void Dettach();
+	Vector3 Offset();
 }

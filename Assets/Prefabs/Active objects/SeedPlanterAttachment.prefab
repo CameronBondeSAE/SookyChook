@@ -123,5 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4af39b2161c7464e8677704b10393da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tractorModel: {fileID: 0}
   seed: {fileID: 986063010507142569, guid: a68c6b65af5fd434790b9c76ace6d7f3, type: 3}
+  attachOffset: {x: 0, y: 0, z: -1}
+  seedAmountPerPlant: 3

@@ -53,6 +53,9 @@ public class CharacterModel : MonoBehaviour
 	[SerializeField]
 	float throwForce = 3f;
 
+	TrailerModel trailer;
+	IPickupable pickupable;
+
 	// Start is called before the first frame update
 	public void Jump()
 	{
@@ -150,12 +153,70 @@ public class CharacterModel : MonoBehaviour
 
 	public void PickUp()
 	{
+		//Always check if something is in front in case player wants to place entities on a trailer
+		RaycastHit hit = CheckWhatsInFrontOfMe();
+
+		if(hit.collider != null)
+        {
+			if(hit.collider.gameObject.GetComponent<TrailerModel>() != null)
+            {
+				trailer = hit.collider.gameObject.GetComponent<TrailerModel>();
+			}
+
+			if(hit.collider.gameObject.GetComponent<IPickupable>() !=null)
+            {
+				pickupable = hit.collider.gameObject.GetComponent<IPickupable>();
+			}
+		}
+		else
+        {
+			trailer = null;
+			pickupable = null;
+        }
+
 		// Already holding something, so drop it
-		if (holdingObject != null && !inVehicle)
+		if (holdingObject != null && !inVehicle && trailer == null)
 		{
 			Drop();
 			return;
 		}
+
+		//Holding something and in front of a trailer, place it on trailer
+		if (trailer != null && holdingObject != null)
+		{
+			//TODO: Might not need this if we use a single point for a spawn area
+			for (int i = 0; i < trailer.mounts.Length; i++)
+			{
+				//TODO: Trailer mounts no longer have child GO - need to do physics check?
+				//if (trailer.mounts[i].childCount == 0)
+				{
+					GameObject currentHoldingObject = holdingObject;
+					Drop();
+					//Hack: Drop has a throw feature
+					currentHoldingObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+					currentHoldingObject.transform.parent = null; //trailer.mounts[i];
+					trailer.objectsInTrailer.Add(currentHoldingObject);
+					currentHoldingObject.transform.position = trailer.mounts[i].transform.position;
+					currentHoldingObject.transform.rotation = trailer.mounts[i].rotation;
+					currentHoldingObject = null;
+					return;
+				}
+			}
+		}
+
+		//Not holding anything but in front of a trailer, grab whatever is on the trailer
+		//TODO: NOT WORKING
+		else if(trailer != null && holdingObject == null && trailer.objectsInTrailer.Count > 0)
+        {
+			holdingObject = trailer.objectsInTrailer[0];
+			trailer.objectsInTrailer.Remove(holdingObject);
+			pickupable.PickUp();
+			holdingObject.transform.parent = holdingMount;
+			holdingObject.transform.localPosition = Vector3.zero;
+			holdingObject.transform.rotation = holdingMount.rotation;
+			return;
+		}
+
 
 		// HACK: Hardcoded to tractor. Should be able to use interface
 		ITractorAttachment ITractorAttachment = IVehicleReference as ITractorAttachment;
@@ -164,11 +225,9 @@ public class CharacterModel : MonoBehaviour
 			ITractorAttachment.Dettach();
 			return;
 		}
-		
-		// Pickup? NOT in vehicle, NOT holding something already
-		RaycastHit  hit        = CheckWhatsInFrontOfMe();
-		IPickupable pickupable = hit.collider.gameObject.GetComponent<IPickupable>();
 
+		// Pickup? NOT in vehicle, NOT holding something already
+		//Hack: Bug allowing player to pick up trailer
 		if (pickupable != null)
 		{
 			holdingObject = hit.collider.gameObject;

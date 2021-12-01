@@ -27,17 +27,17 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     float reductionTimer = 0.5f;
 
     [Header("References Only - Don't Touch")]
-    public GameObject attachment;
+    public MonoBehaviour attachment;
     public bool hasAttachment = false;
 
     //private variables
     bool playerInTractor = false;
+    bool preventAttachment = false;
     float acceleration;
     float steering;
 
-    //Attachment References
+    //Attachment Reference
     ITractorAttachment tractorAttachment;
-    MonoBehaviour currentAttachment;
 
     [Space]
     [Header("Turning Wheels Only")]
@@ -55,7 +55,7 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
     void Start()
     {
-        wheels.SetActive(false);
+        TurnOffTractor();
     }
 
     private void Update()
@@ -72,8 +72,7 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         //Once the player has stopped moving and player is not in tractor - lock it back up
         if (rb.velocity.magnitude < 0.1f && !playerInTractor)
         {
-            wheels.SetActive(false);
-            rb.isKinematic = true;
+            TurnOffTractor();
         }
     }
 
@@ -85,6 +84,12 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
             acceleration -= reductionSpeed;
             yield return new WaitForSeconds(reductionTimer);
         }
+    }
+
+    void TurnOffTractor()
+    {
+        wheels.SetActive(false);
+        rb.isKinematic = true;
     }
 
 
@@ -105,22 +110,34 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         }
     }
 
+    //Trigger check for tractor attachments
     private void OnTriggerEnter(Collider other)
     {
+        if(preventAttachment)
+        {
+            return;
+        }
+
         //Check if the tractor is colliding with an attachment
         tractorAttachment = other.GetComponent<ITractorAttachment>();
         if (tractorAttachment != null)
         {
-            currentAttachment = tractorAttachment as MonoBehaviour;
-
             //Only attach if there is not already an attachment
             if(!hasAttachment)
-            {
+            {                
                 Attach();
             }
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if(tractorAttachment != null & !hasAttachment)
+        {
+            preventAttachment = false;
+        }
+    }
 
+    #region Interface Implementation
     public void Enter()
     {
         //Invoke event for all view related functionality
@@ -134,7 +151,7 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         //If an attachment has been left on the tractor
         if (hasAttachment)
         {
-            currentAttachment.GetComponent<SeedPlanterModel>().Attach();
+            tractorAttachment.Attach();
             //Dettach();
         }
     }
@@ -146,7 +163,7 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
         if (hasAttachment)
         {
-            currentAttachment.GetComponent<SeedPlanterModel>().Dettach();
+            tractorAttachment.Dettach();
             //Dettach();
         }
 
@@ -172,30 +189,31 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
     public void Attach()
     {
-        attachment = currentAttachment.gameObject;
+        attachment = tractorAttachment as MonoBehaviour;
         attachment.transform.parent = attachmentMount;
-        attachment.transform.localPosition = new Vector3(0, 0, 1f);
+        attachment.transform.localPosition = tractorAttachment.Offset();
         attachment.transform.rotation = attachmentMount.rotation;
         tractorAttachment.Attach();
 
+        //Prevent anymore attachments
         hasAttachment = true;
+        preventAttachment = true;
     }
 
     public void Dettach()
     {
         attachment.transform.parent = null;
         attachment.transform.rotation = transform.rotation;
-        currentAttachment.transform.position = attachment.transform.position;
-        //attachment.transform.position = transform.localPosition + (-transform.forward * detachOffset);
-        currentAttachment.GetComponent<SeedPlanterModel>().Dettach();
+        tractorAttachment.Dettach();
         attachment = null;
 
-        Invoke("ResetAttachment", 2f);
-    }
-
-    //Hack for now to prevent attachment being instantly reattached to the tractor
-    private void ResetAttachment()
-    {
         hasAttachment = false;
     }
+
+    public Vector3 Offset()
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }
