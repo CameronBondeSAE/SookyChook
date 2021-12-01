@@ -6,12 +6,14 @@ public class WheelModel : MonoBehaviour
 {
     [Header("Vehicle Attributes - Update all values per vehicle instance")]
     public Rigidbody rb;
+    [Tooltip("Distance the Raycast will shoot")]
     public float suspensionLength = 2f;
+    [Tooltip("Height of vehicle before forces are applied")]
     public float maxHeight = 1f;
     public float maxForce = 500f;
     public float frictionAmount = 50f;
 
-    [Header("Optional - Use Anim Curve")]
+    [Header("Optional Settings - Use Anim Curve")]
     public AnimationCurve suspensionCurve;
     float suspensionValue;
     public bool useAnimCurve;
@@ -22,28 +24,19 @@ public class WheelModel : MonoBehaviour
     [SerializeField]
     float force = 0;
 
-
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        //This vehicles velocity
-        localVelocity = transform.InverseTransformDirection(rb.velocity);
-        xVelocity = localVelocity.x;
-
-        //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
-        rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
-
-
         // Container for useful info coming from casting functions (note ‘out’ below)
         RaycastHit hitinfo;
         hitinfo = new RaycastHit();
 
         Physics.Raycast(transform.position, -transform.up, out hitinfo, suspensionLength, 255, QueryTriggerInteraction.Ignore);
 
-        // Debug: Only draw line if we hit something
+        //Only run this code if we hit a collider
         if (hitinfo.collider)
         {
+            //Wheel Force Logic
             float height = hitinfo.distance;
             force = maxHeight - height;
             force *= maxForce;
@@ -59,7 +52,15 @@ public class WheelModel : MonoBehaviour
                 rb.AddForceAtPosition(transform.up * force, transform.position);
             }
 
+            //Applying lateral forces - Get vehicles velocity
+            localVelocity = transform.InverseTransformDirection(rb.velocity);
+            xVelocity = localVelocity.x;
 
+            //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
+            rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
+
+
+            //Draw line when we hit a collider for debugging
             Debug.DrawLine(transform.position, hitinfo.point, Color.green);
         }
 
