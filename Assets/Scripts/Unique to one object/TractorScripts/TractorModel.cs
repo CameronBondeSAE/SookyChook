@@ -7,14 +7,16 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 {
     [Header("Vehicle Attributes")]
     public Rigidbody rb;
-    public float speed = 5f;
-    public float turnRadius = 10f;
-    //public float frictionAmount = 5f;
+    public float speed = 100f;
+    public float turnRadius = 50f;
+
+    [Header("Needed References")]
+    [Tooltip("Where the player will exit the tractor")]
     public Transform exitPoint;
+    [Tooltip("Reference to the parent object of all tractor wheels - used for turning off physics when tractor not in use")]
     public GameObject wheels;
-    public GameObject attachment;
+    [Tooltip("This is where attachments will be positioned")]
     public Transform attachmentMount;
-    public bool hasAttachment = false;
     //[SerializeField]
     //float detachOffset = 3f;
 
@@ -24,6 +26,11 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     [SerializeField]
     float reductionTimer = 0.5f;
 
+    [Header("References Only - Don't Touch")]
+    public GameObject attachment;
+    public bool hasAttachment = false;
+
+    //private variables
     bool playerInTractor = false;
     float acceleration;
     float steering;
@@ -31,10 +38,6 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
     //Attachment References
     ITractorAttachment tractorAttachment;
     MonoBehaviour currentAttachment;
-
-    //[Space]
-    //public Vector3 localVelocity;
-    //public float xVelocity;
 
     [Space]
     [Header("Turning Wheels Only")]
@@ -57,13 +60,6 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
     private void Update()
     {
-        //This vehicles velocity
-        //localVelocity = transform.InverseTransformDirection(rb.velocity);
-        //xVelocity = localVelocity.x;
-
-        //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards
-        //rb.AddRelativeForce(Vector3.right * xVelocity * -frictionAmount);
-
         //Only reduce speed when the player is not in the tractor & the tractor is moving
         if(!playerInTractor)
         {
