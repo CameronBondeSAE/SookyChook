@@ -7,13 +7,14 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     [Header ("DeliveryTruck Attributes")]
     public Rigidbody rb;
 
-    public float speed;
+    public float speed = 1500.0f;
     public Transform exitPoint;
 
     public List<Wheel> drivingWheels;
     public List<Wheel> steeringWheels;
 
-    private float acceleration;
+    public float acceleration;
+    public float maxSteeringAngle = 70.0f;
     private float steering;
 
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
         {
             rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
             
-            steeringWheel.transform.rotation = Quaternion.Euler(0,steering,0);
+            steeringWheel.transform.rotation = Quaternion.Euler(0,steering*maxSteeringAngle,0);
         }
     }
     
@@ -50,7 +51,7 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
 
     public void Steer(float amount)
     {
-        //steering = amount;
+        steering = amount;
     }
 
     public void Accelerate(float amount)

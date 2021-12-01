@@ -8,26 +8,19 @@ public class DeliverySpawn : MonoBehaviour
 {
 
     public Spawner spawner;
-    public float deliveryEvent;
-    
+    public float spawnFenceEvent;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChangeEvent;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void InstanceOnPhaseChangeEvent(DayNightManager.DayPhase obj)
     {
-        deliveryEvent = FindObjectOfType<DayNightManager>().currentTime;
-        if (deliveryEvent == 12)
+        if (obj == DayNightManager.DayPhase.Noon)
         {
-            spawner = GetComponent<Spawner>();
             spawner.Spawn();
-            Debug.Log("Worked");
         }
     }
-        
-        
-    
 }
