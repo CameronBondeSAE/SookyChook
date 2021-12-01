@@ -39,11 +39,16 @@ public class TractorViewModel : MonoBehaviour
     void OnTractorEnter()
     {
         audioSource.clip = enterTractor;
-        audioSource.loop = true;
+        audioSource.loop = false;
         audioSource.Play();
-        audioSource.PlayDelayed(enterTractor.length);
-        
-        //Debug.Log("Entered Tractor");
+        Invoke("PlayRunningSound", enterTractor.length);
+    }
+
+    void PlayRunningSound()
+    {
+        audioSource.loop = true;
+        audioSource.clip = runningTractor;
+        audioSource.Play();
     }
 
     void OnTractorExit()
