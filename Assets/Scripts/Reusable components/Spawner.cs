@@ -97,7 +97,9 @@ namespace Rob
 				foreach (Transform spawnPoint in _currentGroupInfo.spawnPoints)
 				{
 #if UNITY_EDITOR || UNITY_EDITOR_64
-					Handles.color = new Color(0, 1f, 0, 0.2f);
+
+					Handles.color = Color.green;
+					Handles.zTest = UnityEngine.Rendering.CompareFunction.LessEqual;
 					Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, radius);
 #endif
 				}

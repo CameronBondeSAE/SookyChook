@@ -8,6 +8,7 @@ public class TractorViewModel : MonoBehaviour
     public TractorModel tractorModel;
     public AudioSource audioSource;
     public AudioClip enterTractor;
+    public AudioClip runningTractor;
     public AudioClip exitTractor;
 
     [Header("Turning Wheel Graphics")]
@@ -38,13 +39,17 @@ public class TractorViewModel : MonoBehaviour
     void OnTractorEnter()
     {
         audioSource.clip = enterTractor;
+        audioSource.loop = true;
         audioSource.Play();
+        audioSource.PlayDelayed(enterTractor.length);
+        
         //Debug.Log("Entered Tractor");
     }
 
     void OnTractorExit()
     {
         audioSource.clip = exitTractor;
+        audioSource.loop = false;
         audioSource.Play();
         //Debug.Log("Exited Tractor");
     }
