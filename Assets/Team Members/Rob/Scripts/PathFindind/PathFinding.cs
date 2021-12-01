@@ -35,6 +35,7 @@ namespace Rob
         private void Awake()
         {
             // grid = FindObjectOfType<WorldScan>();
+            
         }
 
         private void Start()
@@ -46,15 +47,15 @@ namespace Rob
             {
                 //if you want to see that algorithm work, comment out find path and reinstate the coroutine
                 
-                //StartCoroutine(FindPath());
-                FindPath();
+                StartCoroutine(FindPath());
+                //FindPath();
             }
         }
         
-        //must comment out public void and uncomment Ienumerator to visualise
+        //must comment out public void and uncomment IEnumerator to visualise
 
-        //IEnumerator FindPath()
-        public void FindPath()
+        IEnumerator FindPath()
+        //public void FindPath()
         {
             startNode = grid.gridNodeReference[startPos.x, startPos.z]; //set the start node
             openNodes.Add(startNode); //add 1st node to the open list
@@ -130,7 +131,7 @@ namespace Rob
                         }
                     }
                 }
-                //yield return new WaitForSeconds(.2f);
+                yield return new WaitForEndOfFrame();
             }
         }
 
