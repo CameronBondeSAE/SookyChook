@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1513167034303830662}
   - component: {fileID: 1513167034303830657}
   m_Layer: 0
-  m_Name: Pathfinding Grid
+  m_Name: Tom Pathfinding Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   gridEnd: {x: 30, y: 30}
   obstacles:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8
   gridStartX: 0
   gridEndX: 0
   gridStartY: 0
