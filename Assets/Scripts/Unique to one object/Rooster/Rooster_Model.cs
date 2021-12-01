@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rooster_Model : MonoBehaviour
+public class Rooster_Model : AnimalBase
 {
     public float sightRange = 10f;
     public Transform targetEnemy;
