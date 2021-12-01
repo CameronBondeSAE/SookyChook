@@ -24,6 +24,8 @@ namespace Rob
 		}
 
 		public bool autoStart = false;
+		
+		public float radius = 5f;
 
 		public  GroupInfo[] groupInfos;
 		public  float       groundOffset;
@@ -61,7 +63,7 @@ namespace Rob
 
 						Vector3 spawnPos = randomTransform.position;
 						spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
-						Vector3 randomSpot = Random.insideUnitCircle * 5;
+						Vector3 randomSpot = Random.insideUnitCircle * radius;
 						randomSpot.z = randomSpot.y; //hack, im sure there is an easier way to do this
 						// Debug.Log(randomSpot);
 						GameObject randomPrefab =
@@ -96,7 +98,7 @@ namespace Rob
 				{
 #if UNITY_EDITOR || UNITY_EDITOR_64
 					Handles.color = new Color(0, 1f, 0, 0.2f);
-					Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, 5);
+					Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, radius);
 #endif
 				}
 			}

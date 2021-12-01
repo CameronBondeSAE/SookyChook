@@ -12,7 +12,7 @@ public interface IVehicle
 	void Steer(float amount);
 
 	/// <summary>
-	/// 0 to 1 float for min max acceleration. Scale at your end
+	/// -1 to 1 float for min max acceleration. -1 for reverse, 1 for forward. Scale at your end
 	/// </summary>
 	/// <param name="amount"></param>
 	void Accelerate(float amount);
