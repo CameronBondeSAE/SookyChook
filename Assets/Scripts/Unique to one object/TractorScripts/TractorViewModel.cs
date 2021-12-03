@@ -17,9 +17,11 @@ public class TractorViewModel : MonoBehaviour
     [SerializeField]
     float turnSpeed = 0.8f;
 
+    private Coroutine coroutine;
+    
     private void Start()
     {
-        tractorModel.EnterTractorEvent += OnTractorEnter;
+        tractorModel.EnterTractorEvent += () => coroutine = StartCoroutine(OnTractorEnter());
         tractorModel.ExitTractorEvent += OnTractorExit;
     }
 
@@ -36,16 +38,13 @@ public class TractorViewModel : MonoBehaviour
         }
     }
 
-    void OnTractorEnter()
+
+    IEnumerator OnTractorEnter()
     {
         audioSource.clip = enterTractor;
         audioSource.loop = false;
         audioSource.Play();
-        Invoke("PlayRunningSound", enterTractor.length);
-    }
-
-    void PlayRunningSound()
-    {
+        yield return new WaitForSeconds(enterTractor.length);
         audioSource.loop = true;
         audioSource.clip = runningTractor;
         audioSource.Play();
@@ -53,6 +52,9 @@ public class TractorViewModel : MonoBehaviour
 
     void OnTractorExit()
     {
+        // Stops the starting sounds sequence
+        StopCoroutine(coroutine);
+
         audioSource.clip = exitTractor;
         audioSource.loop = false;
         audioSource.Play();

@@ -18,18 +18,22 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
     [Tooltip("Reference to the parent object of all wheels - used for turning off physics when not in use")]
     public GameObject wheels;
 
+    public HingeJoint hingeJoint;
+
     private void Start()
     {
         TurnOffPhysics();
     }
 
-    public void Attach()
+    public void Attach(TractorModel aTractorModel)
     {
-        wheels.SetActive(true);
+        hingeJoint.connectedBody = aTractorModel.GetComponent<Rigidbody>();
+        // wheels.SetActive(true);
     }
 
-    public void Dettach()
+    public void Detach()
     {
+        hingeJoint.connectedBody = null;
         TurnOffPhysics();
     }
 
@@ -40,6 +44,6 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
 
     void TurnOffPhysics()
     {
-        wheels.SetActive(false);
+        // wheels.SetActive(false);
     }
 }

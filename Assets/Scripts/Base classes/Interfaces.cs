@@ -42,7 +42,7 @@ public interface IWaterable
 
 public interface ITractorAttachment
 {
-	void Attach();
-	void Dettach();
+	void Attach(TractorModel aTractorModel);
+	void Detach();
 	Vector3 Offset();
 }

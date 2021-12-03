@@ -219,10 +219,11 @@ public class CharacterModel : MonoBehaviour
 
 
 		// HACK: Hardcoded to tractor. Should be able to use interface
-		ITractorAttachment ITractorAttachment = IVehicleReference as ITractorAttachment;
-		if (inVehicle && (IVehicleReference as TractorModel).hasAttachment)
+		// Note: Characters only need to tell tractors to DETACH. Tractors auto attach on contact
+		TractorModel tractorModel = IVehicleReference as TractorModel;
+		if (inVehicle && tractorModel.hasAttachment)
 		{
-			ITractorAttachment.Dettach();
+			tractorModel.Detach();
 			return;
 		}
 

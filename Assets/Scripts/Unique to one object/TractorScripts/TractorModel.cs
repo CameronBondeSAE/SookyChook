@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
+public class TractorModel : MonoBehaviour, IVehicle
 {
     [Header("Vehicle Attributes")]
     public Rigidbody rb;
@@ -149,11 +149,11 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         playerInTractor = true;
 
         //If an attachment has been left on the tractor
-        if (hasAttachment)
-        {
-            tractorAttachment.Attach();
-            //Dettach();
-        }
+        // if (hasAttachment)
+        // {
+            // tractorAttachment.Attach();
+            // Dettach();
+        // }
     }
 
     public void Exit()
@@ -161,11 +161,10 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
         ExitTractorEvent?.Invoke();
         playerInTractor = false;
 
-        if (hasAttachment)
-        {
-            tractorAttachment.Dettach();
-            //Dettach();
-        }
+        // if (hasAttachment)
+        // {
+            // tractorAttachment.Detach();
+        // }
 
 
         //Update pathfinding on tractor exit
@@ -189,22 +188,22 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
     public void Attach()
     {
-        attachment = tractorAttachment as MonoBehaviour;
-        attachment.transform.parent = attachmentMount;
-        attachment.transform.localPosition = tractorAttachment.Offset();
-        attachment.transform.rotation = attachmentMount.rotation;
-        tractorAttachment.Attach();
+        // attachment = tractorAttachment as MonoBehaviour;
+        // attachment.transform.parent = attachmentMount;
+        // attachment.transform.localPosition = tractorAttachment.Offset();
+        // attachment.transform.rotation = attachmentMount.rotation;
+        tractorAttachment.Attach(this);
 
         //Prevent anymore attachments
         hasAttachment = true;
         preventAttachment = true;
     }
 
-    public void Dettach()
+    public void Detach()
     {
         attachment.transform.parent = null;
         attachment.transform.rotation = transform.rotation;
-        tractorAttachment.Dettach();
+        tractorAttachment.Detach();
         attachment = null;
 
         hasAttachment = false;
@@ -212,7 +211,7 @@ public class TractorModel : MonoBehaviour, IVehicle, ITractorAttachment
 
     public Vector3 Offset()
     {
-        throw new NotImplementedException();
+        return attachmentMount.localPosition;
     }
 
     #endregion

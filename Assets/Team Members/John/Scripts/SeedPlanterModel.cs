@@ -57,13 +57,19 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
         while (isAttached);
 	}
 
-    public void Attach()
+    public void Attach(TractorModel aTractorModel)
     {
         isAttached = true;
+        
+        transform.parent = aTractorModel.transform;
+        transform.localPosition = aTractorModel.Offset();
+        transform.rotation = aTractorModel.transform.rotation;
+        
+        
         StartCoroutine(PlantSeeds());
     }
 
-    public void Dettach()
+    public void Detach()
     {
         isAttached = false;
         StopCoroutine(PlantSeeds());
