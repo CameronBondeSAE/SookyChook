@@ -6,17 +6,18 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.Serialization;
 using Color = UnityEngine.Color;
 
 public class ScanningGrid : MonoBehaviour
 {
     public LayerMask layer;
-    public Vector2Int worldSize;
+    public Vector3Int worldSize;
 
     public Node[,] grid;
 
     public int gridSizeX;
-    public int gridSizeY;
+    public int gridSizeZ;
 
     private int nodeSize = 1;
 
@@ -27,9 +28,9 @@ public class ScanningGrid : MonoBehaviour
         public bool isBlocked;
 
         public int gridX;
-        public int gridY;
+        public int gridZ;
 
-        public Vector2Int coords;
+        public Vector3Int coords;
 
         public int gCost;
         public int hCost;
@@ -48,9 +49,9 @@ public class ScanningGrid : MonoBehaviour
 
         //how many grid spots in the world
         gridSizeX = Mathf.RoundToInt(worldSize.x / nodeSize);
-        gridSizeY = Mathf.RoundToInt(worldSize.y / nodeSize);
+        gridSizeZ = Mathf.RoundToInt(worldSize.z / nodeSize);
 
-        grid = new Node [worldSize.x, worldSize.y];
+        grid = new Node [worldSize.x, worldSize.z];
         CreateGrid();
         List<Node> neighbours = new List<Node>();
     }
@@ -60,20 +61,20 @@ public class ScanningGrid : MonoBehaviour
         //Vector3 worldBottomLeft = transform.position - Vector3.right*grid
         for (int x = 0; x < gridSizeX; x++)
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int z = 0; z < gridSizeZ; z++)
             {
-                grid[x, y] = new Node();
-                if ((Physics.CheckBox(new Vector3(x, y, 0),
-                    new Vector2(nodeSize, nodeSize), Quaternion.identity, layer)))
+                grid[x, z] = new Node();
+                if ((Physics.CheckBox(new Vector3(x, 0, z),
+                    new Vector3(nodeSize, 0, nodeSize), Quaternion.identity, layer)))
                 {
-                    grid[x, y].isBlocked = true;
+                    grid[x, z].isBlocked = true;
                 }
             }
         }
     }
 
     //get node from world point
-    public Node NodeFromWorldPos(Vector2 worldPos)
+    /*public Node NodeFromWorldPos(Vector2 worldPos)
     {
         //get percentage of location across world grid
         float percentX = (worldPos.x + worldSize.x / 2) / worldSize.x;
@@ -85,34 +86,36 @@ public class ScanningGrid : MonoBehaviour
 
         //getting world pos locations from percentage to int
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
-        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
+        int y = Mathf.RoundToInt((gridSizeZ - 1) * percentY);
 
         //sends world location to the 2D array
         return grid[x, y];
-    }
+    }*/
 
     public List<Node> path;
 
     private void OnDrawGizmos()
     {
         //grid parameters outline
-        Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, -1));
+        Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, worldSize.z));
 
         //drawing and filling grid
         for (int x = 0; x < gridSizeX; x++)
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int z = 0; z < gridSizeZ; z++)
             {
-                if (grid != null && grid[x, y].isBlocked)
+                if (grid != null && grid[x, z].isBlocked)
                 {
                     Gizmos.color = Color.magenta;
-                    Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (nodeSize - 0.1f));
+                    Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one * (nodeSize - 0.1f));
                 }
-                /*else
+                /*
+                else
                 {
                     Gizmos.color = Color.white;
-                    Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (nodeSize - 0.1f));
-                }*/
+                    Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one * (nodeSize - 0.1f));
+                }
+            */
             }
         }
     }

@@ -11,12 +11,12 @@ namespace Aaron
 {
     public class Pathfinding : MonoBehaviour
     {
-        public Vector2Int beginning, finish;
+        public Vector3Int beginning, finish;
 
         private Vector3 beginningPos;
 
         private int distanceX;
-        private int distanceY;
+        private int distanceZ;
         
         public List<ScanningGrid.Node> openSet = new List<ScanningGrid.Node>();
         public List<ScanningGrid.Node> closedSet = new List<ScanningGrid.Node>();
@@ -38,17 +38,17 @@ namespace Aaron
         }
 
         //get start and finish points in Node Space
-        IEnumerator FindPath(Vector2Int start, Vector2Int end)
+        IEnumerator FindPath(Vector3Int start, Vector3Int end)
         {
-            ScanningGrid.Node endNode = grid.grid[end.x, end.y];
-            currentNode = grid.grid[start.x, start.y];
+            ScanningGrid.Node endNode = grid.grid[end.x, end.z];
+            currentNode = grid.grid[start.x, start.z];
 
             openSet.Add(currentNode);
-            currentNode.coords = new Vector2Int(start.x, start.y);
+            currentNode.coords = new Vector3Int(start.x, 0, start.z);
             currentNode.gCost = 0;
             currentNode.hCost = GetDistance(currentNode.coords, end);
             
-            while (currentNode != grid.grid[end.x, end.y])
+            while (currentNode != grid.grid[end.x, end.z])
             {
                 int currentLowestFCost = currentNode.fCost;
                 foreach (var node in openSet)
@@ -65,7 +65,7 @@ namespace Aaron
                 openSet.Remove(currentNode);
                 closedSet.Add(currentNode);
 
-                if (currentNode == grid.grid[end.x, end.y]) 
+                if (currentNode == grid.grid[end.x, end.z]) 
                 {
                     break;
                 }
@@ -73,13 +73,13 @@ namespace Aaron
                 //checking neighbours surrounding currentNode; within grid
                 for (int x = (currentNode.coords.x - 1); x < (currentNode.coords.x + 2); x++)
                 {
-                    for (int y = (currentNode.coords.y - 1); y < (currentNode.coords.y + 2); y++)
+                    for (int z = (currentNode.coords.z - 1); z < (currentNode.coords.z + 2); z++)
                     {
-                        if (x > 0 && x <= grid.gridSizeX && y > 0 && y <= grid.gridSizeY)
+                        if (x > 0 && x <= grid.gridSizeX && z > 0 && z <= grid.gridSizeZ)
                         {
                             //neighbour location
-                            ScanningGrid.Node neighbour = grid.grid[x,y];
-                            neighbour.coords = new Vector2Int(x, y);
+                            ScanningGrid.Node neighbour = grid.grid[x,z];
+                            neighbour.coords = new Vector3Int(x, 0, z);
 
                             if (neighbour.isBlocked || closedSet.Contains(neighbour))
                             {
@@ -111,7 +111,7 @@ namespace Aaron
             path.Clear();
             
             //in place of the RetracePath() function
-            while (currentNode != grid.grid[beginning.x, beginning.y])
+            while (currentNode != grid.grid[beginning.x, beginning.z])
             {
                 path.Add(currentNode);
                 currentNode = currentNode.parent;
@@ -121,18 +121,18 @@ namespace Aaron
         }
 
 
-        public int GetDistance(Vector2Int start, Vector2Int end)
+        public int GetDistance(Vector3Int start, Vector3Int end)
         {
-            Vector2Int distance = end - start;
+            Vector3Int distance = end - start;
 
-            distance = new Vector2Int(Mathf.Abs(distance.x), Mathf.Abs(distance.y));
+            distance = new Vector3Int(Mathf.Abs(distance.x), Mathf.Abs(distance.y), Mathf.Abs(distance.z));
 
-            if (distance.x > distance.y)
+            if (distance.x > distance.z)
             {
-                return distance.y * 14 + 10 * (distance.x - distance.y);
+                return distance.z * 14 + 10 * (distance.x - distance.z);
             }
 
-            return distance.x * 14 + 10 * (distance.y-distance.x);
+            return distance.x * 14 + 10 * (distance.z-distance.x);
         }
 
         //possibly reintroduce if using coords from world space?
@@ -157,13 +157,13 @@ namespace Aaron
                 foreach (var node in openSet)
                 {
                     Gizmos.color = Color.yellow;
-                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, 0), Vector3.one * (1 - 0.1f));
+                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, node.coords.z), Vector3.one * (1 - 0.1f));
                 }
 
                 foreach (var node in closedSet)
                 {
                     Gizmos.color = Color.red;
-                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, 0), Vector3.one * (01 - .01f));
+                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, node.coords.z), Vector3.one * (01 - .01f));
                 }
 
                 /*if (path.Contains(grid.grid[x, y]))
@@ -173,15 +173,15 @@ namespace Aaron
                 }*/
 
                 Gizmos.color = Color.white;
-                Gizmos.DrawCube(new Vector3(beginning.x, beginning.y, 0), Vector3.one * (01 - .01f));
+                Gizmos.DrawCube(new Vector3(beginning.x, beginning.y, beginning.z), Vector3.one * (01 - .01f));
 
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(new Vector3(finish.x, finish.y, 0), Vector3.one * (1 - 0.1f));
+                Gizmos.DrawCube(new Vector3(finish.x, finish.y, finish.z), Vector3.one * (1 - 0.1f));
             }
             if (currentNode != null)
             {
                 Gizmos.color = Color.cyan;
-                Gizmos.DrawCube(new Vector3(currentNode.coords.x, currentNode.coords.y, 0), Vector3.one);
+                Gizmos.DrawCube(new Vector3(currentNode.coords.x, currentNode.coords.y, currentNode.coords.z), Vector3.one);
             }
         }
     }
