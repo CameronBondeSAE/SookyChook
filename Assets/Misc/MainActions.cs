@@ -241,6 +241,14 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""77651c10-845c-4208-b569-869618abdb1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -252,6 +260,17 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f6e3317-6007-4cfe-bcc1-85f99dc509a7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -292,6 +311,7 @@ public class @MainActions : IInputActionCollection, IDisposable
         // In Menu
         m_InMenu = asset.FindActionMap("In Menu", throwIfNotFound: true);
         m_InMenu_Start = m_InMenu.FindAction("Start", throwIfNotFound: true);
+        m_InMenu_ToggleMenu = m_InMenu.FindAction("ToggleMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -399,11 +419,13 @@ public class @MainActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_InMenu;
     private IInMenuActions m_InMenuActionsCallbackInterface;
     private readonly InputAction m_InMenu_Start;
+    private readonly InputAction m_InMenu_ToggleMenu;
     public struct InMenuActions
     {
         private @MainActions m_Wrapper;
         public InMenuActions(@MainActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Start => m_Wrapper.m_InMenu_Start;
+        public InputAction @ToggleMenu => m_Wrapper.m_InMenu_ToggleMenu;
         public InputActionMap Get() { return m_Wrapper.m_InMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -416,6 +438,9 @@ public class @MainActions : IInputActionCollection, IDisposable
                 @Start.started -= m_Wrapper.m_InMenuActionsCallbackInterface.OnStart;
                 @Start.performed -= m_Wrapper.m_InMenuActionsCallbackInterface.OnStart;
                 @Start.canceled -= m_Wrapper.m_InMenuActionsCallbackInterface.OnStart;
+                @ToggleMenu.started -= m_Wrapper.m_InMenuActionsCallbackInterface.OnToggleMenu;
+                @ToggleMenu.performed -= m_Wrapper.m_InMenuActionsCallbackInterface.OnToggleMenu;
+                @ToggleMenu.canceled -= m_Wrapper.m_InMenuActionsCallbackInterface.OnToggleMenu;
             }
             m_Wrapper.m_InMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -423,6 +448,9 @@ public class @MainActions : IInputActionCollection, IDisposable
                 @Start.started += instance.OnStart;
                 @Start.performed += instance.OnStart;
                 @Start.canceled += instance.OnStart;
+                @ToggleMenu.started += instance.OnToggleMenu;
+                @ToggleMenu.performed += instance.OnToggleMenu;
+                @ToggleMenu.canceled += instance.OnToggleMenu;
             }
         }
     }
@@ -455,5 +483,6 @@ public class @MainActions : IInputActionCollection, IDisposable
     public interface IInMenuActions
     {
         void OnStart(InputAction.CallbackContext context);
+        void OnToggleMenu(InputAction.CallbackContext context);
     }
 }
