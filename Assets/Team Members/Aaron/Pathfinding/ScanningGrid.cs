@@ -5,15 +5,19 @@ using UnityEngine;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Sirenix.OdinInspector;
 using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
 using Color = UnityEngine.Color;
 
-public class ScanningGrid : MonoBehaviour
+public class ScanningGrid : ManagerBase<ScanningGrid>
 {
     public LayerMask layer;
     public Vector3Int worldSize;
 
+    //[ReadOnly]
     public Node[,] grid;
 
     public int gridSizeX;
@@ -74,23 +78,23 @@ public class ScanningGrid : MonoBehaviour
     }
 
     //get node from world point
-    /*public Node NodeFromWorldPos(Vector2 worldPos)
+    public Node NodeFromWorldPos(Vector3 worldPos)
     {
         //get percentage of location across world grid
         float percentX = (worldPos.x + worldSize.x / 2) / worldSize.x;
-        float percentY = (worldPos.y + worldSize.y / 2) / worldSize.y;
+        float percentZ = (worldPos.z + worldSize.z / 2) / worldSize.z;
 
         //clamp between 0 and 1 
         percentX = Mathf.Clamp01(percentX);
-        percentY = Mathf.Clamp01(percentY);
+        percentZ = Mathf.Clamp01(percentZ);
 
         //getting world pos locations from percentage to int
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
-        int y = Mathf.RoundToInt((gridSizeZ - 1) * percentY);
+        int z = Mathf.RoundToInt((gridSizeZ - 1) * percentZ);
 
         //sends world location to the 2D array
-        return grid[x, y];
-    }*/
+        return grid[x, z];
+    }
 
     public List<Node> path;
 

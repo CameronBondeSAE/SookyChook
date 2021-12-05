@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dad07b236ae82540b13c3d04f0194ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginning: {x: 0, y: 0}
-  finish: {x: 0, y: 0}
+  beginning: {x: 0, y: 0, z: 0}
+  finish: {x: 0, y: 0, z: 0}
 --- !u!114 &4457199122860002233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,9 +58,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d8fab9e1c68aa409064bfcb71e2017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: grid
+      Entry: 6
+      Data: 
+    - Name: path
+      Entry: 6
+      Data: 
   layer:
     serializedVersion: 2
-    m_Bits: 0
-  worldSize: {x: 0, y: 0}
+    m_Bits: 8
+  worldSize: {x: 100, y: 0, z: 100}
   gridSizeX: 0
-  gridSizeY: 0
+  gridSizeZ: 0

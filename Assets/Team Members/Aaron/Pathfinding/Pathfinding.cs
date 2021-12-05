@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,18 +29,21 @@ namespace Aaron
 
         private void Start()
         {
-            grid = GetComponent<ScanningGrid>();
-            StartCoroutine(FindPath(beginning, finish));
+            grid = ScanningGrid.Instance;
+            FindPath(beginning, finish);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             //TODO get coords from node world position; use to create paths on the go
         }
 
         //get start and finish points in Node Space
-        IEnumerator FindPath(Vector3Int start, Vector3Int end)
+        public void FindPath(Vector3Int start, Vector3Int end)
         {
+            path.Clear();
+            openSet.Clear();
+            closedSet.Clear();
             ScanningGrid.Node endNode = grid.grid[end.x, end.z];
             currentNode = grid.grid[start.x, start.z];
 
@@ -50,18 +54,9 @@ namespace Aaron
             
             while (currentNode != grid.grid[end.x, end.z])
             {
-                int currentLowestFCost = currentNode.fCost;
-                foreach (var node in openSet)
-                {
-                    if (node.fCost <= currentLowestFCost)
-                    {
-                        {
-                            currentLowestFCost = node.fCost;
-                            currentNode = node;
-                        }
-                    }
-                }
-                
+                var findLowestFCost = FindLowestFCost();
+                if (findLowestFCost != null) currentNode = findLowestFCost;
+
                 openSet.Remove(currentNode);
                 closedSet.Add(currentNode);
 
@@ -95,6 +90,8 @@ namespace Aaron
                                 neighbour.hCost = GetDistance(neighbour.coords, end);
 
                                 neighbour.parent = currentNode;
+                                
+                                
 
                                 if (!openSet.Contains(neighbour))
                                 {
@@ -104,8 +101,6 @@ namespace Aaron
                         }
                     }
                 }
-                
-                yield return new WaitForEndOfFrame();
             }
             
             path.Clear();
@@ -115,11 +110,27 @@ namespace Aaron
             {
                 path.Add(currentNode);
                 currentNode = currentNode.parent;
-
-                yield return new WaitForEndOfFrame();
             }
         }
 
+        private ScanningGrid.Node FindLowestFCost()
+        {
+            int currentLowestFCost = Int32.MaxValue;
+            ScanningGrid.Node lowestNode = null;
+            
+            foreach (var node in openSet)
+            {
+                if (node.fCost < currentLowestFCost)
+                {
+                    
+                        currentLowestFCost = node.fCost;
+                        lowestNode = node;
+
+                }
+            }
+
+            return lowestNode;
+        }
 
         public int GetDistance(Vector3Int start, Vector3Int end)
         {
@@ -154,24 +165,28 @@ namespace Aaron
             if (grid != null)
             {
 
-                foreach (var node in openSet)
+                /*foreach (var node in openSet)
                 {
-                    Gizmos.color = Color.yellow;
+                    Gizmos.color = new Color(1, 0.92f, .16f, 0.5f);
                     Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, node.coords.z), Vector3.one * (1 - 0.1f));
+                    //Handles.Label(new Vector3(node.coords.x-.5f, (node.coords.y), node.coords.z), $"f={node.fCost}, h={node.hCost}, g={node.gCost}");
+
                 }
 
                 foreach (var node in closedSet)
                 {
-                    Gizmos.color = Color.red;
+                    Gizmos.color = new Color(1, 0, 0, .5f);
                     Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, node.coords.z), Vector3.one * (01 - .01f));
-                }
+                    //Handles.Label(new Vector3(node.coords.x-.5f, (node.coords.y), node.coords.z), $"f={node.fCost}, h={node.hCost}, g={node.gCost}");
 
-                /*if (path.Contains(grid.grid[x, y]))
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawCube(new Vector3(x, y, 0), Vector3.one * (01 - .01f));
                 }*/
 
+                foreach (var node in path)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawCube(new Vector3(node.coords.x, node.coords.y, node.coords.z), Vector3.one * (01 - .01f));
+                }
+                
                 Gizmos.color = Color.white;
                 Gizmos.DrawCube(new Vector3(beginning.x, beginning.y, beginning.z), Vector3.one * (01 - .01f));
 
