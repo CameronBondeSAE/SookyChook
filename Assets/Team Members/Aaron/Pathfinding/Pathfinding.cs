@@ -16,6 +16,17 @@ namespace Aaron
 
         private Vector3 beginningPos;
 
+        public Transform Beginning;
+        public Transform Finish;
+
+        private int BeginningX;
+        private int BeginningY;
+        private int BeginningZ;
+        
+        private int FinishX;
+        private int FinishY;
+        private int FinishZ;
+
         private int distanceX;
         private int distanceZ;
         
@@ -30,8 +41,10 @@ namespace Aaron
         private void Start()
         {
             grid = ScanningGrid.Instance;
-            FindPath(beginning, finish);
-        }
+
+            VectorToInt();
+
+            FindPath(beginning, finish);        }
 
         private void FixedUpdate()
         {
@@ -44,6 +57,7 @@ namespace Aaron
             path.Clear();
             openSet.Clear();
             closedSet.Clear();
+            VectorToInt();
             ScanningGrid.Node endNode = grid.grid[end.x, end.z];
             currentNode = grid.grid[start.x, start.z];
 
@@ -144,6 +158,20 @@ namespace Aaron
             }
 
             return distance.x * 14 + 10 * (distance.z-distance.x);
+        }
+
+        private void VectorToInt()
+        {
+            BeginningX = Mathf.RoundToInt(Beginning.position.x);
+            BeginningY = Mathf.RoundToInt(Beginning.position.y);
+            BeginningZ = Mathf.RoundToInt(Beginning.position.z);
+
+            FinishX = Mathf.RoundToInt(Finish.position.x);
+            FinishY = Mathf.RoundToInt(Finish.position.y);
+            FinishZ = Mathf.RoundToInt(Finish.position.z);
+            
+            beginning = new Vector3Int(BeginningX, BeginningY, BeginningZ);
+            finish = new Vector3Int(FinishX, FinishY, FinishZ);
         }
 
         //possibly reintroduce if using coords from world space?
