@@ -6,57 +6,53 @@ using UnityEngine;
 
 namespace Rob
 {
-    public class PathFinding : MonoBehaviour
+    public class PathFinding : ManagerBase<PathFinding>
     {
-        
         // use these  bools to auto start or to see all gizmos (open/closed nodes)
         public bool autoStart;
         public bool debug;
-        
-        [Tooltip("Must set endPos to a different position than startPos")] 
-        [SerializeField] private Vector3Int endPos;
+
+        [Tooltip("Must set endPos to a different position than startPos")]
+        public Vector3Int endPos;
+
         [Tooltip("Must set startPos or it will default to 0,0,0")]
-        [SerializeField] private Vector3Int startPos;
-        
+        public Vector3Int startPos;
+
         [SerializeField] private WorldScan grid;
 
         public List<WorldScan.Node> openNodes = new List<WorldScan.Node>();
         public List<WorldScan.Node> closedNodes = new List<WorldScan.Node>();
-        List<WorldScan.Node> path = new List<WorldScan.Node>();
+        public List<WorldScan.Node> path = new List<WorldScan.Node>();
 
 
-        private WorldScan.Node endNode;
+        WorldScan.Node endNode;
         WorldScan.Node startNode;
         WorldScan.Node currentNode;
         WorldScan.Node neighbour;
 
-        
 
-        private void Awake()
-        {
-            // grid = FindObjectOfType<WorldScan>();
-            
-        }
 
         private void Start()
+        {
+
+            // if (autoStart)
+            // {
+            //     //if you want to see that algorithm work, comment out find path and reinstate the coroutine
+            //
+            //     //StartCoroutine(FindPath());
+            //     //FindPath();
+            // }
+        }
+
+        //must comment out public void and uncomment IEnumerator to visualise
+
+        //IEnumerator FindPath()
+        public List<WorldScan.Node> FindPath()
         {
             endNode = grid.gridNodeReference[endPos.x, endPos.z];
             openNodes.Clear();
             closedNodes.Clear();
-            if (autoStart)
-            {
-                //if you want to see that algorithm work, comment out find path and reinstate the coroutine
-                
-                StartCoroutine(FindPath());
-                //FindPath();
-            }
-        }
-        
-        //must comment out public void and uncomment IEnumerator to visualise
 
-        IEnumerator FindPath()
-        //public void FindPath()
-        {
             startNode = grid.gridNodeReference[startPos.x, startPos.z]; //set the start node
             openNodes.Add(startNode); //add 1st node to the open list
 
@@ -80,7 +76,7 @@ namespace Rob
                 {
                     Debug.Log("Reached End");
                     RetracePath(startNode, endNode);
-                    break;
+                    return path;
                 }
 
 
@@ -131,12 +127,15 @@ namespace Rob
                         }
                     }
                 }
-                yield return new WaitForEndOfFrame();
+                //yield return new WaitForEndOfFrame();
             }
+
+            return null;
         }
 
         void RetracePath(WorldScan.Node start, WorldScan.Node end)
         {
+            path.Clear();
             currentNode = end;
 
             while (currentNode != start)
@@ -148,19 +147,30 @@ namespace Rob
             path.Reverse();
         }
 
+        //TODO fix for an offset and scale
+        public Vector3 ConvertGridToWorldSpace(Vector3Int gridCoord)
+        {
+            return gridCoord + transform.position;
+        }
+
+        public Vector3Int ConvertWorldToGridSpace(Vector3 worldCoord)
+        {
+            return Vector3Int.RoundToInt(worldCoord) - new Vector3Int((int)transform.position.x,(int)transform.position.y,(int)transform.position.z);
+        }
+
 
         void OnDrawGizmos()
         {
             Gizmos.color = Color.magenta;
-            Gizmos.DrawCube(startPos, Vector3.one);
+            Gizmos.DrawCube( transform.position + startPos, Vector3.one);
 
             Gizmos.color = Color.white;
-            Gizmos.DrawCube(endPos, Vector3.one);
+            Gizmos.DrawCube( transform.position + endPos, Vector3.one);
 
             foreach (WorldScan.Node nodePath in path)
             {
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(nodePath.gridPos, Vector3.one);
+                Gizmos.DrawCube(transform.position +nodePath.gridPos, Vector3.one);
             }
 
             if (debug)
@@ -170,7 +180,7 @@ namespace Rob
                     Gizmos.color = Color.cyan;
                     Gizmos.DrawCube(openNode.gridPos, Vector3.one);
                 }
-                
+
                 foreach (WorldScan.Node closedNode in closedNodes)
                 {
                     Gizmos.color = Color.yellow;

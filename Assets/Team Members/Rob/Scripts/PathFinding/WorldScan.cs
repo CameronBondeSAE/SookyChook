@@ -30,7 +30,7 @@ namespace Rob
 
         public Node[,] gridNodeReference;
         public Vector3Int maxSizeofGrid;
-        
+
         public Vector3Int gridSpacing;
         public LayerMask layer;
 
@@ -50,7 +50,7 @@ namespace Rob
                     gridNodeReference[x, z] = new Node();
                     gridNodeReference[x, z].gridPos = new Vector3Int(x, 0, z);
 
-                    if (Physics.CheckBox(new Vector3(x * gridSpacing.x, 0, z * gridSpacing.z),
+                    if (Physics.CheckBox( transform.position + new Vector3(x * gridSpacing.x, 0, z * gridSpacing.z),
                         new Vector3(gridSpacing.x, gridSpacing.y, gridSpacing.z), Quaternion.identity, layer))
                     {
                         gridNodeReference[x, z].isBlocked = true;
@@ -73,12 +73,12 @@ namespace Rob
                             if (gridNodeReference[x, z].isBlocked)
                             {
                                 Gizmos.color = Color.red;
-                                Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
+                                Gizmos.DrawCube(transform.position + new Vector3(x, 0, z), Vector3.one);
                             }
                             else
                             {
                                 Gizmos.color = Color.green;
-                                Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
+                                Gizmos.DrawCube(transform.position + new Vector3(x, 0, z), Vector3.one);
                             }
                         }
                     }
