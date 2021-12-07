@@ -149,11 +149,10 @@ public class TractorModel : MonoBehaviour, IVehicle
         playerInTractor = true;
 
         //If an attachment has been left on the tractor
-        // if (hasAttachment)
-        // {
-            // tractorAttachment.Attach();
-            // Dettach();
-        // }
+        if (hasAttachment)
+        {
+            tractorAttachment.Attach(this);
+        }
     }
 
     public void Exit()
@@ -161,10 +160,10 @@ public class TractorModel : MonoBehaviour, IVehicle
         ExitTractorEvent?.Invoke();
         playerInTractor = false;
 
-        // if (hasAttachment)
-        // {
-            // tractorAttachment.Detach();
-        // }
+        if (hasAttachment)
+        {
+            tractorAttachment.Detach();
+        }
 
 
         //Update pathfinding on tractor exit
@@ -192,7 +191,9 @@ public class TractorModel : MonoBehaviour, IVehicle
         // attachment.transform.parent = attachmentMount;
         // attachment.transform.localPosition = tractorAttachment.Offset();
         // attachment.transform.rotation = attachmentMount.rotation;
+
         tractorAttachment.Attach(this);
+        attachment = tractorAttachment as MonoBehaviour;
 
         //Prevent anymore attachments
         hasAttachment = true;
@@ -209,10 +210,13 @@ public class TractorModel : MonoBehaviour, IVehicle
         hasAttachment = false;
     }
 
+    //Old interface
+    /*
     public Vector3 Offset()
     {
         return attachmentMount.localPosition;
     }
+    */
 
     #endregion
 }

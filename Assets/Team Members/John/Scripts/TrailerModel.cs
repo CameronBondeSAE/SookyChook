@@ -37,10 +37,13 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
         TurnOffPhysics();
     }
 
+    //Old Interface
+    /*
     public Vector3 Offset()
     {
         return attachOffset;
     }
+    */
 
     void TurnOffPhysics()
     {
