@@ -21,7 +21,7 @@ namespace Tom
             //FindPath(start, destination);
         }
 
-        public void FindPath(Vector2Int start, Vector2Int destination)
+        public List<PathfindingGrid.Node> FindPath(Vector2Int start, Vector2Int destination)
         {
             foreach (PathfindingGrid.Node node in grid.nodes)
             {
@@ -101,11 +101,13 @@ namespace Tom
                 path.Add(currentNode);
                 currentNode = currentNode.parent;
             }
+
+            return path;
         }
 
-        public void FindPath(Vector3 start, Vector3 destination)
+        public List<PathfindingGrid.Node> FindPath(Vector3 start, Vector3 destination)
         {
-            FindPath(ConvertPositionToNodeCoordinates(start), ConvertPositionToNodeCoordinates(destination));
+            return FindPath(ConvertPositionToNodeCoordinates(start), ConvertPositionToNodeCoordinates(destination));
         }
 
         public int CalculateDistance(Vector2Int start, Vector2Int end)
