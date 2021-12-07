@@ -12,9 +12,7 @@ namespace Tom
 
         private List<PathfindingGrid.Node> openNodes = new List<PathfindingGrid.Node>();
         private List<PathfindingGrid.Node> closedNodes = new List<PathfindingGrid.Node>();
-
-        public Vector2Int start, destination;
-
+        
         public List<PathfindingGrid.Node> path = new List<PathfindingGrid.Node>();
 
         private void Start()
@@ -103,6 +101,11 @@ namespace Tom
                 path.Add(currentNode);
                 currentNode = currentNode.parent;
             }
+        }
+
+        public void FindPath(Vector3 start, Vector3 destination)
+        {
+            FindPath(ConvertPositionToNodeCoordinates(start), ConvertPositionToNodeCoordinates(destination));
         }
 
         public int CalculateDistance(Vector2Int start, Vector2Int end)
