@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
-  m_Name: TassieDevil
+  m_Name: TassieDevilPlanner
   m_EditorClassIdentifier: 
   conditions:
     list:
@@ -33,7 +33,7 @@ MonoBehaviour:
     - id: 8
       name: isHungry
   actions:
-  - name: Attack Chicken
+  - name: Move To Chicken
     isDefault: 0
     state: {fileID: 7380115231377463841, guid: 6b727379019b5a04299c7fb02da06021, type: 3}
     cost: 1

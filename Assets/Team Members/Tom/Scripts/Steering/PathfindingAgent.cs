@@ -12,9 +12,7 @@ namespace Tom
 
         private List<PathfindingGrid.Node> openNodes = new List<PathfindingGrid.Node>();
         private List<PathfindingGrid.Node> closedNodes = new List<PathfindingGrid.Node>();
-
-        public Vector2Int start, destination;
-
+        
         public List<PathfindingGrid.Node> path = new List<PathfindingGrid.Node>();
 
         private void Start()
@@ -23,7 +21,7 @@ namespace Tom
             //FindPath(start, destination);
         }
 
-        public void FindPath(Vector2Int start, Vector2Int destination)
+        public List<PathfindingGrid.Node> FindPath(Vector2Int start, Vector2Int destination)
         {
             foreach (PathfindingGrid.Node node in grid.nodes)
             {
@@ -103,6 +101,13 @@ namespace Tom
                 path.Add(currentNode);
                 currentNode = currentNode.parent;
             }
+
+            return path;
+        }
+
+        public List<PathfindingGrid.Node> FindPath(Vector3 start, Vector3 destination)
+        {
+            return FindPath(ConvertPositionToNodeCoordinates(start), ConvertPositionToNodeCoordinates(destination));
         }
 
         public int CalculateDistance(Vector2Int start, Vector2Int end)
@@ -120,6 +125,11 @@ namespace Tom
         public Vector2Int ConvertPositionToNodeCoordinates(Vector3 position)
         {
             return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
+        }
+
+        public Vector3 ConvertNodeCoordinatesToPosition(Vector2Int coordinates)
+        {
+            return new Vector3(coordinates.x + grid.gridStartX, 0, coordinates.y + grid.gridStartY);
         }
 
         private void OnDrawGizmosSelected()

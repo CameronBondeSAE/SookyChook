@@ -5,16 +5,18 @@ using UnityEngine;
 
 namespace Rob
 {
-
     public class AttackChickenState : AntAIState
     {
+        private PathFinding pathFinder;
+
         public GameObject owner;
-    
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
+            pathFinder = owner.GetComponent<PathFinding>();
         }
 
         public override void Enter()
