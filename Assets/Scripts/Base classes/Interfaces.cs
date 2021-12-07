@@ -44,5 +44,5 @@ public interface ITractorAttachment
 {
 	void Attach(TractorModel aTractorModel);
 	void Detach();
-	Vector3 Offset();
+	//Vector3 Offset();
 }

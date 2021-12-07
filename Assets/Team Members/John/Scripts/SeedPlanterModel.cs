@@ -7,7 +7,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
     //public TractorModel tractorModel;
     public GameObject seed;
     [SerializeField]
-    Vector3 attachOffset = new Vector3(0, 0, -1f);
+    Vector3 attachOffset = new Vector3(0, 0, -3f);
     bool isAttached = false;
     Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
 
@@ -62,7 +62,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
         isAttached = true;
         
         transform.parent = aTractorModel.transform;
-        transform.localPosition = aTractorModel.Offset();
+        transform.localPosition = attachOffset;
         transform.rotation = aTractorModel.transform.rotation;
         
         
@@ -78,8 +78,11 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
     }
 
+    //Old interface
+    /*
     public Vector3 Offset()
     {
         return attachOffset;
     }
+    */
 }
