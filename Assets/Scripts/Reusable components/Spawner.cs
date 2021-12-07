@@ -100,7 +100,7 @@ namespace Rob
 
 					Handles.color = Color.green;
 					Handles.zTest = UnityEngine.Rendering.CompareFunction.LessEqual;
-					Handles.DrawSolidDisc(spawnPoint.position, Vector3.up, radius);
+					Handles.DrawWireDisc(spawnPoint.position, Vector3.up, radius);
 #endif
 				}
 			}

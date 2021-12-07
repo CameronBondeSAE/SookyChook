@@ -136,6 +136,7 @@ public class CharacterModel : MonoBehaviour
 		RaycastHit hit = CheckWhatsInFrontOfMe();
 
 		// Vehicles?
+		// Review: This won't work if it has multiple IVehicle
 		IVehicleReference = hit.collider.gameObject.GetComponentInParent<IVehicle>();
 		if (IVehicleReference != null)
 		{
@@ -143,6 +144,7 @@ public class CharacterModel : MonoBehaviour
 				GetInVehicle();
 		}
 
+		// Review: This won't work if it has multiple IInteractables
 		IInteractable interactable = hit.collider.gameObject.GetComponentInParent<IInteractable>();
 		if (interactable != null)
 		{
@@ -158,14 +160,14 @@ public class CharacterModel : MonoBehaviour
 
 		if(hit.collider != null)
         {
-			if(hit.collider.gameObject.GetComponent<TrailerModel>() != null)
+			if(hit.collider.gameObject.GetComponentInParent<TrailerModel>() != null)
             {
-				trailer = hit.collider.gameObject.GetComponent<TrailerModel>();
+				trailer = hit.collider.gameObject.GetComponentInParent<TrailerModel>();
 			}
 
-			if(hit.collider.gameObject.GetComponent<IPickupable>() !=null)
+			if(hit.collider.gameObject.GetComponentInParent<IPickupable>() !=null)
             {
-				pickupable = hit.collider.gameObject.GetComponent<IPickupable>();
+				pickupable = hit.collider.gameObject.GetComponentInParent<IPickupable>();
 			}
 		}
 		else

@@ -21,7 +21,7 @@ public class EggProduction : MonoBehaviour
         chicken = GetComponent<ChickenModel>();
         StartCoroutine("LayTimer");
 
-        layTimeMulitplier = (chicken.maxHunger - chicken.hungerLevel) / 10;
+        layTimeMulitplier = (1f - chicken.hungerLevel) / 10;
     }
 
     private void Update()
