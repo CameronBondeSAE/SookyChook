@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class DeliverySequence : MonoBehaviour
 {
+    [Header("Disable Script for Driving Purposes")]
+    [Space]
     [Header("Variable Changes")]
     public Spawner spawner;
     public GameObject deliveryTruck;

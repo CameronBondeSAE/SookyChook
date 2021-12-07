@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class DeliveryTruckModel : MonoBehaviour, IVehicle
@@ -7,17 +8,22 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     [Header ("DeliveryTruck Attributes")]
     public Rigidbody rb;
 
-    public float speed = 1500.0f;
+    public float speed = 2000.0f;
     public Transform exitPoint;
 
+    [Header("Wheel Properties")]
     public GameObject Tires;
-    public List<Wheel> drivingWheels;
-    public List<Wheel> steeringWheels;
 
+    public Transform[] wheelVisuals;
+    public List<Transform> drivingWheels;
+    public List<Transform> steeringWheels;
+
+    [Header("Move Speed")]
     public float acceleration;
-    public float maxSteeringAngle = 70.0f;
+    public float maxSteeringAngle = 45.0f;
     private float steering;
-
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,17 +33,25 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach (Wheel drivingWheel in drivingWheels)
+        
+        //mechanical aspect for wheels
+        foreach (Transform drivingWheel in drivingWheels)
         {
             //rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
-            rb.AddForceAtPosition(drivingWheel.transform.forward * acceleration * speed, drivingWheel.transform.position);
+            rb.AddForceAtPosition(drivingWheel.transform.forward * acceleration * speed, drivingWheel.position);
         }
 
-        foreach (Wheel steeringWheel in steeringWheels)
+        foreach (Transform steeringWheel in steeringWheels)
         {
             //rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
-            rb.AddForceAtPosition(steeringWheel.transform.forward*acceleration*speed,steeringWheel.transform.position);
-            steeringWheel.transform.rotation = Quaternion.Euler(0,steering*maxSteeringAngle,0);
+            rb.AddForceAtPosition(steeringWheel.forward*acceleration*speed,steeringWheel.position);
+            steeringWheel.localRotation = Quaternion.Euler(0,steering*maxSteeringAngle,0);
+        }
+        
+        //visual aspect for steering wheels
+        foreach (Transform v in wheelVisuals)
+        {
+            v.DOLocalRotateQuaternion(Quaternion.Euler(0, steering * maxSteeringAngle, 0), acceleration);
         }
     }
     

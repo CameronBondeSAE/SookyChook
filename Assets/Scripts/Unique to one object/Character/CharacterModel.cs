@@ -136,14 +136,14 @@ public class CharacterModel : MonoBehaviour
 		RaycastHit hit = CheckWhatsInFrontOfMe();
 
 		// Vehicles?
-		IVehicleReference = hit.collider.gameObject.GetComponent<IVehicle>();
+		IVehicleReference = hit.collider.gameObject.GetComponentInParent<IVehicle>();
 		if (IVehicleReference != null)
 		{
 			if (!inVehicle)
 				GetInVehicle();
 		}
 
-		IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+		IInteractable interactable = hit.collider.gameObject.GetComponentInParent<IInteractable>();
 		if (interactable != null)
 		{
 			interactable.Interact();

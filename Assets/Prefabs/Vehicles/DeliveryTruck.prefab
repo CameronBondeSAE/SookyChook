@@ -719,14 +719,17 @@ MonoBehaviour:
   speed: 1000
   exitPoint: {fileID: 4870549095524928171}
   Tires: {fileID: 204350699231880135}
+  wheelVisuals:
+  - {fileID: 5097488277265228183}
+  - {fileID: 2769123987567125673}
   drivingWheels:
-  - {fileID: 4708201011296710898}
-  - {fileID: 6495975845209465710}
+  - {fileID: 7040563811407021356}
+  - {fileID: 2260237237172530625}
   steeringWheels:
-  - {fileID: 6505953674972923304}
-  - {fileID: 7420961522087419049}
+  - {fileID: 5751210231967860061}
+  - {fileID: 4877628317643685222}
   acceleration: 0
-  maxSteeringAngle: 70
+  maxSteeringAngle: 45
 --- !u!114 &3750797262499424309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,5 +1076,15 @@ PrefabInstance:
 --- !u!4 &2401720081851672706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6f75dc9b8bdef6d48a384378578b5064, type: 3}
+  m_PrefabInstance: {fileID: 2800718684309262185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5097488277265228183 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: 6f75dc9b8bdef6d48a384378578b5064, type: 3}
+  m_PrefabInstance: {fileID: 2800718684309262185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2769123987567125673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 50596594197605312, guid: 6f75dc9b8bdef6d48a384378578b5064, type: 3}
   m_PrefabInstance: {fileID: 2800718684309262185}
   m_PrefabAsset: {fileID: 0}
