@@ -10,6 +10,7 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public float speed = 1500.0f;
     public Transform exitPoint;
 
+    public GameObject Tires;
     public List<Wheel> drivingWheels;
     public List<Wheel> steeringWheels;
 
@@ -28,25 +29,27 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     {
         foreach (Wheel drivingWheel in drivingWheels)
         {
-            rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
+            //rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
+            rb.AddForceAtPosition(drivingWheel.transform.forward * acceleration * speed, drivingWheel.transform.position);
         }
 
         foreach (Wheel steeringWheel in steeringWheels)
         {
-            rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
-            
+            //rb.AddForceAtPosition(transform.forward*acceleration*speed,transform.position);
+            rb.AddForceAtPosition(steeringWheel.transform.forward*acceleration*speed,steeringWheel.transform.position);
             steeringWheel.transform.rotation = Quaternion.Euler(0,steering*maxSteeringAngle,0);
         }
     }
     
     public void Enter()
     {
-        
+        Tires.SetActive(true);
+        rb.isKinematic = false;
     }
 
     public void Exit()
     {
-        
+        Tires.SetActive(false);
     }
 
     public void Steer(float amount)

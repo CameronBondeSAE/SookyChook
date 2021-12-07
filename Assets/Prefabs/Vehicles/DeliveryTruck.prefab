@@ -717,7 +717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
   speed: 1000
-  exitPoint: {fileID: 0}
+  exitPoint: {fileID: 4870549095524928171}
+  Tires: {fileID: 204350699231880135}
   drivingWheels:
   - {fileID: 4708201011296710898}
   - {fileID: 6495975845209465710}
@@ -742,7 +743,7 @@ MonoBehaviour:
   deliveryTruck: {fileID: 6880129374932396767}
   deliveryTruckPos: {fileID: 0}
   deliveryTime: 11.8
-  truckSpeed: 1
+  truckSpeed: 1.5
   deliveryEvent: 0
 --- !u!114 &8577010391462542454
 MonoBehaviour:
@@ -757,6 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoStart: 0
+  radius: 5
   groupInfos:
   - prefabs:
     - {fileID: 4814860246875035319, guid: 4eacafc61b3568f4b8baf14b364ae94a, type: 3}

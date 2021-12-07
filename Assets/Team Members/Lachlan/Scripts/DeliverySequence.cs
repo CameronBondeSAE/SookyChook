@@ -28,31 +28,16 @@ public class DeliverySequence : MonoBehaviour
     {
         if (obj == DayNightManager.DayPhase.Noon)
         {
+            //TODO: Need to make truck move back and forward consistently. Need to orient position of truck
+            //deliveryTruck.transform.position=new Vector3();
+            //Vector3(deliveryTruckPos);
+            //deliveryTruck
+            
+            deliveryTruck.isStatic = false;
             deliveryTruck.SetActive(true);
             //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
             StartCoroutine(Delivery(new float()));
         }
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //if (deliveryEvent == 7)
-        {
-            //spawner = GetComponent<Spawner>();
-            //spawner.Spawn();
-            //Debug.Log("Testing");
-            //StartCoroutine(Delivery(new Vector2()));
-        }
-
-        //if (deliveryEvent == 7)
-        {
-            
-            //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
-            //Debug.Log("Testing");
-            //StartCoroutine(Delivery(new Vector2()));
-        }
-        
     }
 
     public IEnumerator Delivery(float amount)
@@ -68,7 +53,8 @@ public class DeliverySequence : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         
         deliveryTruck.SetActive(false);
-        
+        deliveryTruck.isStatic = true;
+        //TODO: remove box collider to make fences splurge out, also adjust spawn radius of fences in prefab.
         StopCoroutine(Delivery(new float()));
     }
 }
