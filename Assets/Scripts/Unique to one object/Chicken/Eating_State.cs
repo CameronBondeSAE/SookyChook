@@ -18,11 +18,14 @@ public class Eating_State : SookyAntAIState
 
 	private IEnumerator EatCoroutine()
 	{
-		yield return new WaitForSeconds(3f);
-		
+		for (int i = 0; i < 3; i++)
+		{
+			chickenModel.targetEdible.GetComponent<Edible>().BeingEaten();
+			yield return new WaitForSeconds(1f);
+		}
+
 		chickenModel.ChangeHunger(-chickenModel.targetEdible.foodAmount);
 		DestroyImmediate(chickenModel.targetEdible.gameObject);
-		// DestroyImmediate(owner);
 		
 		chickenModel.atFood = false;
 		chickenModel.foundFood = false;
