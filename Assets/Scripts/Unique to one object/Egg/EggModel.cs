@@ -35,7 +35,8 @@ public class EggModel : MonoBehaviour
         if (isFertilised)
         {
             //add to fertilised egg list in chicken manager
-            chickenManager.fertilisedEggsList.Add(this.gameObject);
+            if (ChickenManager.Instance.fertilisedEggsList != null)
+                ChickenManager.Instance.fertilisedEggsList.Add(this.gameObject);
             //start timer for hatching
             StartCoroutine("HatchingTimer");
         }

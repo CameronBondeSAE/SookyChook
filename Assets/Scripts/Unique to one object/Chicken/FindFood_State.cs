@@ -9,10 +9,25 @@ public class FindFood_State : SookyAntAIState
 	public override void Enter()
 	{
 		base.Enter();
-		
+
+		StartCoroutine(FindFoodCoroutine());
+	}
+
+	public IEnumerator FindFoodCoroutine()
+	{
+		yield return new WaitForSeconds(2f);
+
 		// Hack. Pick a random edible
-		owner.GetComponent<ChickenModel>().targetEdible = Edible.edibles[Random.Range(0,Edible.edibles.Count)];
-		// Edible lookFor = vision.LookForEdible();
-		// Edible lookFor = vision.LookFor<Edible>();
+		foreach (Edible edible in Edible.edibles)
+		{
+			if (!edible.GetComponent<ChickenModel>())
+			{
+				owner.GetComponent<ChickenModel>().targetEdible = edible;
+				owner.GetComponent<ChickenModel>().foundFood = true;
+				Debug.Log($"Found food {owner.GetComponent<ChickenModel>().targetEdible}");
+			}
+		}
+		
+		Finish();
 	}
 }

@@ -39,9 +39,12 @@ public class EggProduction : MonoBehaviour
 
     void LayEgg()
     {
-        GameObject copy = egg;
-        Vector3 chickenLocation = transform.position;
+        if (egg is { })
+        {
+            GameObject copy = egg;
+            Vector3 chickenLocation = transform.position;
         
-        Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
+            Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
+        }
     }
 }

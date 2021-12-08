@@ -5,13 +5,28 @@ using UnityEngine;
 
 public class Eating_State : SookyAntAIState
 {
+	ChickenModel chickenModel;
+	
 	public override void Enter()
 	{
 		base.Enter();
 
-		ChickenModel chickenModel = owner.GetComponent<ChickenModel>();
+		chickenModel = owner.GetComponent<ChickenModel>();
 		
-		Destroy(chickenModel.targetEdible.gameObject);
-		chickenModel.ReduceHunger(chickenModel.hungerLevel);
+		StartCoroutine(EatCoroutine());
+	}
+
+	private IEnumerator EatCoroutine()
+	{
+		yield return new WaitForSeconds(3f);
+		
+		chickenModel.ChangeHunger(-chickenModel.targetEdible.foodAmount);
+		DestroyImmediate(chickenModel.targetEdible.gameObject);
+		// DestroyImmediate(owner);
+		
+		chickenModel.atFood = false;
+		chickenModel.foundFood = false;
+		chickenModel.targetEdible = null;
+		Finish();
 	}
 }

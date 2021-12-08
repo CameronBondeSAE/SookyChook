@@ -260,11 +260,13 @@ GameObject:
   - component: {fileID: 3438443056123701457}
   - component: {fileID: 2942669957788344390}
   - component: {fileID: 979957324}
+  - component: {fileID: 3737000301862371597}
   - component: {fileID: 979957325}
   - component: {fileID: 979957326}
+  - component: {fileID: 9176017063996018814}
   - component: {fileID: 5562533064459475679}
   - component: {fileID: 8466676385385379710}
-  - component: {fileID: 9176017063996018814}
+  - component: {fileID: 4195831418780715697}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -308,9 +310,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648933817718183396}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1.5
-  m_AngularDrag: 5
+  m_Mass: 3
+  m_Drag: 3
+  m_AngularDrag: 8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -329,10 +331,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerLevel: 0
-  hungerThreshold: 0.5
+  hungerThreshold: 0.25
   isHungry: 0
+  foundFood: 0
+  atFood: 0
   isFull: 0
   targetEdible: {fileID: 0}
+  deathFling: 30
 --- !u!114 &2942669957788344390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +367,19 @@ MonoBehaviour:
   manualUpdate: 0
   thinkInterval: 0.1
   scenario: {fileID: 11400000, guid: 29491ee9228306d448a2065bd7c75230, type: 2}
+--- !u!114 &3737000301862371597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648933817718183396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa855c629c2edd246a71c2127dd2aa37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chickenModel: {fileID: 3438443056123701457}
 --- !u!114 &979957325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,37 +405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95546a72ae40aa743b7914e10eec2bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5562533064459475679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648933817718183396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad228831125e8a4091e157fe0c976db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1086741024555083841}
-  speed: 12.5
-  turn: 0
-  turnMultiplier: 15
---- !u!114 &8466676385385379710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648933817718183396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c451d5f3616391478378379157d5770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {x: 0, y: 0, z: 0}
-  turnSpeed: 25
-  rb: {fileID: 1086741024555083841}
 --- !u!114 &9176017063996018814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +420,52 @@ MonoBehaviour:
   currentHealth: 10
   maxHealth: 10
   deathThreshold: 0
+  isAlive: 0
+--- !u!114 &5562533064459475679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648933817718183396}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad228831125e8a4091e157fe0c976db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1086741024555083841}
+  speed: 8
+  turn: 0
+  turnMultiplier: 15
+--- !u!114 &8466676385385379710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648933817718183396}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c451d5f3616391478378379157d5770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
+  turnSpeed: 25
+  rb: {fileID: 1086741024555083841}
+--- !u!114 &4195831418780715697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648933817718183396}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc3dae351ad1724a886fd8b3c26d3ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1086741024555083841}
+  speed: 5
 --- !u!1 &1648991387308690618
 GameObject:
   m_ObjectHideFlags: 0

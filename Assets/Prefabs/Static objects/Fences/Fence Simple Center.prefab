@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 165790966617754205}
   - component: {fileID: 4750607994223367216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 1060564423656622859}
   - component: {fileID: 2977749001075998657}
   - component: {fileID: 1258288386469729613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: fence_simpleCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 2779940999867937752}
   - component: {fileID: 5956146161788237531}
   - component: {fileID: 1084569832748214862}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fence Simple Center
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 1933218752974506568}
   - component: {fileID: 5300337900367809713}
   - component: {fileID: 6339019359466275128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5044,7 +5044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5344388556890469612}
   - component: {fileID: 8803957814754227427}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

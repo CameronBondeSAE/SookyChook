@@ -12,6 +12,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     float deathThreshold;
 
+    [SerializeField]
+    public bool isAlive;
+
     //DEATH EVENT
     public delegate void DeathSignature(GameObject gameObject);
     public event DeathSignature DeathEvent;
@@ -19,6 +22,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        isAlive = true;
     }
 
     //Manage Object Health (Can both increase or decrease health)
@@ -34,7 +38,12 @@ public class Health : MonoBehaviour
         //If health ever drops to 0 or below fire off DeathEvent
         if(currentHealth <= deathThreshold)
         {
+            isAlive = false;
             DeathEvent?.Invoke(gameObject);
+        }
+        else
+        {
+            isAlive = true;
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using Anthill.AI;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,14 +18,19 @@ public class ChickenSense : MonoBehaviour, ISense
     }
 
     public ChickenModel chickenModel;
-    
+
+    private void Awake()
+    {
+        chickenModel = GetComponent<ChickenModel>();
+    }
+
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
         aWorldState.Set(Conditions.isHungry, chickenModel.isHungry);
         aWorldState.Set(Conditions.isScared, false);
         aWorldState.Set(Conditions.isDusk, false);
         aWorldState.Set(Conditions.isDawn, false);
-        aWorldState.Set(Conditions.foundFood, false);
-        aWorldState.Set(Conditions.atFood, false);
+        aWorldState.Set(Conditions.foundFood, chickenModel.foundFood);
+        aWorldState.Set(Conditions.atFood, chickenModel.atFood);
     }
 }

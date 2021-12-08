@@ -21,6 +21,11 @@ public class Chicken_ViewModel : MonoBehaviour
 
 	void ChickenModelOnPickUpEvent(bool pickingUp)
 	{
+		if (!GetComponentInParent<Health>().isAlive)
+		{
+			return;
+		}
+
 		if (pickingUp)
 		{
 			audioSource.clip = pickedUp;
@@ -36,7 +41,10 @@ public class Chicken_ViewModel : MonoBehaviour
 
 	void ChickenModelOnInteractEvent()
 	{
-		audioSource.clip = interactedWith;
-		audioSource.Play();
+		if (GetComponentInParent<Health>().isAlive)
+		{
+			audioSource.clip = interactedWith;
+			audioSource.Play();
+		}
 	}
 }

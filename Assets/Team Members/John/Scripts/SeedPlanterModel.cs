@@ -30,7 +30,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     // Start is called before the first frame update
     void Start()
     {
-        shop.PlanterUpgradedEvent += Upgrade;
+        if (shop is { }) shop.PlanterUpgradedEvent += Upgrade;
         //tractorModel.TractorAttachableEvent += OnAttached;
     }
 

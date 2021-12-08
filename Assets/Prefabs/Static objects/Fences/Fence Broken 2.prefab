@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6529691369390792318}
   - component: {fileID: 8056627241896431204}
   - component: {fileID: 7987870424488538539}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fence Broken 2
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 7314106005237964015}
   - component: {fileID: 5922012773198173002}
   - component: {fileID: 8488089528766916480}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: fenceBroken 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 4105058768834594759, guid: 43135bd4ce2611c4fae07fc253e750d2, type: 3}
       propertyPath: m_Name
       value: fenceBroken 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105058768834594759, guid: 43135bd4ce2611c4fae07fc253e750d2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

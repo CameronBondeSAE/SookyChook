@@ -31,7 +31,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 8073204910766273572, guid: 22397e540d0fbef4c90cc3bc4ebdac9a, type: 3}
     cost: 0
-    position: {x: 946, y: 51}
+    position: {x: 1149, y: 49}
     pre:
     - id: 5
       value: 1
@@ -39,10 +39,10 @@ MonoBehaviour:
     - id: 0
       value: 0
   - name: Find food
-    isDefault: 1
+    isDefault: 0
     state: {fileID: 8073204910766273572, guid: 3797c87012d8d3d4292b2f9e7100b249, type: 3}
     cost: 0
-    position: {x: 487, y: 50}
+    position: {x: 686, y: 48}
     pre:
     - id: 0
       value: 1
@@ -53,32 +53,41 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 8073204910766273572, guid: dd925de19b517b544940f495616bcf62, type: 3}
     cost: 0
-    position: {x: 720, y: 51}
+    position: {x: 920, y: 51}
     pre:
     - id: 4
       value: 1
     post:
     - id: 5
       value: 1
+  - name: Wandering
+    isDefault: 1
+    state: {fileID: 2113498308811593342, guid: 4b2b9ebf591241c45b85cc9646fdf905, type: 3}
+    cost: 0
+    position: {x: 479, y: 48}
+    pre:
+    - id: 0
+      value: 0
+    post: []
   goals:
   - name: Stay alive
     isDefault: 1
-    position: {x: 245, y: 50}
+    position: {x: 267, y: 47}
     conditions:
     - id: 0
       value: 0
   worldStates:
-  - position: {x: 249, y: 289}
+  - position: {x: 449, y: 289}
     isAutoUpdate: 1
     list:
     - id: 0
       value: 1
     - id: 1
-      value: 1
+      value: 0
     - id: 2
-      value: 1
+      value: 0
     - id: 3
-      value: 1
+      value: 0
     - id: 4
       value: 0
     - id: 5
