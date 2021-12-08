@@ -6,6 +6,13 @@ using Tom;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum ProductType
+{
+    Chicken,
+    Egg,
+    Rooster
+}
+
 public class ChickenGrowingMode : GameModeBase
 {
     public List<CharacterModel> players;
@@ -18,13 +25,6 @@ public class ChickenGrowingMode : GameModeBase
     {
         public ProductType productType;
         public int amount;
-    }
-
-    public enum ProductType
-    {
-        Chicken,
-        Egg,
-        Rooster
     }
 
     public List<Order> possibleOrders;
