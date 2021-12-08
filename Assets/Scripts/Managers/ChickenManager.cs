@@ -84,7 +84,6 @@ namespace Aaron
         {
             ChickenDeathEvent?.Invoke();
             chickensList.Remove(chicken);
-            Destroy(chicken);
         }
         
         private void FixedUpdate()

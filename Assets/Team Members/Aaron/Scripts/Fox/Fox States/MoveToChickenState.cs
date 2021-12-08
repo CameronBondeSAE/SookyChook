@@ -75,15 +75,16 @@ namespace Aaron
                 rotateTowards = false;
                 moveTowards = false;
             }
-            if(distance <= 1f)
+
+            if (distance <= 1)
             {
                 owner.GetComponent<FoxModel>().inRange = true;
             }
-            else
+
+            if (distance > 1)
             {
                 owner.GetComponent<FoxModel>().inRange = false;
             }
-            
         }
 
         public override void Exit()
