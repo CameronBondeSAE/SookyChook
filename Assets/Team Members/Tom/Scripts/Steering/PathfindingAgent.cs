@@ -102,6 +102,8 @@ namespace Tom
                 currentNode = currentNode.parent;
             }
 
+            path.Reverse();
+
             return path;
         }
 
@@ -129,7 +131,7 @@ namespace Tom
 
         public Vector3 ConvertNodeCoordinatesToPosition(Vector2Int coordinates)
         {
-            return new Vector3(coordinates.x + grid.gridStartX, 0, coordinates.y + grid.gridStartY);
+            return new Vector3(coordinates.x, 0, coordinates.y);
         }
 
         private void OnDrawGizmosSelected()
