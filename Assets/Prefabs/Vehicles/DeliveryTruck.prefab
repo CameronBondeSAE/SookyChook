@@ -600,7 +600,6 @@ GameObject:
   - component: {fileID: 4301735083417580258}
   - component: {fileID: 3139659806725499562}
   - component: {fileID: 7230645710583350255}
-  - component: {fileID: 3750797262499424309}
   - component: {fileID: 8577010391462542454}
   - component: {fileID: 6024817535308584749}
   m_Layer: 0
@@ -716,7 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2572529917681694738}
-  speed: 1000
+  speed: 3000
   exitPoint: {fileID: 4870549095524928171}
   Tires: {fileID: 204350699231880135}
   wheelVisuals:
@@ -730,24 +729,6 @@ MonoBehaviour:
   - {fileID: 4877628317643685222}
   acceleration: 0
   maxSteeringAngle: 45
---- !u!114 &3750797262499424309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880129374932396767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d09cad58c976b46a8d0b0b80e041f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawner: {fileID: 8577010391462542454}
-  deliveryTruck: {fileID: 6880129374932396767}
-  deliveryTruckPos: {fileID: 0}
-  deliveryTime: 11.8
-  truckSpeed: 1.5
-  deliveryEvent: 0
 --- !u!114 &8577010391462542454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoStart: 0
-  radius: 5
+  radius: 2
   groupInfos:
   - prefabs:
     - {fileID: 4814860246875035319, guid: 4eacafc61b3568f4b8baf14b364ae94a, type: 3}
