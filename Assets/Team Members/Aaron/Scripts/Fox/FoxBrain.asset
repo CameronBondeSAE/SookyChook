@@ -80,8 +80,6 @@ MonoBehaviour:
     pre:
     - id: 1
       value: 0
-    - id: 4
-      value: 0
     - id: 9
       value: 1
     post:
@@ -95,8 +93,6 @@ MonoBehaviour:
     pre:
     - id: 7
       value: 0
-    - id: 4
-      value: 0
     - id: 1
       value: 1
     post:
@@ -106,18 +102,20 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5509765540849849095, guid: c37baab741c1880418c1d89479b63268, type: 3}
     cost: 0
-    position: {x: 820, y: 360}
+    position: {x: 827, y: 364}
     pre:
     - id: 7
       value: 1
     post:
+    - id: 7
+      value: 0
     - id: 5
       value: 1
   - name: Eat Chicken
     isDefault: 0
     state: {fileID: 4375888048723676311, guid: 98da40a4aea42a14b813d4f6eaa2ee6c, type: 3}
     cost: 0
-    position: {x: 1020, y: 360}
+    position: {x: 1036, y: 366}
     pre:
     - id: 5
       value: 1
@@ -137,7 +135,7 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 3993048098494218905, guid: ce1fe20e6d82f0344875cd73cbdbca52, type: 3}
     cost: 0
-    position: {x: 1286, y: 365}
+    position: {x: 217.28842, y: 360.09204}
     pre:
     - id: 9
       value: 0
@@ -150,7 +148,7 @@ MonoBehaviour:
     - id: 6
       value: 1
   worldStates:
-  - position: {x: 420, y: 939}
+  - position: {x: 418, y: 939}
     isAutoUpdate: 1
     list:
     - id: 0

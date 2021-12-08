@@ -9,8 +9,7 @@ public class EggProduction : MonoBehaviour
 {
     private ChickenModel chicken;
     public GameObject egg;
-    private bool layingEggs;
-    
+
     public int layTime = 10;
     
     private float layTimeMulitplier;
@@ -26,39 +25,23 @@ public class EggProduction : MonoBehaviour
 
     private void Update()
     {
-        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Morning)
-        {
-            layingEggs = true;
-        }
-
-        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Night)
-        {
-            layingEggs = false;
-        }
     }
 
     private IEnumerator LayTimer()
     {
-        while (layingEggs)
+        for (int i = 0; i < layTime; i++)
         {
-            for (int i = 0; i < layTime; i++)
-            {
-                yield return new WaitForSeconds(1 + layTimeMulitplier);
-            }
-
-            LayEgg();
+            yield return new WaitForSeconds(1 + layTimeMulitplier);
         }
+
+        LayEgg();
     }
 
     void LayEgg()
     {
         GameObject copy = egg;
-        Vector3 chickenLocation = this.transform.position;
-        //need lay offset
+        Vector3 chickenLocation = transform.position;
         
         Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
-        
-        //laying an egg uses food reserves
-        chicken.ReduceHunger(0.25f);
     }
 }

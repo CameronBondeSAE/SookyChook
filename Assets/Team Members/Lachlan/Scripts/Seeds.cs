@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -35,9 +36,29 @@ public class Seeds : MonoBehaviour, IWaterable
         }
     }
 
-
+    void OnTriggerEnter(Collider other)
+    {
+        //if(Growth(true))
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.GetComponent<CharacterModel>().CryingEvent += Growth;
+            
+            target = other.gameObject;
+            
+        }
+        
+    }
+    void OnTriggerExit(Collider other)
+    {
+        //Debug.Log("Testing Collider");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            target = null;
+        }
+    }
+    
+    
     //Interfaces
-
     public void BeingWatered(float amount)
     {
         //Audio Source is Quiet
@@ -47,5 +68,7 @@ public class Seeds : MonoBehaviour, IWaterable
         //Destroy Seeds and Grow Grass
         GameObject.Destroy(gameObject);
         GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
+        Debug.Log("Seed Gone");
+        throw new NotImplementedException();
     }
 }
