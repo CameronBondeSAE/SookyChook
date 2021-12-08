@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 979957326}
   - component: {fileID: 5562533064459475679}
   - component: {fileID: 8466676385385379710}
+  - component: {fileID: 9176017063996018814}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -373,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ca68f1a712d064b9956ff53d188e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodAmount: 0
 --- !u!114 &979957326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,8 +387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95546a72ae40aa743b7914e10eec2bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {x: 0, y: 0}
-  destination: {x: 0, y: 0}
 --- !u!114 &5562533064459475679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +418,21 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   turnSpeed: 25
   rb: {fileID: 1086741024555083841}
+--- !u!114 &9176017063996018814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648933817718183396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4712953eb7c34ea41a7f43191041ee64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 10
+  maxHealth: 10
+  deathThreshold: 0
 --- !u!1 &1648991387308690618
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         
         playerInput.actions.FindAction("Jump").performed += aContext => characterModel.Jump();
         playerInput.actions.FindAction("Interact").performed += aContext => characterModel.Interact();
-        playerInput.actions.FindAction("Pickup").performed += aContext => characterModel.PickUp();
+        playerInput.actions.FindAction("Pickup").performed += aContext => characterModel.PickUpCheck();
         
         playerInput.actions.FindAction("Movement").performed += OnMovementOnperformed;
         playerInput.actions.FindAction("Movement").canceled += OnMovementOnperformed;
