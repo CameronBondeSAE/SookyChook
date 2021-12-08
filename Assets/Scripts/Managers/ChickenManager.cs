@@ -14,12 +14,13 @@ namespace Aaron
     [Serializable]
     public class ChickenManager : ManagerBase<ChickenManager>
     {
-
         public Spawner spawner;
         
         public List<GameObject> chickensList;
         public List<GameObject> roostersList;
         public List<GameObject> fertilisedEggsList;
+
+        public event Action ChickenDeathEvent;
 
         [Serializable]
         public class Names
@@ -41,6 +42,8 @@ namespace Aaron
             
             chickensList = new List<GameObject>();
             chickensList = spawner.spawned;
+            
+
             
             roostersList = new List<GameObject>();
             fertilisedEggsList = new List<GameObject>();
@@ -70,10 +73,25 @@ namespace Aaron
             //JsonUtility.FromJson<ChickenManager>(chickenNames);
 
             Debug.Log(JsonUtility.ToJson(this));
+        }
 
+        private void OnEnable()
+        {
+            foreach (var chicken in chickensList)
+            {
+                chicken.GetComponent<Health>().DeathEvent += RemoveChicken;
+            }
+        }
 
-
+        public void RemoveChicken(GameObject chicken)
+        {
+            ChickenDeathEvent?.Invoke();
+            chickensList.Remove(chicken);
+            Destroy(chicken);
         }
         
+        private void FixedUpdate()
+        {
+        }
     }
 }

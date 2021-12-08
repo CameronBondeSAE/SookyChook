@@ -100,8 +100,8 @@ public class ScanningGrid : ManagerBase<ScanningGrid>
 
     private void OnDrawGizmos()
     {
-        //grid parameters outline
-        Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, worldSize.z));
+        /*//grid parameters outline
+        Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, worldSize.y, worldSize.z));*/
 
         //drawing and filling grid
         for (int x = 0; x < gridSizeX; x++)
@@ -113,13 +113,11 @@ public class ScanningGrid : ManagerBase<ScanningGrid>
                     Gizmos.color = Color.magenta;
                     Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one * (nodeSize - 0.1f));
                 }
-                /*
-                else
+                /*if(x == 0 || z == 0)
                 {
                     Gizmos.color = Color.white;
                     Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one * (nodeSize - 0.1f));
-                }
-            */
+                }*/
             }
         }
     }

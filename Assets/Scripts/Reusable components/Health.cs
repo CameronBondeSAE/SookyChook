@@ -13,9 +13,9 @@ public class Health : MonoBehaviour
     float deathThreshold;
 
     //DEATH EVENT
-    public delegate void DeathSignature();
+    public delegate void DeathSignature(GameObject gameObject);
     public event DeathSignature DeathEvent;
-    
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -34,7 +34,7 @@ public class Health : MonoBehaviour
         //If health ever drops to 0 or below fire off DeathEvent
         if(currentHealth <= deathThreshold)
         {
-            DeathEvent?.Invoke();
+            DeathEvent?.Invoke(gameObject);
         }
     }
 

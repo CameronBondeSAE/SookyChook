@@ -35,14 +35,6 @@ namespace Aaron
 
             foxModel.chickenGone = true;
             foxModel.isHunting = false;
-
-            if (fox.target.GetComponent<ChickenModel>())
-            {
-                Debug.Log("Confirmed");
-                EatChickenEvent?.Invoke();
-            }
-            
-            Debug.Log("Eating State");
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -53,6 +45,8 @@ namespace Aaron
         public override void Exit()
         {
             base.Exit();
+            
+            owner.GetComponent<Wander>().enabled = true;
         }
     }
 }

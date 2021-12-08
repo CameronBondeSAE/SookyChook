@@ -20,7 +20,6 @@ public class IdleState : AntAIState
     {
         base.Enter();
 
-        owner.GetComponent<Wander>().enabled = true;
         owner.GetComponent<FoxModel>().target = null;
         
         //reset relevant bools
