@@ -9,7 +9,6 @@ using Object = UnityEngine.Object;
 public class Seeds : MonoBehaviour, IWaterable
 {
     [Header("Seed Properties")]
-    public Object seedObject;
     public GameObject target;
     public GameObject grassSpawn;
 
@@ -67,7 +66,7 @@ public class Seeds : MonoBehaviour, IWaterable
         audioSource.Play();
             
         //Destroy Seeds and Grow Grass
-        GameObject.Destroy(seedObject);
+        GameObject.Destroy(gameObject);
         GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
         Debug.Log("Seed Gone");
         throw new NotImplementedException();

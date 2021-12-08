@@ -49,6 +49,14 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cry"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e44c5d1-dfcd-4a5f-9095-9a5c951e972b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -271,6 +279,39 @@ public class @MainActions : IInputActionCollection, IDisposable
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ea33bff-e59a-4f7b-837e-f0a664d0b60d"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard WASD"",
+                    ""action"": ""Cry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43ec59bb-d87b-4c1e-b0a7-0bc8f88ea490"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Arrows"",
+                    ""action"": ""Cry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cc1aa67-16a4-4d7e-9415-fe6a6bb41a71"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -363,6 +404,7 @@ public class @MainActions : IInputActionCollection, IDisposable
         m_InGame_Pickup = m_InGame.FindAction("Pickup", throwIfNotFound: true);
         m_InGame_Jump = m_InGame.FindAction("Jump", throwIfNotFound: true);
         m_InGame_Movement = m_InGame.FindAction("Movement", throwIfNotFound: true);
+        m_InGame_Cry = m_InGame.FindAction("Cry", throwIfNotFound: true);
         // In Menu
         m_InMenu = asset.FindActionMap("In Menu", throwIfNotFound: true);
         m_InMenu_Start = m_InMenu.FindAction("Start", throwIfNotFound: true);
@@ -420,6 +462,7 @@ public class @MainActions : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_Pickup;
     private readonly InputAction m_InGame_Jump;
     private readonly InputAction m_InGame_Movement;
+    private readonly InputAction m_InGame_Cry;
     public struct InGameActions
     {
         private @MainActions m_Wrapper;
@@ -428,6 +471,7 @@ public class @MainActions : IInputActionCollection, IDisposable
         public InputAction @Pickup => m_Wrapper.m_InGame_Pickup;
         public InputAction @Jump => m_Wrapper.m_InGame_Jump;
         public InputAction @Movement => m_Wrapper.m_InGame_Movement;
+        public InputAction @Cry => m_Wrapper.m_InGame_Cry;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -449,6 +493,9 @@ public class @MainActions : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMovement;
+                @Cry.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnCry;
+                @Cry.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnCry;
+                @Cry.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnCry;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -465,6 +512,9 @@ public class @MainActions : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Cry.started += instance.OnCry;
+                @Cry.performed += instance.OnCry;
+                @Cry.canceled += instance.OnCry;
             }
         }
     }
@@ -543,6 +593,7 @@ public class @MainActions : IInputActionCollection, IDisposable
         void OnPickup(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnCry(InputAction.CallbackContext context);
     }
     public interface IInMenuActions
     {

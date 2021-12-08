@@ -59,32 +59,10 @@ public class CharacterModel : MonoBehaviour
     [SerializeReference]
     IPickupable pickupableNearby;
 
-    // Start is called before the first frame update
-    public void Jump()
-    {
-        if (!onGround)
-            return;
+    Coroutine cryCoroutine;
+    [SerializeField]
+    private bool isCrying;
 
-        rb.drag = 0f;
-        rb.AddForce(0, jumpHeight, 0, ForceMode.VelocityChange);
-        JumpEvent?.Invoke();
-    }
-
-    // void Update()
-    // {
-    // 	RaycastHit hit;
-    // 	Ray        ray = new Ray(transform.position + interactRayOffset, transform.forward);
-    //
-    // 	Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.red, 2f);
-    //
-    // 	// if (Physics.Raycast(ray, out hit, interactDistance))
-    // 	if (Physics.SphereCast(ray, 0.5f, out hit, interactDistance))
-    // 	{
-    // 		Debug.DrawLine(ray.origin, hit.point, Color.green, 1f);
-    // 	}
-    // }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (!onGround)
@@ -113,6 +91,11 @@ public class CharacterModel : MonoBehaviour
             // Old line, don't use, too crappy looking
             // transform.LookAt(transform.position + lookMovementDirection);
         }
+
+        if (isCrying)
+        {
+            DropWater();
+        }
     }
 
     public void MoveDirection(Vector2 direction)
@@ -126,6 +109,16 @@ public class CharacterModel : MonoBehaviour
         {
             movementDirection = direction;
         }
+    }
+
+    public void Jump()
+    {
+        if (!onGround)
+            return;
+
+        rb.drag = 0f;
+        rb.AddForce(0, jumpHeight, 0, ForceMode.VelocityChange);
+        JumpEvent?.Invoke();
     }
 
     public void Interact()
@@ -302,44 +295,61 @@ public class CharacterModel : MonoBehaviour
         onGround = false;
 
         IVehicleReference.Exit();
+    }
 
-        // HACK: TODO: Detect favorite chicken death!
-        StopCoroutine(Cry());
-        StartCoroutine(Cry());
+    public void CryCoroutine()
+    {
+        if(cryCoroutine!=null) StopCoroutine(cryCoroutine);
+        cryCoroutine = StartCoroutine(Cry());
     }
 
     public IEnumerator Cry()
     {
-        // Start crying
-        CryingEvent?.Invoke(true);
         cryTimerValue = cryTimer;
 
+        isCrying = true;
+        
         for (int i = 0; i <= cryTimerValue; i++)
         {
-            //Shoot raycast down & store what we hit in hitinfo
-            RaycastHit hitinfo;
-            hitinfo = new RaycastHit();
-
-            //Using height offset to make sure raycase isn't shooting under ground
-            Physics.Raycast(transform.position + heightOffset, -transform.up, out hitinfo, maxDistance, 255,
-                QueryTriggerInteraction.Collide);
-
-            IWaterable waterable = hitinfo.collider.GetComponent<IWaterable>();
-            if (waterable != null)
-            {
-                waterable.BeingWatered(1f);
-            }
-
             
-            //This causes the for loop to pause at the end of each loop
-            yield return new WaitForSeconds(1f);
+            // Start crying
+            CryingEvent?.Invoke(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            // Crying is done in bursts
+            CryingEvent?.Invoke(false);
+            yield return new WaitForSeconds(0.5f);
         }
 
         //Only pauses once the entire for loop is completed
         yield return new WaitForSeconds(cryTimer - cryTimerValue);
 
-        //Debug.Log("Stopped crying");
-        CryingEvent?.Invoke(false);
+        isCrying = false;
+    }
+
+    private void DropWater()
+    {
+        //Shoot raycast down & store what we hit in hitinfo
+        RaycastHit hitinfo;
+        hitinfo = new RaycastHit();
+
+        //Using height offset to make sure raycase isn't shooting under ground
+        Vector3 inverseTransformPoint = transform.TransformPoint(heightOffset);
+        Debug.DrawRay(inverseTransformPoint, -transform.up * 5f, Color.green, 2f);
+
+        Physics.Raycast(inverseTransformPoint, -transform.up, out hitinfo, maxDistance, 255,
+            QueryTriggerInteraction.Collide);
+
+        if (hitinfo.collider != null)
+        {
+            Debug.Log(hitinfo.collider.gameObject.name);
+            IWaterable waterable = hitinfo.collider.GetComponent<IWaterable>();
+            if (waterable != null)
+            {
+                waterable.BeingWatered(1f);
+            }
+        }
     }
 
     RaycastHit CheckWhatsInFrontOfMe()
