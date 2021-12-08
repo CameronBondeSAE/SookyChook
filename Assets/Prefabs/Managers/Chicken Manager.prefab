@@ -53,12 +53,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  chicken: {fileID: 0}
-  rooster: {fileID: 0}
-  egg: {fileID: 0}
+  spawner: {fileID: 0}
   chickensList: []
   roostersList: []
   fertilisedEggsList: []
+  names:
+    UnlovedNames: []
+    LovedNames: []
+    RoosterNames: []
 --- !u!114 &8252217912057601022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,10 +74,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoStart: 0
+  radius: 5
   groupInfos:
   - prefabs:
-    - {fileID: 1648933817718183396, guid: 2bc8eb8ba687d764787093a9705f5a2a, type: 3}
+    - {fileID: 1648933817718183396, guid: 192fa124a1e5ab94fb102b31187dd616, type: 3}
     spawnPoints: []
-    countPerGroup: 0
-  groundOffset: 0
+    countPerGroup: 20
+  groundOffset: 1
   spawned: []

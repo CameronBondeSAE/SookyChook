@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3.8221264, g: 4.1908417, b: 6.1825867, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -944,22 +944,18 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 350579319, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-    - target: {fileID: 1049785892, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 168134506085575909, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 168134506085575909, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+    - target: {fileID: 1116069404871925224, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1116069404871925224, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
     - target: {fileID: 1984760717852879853, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1984760717852879853, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-    - target: {fileID: 2146250491620654688, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8285517888581901038, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
