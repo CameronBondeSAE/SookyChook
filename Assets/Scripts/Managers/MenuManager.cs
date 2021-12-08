@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
+    public bool autoRun = false;
+    
     public GameObject menuView;
 
     private void Awake()
@@ -14,6 +16,11 @@ public class MenuManager : MonoBehaviour
         var mainActions = new MainActions();
         mainActions.InMenu.Enable();
         mainActions.InMenu.ToggleMenu.performed += ToggleMenuOnperformed;
+
+        if (autoRun)
+        {
+            StartGame();
+        }
     }
 
     private void ToggleMenuOnperformed(InputAction.CallbackContext aObj)

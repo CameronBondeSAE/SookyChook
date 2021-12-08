@@ -46,3 +46,8 @@ public interface ITractorAttachment
 	void Detach();
 	//Vector3 Offset();
 }
+
+public interface ISellable
+{
+	void GetProductType(ProductType productType);
+}

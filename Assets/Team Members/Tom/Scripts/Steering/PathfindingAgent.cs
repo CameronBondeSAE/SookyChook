@@ -127,6 +127,11 @@ namespace Tom
             return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
         }
 
+        public Vector3 ConvertNodeCoordinatesToPosition(Vector2Int coordinates)
+        {
+            return new Vector3(coordinates.x + grid.gridStartX, 0, coordinates.y + grid.gridStartY);
+        }
+
         private void OnDrawGizmosSelected()
         {
             if (grid != null)

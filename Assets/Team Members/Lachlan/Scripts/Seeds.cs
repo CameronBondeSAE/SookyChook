@@ -28,6 +28,7 @@ public class Seeds : MonoBehaviour, IWaterable
         if (isCrying)
         {
             Crying = true;
+            
         }
         else
         {
@@ -35,38 +36,17 @@ public class Seeds : MonoBehaviour, IWaterable
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        //if(Growth(true))
-        if (other.gameObject.CompareTag("Player")&& Crying==true)
-        {
-            target = other.gameObject;
-            
-            //Audio Source is Quiet
-            audioSource.clip = grassClip;
-            audioSource.Play();
-            
-            //Destroy Seeds and Grow Grass
-            GameObject.Destroy(seedObject);
-            GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
-            Debug.Log("Seed Gone");
-        }
-        
-    }
-    void OnTriggerExit(Collider other)
-    {
-        //Debug.Log("Testing Collider");
-        if (other.gameObject.CompareTag("Player"))
-        {
-            target = null;
-        }
-    }
-    
-    
+
     //Interfaces
 
     public void BeingWatered(float amount)
     {
-        throw new NotImplementedException();
+        //Audio Source is Quiet
+        audioSource.clip = grassClip;
+        audioSource.Play();
+            
+        //Destroy Seeds and Grow Grass
+        GameObject.Destroy(seedObject);
+        GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
     }
 }

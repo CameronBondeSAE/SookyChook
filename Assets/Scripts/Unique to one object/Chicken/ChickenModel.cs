@@ -8,20 +8,22 @@ using UnityEngine.Events;
 
 public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
 {
-    public int maxHunger;
     public float hungerLevel;
+    public float hungerThreshold = 0.5f;
+    public bool  isHungry;
+    
     //public float growth;
 
-    public bool isFull;
-    
+    public bool   isFull;
+    public Edible targetEdible;
+
     public event Action InteractEvent;
     public event Action<bool> PickUpEvent;
 
     // Start is called before the first frame update
     void Start()
     {
-        maxHunger = 10;
-        hungerLevel = maxHunger / 2f;
+        hungerLevel = 0.5f;
         StartCoroutine("ReduceHungerTime");
     }
 
@@ -45,6 +47,11 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
     public void ReduceHunger(float reduction)
     {
         hungerLevel -= reduction;
+
+        if (hungerLevel > hungerThreshold)
+        {
+            isHungry = true;
+        }
     }
 
     #region Interface implementation

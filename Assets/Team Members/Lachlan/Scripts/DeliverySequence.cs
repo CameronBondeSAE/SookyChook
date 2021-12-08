@@ -18,12 +18,23 @@ public class DeliverySequence : MonoBehaviour
     
     [Header("ReadOnly")]
     public float deliveryEvent;
+
+    private bool hasSpawned = false;
     
     void Start()
     {
         DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChangeEvent;
-        
-        //Instantiate(deliveryTruck, transform.position, Quaternion.Euler(0,-90,0));
+
+        // if (hasSpawned == false)
+        // {
+            // hasSpawned = true;
+            // Instantiate(deliveryTruck, deliveryTruckPos.position, Quaternion.Euler(0,-90,0));
+        // }
+        // else
+        // {
+            // hasSpawned = true;
+        // }
+        //Instantiate(deliveryTruck, deliveryTruckPos.position, Quaternion.Euler(0,-90,0));
     }
 
     private void InstanceOnPhaseChangeEvent(DayNightManager.DayPhase obj)
@@ -31,11 +42,11 @@ public class DeliverySequence : MonoBehaviour
         if (obj == DayNightManager.DayPhase.Noon)
         {
             //TODO: Need to make truck move back and forward consistently. Need to orient position of truck
-            //deliveryTruck.transform.position=new Vector3();
-            //Vector3(deliveryTruckPos);
-            //deliveryTruck
+
+            //deliveryTruck.isStatic = false;
+            deliveryTruck.transform.position = deliveryTruckPos.position;
+            deliveryTruck.transform.localRotation = deliveryTruckPos.rotation;
             
-            deliveryTruck.isStatic = false;
             deliveryTruck.SetActive(true);
             //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
             StartCoroutine(Delivery(new float()));
@@ -45,17 +56,19 @@ public class DeliverySequence : MonoBehaviour
     public IEnumerator Delivery(float amount)
     {
         //Reverse
-        FindObjectOfType<DeliveryTruckModel>().Accelerate(-truckSpeed);
+        deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(-truckSpeed);
+        //FindObjectOfType<DeliveryTruckModel>().Accelerate(-truckSpeed);
         Debug.Log("Back");
         yield return new WaitForSeconds(2.0f);
         
         //Accelerate
-        FindObjectOfType<DeliveryTruckModel>().Accelerate(truckSpeed);
+        deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(truckSpeed);
+        //FindObjectOfType<DeliveryTruckModel>().Accelerate(truckSpeed);
         Debug.Log("Forward");
         yield return new WaitForSeconds(3.5f);
-        
+
         deliveryTruck.SetActive(false);
-        deliveryTruck.isStatic = true;
+        //deliveryTruck.isStatic = true;
         //TODO: remove box collider to make fences splurge out, also adjust spawn radius of fences in prefab.
         StopCoroutine(Delivery(new float()));
     }
