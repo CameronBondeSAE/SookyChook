@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4814082341017035697
+--- !u!1 &7305828587965654753
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2541867661163480372}
-  - component: {fileID: -6631753516900096408}
-  - component: {fileID: -7356258711812787271}
+  - component: {fileID: 922268198579011382}
+  - component: {fileID: -4425158192723676911}
+  - component: {fileID: -6722543917428969794}
   m_Layer: 0
-  m_Name: DeliveryManager
+  m_Name: OrderManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2541867661163480372
+--- !u!4 &922268198579011382
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814082341017035697}
+  m_GameObject: {fileID: 7305828587965654753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,38 +32,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6631753516900096408
+--- !u!114 &-4425158192723676911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814082341017035697}
+  m_GameObject: {fileID: 7305828587965654753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d09cad58c976b46a8d0b0b80e041f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b40d2a40c4b89841ba1a83e7752a88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: -7356258711812787271}
-  deliveryTruck: {fileID: 6880129374932396767, guid: 49e4664fd2e4a194a83cd49f8db1fe48, type: 3}
-  deliveryTruckPos: {fileID: 0}
-  deliveryTime: 11.8
-  truckSpeed: 1
-  deliveryEvent: 0
---- !u!114 &-7356258711812787271
+  gameModeName: 
+  possibleOrders:
+  - productType: 0
+    amount: 1
+  - productType: 0
+    amount: 3
+  orderDelayRange: {x: 10, y: 15}
+--- !u!114 &-6722543917428969794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814082341017035697}
+  m_GameObject: {fileID: 7305828587965654753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42342a0b9409a3e46bc706a39c1adee9, type: 3}
+  m_Script: {fileID: 11500000, guid: e6f40c3c0cb50574cb6f3e51402ab197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoStart: 0
-  radius: 5
-  groupInfos: []
-  groundOffset: 0
-  spawned: []
+  orderText: {fileID: 0}

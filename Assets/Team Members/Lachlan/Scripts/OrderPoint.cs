@@ -13,6 +13,7 @@ public class OrderPoint : MonoBehaviour
     void Start()
     {
         FindObjectOfType<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
+        DayNightManager.Instance.PhaseChangeEvent += OrderMenu2;
     }
 
     // Update is called once per frame
@@ -23,6 +24,16 @@ public class OrderPoint : MonoBehaviour
 
     void OrderMenu(ChickenGrowingMode.Order amount)
     {
+        Debug.Log("test");
         orderText.text = amount.ToString();
+        Debug.Log(amount);
+        Debug.Log("Check");
+    }
+
+    void OrderMenu2(DayNightManager.DayPhase order)
+    {
+        Debug.Log("test");
+        orderText.text = order.ToString();
+        Debug.Log(order);
     }
 }
