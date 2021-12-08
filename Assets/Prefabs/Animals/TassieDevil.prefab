@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8048906245288645218}
   - component: {fileID: 942582001}
   - component: {fileID: 519455911}
+  - component: {fileID: 6393622567751630315}
+  - component: {fileID: 1360365784}
   m_Layer: 0
   m_Name: TassieDevil
   m_TagString: Untagged
@@ -48,6 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e604067dea4f044ade3fd614465fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiAgent: {fileID: 8048906245288645218}
+  seeChicken: 1
+  isHungry: 0
+  isMoving: 0
 --- !u!114 &8048906245288645218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,14 +92,42 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183116927532342443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a82253abef5a7274e948ff578234aafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
   distanceToNode: 0.5
   currentIndex: 0
+--- !u!114 &6393622567751630315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183116927532342443}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbb7401186d57146ba5ff85cdb4f0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fov: 120
+  maxDistance: 100
+  canSeeTarget: 0
+--- !u!114 &1360365784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183116927532342443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d54853b86c8f7419376db9f9df2364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tassieDevilModel: {fileID: 2356582299866801059}
 --- !u!1 &2458460363309185224
 GameObject:
   m_ObjectHideFlags: 0
