@@ -51,3 +51,8 @@ public interface ISellable
 {
 	void GetProductType(ProductType productType);
 }
+
+public interface IUpgradeable
+{
+	void Upgrade();
+}

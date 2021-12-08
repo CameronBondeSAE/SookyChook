@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrailerModel : MonoBehaviour, ITractorAttachment
 {
-    [Header("Position when placed onto tractor")]
+    [Header("Object position when placed onto tractor")]
     public Transform[] mounts;
 
     [Header("Attachment offset when on vehicle")]
@@ -28,6 +28,7 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
     public void Attach(TractorModel aTractorModel)
     {
         hingeJoint.connectedBody = aTractorModel.GetComponent<Rigidbody>();
+
         // wheels.SetActive(true);
     }
 

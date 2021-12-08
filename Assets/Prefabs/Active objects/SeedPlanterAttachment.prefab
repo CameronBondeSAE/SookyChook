@@ -124,5 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: {fileID: 986063010507142569, guid: a68c6b65af5fd434790b9c76ace6d7f3, type: 3}
+  shop: {fileID: 0}
   attachOffset: {x: 0, y: 0, z: -3}
-  seedAmountPerPlant: 3
+  planterLevel: 1
+  raycastOffset: {x: 0, y: 0.5, z: 0}

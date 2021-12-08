@@ -2,21 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
+public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 {
     //public TractorModel tractorModel;
     public GameObject seed;
+    public SeedPlanter_ShopPanel shop;
+
+    [Header("Attachment offset when on vehicle")]
     [SerializeField]
+    [Tooltip("Offset when attaching onto tractor/vehicle")]
     Vector3 attachOffset = new Vector3(0, 0, -3f);
-    bool isAttached = false;
+
+
+    [Header("Info Only:")]
+    public int planterLevel = 1;
+    int seedAmountPerPlant = 1;
+    [SerializeField]
     Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
 
-    [SerializeField]
-    int seedAmountPerPlant = 3;
+    bool isAttached = false;
+    int maxlevel = 3;
+
+    //Events
+    public event System.Action LevelUpEvent;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        shop.PlanterUpgradedEvent += Upgrade;
         //tractorModel.TractorAttachableEvent += OnAttached;
     }
 
@@ -76,6 +90,38 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
+    }
+
+    public void Upgrade()
+    {
+        //Upgrade to next level
+        if(planterLevel < maxlevel)
+        {
+            planterLevel += 1;
+            PlanterUpgrades(planterLevel);
+        }
+
+        if(planterLevel == maxlevel)
+        {
+            //Max Level Event ?
+        }
+    }
+
+    void PlanterUpgrades(int newLevel)
+    {
+        //Event for whatever EFX/SFX we want to happen on upgrading
+        LevelUpEvent?.Invoke();
+
+        if(newLevel == 2)
+        {
+            seedAmountPerPlant = 2;
+            return;
+        }
+
+        if(newLevel == maxlevel)
+        {
+            seedAmountPerPlant = 4;
+        }
     }
 
     //Old interface
