@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8286375268230540704}
   - component: {fileID: 5741262885955035524}
   - component: {fileID: 2418728526030122337}
-  - component: {fileID: 3072049301258826369}
+  - component: {fileID: 9074615799495936927}
   m_Layer: 0
   m_Name: Seeds
   m_TagString: Untagged
@@ -49,9 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seedObject: {fileID: 986063010507142569}
   target: {fileID: 0}
-  grassSpawn: {fileID: 9097203274510887077, guid: b6c78e85e18872a4daf1471759e714da, type: 3}
+  grassSpawn: {fileID: 4060154509995794622, guid: dc2532809acbf4648b6bed39ae7ba71a, type: 3}
   Crying: 0
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 4837782636536251624}
   grassClip: {fileID: 8300000, guid: 893f7ce2592750e48986a4f9a8727ba6, type: 3}
 --- !u!135 &5741262885955035524
 SphereCollider:
@@ -80,10 +80,10 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &3072049301258826369
-SphereCollider:
+--- !u!65 &9074615799495936927
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -93,7 +93,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11
+  m_Size: {x: 0.11, y: 0.17, z: 0.14}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8857114907729355521
 GameObject:
@@ -236,15 +236,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c16e408020c77409d36e78007898a1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c5c16e408020c77409d36e78007898a1, type: 3}
-      propertyPath: m_LocalScale.y
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c16e408020c77409d36e78007898a1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c16e408020c77409d36e78007898a1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c16e408020c77409d36e78007898a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -289,7 +289,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c5c16e408020c77409d36e78007898a1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -3963241562183589234, guid: d36ee79771eb78b498ed4fb1e80e472a, type: 3}
+      objectReference: {fileID: -3963241562183589234, guid: 8b8517de0b835f8489503bc8c783fe45, type: 3}
     - target: {fileID: -5754084199372789682, guid: c5c16e408020c77409d36e78007898a1, type: 3}
       propertyPath: m_Mesh
       value: 

@@ -36,6 +36,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Cry",
+                    "type": "Button",
+                    "id": "2e44c5d1-dfcd-4a5f-9095-9a5c951e972b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -256,6 +264,39 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pickup",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ea33bff-e59a-4f7b-837e-f0a664d0b60d",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard WASD",
+                    "action": "Cry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43ec59bb-d87b-4c1e-b0a7-0bc8f88ea490",
+                    "path": "<Keyboard>/slash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Arrows",
+                    "action": "Cry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3cc1aa67-16a4-4d7e-9415-fe6a6bb41a71",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Cry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

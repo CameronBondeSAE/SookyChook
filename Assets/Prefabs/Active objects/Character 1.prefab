@@ -9960,11 +9960,16 @@ MonoBehaviour:
   lookMovementDirection: {x: 0, y: 0, z: 0}
   grass: {fileID: 4060154509995794622, guid: dc2532809acbf4648b6bed39ae7ba71a, type: 3}
   maxDistance: 1.8
-  cryTimer: 4
-  heightOffset: {x: 0, y: 0.5, z: 0}
-  holdingObject: {fileID: 0}
+  cryTimer: 20
+  heightOffset: {x: 0, y: 2, z: 0.25}
   holdingMount: {fileID: 2507894514881146547}
-  throwForce: 3
+  throwForce: 6
+  pickupableNearby:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!114 &2458002238894678267
 MonoBehaviour:
   m_ObjectHideFlags: 0
