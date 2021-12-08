@@ -190,17 +190,17 @@ public class CharacterModel : MonoBehaviour
         if (trailer != null && holdingObject != null)
         {
             //TODO: Might not need this if we use a single point for a spawn area
-            for (int i = 0; i < trailer.mounts.Length; i++)
+            //for (int i = 0; i < trailer.mounts.Length; i++)
             {
                 //TODO: Trailer mounts no longer have child GO - need to do physics check?
                 //if (trailer.mounts[i].childCount == 0)
                 {
                     //Hack: Drop has a throw feature
-                    holdingObjectGO.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    //holdingObjectGO.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     trailer.objectsInTrailer.Add(holdingObjectGO);
-                    holdingObjectGO.transform.position = trailer.mounts[i].transform.position;
-                    holdingObjectGO.transform.rotation = trailer.mounts[i].rotation;
-                    holdingObjectGO = null;
+                    holdingObjectGO.transform.position = trailer.mounts[0].transform.position;
+                    holdingObjectGO.transform.rotation = trailer.mounts[0].rotation;
+                    //holdingObjectGO = null;
                     Drop(false);
                     return;
                 }
@@ -213,7 +213,8 @@ public class CharacterModel : MonoBehaviour
         {
             holdingObjectGO = trailer.objectsInTrailer[0];
             trailer.objectsInTrailer.Remove(holdingObjectGO);
-            pickupableNearby?.PickUp();
+            //pickupableNearby = holdingObjectGO.GetComponentInParent<IPickupable>();
+            Pickup(holdingObjectGO);
             return;
         }
 
@@ -239,7 +240,7 @@ public class CharacterModel : MonoBehaviour
     {
         holdingObjectGO = pickupGO;
         holdingObject = pickupGO.GetComponent<IPickupable>();
-        pickupableNearby.PickUp();
+        holdingObject.PickUp();
         holdingObjectGO.transform.parent = holdingMount;
         holdingObjectGO.transform.localPosition = Vector3.zero;
         holdingObjectGO.transform.rotation = holdingMount.rotation;
@@ -255,6 +256,9 @@ public class CharacterModel : MonoBehaviour
                 rb.velocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
         holdingObjectGO = null;
         holdingObject = null;
+
+        //Reset trailer to null - this was causing a bug to always pick up the chicken in the trailer
+        trailer = null;
     }
 
     public void GetInVehicle()
