@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameModeName: Chicken Growing
-  players: []
-  playerSpawns:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  possibleOrders:
+  - productType: 0
+    amount: 1
+  - productType: 1
+    amount: 1
+  orderDelayRange: {x: 10, y: 15}

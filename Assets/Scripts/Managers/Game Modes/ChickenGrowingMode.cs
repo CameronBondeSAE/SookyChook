@@ -15,9 +15,6 @@ public enum ProductType
 
 public class ChickenGrowingMode : GameModeBase
 {
-    public List<CharacterModel> players;
-    public Transform[] playerSpawns = new Transform[4];
-
     //public OrderDropoffZone orderZone;
 
     [Serializable]
@@ -31,19 +28,13 @@ public class ChickenGrowingMode : GameModeBase
 
     public event Action<Order> NewOrderEvent;
 
+    public Vector2 orderDelayRange = new Vector2(10, 15);
+
     public override void Activate()
     {
         base.Activate();
-
-        for (int i = 0; i < players.Count; i++)
-        {
-            if (playerSpawns[i] != null)
-            {
-                Instantiate(players[i], playerSpawns[i].position, playerSpawns[i].rotation);
-            }
-        }
         
-        NewOrder();
+        DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
 
         // DayNightManager.Instance.PhaseChangeEvent += OrderCheck;
         // ChickenManagerEvent += ChickenCheck;
@@ -70,5 +61,26 @@ public class ChickenGrowingMode : GameModeBase
     {
         Order newOrder = possibleOrders[Random.Range(0, possibleOrders.Count)];
         NewOrderEvent?.Invoke(newOrder);
+    }
+
+    public IEnumerator AcceptOrders()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(orderDelayRange.x, orderDelayRange.y));
+            NewOrder();
+        }
+    }
+
+    public void SetAcceptingOrders(DayNightManager.DayPhase phase)
+    {
+        if (phase == DayNightManager.DayPhase.Morning)
+        {
+            StartCoroutine(AcceptOrders());
+        }
+        if (phase == DayNightManager.DayPhase.Evening)
+        {
+            StopCoroutine(AcceptOrders());
+        }
     }
 }
