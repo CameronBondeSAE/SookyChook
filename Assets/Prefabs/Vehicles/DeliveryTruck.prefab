@@ -629,7 +629,7 @@ Transform:
   - {fileID: 1508309778772650118}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!54 &2572529917681694738
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -727,7 +727,7 @@ MonoBehaviour:
   steeringWheels:
   - {fileID: 5751210231967860061}
   - {fileID: 4877628317643685222}
-  acceleration: 1
+  acceleration: 0
   maxSteeringAngle: 45
 --- !u!114 &8577010391462542454
 MonoBehaviour:

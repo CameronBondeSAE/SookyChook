@@ -35,8 +35,6 @@ namespace Aaron
         void Start()
         {
 
-            ChickenManager chickenData = new ChickenManager();
-            
             spawner = GetComponent<Spawner>();
             spawner.Spawn();
             
@@ -65,10 +63,9 @@ namespace Aaron
             
             //TODO: Try and fix this up (Lachlan Stuff)
             // JSON SAVE AND LOAD
-            string json = JsonUtility.ToJson(chickenData);
-            
-            
-            chickenData = JsonUtility.FromJson<ChickenManager>(json);
+            ChickenManager chickenManager = this;
+            string json = JsonUtility.ToJson(this);
+            chickenManager = JsonUtility.FromJson<ChickenManager>(json);
             //string chickenNames = this.ToString();
             //JsonUtility.FromJson<ChickenManager>(chickenNames);
 

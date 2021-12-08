@@ -19,7 +19,7 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public List<Transform> steeringWheels;
 
     [Header("Move Speed")]
-    public float acceleration;
+    public float acceleration = 0.0f;
     public float maxSteeringAngle = 45.0f;
     private float steering;
     

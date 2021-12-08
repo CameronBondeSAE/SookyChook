@@ -34,9 +34,18 @@ namespace Lachlan
             // TODO: Still need to work on fixing this code...
             if (GUILayout.Button("Load Names"))
             {
+                if (target is ChickenManager)
+                {
+                    ChickenManager chickenManager = target as ChickenManager;
+                    string json = JsonUtility.ToJson(target);
+                    target = JsonUtility.FromJson<ChickenManager>(json);
+                    //JsonUtility.FromJson<ChickenManager>(chickenManager);
+                }
                 //string chickenNames = this.chickensList.ToString();
-                string chickenNames = FindObjectOfType<ChickenManager>().ToString();
-                JsonUtility.FromJson<ChickenManager>(chickenNames);
+                //FindObjectOfType<ChickenManager>().names = JsonUtility.FromJson<ChickenManager>(json);
+                
+                //string chickenNames = FindObjectOfType<ChickenManager>().ToString();
+                //JsonUtility.FromJson<ChickenManager>(chickenNames);
             }
 
             GUILayout.EndHorizontal();
