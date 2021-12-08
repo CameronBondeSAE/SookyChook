@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7380115231377463841
+--- !u!1 &8605171985727481684
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 321558718469595863}
-  - component: {fileID: 6441430644289364757}
+  - component: {fileID: 413720496652945873}
+  - component: {fileID: 3260560476630139854}
   m_Layer: 0
-  m_Name: Attack Chicken
+  m_Name: move To Rooster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &321558718469595863
+--- !u!4 &413720496652945873
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7380115231377463841}
+  m_GameObject: {fileID: 8605171985727481684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,16 +31,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6441430644289364757
+--- !u!114 &3260560476630139854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7380115231377463841}
+  m_GameObject: {fileID: 8605171985727481684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c65f9c4ab90f7a4e91ad316a2aee7c1, type: 3}
+  m_Script: {fileID: 11500000, guid: d9402c20b84e7b542af1d8792925af99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}

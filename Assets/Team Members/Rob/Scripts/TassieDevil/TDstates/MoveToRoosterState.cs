@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 
+
 namespace Rob
 {
-    public class AttackChickenState : AntAIState
+    public class MoveToRoosterState : AntAIState
     {
-        private PathFinding pathFinder;
-
         public GameObject owner;
 
         public override void Create(GameObject aGameObject)
@@ -16,7 +15,6 @@ namespace Rob
             base.Create(aGameObject);
 
             owner = aGameObject;
-            pathFinder = owner.GetComponent<PathFinding>();
         }
 
         public override void Enter()

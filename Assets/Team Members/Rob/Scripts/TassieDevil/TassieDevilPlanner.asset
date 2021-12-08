@@ -17,7 +17,7 @@ MonoBehaviour:
     - id: 0
       name: seeChicken
     - id: 1
-      name: seeRosster
+      name: seeRooster
     - id: 2
       name: pathClear
     - id: 3
@@ -32,38 +32,44 @@ MonoBehaviour:
       name: fightingDevil
     - id: 8
       name: isHungry
+    - id: 9
+      name: isMoving
   actions:
   - name: Move To Chicken
     isDefault: 0
     state: {fileID: 7380115231377463841, guid: 6b727379019b5a04299c7fb02da06021, type: 3}
-    cost: 1
-    position: {x: 281, y: 337}
+    cost: 0
+    position: {x: 688, y: 278}
     pre:
     - id: 0
-      value: 0
+      value: 1
     - id: 8
       value: 1
+    - id: 9
+      value: 0
     post:
-    - id: 0
+    - id: 9
       value: 1
-  - name: Attack Rooster
+  - name: Move To Rooster
     isDefault: 0
     state: {fileID: 8605171985727481684, guid: 36977ef27c0b36340be0c8e15dadae2b, type: 3}
-    cost: 2
-    position: {x: 275, y: 54}
+    cost: 1
+    position: {x: 523, y: 36}
     pre:
     - id: 1
-      value: 0
+      value: 1
     - id: 8
       value: 1
+    - id: 9
+      value: 0
     post:
-    - id: 1
+    - id: 9
       value: 1
   - name: Fight Other Devil
     isDefault: 0
     state: {fileID: 8531050007860474022, guid: cdfeda8a9adc1594b9829e89599ede0f, type: 3}
     cost: 0
-    position: {x: 281, y: 570}
+    position: {x: 334, y: 505}
     pre:
     - id: 3
       value: 1
@@ -76,7 +82,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4079306869741866049, guid: aed1e72fb8bc56b418801bd9e5dc63b9, type: 3}
     cost: 0
-    position: {x: 724, y: 288}
+    position: {x: 996, y: 47}
     pre:
     - id: 4
       value: 1
@@ -86,10 +92,12 @@ MonoBehaviour:
   - name: Take Chicken
     isDefault: 0
     state: {fileID: 7714846803375238466, guid: fb86bc997f2ee884883a2f2a6f45d29e, type: 3}
-    cost: 1
-    position: {x: 489, y: 336}
+    cost: 0
+    position: {x: 884, y: 279}
     pre:
     - id: 0
+      value: 1
+    - id: 9
       value: 1
     post:
     - id: 5
@@ -97,15 +105,13 @@ MonoBehaviour:
   - name: Take Rooster
     isDefault: 0
     state: {fileID: 4538777190289985416, guid: 93c237ec67a64614baf4d19002b77280, type: 3}
-    cost: 2
-    position: {x: 477, y: 53}
+    cost: 1
+    position: {x: 716, y: 37}
     pre:
     - id: 1
       value: 1
-    - id: 0
-      value: 0
-    - id: 4
-      value: 0
+    - id: 9
+      value: 1
     post:
     - id: 5
       value: 1
@@ -113,20 +119,52 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 6045964989547240190, guid: a684264e64a08424ebaca441b5c1e90a, type: 3}
     cost: 0
-    position: {x: 488, y: 575}
+    position: {x: 294, y: 274}
     pre:
     - id: 6
       value: 1
     post: []
+  - name: Find Rooster
+    isDefault: 0
+    state: {fileID: 1916945410556582535, guid: fcd9d4b602bba874f8fe4e8228e5d980, type: 3}
+    cost: 0
+    position: {x: 323, y: 36}
+    pre:
+    - id: 6
+      value: 1
+    - id: 1
+      value: 0
+    post:
+    - id: 1
+      value: 1
+  - name: Find Chicken
+    isDefault: 0
+    state: {fileID: 6560450020906110505, guid: af520ba9601faef4ab838395178fbcb2, type: 3}
+    cost: 0
+    position: {x: 493, y: 274}
+    pre:
+    - id: 0
+      value: 0
+    - id: 6
+      value: 1
+    post:
+    - id: 0
+      value: 1
   goals:
   - name: Return Home
-    isDefault: 1
-    position: {x: 722, y: 177}
+    isDefault: 0
+    position: {x: 1105, y: 280}
     conditions:
     - id: 5
       value: 1
+  - name: TestGoal
+    isDefault: 1
+    position: {x: 1108, y: 398}
+    conditions:
+    - id: 0
+      value: 1
   worldStates:
-  - position: {x: 725, y: 553}
+  - position: {x: 712, y: 516}
     isAutoUpdate: 1
     list:
     - id: 0
@@ -136,13 +174,13 @@ MonoBehaviour:
     - id: 2
       value: 0
     - id: 3
-      value: 1
+      value: 0
     - id: 4
       value: 0
     - id: 5
       value: 0
     - id: 6
-      value: 0
+      value: 1
     - id: 7
       value: 0
     - id: 8

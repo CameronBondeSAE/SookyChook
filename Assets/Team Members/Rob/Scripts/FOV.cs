@@ -2,46 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FOV : MonoBehaviour
+
+namespace Rob
 {
-    public GameObject item;
-    public float fov;
-    public float maxDistance;
-    public float minDistance;
-    public GameObject prey;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class FOV : MonoBehaviour
     {
-        //CheckDistance();
-    }
+        public float fov;
+        public float maxDistance;
 
-    private void Update()
-    {
-        Vector3 directionToEnemy = item.transform.position - transform.position;
-        float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
-        //Debug.Log(angleToEnemy);
-        if (angleToEnemy < fov / 2)
+        [Tooltip("Must set layerMask to object")]
+        // public LayerMask objectLayer;
+        [HideInInspector]
+        public bool canSeeTarget;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            if (Physics.Raycast(transform.position, item.transform.position - transform.position, out RaycastHit hit,
-                maxDistance))
+            //CheckDistance();
+        }
+
+        public void CanISee(Transform target)
+        {
+            Vector3 directionToEnemy = target.position - transform.position;
+            float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
+            //Debug.Log(angleToEnemy);
+            if (angleToEnemy < fov / 2)
             {
-                Debug.Log(hit.collider.gameObject.layer);
-                if (hit.collider.gameObject == prey)
+                if (Physics.Linecast(transform.position, target.position, out RaycastHit hit))
                 {
-                    Debug.DrawRay(transform.position, item.transform.position - transform.position, Color.green, .5f);
-                }
-                else
-                {
-                    Debug.DrawRay(transform.position, item.transform.position - transform.position, Color.red,
-                        .5f);
+                    if (hit.transform == target)
+                    {
+                        Debug.DrawRay(transform.position, target.position - transform.position, Color.green, .5f);
+                        canSeeTarget = true;
+                    }
+                    else
+                    {
+                        Debug.DrawRay(transform.position, target.position - transform.position, Color.red,
+                            .5f);
+                        canSeeTarget = false;
+                    }
                 }
             }
-        }
-        else
-        {
-            Debug.DrawLine(transform.position, item.transform.position, Color.red, 0.5f);
         }
     }
 }

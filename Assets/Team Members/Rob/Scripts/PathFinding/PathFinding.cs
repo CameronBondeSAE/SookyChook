@@ -31,10 +31,8 @@ namespace Rob
         WorldScan.Node neighbour;
 
 
-
         private void Start()
         {
-
             // if (autoStart)
             // {
             //     //if you want to see that algorithm work, comment out find path and reinstate the coroutine
@@ -155,22 +153,23 @@ namespace Rob
 
         public Vector3Int ConvertWorldToGridSpace(Vector3 worldCoord)
         {
-            return Vector3Int.RoundToInt(worldCoord) - new Vector3Int((int)transform.position.x,(int)transform.position.y,(int)transform.position.z);
+            return Vector3Int.RoundToInt(worldCoord) - new Vector3Int((int)transform.position.x,
+                (int)transform.position.y, (int)transform.position.z);
         }
 
 
         void OnDrawGizmos()
         {
             Gizmos.color = Color.magenta;
-            Gizmos.DrawCube( transform.position + startPos, Vector3.one);
+            Gizmos.DrawCube(transform.position + startPos, Vector3.one);
 
             Gizmos.color = Color.white;
-            Gizmos.DrawCube( transform.position + endPos, Vector3.one);
+            Gizmos.DrawCube(transform.position + endPos, Vector3.one);
 
             foreach (WorldScan.Node nodePath in path)
             {
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(transform.position +nodePath.gridPos, Vector3.one);
+                Gizmos.DrawCube(transform.position + nodePath.gridPos, Vector3.one);
             }
 
             if (debug)
