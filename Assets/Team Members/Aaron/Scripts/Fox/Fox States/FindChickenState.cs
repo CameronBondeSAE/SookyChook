@@ -31,8 +31,6 @@ namespace Aaron
             base.Enter();
             
             chickensInWorld = ChickenManager.Instance.chickensList;
-            
-            Debug.Log("Finding Chicken State");
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class FoxSense : MonoBehaviour, ISense
 {
+    //enums instead of strings
+    
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
         aWorldState.BeginUpdate(aAgent.planner);

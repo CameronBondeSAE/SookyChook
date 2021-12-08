@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
+using UnityEditor;
 using UnityEngine;
 
 namespace Aaron
@@ -11,6 +12,7 @@ namespace Aaron
         private event Action EatingChicken ;
         public GameObject owner;
         public GameObject chickenTarget;
+        FoxModel foxModel;
             
         public override void Create(GameObject aGameObject)
         {
@@ -22,17 +24,22 @@ namespace Aaron
         public override void Enter()
         {
             base.Enter();
+            
+            FoxModel foxModel = owner.GetComponent<FoxModel>();
+            
+            chickenTarget = foxModel.target;
 
-            chickenTarget = owner.GetComponent<FoxModel>().target;
-
-            if (owner.GetComponent<FoxModel>().inRange == true)
+            if (foxModel.inRange == true)
             {
-                EatingChicken?.Invoke();
+                if(foxModel.target.GetComponent<Health>())
+                Attack();
+            }
+            else
+            {
+                foxModel.inRange = false;
             }
 
-            owner.GetComponent<FoxModel>().eatingChicken = true;
-
-            Debug.Log("Attacking State");
+            //owner.GetComponent<FoxModel>().eatingChicken = true;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -45,6 +52,11 @@ namespace Aaron
             base.Exit();
             
             
+        }
+
+        void Attack()
+        {
+            foxModel.target.GetComponent<Health>().ChangeHealth(-5);
         }
 
     }

@@ -25,6 +25,7 @@ public class FoxViewModel : MonoBehaviour
     {
         audioSource.clip = eatingSound;
         audioSource.loop = false;
+        audioSource.volume = 0.5f;
         audioSource.Play();
     }
 }

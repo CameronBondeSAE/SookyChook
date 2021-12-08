@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Aaron
 {
@@ -16,16 +17,16 @@ namespace Aaron
 
         private Vector3 beginningPos;
 
-        public Transform Beginning;
-        public Transform Finish;
+        public Transform beginningVectorPos;
+        public Transform finishVectorPos;
 
-        private int BeginningX;
-        private int BeginningY;
-        private int BeginningZ;
+        /*private int beginningX;
+        private int beginningY;
+        private int beginningZ;
         
-        private int FinishX;
-        private int FinishY;
-        private int FinishZ;
+        private int finishX;
+        private int finishY;
+        private int finishZ;*/
 
         private int distanceX;
         private int distanceZ;
@@ -41,23 +42,23 @@ namespace Aaron
         private void Start()
         {
             grid = ScanningGrid.Instance;
+            
+            //Beginning = this.transform;
+            beginning = VectorToInt(beginningVectorPos.position);
+            finish = VectorToInt(finishVectorPos.position);
 
-            VectorToInt();
-
-            FindPath(beginning, finish);        }
-
-        private void FixedUpdate()
-        {
-            //TODO get coords from node world position; use to create paths on the go
+            FindPath(beginning, finish);        
         }
 
         //get start and finish points in Node Space
         public void FindPath(Vector3Int start, Vector3Int end)
         {
+            beginning = VectorToInt(beginningVectorPos.position);
+            finish = VectorToInt(finishVectorPos.position);
+            
             path.Clear();
             openSet.Clear();
             closedSet.Clear();
-            VectorToInt();
             ScanningGrid.Node endNode = grid.grid[end.x, end.z];
             currentNode = grid.grid[start.x, start.z];
 
@@ -160,18 +161,21 @@ namespace Aaron
             return distance.x * 14 + 10 * (distance.z-distance.x);
         }
 
-        private void VectorToInt()
+        private Vector3Int VectorToInt(Vector3 coords)
         {
-            BeginningX = Mathf.RoundToInt(Beginning.position.x);
-            BeginningY = Mathf.RoundToInt(Beginning.position.y);
-            BeginningZ = Mathf.RoundToInt(Beginning.position.z);
+            //cleaner way than below
+            return new Vector3Int(Mathf.RoundToInt(coords.x), Mathf.RoundToInt(coords.y), Mathf.RoundToInt(coords.z));
 
-            FinishX = Mathf.RoundToInt(Finish.position.x);
-            FinishY = Mathf.RoundToInt(Finish.position.y);
-            FinishZ = Mathf.RoundToInt(Finish.position.z);
+            /*beginningX = Mathf.RoundToInt(beginningVectorPos.position.x);
+            beginningY = Mathf.RoundToInt(beginningVectorPos.position.y);
+            beginningZ = Mathf.RoundToInt(beginningVectorPos.position.z);
+
+            finishX = Mathf.RoundToInt(finishVectorPos.position.x);
+            finishY = Mathf.RoundToInt(finishVectorPos.position.y);
+            finishZ = Mathf.RoundToInt(finishVectorPos.position.z);
             
-            beginning = new Vector3Int(BeginningX, BeginningY, BeginningZ);
-            finish = new Vector3Int(FinishX, FinishY, FinishZ);
+            beginning = new Vector3Int(beginningX, beginningY, beginningZ);
+            finish = new Vector3Int(finishX, finishY, finishZ);*/
         }
 
         //possibly reintroduce if using coords from world space?
