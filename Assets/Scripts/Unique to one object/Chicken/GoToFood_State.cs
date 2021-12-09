@@ -47,9 +47,9 @@ public class GoToFood_State : SookyAntAIState
     {
         base.Execute(aDeltaTime, aTimeScale);
 
-        if (Vector3.Distance(transform.position,
-            owner.GetComponent<PathfindingAgent>()
-                .ConvertNodeCoordinatesToPosition(currentNodeTarget.coordinates)) < 1f)
+        if (currentNodeTarget != null && Vector3.Distance(transform.position,
+	        owner.GetComponent<PathfindingAgent>()
+		        .ConvertNodeCoordinatesToPosition(currentNodeTarget.coordinates)) < 1f)
         {
             // At end of path?
             if (currentNodeIndex >= owner.GetComponent<PathfindingAgent>().path.Count - 1)
