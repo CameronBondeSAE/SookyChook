@@ -1,23 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
+using Rob;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class TassieSense : MonoBehaviour, ISense
 {
-    // public enum TassieDevilPlanner
-    // {
-    //     seeChicken = 0,
-    //     seeRosster = 1,
-    //     pathClear = 2,
-    //     devilNear = 3,
-    //     seePlayer = 4,
-    //     returnHome = 5,
-    //     isLooking = 6,
-    //     fightingDevil = 7,
-    //     isHungry = 8
-    // }
     public enum TassieDevilPlanner
     {
         seeChicken = 0,
@@ -33,25 +24,41 @@ public class TassieSense : MonoBehaviour, ISense
     }
 
     public TassieDevilModel tassieDevilModel;
+    private FOV tassieFOV;
+
+
+    private void Start()
+    {
+        tassieFOV = GetComponent<FOV>();
+    }
 
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
-        aWorldState.BeginUpdate(aAgent.planner);
-        
-        aWorldState.Set(TassieDevilPlanner.seeChicken, aAgent.GetComponent<TassieDevilModel>().seeChicken);
-        aWorldState.Set(TassieDevilPlanner.seeRooster, SeeRooster());
-        aWorldState.Set(TassieDevilPlanner.pathClear, PathClear());
-        aWorldState.Set(TassieDevilPlanner.devilNear, DevilIsNear());
-        aWorldState.Set(TassieDevilPlanner.seePlayer, SeePlayer());
-        aWorldState.Set(TassieDevilPlanner.returnHome, false);
+        aWorldState.Set(TassieDevilPlanner.seeChicken, SeeChicken());
+        aWorldState.Set(TassieDevilPlanner.seeRooster, false);
+        aWorldState.Set(TassieDevilPlanner.pathClear, false);
+        aWorldState.Set(TassieDevilPlanner.devilNear, false);
+        aWorldState.Set(TassieDevilPlanner.seePlayer, false);
+        aWorldState.Set(TassieDevilPlanner.returnHome, ReturnHome());
         aWorldState.Set(TassieDevilPlanner.isLooking, true);
-        aWorldState.Set(TassieDevilPlanner.fightingDevil, FightingDevil());
+        aWorldState.Set(TassieDevilPlanner.fightingDevil, false);
         aWorldState.Set(TassieDevilPlanner.isHungry, aAgent.GetComponent<TassieDevilModel>().isHungry);
-        aWorldState.Set(TassieDevilPlanner.isMoving, aAgent.GetComponent<TassieDevilModel>().isMoving);
+        aWorldState.Set(TassieDevilPlanner.isMoving,IsMoving());
         
-        aWorldState.EndUpdate();
     }
-    
+
+    private bool SeeChicken()
+    {
+        if (tassieDevilModel.prey != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false; 
+        }
+    }
+
 
     private bool SeeRooster()
     {
@@ -61,6 +68,7 @@ public class TassieSense : MonoBehaviour, ISense
     private bool PathClear()
     {
         throw new System.NotImplementedException();
+       
     }
 
     private bool DevilIsNear()
@@ -71,6 +79,11 @@ public class TassieSense : MonoBehaviour, ISense
     private bool SeePlayer()
     {
         throw new System.NotImplementedException();
+    }
+
+    private bool ReturnHome()
+    {
+        return false;
     }
 
     private bool FightingDevil()
@@ -86,6 +99,6 @@ public class TassieSense : MonoBehaviour, ISense
     
     private bool IsMoving()
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 }

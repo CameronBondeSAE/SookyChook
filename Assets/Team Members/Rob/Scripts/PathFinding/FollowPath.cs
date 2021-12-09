@@ -9,7 +9,6 @@ namespace Rob
     public class FollowPath : MonoBehaviour
     {
         //public PathFinding pathFinder;
-        public Transform target;
         public float distanceToNode;
         public int currentIndex;
         List<WorldScan.Node> path;
@@ -17,15 +16,17 @@ namespace Rob
 
         public void Start()
         {
+            
+        }
+
+        public void TakePath(Transform target)
+        {
             PathFinding.Instance.startPos = PathFinding.Instance.ConvertWorldToGridSpace(transform.position);
             PathFinding.Instance.endPos = PathFinding.Instance.ConvertWorldToGridSpace(target.position);
             path = PathFinding.Instance.FindPath().ToList();
             currentIndex = 0;
             target.position = PathFinding.Instance.ConvertGridToWorldSpace(path[0].gridPos);
-        }
-
-        private void Update()
-        {
+            
             if (PathFinding.Instance.path.Count > 0)
             {
                 //HACK change later

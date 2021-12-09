@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Anthill.AI;
 using UnityEngine;
 
 namespace Rob
 {
-    public class MoveToChickenState : AntAIState
+    public class MoveToTheChickenState : AntAIState
     {
-        private PathFinding pathFinder;
+        private TassieDevilModel tassieModel;
+        public List<WorldScan.Node> path;
+        private Vector3Int preyPos;
+        private Vector3Int myPos;
+        public int currentIndex;
+        public FollowPath followPath;
+        
+        
+        
 
         public GameObject owner;
 
@@ -16,19 +25,24 @@ namespace Rob
             base.Create(aGameObject);
 
             owner = aGameObject;
-            pathFinder = owner.GetComponent<PathFinding>();
+            followPath = GetComponent<FollowPath>();
+            tassieModel = GetComponent<TassieDevilModel>();
+            currentIndex = 0;
+
         }
 
         public override void Enter()
         {
             base.Enter();
+            followPath.TakePath(tassieModel.prey);
             
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
+           
+
         }
 
         public override void Exit()

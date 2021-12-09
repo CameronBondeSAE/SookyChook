@@ -8,12 +8,13 @@ namespace Rob
 {
 
 
-    public class FindChickenState : AntAIState
+    public class FindAChickenState : AntAIState
     {
         private TassieDevilModel tassieModel;
         public GameObject owner;
         public ChickenManager chickenManager;
         private FOV fov;
+       
 
         public override void Create(GameObject aGameObject)
         {
@@ -35,10 +36,10 @@ namespace Rob
             base.Execute(aDeltaTime, aTimeScale);
             foreach (GameObject chicken in chickenManager.chickensList)
             {
-                fov.CanISee(chicken.transform);
-                if (fov.canSeeTarget)
+                if (fov.CanISee(chicken.transform))
                 {
-                    tassieModel.seeChicken = true;
+                    tassieModel.prey = chicken.transform;
+                    Finish();
                 }
             }
 

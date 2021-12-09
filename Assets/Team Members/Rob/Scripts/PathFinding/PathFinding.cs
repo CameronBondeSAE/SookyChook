@@ -131,7 +131,7 @@ namespace Rob
             return null;
         }
 
-        void RetracePath(WorldScan.Node start, WorldScan.Node end)
+        public void RetracePath(WorldScan.Node start, WorldScan.Node end)
         {
             path.Clear();
             currentNode = end;
