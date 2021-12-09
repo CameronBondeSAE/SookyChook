@@ -14,9 +14,7 @@ namespace Rob
         private Vector3Int myPos;
         public int currentIndex;
         public FollowPath followPath;
-        
-        
-        
+
 
         public GameObject owner;
 
@@ -28,21 +26,18 @@ namespace Rob
             followPath = GetComponent<FollowPath>();
             tassieModel = GetComponent<TassieDevilModel>();
             currentIndex = 0;
-
         }
 
         public override void Enter()
         {
             base.Enter();
-            followPath.TakePath(tassieModel.prey);
-            
+            followPath.SetPath(tassieModel.prey);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-           
-
+            followPath.TakePath(tassieModel.prey);
         }
 
         public override void Exit()

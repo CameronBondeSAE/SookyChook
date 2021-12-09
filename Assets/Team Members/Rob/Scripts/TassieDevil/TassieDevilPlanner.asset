@@ -34,6 +34,8 @@ MonoBehaviour:
       name: isHungry
     - id: 9
       name: isMoving
+    - id: 10
+      name: atPrey
   actions:
   - name: Move To Chicken
     isDefault: 0
@@ -44,9 +46,11 @@ MonoBehaviour:
     - id: 0
       value: 1
     - id: 9
-      value: 0
+      value: 1
     post:
     - id: 9
+      value: 0
+    - id: 10
       value: 1
   - name: Move To Rooster
     isDefault: 0
@@ -67,7 +71,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 8531050007860474022, guid: cdfeda8a9adc1594b9829e89599ede0f, type: 3}
     cost: 0
-    position: {x: 334, y: 505}
+    position: {x: 312, y: 539}
     pre:
     - id: 3
       value: 1
@@ -95,7 +99,7 @@ MonoBehaviour:
     pre:
     - id: 0
       value: 1
-    - id: 9
+    - id: 10
       value: 1
     post:
     - id: 5
@@ -152,6 +156,8 @@ MonoBehaviour:
       value: 1
     - id: 6
       value: 0
+    - id: 9
+      value: 1
   goals:
   - name: Return Home
     isDefault: 1
@@ -166,7 +172,7 @@ MonoBehaviour:
     - id: 0
       value: 1
   worldStates:
-  - position: {x: 572, y: 514}
+  - position: {x: 568, y: 534}
     isAutoUpdate: 1
     list:
     - id: 0
@@ -188,4 +194,6 @@ MonoBehaviour:
     - id: 8
       value: 0
     - id: 9
+      value: 0
+    - id: 10
       value: 0

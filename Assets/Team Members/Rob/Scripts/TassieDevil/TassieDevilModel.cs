@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
@@ -12,9 +13,16 @@ public class TassieDevilModel : MonoBehaviour
     public bool isHungry;
     public bool isMoving;
     public bool isLooking;
+    public bool atPrey;
     
     public Transform prey;
 
     public int hunger;
     public int hungerthreshhold;
+
+
+    public void FixedUpdate()
+    {
+        throw new NotImplementedException();
+    }
 }

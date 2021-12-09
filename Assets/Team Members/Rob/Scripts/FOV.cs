@@ -9,7 +9,7 @@ namespace Rob
     {
         public float fov;
         public float maxDistance;
-        public GameObject prey;
+        //public GameObject prey;
 
 
         // Start is called before the first frame update
@@ -20,7 +20,7 @@ namespace Rob
 
         public bool CanISee(Transform target)
         {
-            target = prey.transform;
+            //target = prey.transform;
             Vector3 directionToEnemy = target.position - transform.position;
             float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
             //Debug.Log(angleToEnemy);

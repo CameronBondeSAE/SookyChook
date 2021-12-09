@@ -20,7 +20,8 @@ public class TassieSense : MonoBehaviour, ISense
         isLooking = 6,
         fightingDevil = 7,
         isHungry = 8,
-        isMoving = 9
+        isMoving = 9,
+        atPrey = 10
     }
 
     public TassieDevilModel tassieDevilModel;
@@ -44,6 +45,7 @@ public class TassieSense : MonoBehaviour, ISense
         aWorldState.Set(TassieDevilPlanner.fightingDevil, false);
         aWorldState.Set(TassieDevilPlanner.isHungry, aAgent.GetComponent<TassieDevilModel>().isHungry);
         aWorldState.Set(TassieDevilPlanner.isMoving,IsMoving());
+        aWorldState.Set(TassieDevilPlanner.atPrey,false);
         
     }
 
@@ -83,7 +85,14 @@ public class TassieSense : MonoBehaviour, ISense
 
     private bool ReturnHome()
     {
-        return false;
+        if (tassieDevilModel.atPrey)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private bool FightingDevil()
