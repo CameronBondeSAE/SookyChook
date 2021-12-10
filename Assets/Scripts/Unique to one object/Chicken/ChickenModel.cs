@@ -4,11 +4,8 @@ using Tom;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
+public class ChickenModel : AnimalBase, IInteractable, IPickupable
 {
-    public float hungerLevel;
-    public float hungerThreshold = 0.5f;
-    public bool  isHungry;
     public bool foundFood;
     public bool atFood;
     
@@ -25,12 +22,12 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
     private float deathFling = 10f;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
      
         rb = GetComponent<Rigidbody>();
         GetComponent<Health>().DeathEvent += Death;
-        StartCoroutine("ReduceHungerTime");
     }
 
     // Update is called once per frame
@@ -39,39 +36,16 @@ public class ChickenModel : MonoBehaviour, IInteractable, IPickupable
        //if eats food, increase scale size by growth until localScale == 1
     }
     
-    private IEnumerator ReduceHungerTime()
-    {
-        while (GetComponent<Health>().GetHealth()>0)
-        {
-            ChangeHunger(0.02f);
-            yield return new WaitForSeconds(1);
-        }
-    }
-    
-    public void ChangeHunger(float amount)
-    {
-        hungerLevel += amount;
-
-        hungerLevel = Mathf.Clamp01(hungerLevel);
-
-        if (hungerLevel > hungerThreshold)
-        {
-            isHungry = true;
-        }
-        else
-        {
-            isHungry = false;
-        }
-
-        // DIIIIIEEEE
-        if (hungerLevel>=1f)
-        {
-            GetComponent<Health>().ChangeHealth(-100f);
-        }
-    }
-
     #region Interface/Overrides implementation
-    
+
+    public override void ReachedMaxHungry()
+    {
+        base.ReachedMaxHungry();
+
+        // Just die
+        GetComponent<Health>().ChangeHealth(-100f);
+    }
+
     public void Interact()
     {
         InteractEvent?.Invoke();

@@ -494,7 +494,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8505747, y: 1}
+    m_SensorSize: {x: 2.183406, y: 1}
     Iso: 200
     ShutterSpeed: 0.68
     Aperture: 17.2
@@ -1840,7 +1840,7 @@ PrefabInstance:
     - target: {fileID: 239450592114366785, guid: ab66a590b4e7846439ea50fd722ff697, type: 3}
       propertyPath: spawner
       value: 
-      objectReference: {fileID: 7664069007845222738}
+      objectReference: {fileID: 7664069007845222738, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
     - target: {fileID: 239450592114366785, guid: ab66a590b4e7846439ea50fd722ff697, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -1909,24 +1909,14 @@ PrefabInstance:
       propertyPath: groupInfos.Array.data[0].spawnPoints.Array.size
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8252217912057601022, guid: ab66a590b4e7846439ea50fd722ff697, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ab66a590b4e7846439ea50fd722ff697, type: 3}
 --- !u!4 &1567266721620257108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 944056727484603384, guid: ab66a590b4e7846439ea50fd722ff697, type: 3}
   m_PrefabInstance: {fileID: 1790737548696285868}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7664069007845222738 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8252217912057601022, guid: ab66a590b4e7846439ea50fd722ff697, type: 3}
-  m_PrefabInstance: {fileID: 1790737548696285868}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42342a0b9409a3e46bc706a39c1adee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2041345152865179489
 PrefabInstance:
   m_ObjectHideFlags: 0

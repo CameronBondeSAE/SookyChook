@@ -17,16 +17,22 @@ public class FindFood_State : SookyAntAIState
 	{
 		yield return new WaitForSeconds(2f);
 
+		List<Edible> imInterestedInThese = new List<Edible>();
+
 		// Hack. Pick a random edible
 		foreach (Edible edible in Edible.edibles)
 		{
 			if (!edible.GetComponent<ChickenModel>())
 			{
-				owner.GetComponent<ChickenModel>().targetEdible = edible;
-				owner.GetComponent<ChickenModel>().foundFood = true;
-				Debug.Log($"Found food {owner.GetComponent<ChickenModel>().targetEdible}");
+				imInterestedInThese.Add(edible);
 			}
 		}
+
+		
+		owner.GetComponent<ChickenModel>().targetEdible = imInterestedInThese[Random.Range(0, imInterestedInThese.Count)];
+		owner.GetComponent<ChickenModel>().foundFood    = true;
+		// Debug.Log($"Found food {owner.GetComponent<ChickenModel>().targetEdible}");
+
 		
 		Finish();
 	}

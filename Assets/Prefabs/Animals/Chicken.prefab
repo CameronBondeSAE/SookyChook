@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerLevel: 0
-  hungerThreshold: 0.25
+  hungerThreshold: 0.1
   isHungry: 0
   foundFood: 0
   atFood: 0
