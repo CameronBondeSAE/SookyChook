@@ -35,6 +35,8 @@ public class ChickenGrowingMode : GameModeBase
     [Tooltip("Number of orders that causes a game over")]
     public int maxOrders = 10;
 
+    private Coroutine acceptingOrders;
+
     public override void Activate()
     {
         base.Activate();
@@ -80,11 +82,11 @@ public class ChickenGrowingMode : GameModeBase
     {
         if (phase == DayNightManager.DayPhase.Morning)
         {
-            StartCoroutine(AcceptOrders());
+            acceptingOrders = StartCoroutine(AcceptOrders());
         }
         if (phase == DayNightManager.DayPhase.Evening)
         {
-            StopCoroutine(AcceptOrders());
+            StopCoroutine(acceptingOrders);
         }
     }
 }
