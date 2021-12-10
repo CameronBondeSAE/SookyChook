@@ -35,7 +35,7 @@ namespace Aaron
         void Start()
         {
 
-            spawner = GetComponent<Spawner>();
+            //spawner = GetComponent<Spawner>();
             spawner.Spawn();
             
             chickensList = new List<GameObject>();
