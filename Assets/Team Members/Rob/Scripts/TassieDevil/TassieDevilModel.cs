@@ -13,8 +13,9 @@ public class TassieDevilModel : MonoBehaviour
     public bool isHungry;
     public bool isMoving;
     public bool isLooking = true;
-    public bool atPrey;
-    
+    public bool atTarget;
+    public bool hasChicken;
+
     public Transform prey;
 
     public int hunger;

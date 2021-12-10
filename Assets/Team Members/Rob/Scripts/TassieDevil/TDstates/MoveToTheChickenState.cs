@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Aaron;
 using Anthill.AI;
 using UnityEngine;
 
@@ -9,9 +10,9 @@ namespace Rob
     public class MoveToTheChickenState : SookyAntAIState
     {
         private TassieDevilModel tassieModel;
+        private Transform pathTowardsTransform;
+        
         public List<WorldScan.Node> path;
-        private Vector3Int preyPos;
-        private Vector3Int myPos;
         public int currentIndex;
         public FollowPath followPath;
         
@@ -19,15 +20,16 @@ namespace Rob
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
-            
             followPath = owner.GetComponent<FollowPath>();
             tassieModel = owner.GetComponent<TassieDevilModel>();
+            
             currentIndex = 0;
         }
 
         public override void Enter()
         {
             base.Enter();
+            
             followPath.SetPath(tassieModel.prey);
         }
 
@@ -35,9 +37,10 @@ namespace Rob
         {
             base.Execute(aDeltaTime, aTimeScale);
             followPath.TakePath();
-            if (tassieModel.atPrey)
+            if (tassieModel.atTarget)
             {
                 tassieModel.isMoving = false;
+                
                 Finish();
             }
         }

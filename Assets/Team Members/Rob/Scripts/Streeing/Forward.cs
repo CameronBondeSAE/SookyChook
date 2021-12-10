@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Forward : MonoBehaviour
 {
-    private Rigidbody rb;
+    public Rigidbody rb;
     public float speed;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         rb.AddForce(transform.forward * speed, ForceMode.Acceleration);
     }

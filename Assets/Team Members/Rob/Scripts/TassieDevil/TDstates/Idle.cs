@@ -27,6 +27,10 @@ namespace Rob
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            if (tassieDevilModel.isHungry)
+            {
+                Finish();
+            }
             
         }
 

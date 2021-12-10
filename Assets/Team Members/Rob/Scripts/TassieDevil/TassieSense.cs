@@ -21,7 +21,9 @@ public class TassieSense : MonoBehaviour, ISense
         fightingDevil = 7,
         isHungry = 8,
         isMoving = 9,
-        atPrey = 10
+        atTarget = 10,
+        isAtFarm = 11,
+        hasChicken = 12
     }
 
     public TassieDevilModel tassieDevilModel;
@@ -45,8 +47,12 @@ public class TassieSense : MonoBehaviour, ISense
         aWorldState.Set(TassieDevilPlanner.fightingDevil, false);
         aWorldState.Set(TassieDevilPlanner.isHungry, aAgent.GetComponent<TassieDevilModel>().isHungry);
         aWorldState.Set(TassieDevilPlanner.isMoving, IsMoving());
-        aWorldState.Set(TassieDevilPlanner.atPrey, false);
+        aWorldState.Set(TassieDevilPlanner.atTarget, false);
+        aWorldState.Set(TassieDevilPlanner.isAtFarm, IsAtFarm());
+        aWorldState.Set(TassieDevilPlanner.hasChicken, aAgent.GetComponent<TassieDevilModel>().hasChicken);
     }
+
+    
 
     private bool SeeChicken()
     {
@@ -78,12 +84,12 @@ public class TassieSense : MonoBehaviour, ISense
 
     private bool SeePlayer()
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 
     private bool ReturnHome()
     {
-        if (tassieDevilModel.atPrey)
+        if (tassieDevilModel.hasChicken)
         {
             return true;
         }
@@ -107,6 +113,18 @@ public class TassieSense : MonoBehaviour, ISense
     private bool IsMoving()
     {
         if (tassieDevilModel.prey != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    private bool IsAtFarm()
+    {
+        if (tassieDevilModel.atTarget)
         {
             return true;
         }

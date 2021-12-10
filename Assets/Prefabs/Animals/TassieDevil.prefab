@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &492414658441941460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7665423290991836688}
+  - component: {fileID: 1526219752414524807}
+  - component: {fileID: 3294328559912015751}
+  - component: {fileID: 7419186840531261515}
+  m_Layer: 0
+  m_Name: Steering Behaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7665423290991836688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492414658441941460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1183116927532342442}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1526219752414524807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492414658441941460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541bb2398d113d14d9211b84ad0f1f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+--- !u!114 &3294328559912015751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492414658441941460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3ad93a71874a14db98685f33c0e028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torque: 0
+  checkDist: 0
+  checkDistLeft: 0
+  checkDistRight: 0
+--- !u!114 &7419186840531261515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492414658441941460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f1f721484bb5d43b47ae690b9694e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomOffset: 0
 --- !u!1 &1183116927532342443
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +110,7 @@ Transform:
   m_Children:
   - {fileID: 2967253096225574466}
   - {fileID: 370728329238419445}
+  - {fileID: 7665423290991836688}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,9 +127,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiAgent: {fileID: 8048906245288645218}
-  seeChicken: 1
+  seeChicken: 0
   isHungry: 0
   isMoving: 0
+  isLooking: 1
+  atPrey: 0
+  prey: {fileID: 0}
+  hunger: 0
+  hungerthreshhold: 0
 --- !u!114 &8048906245288645218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,12 +159,12 @@ Rigidbody:
   m_GameObject: {fileID: 1183116927532342443}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 96
   m_CollisionDetection: 0
 --- !u!114 &519455911
 MonoBehaviour:
@@ -97,9 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82253abef5a7274e948ff578234aafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   distanceToNode: 0.5
   currentIndex: 0
+  tassieDevilModel: {fileID: 2356582299866801059}
+  turningSpeed: 0
 --- !u!114 &6393622567751630315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,14 +189,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183116927532342443}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffbb7401186d57146ba5ff85cdb4f0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fov: 120
   maxDistance: 100
-  canSeeTarget: 0
 --- !u!114 &1360365784
 MonoBehaviour:
   m_ObjectHideFlags: 0

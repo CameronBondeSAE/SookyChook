@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Steering : MonoBehaviour
 {
-    private Rigidbody rb;
+    public Rigidbody rb;
     public float torque;
     public float checkDist;
     public float checkDistLeft;
@@ -14,7 +14,6 @@ public class Steering : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponentInParent<Rigidbody>();
     }
 
     void Update()

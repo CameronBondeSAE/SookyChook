@@ -11,44 +11,57 @@ namespace Rob
         //public PathFinding pathFinder;
         public float distanceToNode;
         public int currentIndex;
-        List<WorldScan.Node> path;
-        private WorldScan.Node targetPathNode;
         public TassieDevilModel tassieDevilModel;
+        public float turningSpeed;
+
+        public Wander wander;
+
+        List<WorldScan.Node> path;
+
+        private WorldScan.Node targetPathNode;
+        private Rigidbody rb;
+
+
+        private void Start()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
 
 
         public void SetPath(Transform target)
         {
-            
             PathFinding.Instance.startPos = PathFinding.Instance.ConvertWorldToGridSpace(transform.position);
             PathFinding.Instance.endPos = PathFinding.Instance.ConvertWorldToGridSpace(target.position);
             path = PathFinding.Instance.FindPath().ToList();
             currentIndex = 0;
             targetPathNode = path[0];
-
         }
 
         public void TakePath()
         {
             if (PathFinding.Instance.path.Count > 0)
             {
+                wander.enabled = false;
                 //HACK change later
                 Vector3 targetNodeWorld = PathFinding.Instance.ConvertGridToWorldSpace(targetPathNode.gridPos);
-                transform.LookAt(targetNodeWorld);
-                transform.Translate(0, 0, Time.deltaTime * 5, Space.Self);
+                Vector3 targetWorldPosition = transform.InverseTransformPoint(targetNodeWorld);
+                float turningDirection = targetWorldPosition.x;
+                rb.AddTorque(Vector3.up * turningSpeed * turningDirection, ForceMode.Acceleration);
+                //transform.LookAt(targetNodeWorld);
+                //transform.Translate(0, 0, Time.deltaTime * 5, Space.Self);
                 if (Vector3.Distance(transform.position, targetNodeWorld) < distanceToNode)
                 {
                     currentIndex++;
-                    
+
                     if (currentIndex >= path.Count - 1)
                     {
-                        tassieDevilModel.atPrey = true;
+                        tassieDevilModel.atTarget = true;
+                        wander.enabled = true;
                     }
-                    
+
                     targetPathNode = path[currentIndex];
                 }
             }
-
-            
         }
     }
 }
