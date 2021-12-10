@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Rob
 {
-    public class MoveToTheChickenState : AntAIState
+    public class MoveToTheChickenState : SookyAntAIState
     {
         private TassieDevilModel tassieModel;
         public List<WorldScan.Node> path;
@@ -14,17 +14,14 @@ namespace Rob
         private Vector3Int myPos;
         public int currentIndex;
         public FollowPath followPath;
-
-
-        public GameObject owner;
+        
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
-
-            owner = aGameObject;
-            followPath = GetComponent<FollowPath>();
-            tassieModel = GetComponent<TassieDevilModel>();
+            
+            followPath = owner.GetComponent<FollowPath>();
+            tassieModel = owner.GetComponent<TassieDevilModel>();
             currentIndex = 0;
         }
 
@@ -37,7 +34,12 @@ namespace Rob
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            followPath.TakePath(tassieModel.prey);
+            followPath.TakePath();
+            if (tassieModel.atPrey)
+            {
+                tassieModel.isMoving = false;
+                Finish();
+            }
         }
 
         public override void Exit()

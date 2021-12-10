@@ -23,7 +23,6 @@ namespace Rob
             //target = prey.transform;
             Vector3 directionToEnemy = target.position - transform.position;
             float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
-            //Debug.Log(angleToEnemy);
             if (angleToEnemy < fov / 2)
             {
                 if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit hit, Mathf.Infinity))

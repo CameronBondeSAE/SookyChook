@@ -12,7 +12,7 @@ public class TassieDevilModel : MonoBehaviour
     public bool seeChicken;
     public bool isHungry;
     public bool isMoving;
-    public bool isLooking;
+    public bool isLooking = true;
     public bool atPrey;
     
     public Transform prey;
@@ -20,9 +20,5 @@ public class TassieDevilModel : MonoBehaviour
     public int hunger;
     public int hungerthreshhold;
 
-
-    public void FixedUpdate()
-    {
-        throw new NotImplementedException();
-    }
+    
 }

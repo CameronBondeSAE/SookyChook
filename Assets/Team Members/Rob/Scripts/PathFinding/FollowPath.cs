@@ -12,32 +12,43 @@ namespace Rob
         public float distanceToNode;
         public int currentIndex;
         List<WorldScan.Node> path;
+        private WorldScan.Node targetPathNode;
+        public TassieDevilModel tassieDevilModel;
 
 
         public void SetPath(Transform target)
         {
+            
             PathFinding.Instance.startPos = PathFinding.Instance.ConvertWorldToGridSpace(transform.position);
             PathFinding.Instance.endPos = PathFinding.Instance.ConvertWorldToGridSpace(target.position);
             path = PathFinding.Instance.FindPath().ToList();
             currentIndex = 0;
-            target.position = PathFinding.Instance.ConvertGridToWorldSpace(path[0].gridPos);
+            targetPathNode = path[0];
+
         }
 
-        public void TakePath(Transform target)
+        public void TakePath()
         {
             if (PathFinding.Instance.path.Count > 0)
             {
                 //HACK change later
-
+                Vector3 targetNodeWorld = PathFinding.Instance.ConvertGridToWorldSpace(targetPathNode.gridPos);
+                transform.LookAt(targetNodeWorld);
                 transform.Translate(0, 0, Time.deltaTime * 5, Space.Self);
-                if (Vector3.Distance(transform.position, target.position) < distanceToNode)
+                if (Vector3.Distance(transform.position, targetNodeWorld) < distanceToNode)
                 {
                     currentIndex++;
-                    target.position = PathFinding.Instance.ConvertGridToWorldSpace(path[currentIndex].gridPos);
+                    
+                    if (currentIndex >= path.Count - 1)
+                    {
+                        tassieDevilModel.atPrey = true;
+                    }
+                    
+                    targetPathNode = path[currentIndex];
                 }
             }
 
-            transform.LookAt(target);
+            
         }
     }
 }

@@ -7,23 +7,21 @@ using UnityEngine;
 namespace Rob
 {
 
-    public class Idle : AntAIState
+    public class Idle : SookyAntAIState
     {
-        public GameObject owner;
         private TassieDevilModel tassieDevilModel;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
+            tassieDevilModel = owner.GetComponent<TassieDevilModel>();
 
-            owner = aGameObject;
         }
 
         public override void Enter()
         {
             base.Enter();
-            StartCoroutine(TestFindChicken());
-            
+
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -37,10 +35,6 @@ namespace Rob
             base.Exit();
         }
 
-        IEnumerator TestFindChicken()
-        {
-            yield return new WaitForSeconds(3);
-            Finish();
-        }
+       
     }
 }

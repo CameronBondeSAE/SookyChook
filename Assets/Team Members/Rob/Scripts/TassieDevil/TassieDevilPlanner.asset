@@ -55,7 +55,7 @@ MonoBehaviour:
   - name: Move To Rooster
     isDefault: 0
     state: {fileID: 8605171985727481684, guid: 36977ef27c0b36340be0c8e15dadae2b, type: 3}
-    cost: 1
+    cost: 10
     position: {x: 523, y: 36}
     pre:
     - id: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
   - name: Take Rooster
     isDefault: 0
     state: {fileID: 4538777190289985416, guid: 93c237ec67a64614baf4d19002b77280, type: 3}
-    cost: 1
+    cost: 10
     position: {x: 716, y: 37}
     pre:
     - id: 1
@@ -128,16 +128,20 @@ MonoBehaviour:
     post:
     - id: 6
       value: 1
+    - id: 8
+      value: 1
   - name: Find Rooster
     isDefault: 0
     state: {fileID: 1916945410556582535, guid: fcd9d4b602bba874f8fe4e8228e5d980, type: 3}
-    cost: 0
+    cost: 10
     position: {x: 323, y: 36}
     pre:
     - id: 6
       value: 1
     - id: 1
       value: 0
+    - id: 8
+      value: 1
     post:
     - id: 1
       value: 1
@@ -150,6 +154,8 @@ MonoBehaviour:
     - id: 0
       value: 0
     - id: 6
+      value: 1
+    - id: 8
       value: 1
     post:
     - id: 0
@@ -192,7 +198,7 @@ MonoBehaviour:
     - id: 7
       value: 0
     - id: 8
-      value: 0
+      value: 1
     - id: 9
       value: 0
     - id: 10

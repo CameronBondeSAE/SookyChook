@@ -41,12 +41,11 @@ public class TassieSense : MonoBehaviour, ISense
         aWorldState.Set(TassieDevilPlanner.devilNear, false);
         aWorldState.Set(TassieDevilPlanner.seePlayer, false);
         aWorldState.Set(TassieDevilPlanner.returnHome, ReturnHome());
-        aWorldState.Set(TassieDevilPlanner.isLooking, true);
+        aWorldState.Set(TassieDevilPlanner.isLooking, aAgent.GetComponent<TassieDevilModel>().isLooking);
         aWorldState.Set(TassieDevilPlanner.fightingDevil, false);
         aWorldState.Set(TassieDevilPlanner.isHungry, aAgent.GetComponent<TassieDevilModel>().isHungry);
-        aWorldState.Set(TassieDevilPlanner.isMoving,IsMoving());
-        aWorldState.Set(TassieDevilPlanner.atPrey,false);
-        
+        aWorldState.Set(TassieDevilPlanner.isMoving, IsMoving());
+        aWorldState.Set(TassieDevilPlanner.atPrey, false);
     }
 
     private bool SeeChicken()
@@ -57,7 +56,7 @@ public class TassieSense : MonoBehaviour, ISense
         }
         else
         {
-            return false; 
+            return false;
         }
     }
 
@@ -70,7 +69,6 @@ public class TassieSense : MonoBehaviour, ISense
     private bool PathClear()
     {
         throw new System.NotImplementedException();
-       
     }
 
     private bool DevilIsNear()
@@ -105,9 +103,16 @@ public class TassieSense : MonoBehaviour, ISense
         //if hunger > min hunger
         return true;
     }
-    
+
     private bool IsMoving()
     {
-        return true;
+        if (tassieDevilModel.prey != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
