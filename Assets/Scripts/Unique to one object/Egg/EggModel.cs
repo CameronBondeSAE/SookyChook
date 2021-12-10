@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 
 public class EggModel : MonoBehaviour
 {
-    private ChickenManager chickenManager;
     public GameObject chicken;
 
     public bool isFertilised;
@@ -20,8 +19,6 @@ public class EggModel : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        chickenManager = FindObjectOfType<ChickenManager>();
-        
         int randomNumber = Random.Range(0, 19);
         if (randomNumber < 9)
         {
@@ -60,10 +57,10 @@ public class EggModel : MonoBehaviour
         Instantiate(copy, this.transform.position, copy.transform.rotation);
 
         //add to chicken list in chicken manager
-        chickenManager.chickensList.Add(copy);
+        ChickenManager.Instance.chickensList.Add(copy);
         
         //remove this object
-        chickenManager.fertilisedEggsList.Remove(this.gameObject);
+        ChickenManager.Instance.fertilisedEggsList.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
 }

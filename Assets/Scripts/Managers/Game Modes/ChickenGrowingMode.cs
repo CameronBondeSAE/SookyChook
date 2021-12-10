@@ -25,21 +25,25 @@ public class ChickenGrowingMode : GameModeBase
     }
 
     public List<Order> possibleOrders;
+    public List<Order> currentOrders;
 
     public event Action<Order> NewOrderEvent;
-
+    
+    [Tooltip("Time between orders in real-time seconds, NOTE: Does not account for DayNightManager time dilation")]
     public Vector2 orderDelayRange = new Vector2(10, 15);
+
+    [Tooltip("Number of orders that causes a game over")]
+    public int maxOrders = 10;
+
+    private Coroutine acceptingOrders;
 
     public override void Activate()
     {
         base.Activate();
         
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
-
-        // DayNightManager.Instance.PhaseChangeEvent += OrderCheck;
-        // ChickenManagerEvent += ChickenCheck;
+        ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
     }
-    
     
     public void ChickenCheck()
     {
@@ -49,18 +53,20 @@ public class ChickenGrowingMode : GameModeBase
         }
     }
 
-    // public void OrderCheck(DayNightManager.DayPhase phase)
-    // {
-    //     if (phase == DayNightManager.DayPhase.Evening && !orderZone.orderCompleted)
-    //     {
-    //         EndMode();
-    //     }
-    // }
+    public void OrderCheck()
+    {
+        if (currentOrders.Count >= maxOrders)
+        {
+            EndMode();
+        }
+    }
 
     public void NewOrder()
     {
         Order newOrder = possibleOrders[Random.Range(0, possibleOrders.Count)];
+        currentOrders.Add(newOrder);
         NewOrderEvent?.Invoke(newOrder);
+        OrderCheck();
     }
 
     public IEnumerator AcceptOrders()
@@ -76,11 +82,11 @@ public class ChickenGrowingMode : GameModeBase
     {
         if (phase == DayNightManager.DayPhase.Morning)
         {
-            StartCoroutine(AcceptOrders());
+            acceptingOrders = StartCoroutine(AcceptOrders());
         }
         if (phase == DayNightManager.DayPhase.Evening)
         {
-            StopCoroutine(AcceptOrders());
+            StopCoroutine(acceptingOrders);
         }
     }
 }

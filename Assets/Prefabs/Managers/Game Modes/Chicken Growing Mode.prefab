@@ -49,4 +49,6 @@ MonoBehaviour:
     amount: 1
   - productType: 1
     amount: 1
+  currentOrders: []
   orderDelayRange: {x: 10, y: 15}
+  maxOrders: 10
