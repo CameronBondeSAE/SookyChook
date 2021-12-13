@@ -20,7 +20,7 @@ public class DeliverySpawn : MonoBehaviour
     {
         if (obj == DayNightManager.DayPhase.Noon)
         {
-            spawner.Spawn();
+            spawner.SpawnMultiple();
         }
     }
 }

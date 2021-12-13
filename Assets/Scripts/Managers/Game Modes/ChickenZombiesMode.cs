@@ -6,7 +6,7 @@ public class ChickenZombiesMode : GameModeBase
 {
     public GraveyardManager graveyardManager;
     public CharacterModel[] players;
-    public Transform[] playerSpawns;
+    // public Transform[] playerSpawns;
 
 
     public override void Activate()
@@ -18,7 +18,7 @@ public class ChickenZombiesMode : GameModeBase
         {
             if (playerSpawns != null)
             {
-                Instantiate(players[i], playerSpawns[i].position, playerSpawns[i].rotation);
+                // Instantiate(players[i], playerSpawns[i].position, playerSpawns[i].rotation);
             }
         }
     }

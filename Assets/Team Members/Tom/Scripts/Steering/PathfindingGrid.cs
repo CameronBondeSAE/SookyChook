@@ -30,6 +30,8 @@ namespace Tom
         private void Awake()
         {
             CalculateGrid();
+
+            GlobalEvents.levelStaticsUpdated += o => CalculateGrid();
         }
 
         public void CalculateGrid()
