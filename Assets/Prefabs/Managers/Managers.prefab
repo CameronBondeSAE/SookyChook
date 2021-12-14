@@ -1614,6 +1614,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chicken Growing Mode
       objectReference: {fileID: 0}
+    - target: {fileID: 4636796478652205857, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1049785892}
     - target: {fileID: 5027815690734542235, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: playerSpawns.Array.size
       value: 4
