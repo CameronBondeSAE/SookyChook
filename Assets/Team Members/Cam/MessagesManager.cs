@@ -27,7 +27,7 @@ public class MessagesManager : ManagerBase<MessagesManager>
 		textMeshProUGUI.text = message;
 		textMeshProUGUI.transform.localScale = Vector3.one * 2f;
 		textMeshProUGUI.transform.DOPunchScale(Vector3.one, 0.5f);
-		yield return new WaitForSeconds(timeToShow * (message.Length/22f));
+		yield return new WaitForSeconds(timeToShow * (message.Length/20f));
 		textMeshProUGUI.text = "";
 	}
 }
