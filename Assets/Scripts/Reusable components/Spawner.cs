@@ -38,13 +38,13 @@ namespace Rob
 
 		private void Start()
 		{
-			if (autoStart) Spawn();
+			if (autoStart) SpawnMultiple();
 			
 			// FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
 		}
 
 		// public void ChangePhase(DayNightManager.DayPhase timeOfDay)
-		public List<GameObject> Spawn()
+		public List<GameObject> SpawnMultiple()
 		{
 			for (int i = 0; i < groupInfos.Length; i++) //searches through all of wildLife aray
 			{
@@ -68,19 +68,7 @@ namespace Rob
 						// Debug.Log(randomSpot);
 						GameObject randomPrefab =
 							_currentGroupInfo.prefabs[Random.Range(0, _currentGroupInfo.prefabs.Length)];
-						GameObject spawnedPrefab = Instantiate(randomPrefab, spawnPos + randomSpot,
-															   randomTransform.rotation);
-
-						if (Physics.Raycast(spawnedPrefab.transform.position, Vector3.down, out RaycastHit hit, 20))
-						{
-							Vector3 newSpawnPos = spawnedPrefab.transform.position;
-							Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
-							// Debug.Log(hit.distance);
-							newSpawnPos = new Vector3(newSpawnPos.x,
-													  newSpawnPos.y - (hit.distance - groundOffset),
-													  newSpawnPos.z);
-							spawnedPrefab.transform.position = newSpawnPos;
-						}
+						GameObject spawnedPrefab = SpawnSingle(randomPrefab, spawnPos + randomSpot, randomTransform);
 
 						spawned.Add(spawnedPrefab);
 					}
@@ -88,6 +76,26 @@ namespace Rob
 			}
 
 			return spawned;
+		}
+
+		public GameObject SpawnSingle(GameObject prefab, Vector3 pos, Transform rotation)
+		{
+			Vector3 randomSpot;
+			GameObject spawnedPrefab = Instantiate(prefab, pos,
+				rotation.rotation);
+
+			if (Physics.Raycast(spawnedPrefab.transform.position, Vector3.down, out RaycastHit hit, 20))
+			{
+				Vector3 newSpawnPos = spawnedPrefab.transform.position;
+				Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
+				// Debug.Log(hit.distance);
+				newSpawnPos = new Vector3(newSpawnPos.x,
+					newSpawnPos.y - (hit.distance - groundOffset),
+					newSpawnPos.z);
+				spawnedPrefab.transform.position = newSpawnPos;
+			}
+
+			return spawnedPrefab;
 		}
 
 		private void OnDrawGizmos()

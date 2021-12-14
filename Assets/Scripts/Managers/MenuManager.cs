@@ -2,14 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tanks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class MenuManager : MonoBehaviour
 {
     public bool autoRun = false;
     
     public GameObject menuView;
+    [SerializeField]
+    private GameObject gameModeButton;
+
+    [SerializeField]
+    private Transform gameModeParent;
 
     private void Awake()
     {
@@ -17,9 +25,16 @@ public class MenuManager : MonoBehaviour
         mainActions.InMenu.Enable();
         mainActions.InMenu.ToggleMenu.performed += ToggleMenuOnperformed;
 
+        foreach (GameModeBase gameMode in GameManager.Instance.gameModes)
+        {
+	        GameObject newButton = Instantiate(gameModeButton, gameModeParent);
+	        newButton.GetComponentInChildren<TextMeshProUGUI>().text = gameMode.gameModeName;
+	        newButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { GameManager.Instance.SetGameMode(gameMode); });
+        }
+        
         if (autoRun)
         {
-            StartGame();
+            StartGame(2);
         }
     }
 
@@ -31,9 +46,11 @@ public class MenuManager : MonoBehaviour
             ShowMenu();
     }
 
-    public void StartGame()
+    public void StartGame(int numberOfPlayers)
     {
         menuView.SetActive(false);
+        
+        GameManager.Instance.SpawnPlayers(numberOfPlayers);
 
         // Just restart if already playing
         if (GameManager.Instance.inGame)

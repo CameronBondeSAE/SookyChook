@@ -759,7 +759,7 @@ TextureImporter:
       213: -5210092014125140150
     second: Clouds-02
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -779,6 +779,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -787,9 +789,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -810,9 +812,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -5096,6 +5102,208 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Plants-Plant04-05: -9085200695585293983
+      Plants-Plant05-11: 5026699264789287400
+      Repair-01: -8595171533772156863
+      Plants-Plant05-18: -8561969557108643926
+      Repair-06: -5428607050841444835
+      ProgressBarCircle-11: 6193927898112694434
+      Repair-05: 4667436695532968811
+      Plants-Plant03-07: -373641949101448202
+      Bomb-07: 1065792211462064763
+      Plants-Plant05-12: 4472804231394609061
+      Plants-Plant03-19: -5454528528118252621
+      TankTower-03: 3253767682438706019
+      Plants-Plant02-17: 2152833845553628993
+      Plants-Plant04-04: -1409124510679211616
+      Plants-Plant04-06: -4436579362433754148
+      Plants-Plant05-20: 3033335064608682187
+      Ammo-04: 3756271271421796404
+      Plants-Plant04-07: 829482870083342499
+      Plants-Plant04-02: 7906273114427174305
+      TankTower-01: -7523935263497258155
+      Plants-Plant03-17: 8658374578040684237
+      Plants-Plant05-10: 6865390566449439387
+      ProgressBarCircle-09: -4393175327561363276
+      ProgressBarCircle-13: 6267627407106745914
+      Plants-Plant03-14: -4661003866563762241
+      Misc-05: 2241379004580627381
+      Plants-Plant01-16: -3678993421900955870
+      Plants-Plant01-19: -7260328917759432884
+      ProgressBarCircle-07: 4145813514233341480
+      Plants-Plant05-16: 6621725685579982240
+      Particles-02: 6955138477306786569
+      Gun-07: -8358164944809177082
+      TankRed-04: -7496646765698969579
+      TankGreen-03: -377677448440899842
+      Plants-Plant03-13: -7986723322606992948
+      Plants-Plant01-03: -2934317025918708425
+      Plants-Plant04-20: -1150890163246322035
+      Plants-Plant03-09: 4197972654127085579
+      Plants-Plant04-16: 6611501176124453952
+      Plants-Plant01-15: 8128976917190015573
+      Particles-03: -2758170822950884431
+      Gun-05: -2526024183967994737
+      Gun-08: 3319428132202320117
+      Plants-Plant02-14: 3362895435345618436
+      Plants-Plant01-06: -3375845543143254203
+      Bomb-02: -7077759281332388187
+      BonusPoint-01: 5232590655365473811
+      Repair-03: 8414273874572932029
+      ProgressBarCircle-06: 8324844202617938312
+      Plants-Plant02-01: -7964797823234954653
+      Misc-01: 4878716608318187099
+      Plants-Plant02-12: 5504976875356730118
+      ProgressBarCircle-01: 178928858578810587
+      Rocks-07: -3363809255978463793
+      TankTower-04: 4409346157955124216
+      ProgressBarHorizontal-01: -8930084693812696072
+      Plants-Plant01-11: 4930015001149652502
+      Plants-Plant05-04: -1660736737802181319
+      Bomb-03: 4647821057990515429
+      Ground-04: -8224716397282944026
+      Ammo-07: 8552597810022852682
+      Gun-02: 1052749453575178186
+      Plants-Plant04-10: 108864297213713577
+      Base-02: -5570921886776194874
+      ProgressBarCircle-08: 1918014652444730482
+      Rocks-08: -6201370209515914761
+      Plants-Plant05-08: -7266072426666510120
+      Plants-Plant03-02: 1658937212142007792
+      Plants-Plant04-12: 5819091690850035850
+      ProgressBarCircle-04: 3661251463949212335
+      Misc-03: 2923611486085656033
+      Ammo-05: 4875651318974612866
+      Ammo-02: -8396724547403542455
+      Plants-Plant02-18: -8211470597056522803
+      Gun-01: -477189056442494047
+      Plants-Plant02-05: 3622814903363817642
+      Plants-Plant03-08: 3216912588619632951
+      Plants-Plant01-17: -6162374930043786063
+      Plants-Plant01-02: 6128960325858303446
+      Plants-Plant05-01: -1275509123252589969
+      Plants-Plant05-05: 240355618604393627
+      Plants-Plant01-01: 8316924134252875325
+      Rocks-02: 1791542432724120138
+      Plants-Plant02-11: -8103277948965499574
+      TankRed-03: 8432935398126356078
+      Bomb-05: 5763803472507892248
+      Plants-Plant02-06: 5478787852759652778
+      ProgressBarCircle-03: 6834789429094877277
+      Ammo-03: -8327843960587377854
+      Gun-04: -6591388293409218867
+      Plants-Plant03-06: -8524675853373328861
+      Plants-Plant04-17: 3049709556058446478
+      Plants-Plant04-01: 1203076561546638611
+      Bomb-06: -687220965003247734
+      Plants-Plant02-13: -323362794079090647
+      Repair-07: 1614624548415884925
+      ProgressBarCircle-19: 6484428886595836417
+      Repair-04: 689598209960942265
+      Plants-Plant05-09: -3064546855979490847
+      Plants-Plant03-01: 4828772420389195508
+      Plants-Plant05-14: 755435120613836676
+      Plants-Plant02-19: -5817375353832095242
+      Ground-01: 3425351539962828018
+      Plants-Plant01-07: -5303729400676932691
+      Plants-Plant01-10: -6900925442887206790
+      Rocks-03: -1761103883627583781
+      ProgressBarCircle-02: 2223624284543778380
+      Plants-Plant02-04: -8348098819036293266
+      TankTower-02: -8955582618123105971
+      Bomb-01: 9183315166416555159
+      Particles-04: -47042876029673885
+      ProgressBarHorizontal-08: -7197319254989454002
+      ProgressBarCircle-05: 3574909108720448418
+      ProgressBarCircle-14: 503967279795875189
+      Plants-Plant05-19: -7371271242572599690
+      TankGreen-01: 1100475272729929060
+      Rocks-05: 2296712524359767481
+      ProgressBarCircle-21: 989566236280666028
+      Plants-Plant02-20: 3225403942881644069
+      ProgressBarHorizontal-02: 6745283526561224663
+      Plants-Plant04-19: -6261771142179320870
+      Ammo-06: 3129339768157843416
+      Bullets-01: 5054534931580846452
+      Plants-Plant01-14: 1513007840574952994
+      Plants-Plant04-11: -35008047167125329
+      Plants-Plant03-04: -7006325127827633445
+      Plants-Plant03-12: 769279914857135941
+      Plants-Plant04-15: -7504313121361411341
+      Plants-Plant03-10: 3334780649310790219
+      ProgressBarHorizontal-07: -8672460847044582878
+      Plants-Plant01-04: -6334188193793431553
+      Plants-Plant01-08: -8665697357678795801
+      Plants-Plant04-03: 1771320506416011790
+      ProgressBarHorizontal-05: 2651131088192975429
+      Gun-06: 7010984407486306835
+      Rocks-06: 2463751026737361315
+      ProgressBarHorizontal-09: 1511272503312404221
+      Plants-Plant01-12: -1784950008547848551
+      Plants-Plant02-10: 3766330202270237372
+      Plants-Plant04-18: 6783625655705473859
+      Plants-Plant02-07: 5681136254774464669
+      Plants-Plant01-05: 2524311273677770890
+      ProgressBarHorizontal-04: -944094748661565196
+      Plants-Plant02-15: 2899444797913198090
+      Plants-Plant03-15: -8415270789599260923
+      Plants-Plant01-09: 5168610501434161118
+      Plants-Plant05-07: 3973367750933966704
+      ProgressBarCircle-12: 5670814787976932475
+      Plants-Plant05-03: 5225670547897406046
+      Plants-Plant01-18: -3976509164125102465
+      Plants-Plant03-05: -4266858969449806329
+      ProgressBarHorizontal-10: -7344808094210548356
+      Plants-Plant02-16: 6887070589110900355
+      ExplosionTrace-01: -5210482694531845248
+      TankGreen-04: 8584566267843855048
+      Base-01: -2400906511236618168
+      Plants-Plant04-08: 6090518753302330939
+      Misc-02: -2721772577531525046
+      Plants-Plant02-02: -2533420066117311655
+      Box-01: -6737880311974553951
+      Plants-Plant05-02: 1663362759024652786
+      Plants-Plant05-17: -1904504154305651439
+      ProgressBarHorizontal-03: -8802925072812657700
+      ProgressBarCircle-10: -8172175475871971939
+      ProgressBarCircle-17: -1349174821613635428
+      Ground-02: -7078159825299465285
+      Plants-Plant01-13: -16065300312410659
+      ProgressBarCircle-15: 8264436974773166870
+      Ammo-01: 7954328192878167021
+      Plants-Plant04-09: -6855868083993939655
+      Plants-Plant05-06: 8624311087935647617
+      ProgressBarHorizontal-06: 6942597595479737193
+      ProgressBarCircle-18: -867305783073845256
+      TankBomb-01: 1480168572861177467
+      Bomb-04: 7429036644213992508
+      Plants-Tree01-01: 8036189643074835008
+      Rocks-01: -7295884331477860154
+      Plants-Plant04-14: 7017551853137835259
+      Rocks-04: -1279011951930623190
+      Plants-Plant04-13: 3276975000314462929
+      Plants-Plant03-11: -6874100204244354935
+      ProgressBarCircle-16: -8154856749487018484
+      Plants-Plant02-03: -712755807073967451
+      Gun-03: 5522289936347052451
+      Repair-02: -4683365050137967493
+      Plants-Plant03-03: 8806543758895606400
+      Ground-03: -889433803210933706
+      Plants-Plant02-09: 3199341830785261509
+      Plants-Plant05-15: -8457013907977688933
+      Plants-Plant05-13: 3587687881971472817
+      Plants-Plant02-08: -1926527145859304514
+      Plants-Plant03-20: -1618794017411438297
+      TankRed-02: 2931003036778622348
+      TankGreen-02: -5957848700888832678
+      Plants-Plant01-20: 472265545318213150
+      Misc-04: 8812357720086545140
+      Particles-01: -169888878438190580
+      ProgressBarCircle-20: 2062256400395593941
+      Plants-Plant03-16: -1374843242527240684
+      Plants-Plant03-18: 7268575249995651022
+      TankRed-01: -808355174537394671
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
