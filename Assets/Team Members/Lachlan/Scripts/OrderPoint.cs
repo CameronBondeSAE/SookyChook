@@ -28,6 +28,8 @@ public class OrderPoint : MonoBehaviour
         orderText.text = amount.ToString();
         Debug.Log(amount);
         Debug.Log("Check");
+        
+        
     }
 
     void OrderMenu2(DayNightManager.DayPhase order)

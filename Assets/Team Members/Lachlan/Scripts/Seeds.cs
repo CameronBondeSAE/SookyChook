@@ -18,11 +18,7 @@ public class Seeds : MonoBehaviour, IWaterable
     public AudioClip grassClip;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        FindObjectOfType<CharacterModel>().CryingEvent += Growth;
-        //FindObjectOfType<CharacterModel>().CryingEvent -= Growth;
-    }
+    
     void Growth(bool isCrying)
     {
         if (isCrying)
@@ -33,27 +29,6 @@ public class Seeds : MonoBehaviour, IWaterable
         else
         {
             Crying = false;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        //if(Growth(true))
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.GetComponent<CharacterModel>().CryingEvent += Growth;
-            
-            target = other.gameObject;
-            
-        }
-        
-    }
-    void OnTriggerExit(Collider other)
-    {
-        //Debug.Log("Testing Collider");
-        if (other.gameObject.CompareTag("Player"))
-        {
-            target = null;
         }
     }
     
@@ -68,7 +43,5 @@ public class Seeds : MonoBehaviour, IWaterable
         //Destroy Seeds and Grow Grass
         GameObject.Destroy(gameObject);
         GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
-        Debug.Log("Seed Gone");
-        throw new NotImplementedException();
     }
 }

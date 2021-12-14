@@ -59,7 +59,7 @@ public class DeliverySequence : MonoBehaviour
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(-truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(-truckSpeed);
         Debug.Log("Back");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.5f);
         
         //Accelerate
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(truckSpeed);
