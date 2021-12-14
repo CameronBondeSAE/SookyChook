@@ -59,57 +59,18 @@ namespace Aaron
             
             turnTowards.target = chickenTarget.transform.position;
 
-            //Pathfinding info
+            /*//Pathfinding info
             Vector3Int foxLocation = new Vector3Int(Mathf.RoundToInt(owner.transform.position.x),
                 Mathf.RoundToInt(owner.transform.position.y), Mathf.RoundToInt(owner.transform.position.z));
             Vector3Int targetLocation = new Vector3Int(Mathf.RoundToInt(chickenTarget.transform.position.x),
                 Mathf.RoundToInt(chickenTarget.transform.position.y),
                 Mathf.RoundToInt(chickenTarget.transform.position.z));
-            owner.GetComponent<Pathfinding>().FindPath(foxLocation, targetLocation);
-
-            //rotateTowards = true;
-            //moveTowards = true;
-
-            //As in Cams tbh
-            /*List<ScanningGrid.Node> path = owner.GetComponent<Pathfinding>().path;
-
-            if (path.Count == 0)
-            {
-                Finish();
-            }
-
-            else
-            {
-                currentNodeTarget = path[currentNodeIndex];
-                
-                TurnTowards(chickenTarget.transform.position);
-                moveTowards = true;
-            }*/
+            owner.GetComponent<Pathfinding>().FindPath(foxLocation, targetLocation);*/
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            //As in Cams again
-            /*if (currentNodeTarget != null && Vector3.Distance(transform.position,
-                owner.GetComponent<Pathfinding>().VectorToInt(currentNodeTarget.coords)) < 1f)
-            {
-                if (currentNodeIndex < GetComponent<Pathfinding>().path.Count - 1)
-                {
-                    owner.GetComponent<FoxModel>().inRange = true;
-                    Finish();
-                }
-
-                else
-                {
-                    currentNodeIndex++;
-
-                    currentNodeTarget = owner.GetComponent<Pathfinding>().path[currentNodeIndex];
-                    
-                    TurnTowards(currentNodeTarget.coords);
-                }
-            }*/
 
             //Probs Hacks?
             distance = Vector3.Distance(chickenTarget.transform.position, owner.transform.position);
@@ -123,7 +84,7 @@ namespace Aaron
 
         void CheckDistance()
         {
-            if (distance <= 0.5f)
+            if (distance <= 0.8f)
             {
                 rotateTowards = false;
                 moveTowards = false;
@@ -132,6 +93,15 @@ namespace Aaron
             if (distance <= 1)
             {
                 owner.GetComponent<FoxModel>().inRange = true;
+                if (!chickenTarget.GetComponent<Health>().isAlive)
+                {
+                    owner.GetComponent<FoxModel>().willAttack = false;
+                    owner.GetComponent<FoxModel>().eatingChicken = true;
+                }
+                else
+                {
+                    owner.GetComponent<FoxModel>().willAttack = true;
+                }
             }
 
             if (distance > 1)

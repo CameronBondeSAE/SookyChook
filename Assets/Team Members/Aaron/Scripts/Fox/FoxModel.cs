@@ -16,6 +16,7 @@ public class FoxModel : MonoBehaviour
     public bool inRange;
     public bool eatingChicken;
     public bool chickenGone;
+    public bool willAttack;
 
     // Start is called before the first frame update
     void Start()

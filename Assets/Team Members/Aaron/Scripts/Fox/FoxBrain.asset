@@ -34,6 +34,8 @@ MonoBehaviour:
       name: canSeeHidingSpot
     - id: 9
       name: isHunting
+    - id: 10
+      name: willAttack
   actions:
   - name: Find Hiding Spot
     isDefault: 0
@@ -102,9 +104,11 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5509765540849849095, guid: c37baab741c1880418c1d89479b63268, type: 3}
     cost: 0
-    position: {x: 827, y: 364}
+    position: {x: 1041, y: 298}
     pre:
     - id: 7
+      value: 1
+    - id: 10
       value: 1
     post:
     - id: 7
@@ -115,9 +119,11 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4375888048723676311, guid: 98da40a4aea42a14b813d4f6eaa2ee6c, type: 3}
     cost: 0
-    position: {x: 1036, y: 366}
+    position: {x: 1040, y: 542}
     pre:
-    - id: 5
+    - id: 10
+      value: 0
+    - id: 7
       value: 1
     post:
     - id: 6
@@ -154,7 +160,7 @@ MonoBehaviour:
     - id: 0
       value: 0
     - id: 1
-      value: 0
+      value: 1
     - id: 2
       value: 0
     - id: 3
@@ -166,8 +172,10 @@ MonoBehaviour:
     - id: 6
       value: 0
     - id: 7
-      value: 0
+      value: 1
     - id: 8
       value: 0
     - id: 9
       value: 1
+    - id: 10
+      value: 0
