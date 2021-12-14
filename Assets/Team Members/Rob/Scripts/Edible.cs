@@ -11,12 +11,30 @@ public class Edible : MonoBehaviour
 	// Global list of edibles for AI to check
 	public static List<Edible> edibles = new List<Edible>();
 
-	public event Action BeingEatenEvent;
+	public event Action<float> BeingEatenEvent;
+	public event Action EatenEvent;
 	
-	// Override this to do custom fx for being eaten! Or sub to the event
-	public virtual void BeingEaten()
+	/// <summary>
+	/// Override this to do custom fx for being eaten! Or sub to the event
+	/// </summary>
+	/// <param name="amount">amount is 0-1f. 1 should insta-eat the whole thing</param>
+	public virtual void BeingEaten(float amount)
 	{
-		BeingEatenEvent?.Invoke();
+		BeingEatenEvent?.Invoke(amount);
+		
+		foodAmount -= amount;
+		
+		if (foodAmount <= 0)
+		{
+			Eaten();
+		}
+		
+	}
+
+	public virtual void Eaten()
+	{
+		EatenEvent?.Invoke();
+		Destroy(gameObject);
 	}
 
 	void OnEnable()

@@ -30,6 +30,9 @@ public class FenceModel : MonoBehaviour, IPickupable
         }
         rb.useGravity = false;
         rb.isKinematic = true;
+        
+        //Invoke event to update pathfinding algorithms
+        GlobalEvents.OnLevelStaticsUpdated(gameObject);
     }
 
     public void PutDown()

@@ -6,94 +6,100 @@ using Random = UnityEngine.Random;
 
 public class ChickenModel : AnimalBase, IInteractable, IPickupable
 {
-    public bool foundFood;
-    public bool atFood;
-    
-    //public float growth;
+	public bool foundFood;
+	public bool atFood;
 
-    public bool   isFull;
-    public Edible targetEdible;
+	//public float growth;
 
-    public event Action InteractEvent;
-    public event Action<bool> PickUpEvent;
+	public bool isFull;
+	public Edible targetEdible;
 
-    Rigidbody rb;
-    [SerializeField]
-    private float deathFling = 10f;
+	public event Action InteractEvent;
+	public event Action<bool> PickUpEvent;
 
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
-     
-        rb = GetComponent<Rigidbody>();
-        GetComponent<Health>().DeathEvent += Death;
-    }
+	Rigidbody rb;
 
-    // Update is called once per frame
-    void Update()
-    {
-       //if eats food, increase scale size by growth until localScale == 1
-    }
-    
-    #region Interface/Overrides implementation
+	[SerializeField]
+	private float deathFling = 10f;
 
-    public override void ReachedMaxHungry()
-    {
-        base.ReachedMaxHungry();
+	// Start is called before the first frame update
+	public override void Start()
+	{
+		base.Start();
 
-        // Just die
-        GetComponent<Health>().ChangeHealth(-100f);
-    }
+		rb = GetComponent<Rigidbody>();
+		GetComponent<Health>().DeathEvent += Death;
+	}
 
-    public void Interact()
-    {
-        InteractEvent?.Invoke();
-        Death(gameObject);
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		//if eats food, increase scale size by growth until localScale == 1
+	}
 
-    public void PickUp()
-    {
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<Collider>().enabled      = false;
-        PickUpEvent?.Invoke(true);
-    }
+	#region Interface/Overrides implementation
 
-    public void PutDown()
-    {
-        GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<Collider>().enabled      = true;
-        PickUpEvent?.Invoke(false);
-    }
+	public override void ReachedMaxHungry()
+	{
+		base.ReachedMaxHungry();
 
-    public void Death(GameObject aGameObject)
-    {
-        // This takes time, so I don't want to die twice!
-        GetComponent<Health>().DeathEvent -= Death;
-        StartCoroutine(DeathSequence());
-        // Destroy(gameObject);
-    }
+		// Just die
+		GetComponent<Health>().ChangeHealth(-100f);
+	}
 
-    public IEnumerator DeathSequence()
-    {
-        // Disable all chicken things. NOTE: You could just spawn a death chicken prefab
-        
-        rb.constraints = RigidbodyConstraints.None;
-        rb.angularDrag = 0;
-        rb.drag = 0;
-        rb.angularVelocity = new Vector3( Random.Range(-deathFling, deathFling), Random.Range(-deathFling, deathFling),
-            Random.Range(-deathFling, deathFling));
-        rb.velocity = Vector3.up * deathFling/4f;
-        GetComponent<Collider>().material = new PhysicMaterial();
-        
-        Aaron.Wander wander = GetComponent<Aaron.Wander>();
-        wander.enabled = false;
-        GetComponent<Tom.TurnToward>().enabled = false;
-        GetComponent<ChickenModel>().enabled = false;
-        
-        yield return new WaitForSeconds(2f);
-        // GetComponent<Edible>().
-    }
-    
-    #endregion
+	public void Interact()
+	{
+		InteractEvent?.Invoke();
+		Death(gameObject);
+	}
+
+	public void PickUp()
+	{
+		GetComponent<Rigidbody>().isKinematic = true;
+		GetComponent<Collider>().enabled = false;
+		PickUpEvent?.Invoke(true);
+	}
+
+	public void PutDown()
+	{
+		GetComponent<Rigidbody>().isKinematic = false;
+		GetComponent<Collider>().enabled = true;
+		PickUpEvent?.Invoke(false);
+	}
+
+	public void Death(GameObject aGameObject)
+	{
+		// This takes time, so I don't want to die twice!
+		GetComponent<Health>().DeathEvent -= Death;
+		StartCoroutine(DeathSequence());
+		// Destroy(gameObject);
+	}
+
+	public IEnumerator DeathSequence()
+	{
+		// Disable all chicken things. NOTE: You could just spawn a death chicken prefab
+
+		rb.constraints = RigidbodyConstraints.None;
+		rb.angularDrag = 0;
+		rb.drag = 0;
+		rb.angularVelocity = new Vector3(Random.Range(-deathFling, deathFling), Random.Range(-deathFling, deathFling),
+			Random.Range(-deathFling, deathFling));
+		rb.velocity = Vector3.up * deathFling / 4f;
+		foreach (Collider child in GetComponentsInChildren<Collider>())
+		{
+			child.material = new PhysicMaterial();
+		}
+
+		Aaron.Wander wander = GetComponent<Aaron.Wander>();
+		wander.enabled = false;
+		GetComponent<Tom.TurnToward>().enabled = false;
+		GetComponent<ChickenModel>().enabled = false;
+
+		yield return new WaitForSeconds(2f);
+		
+		rb.angularDrag = 0;
+		rb.drag = 1;
+	}
+
+	#endregion
 }
