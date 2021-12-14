@@ -15,7 +15,7 @@ namespace Aaron
     {
         public ScanningGrid.Node currentNodeTarget;
         public GameObject owner;
-        public GameObject chickenTarget;
+        public Edible chickenTarget;
         private TurnTowards turnTowards;
         private Wander wander;
         private MoveForward moveForward;

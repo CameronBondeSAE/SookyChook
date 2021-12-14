@@ -15,6 +15,8 @@ namespace Rob
         public float turningSpeed;
 
         public Wander wander;
+        public Forward forward;
+        
 
         List<WorldScan.Node> path;
 
@@ -39,7 +41,7 @@ namespace Rob
 
         public void TakePath()
         {
-            if (PathFinding.Instance.path.Count > 0)
+            if (PathFinding.Instance.path.Count > 0 && !tassieDevilModel.atTarget)
             {
                 wander.enabled = false;
                 //HACK change later
@@ -55,6 +57,7 @@ namespace Rob
 
                     if (currentIndex >= path.Count - 1)
                     {
+                        currentIndex = path.Count - 1;
                         tassieDevilModel.atTarget = true;
                         wander.enabled = true;
                     }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Steering : MonoBehaviour
 {
     public Rigidbody rb;
+    public float multiplyer;
     public float torque;
     public float checkDist;
     public float checkDistLeft;
@@ -19,25 +20,29 @@ public class Steering : MonoBehaviour
 
     void Update()
     {
-        Ray rayForward = new Ray(this.transform.position, this.transform.forward);
-        Ray rayLeft = new Ray(this.transform.position, transform.forward - transform.right);
-        Ray rayRight = new Ray(this.transform.position, transform.forward + transform.right);
+        Ray rayForward = new Ray(transform.position, transform.forward);
+        Ray rayLeft = new Ray(transform.position, transform.forward - transform.right);
+        Ray rayRight = new Ray(transform.position, transform.forward + transform.right);
 
         RaycastHit hit;
 
         if (Physics.Raycast(rayForward, out hit, checkDist))
         {
-            rb.AddRelativeTorque(Vector3.up * torque);
+            float distanceTo = (checkDist - hit.distance) * multiplyer;
+            rb.AddRelativeTorque(Vector3.up * torque * checkDist * multiplyer, ForceMode.Acceleration);
         }
 
         if (Physics.Raycast(rayRight, out hit, checkDistRight))
         {
-            rb.AddRelativeTorque(Vector3.up * torque);
+            float distanceTo = (checkDistRight - hit.distance) * multiplyer;
+            rb.AddRelativeTorque(Vector3.up * torque * checkDistRight * multiplyer, ForceMode.Acceleration);
         }
 
         if (Physics.Raycast(rayLeft, out hit, checkDistLeft))
         {
-            rb.AddRelativeTorque(Vector3.up * torque);
+            float distanceTo = (checkDistLeft - hit.distance) * multiplyer;
+            rb.AddRelativeTorque(Vector3.up * torque * checkDistLeft * multiplyer, ForceMode.Acceleration);
+            
         }
     }
 
