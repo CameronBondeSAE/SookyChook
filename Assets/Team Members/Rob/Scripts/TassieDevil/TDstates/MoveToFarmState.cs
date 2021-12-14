@@ -16,7 +16,12 @@ public class MoveToFarmState : SookyAntAIState
 
         followPath = owner.GetComponent<FollowPath>();
         tassieDevilModel = owner.GetComponent<TassieDevilModel>();
+        
+    }
 
+    public override void Enter()
+    {
+        base.Enter();
         foreach (SpawnPoint spawnPoint in SpawnPoint.spawnPoints)
         {
             if (spawnPoint.typeOfPointOfPoint == SpawnPoint.TypeOfPoint.MainFarm)
@@ -24,11 +29,6 @@ public class MoveToFarmState : SookyAntAIState
                 farmSpawnPoint = spawnPoint.transform;
             }
         }
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
         followPath.SetPath(farmSpawnPoint);
     }
 
@@ -38,7 +38,7 @@ public class MoveToFarmState : SookyAntAIState
         followPath.TakePath();
         if (tassieDevilModel.atTarget)
         {
-            
+            tassieDevilModel.isAtFarm = true;
             Finish();
         }
     }

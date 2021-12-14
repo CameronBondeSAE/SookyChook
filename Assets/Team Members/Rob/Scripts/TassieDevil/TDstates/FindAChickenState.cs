@@ -26,6 +26,8 @@ namespace Rob
         public override void Enter()
         {
             base.Enter();
+            tassieModel.atTarget = false;
+            tassieModel.isAtFarm = true;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -37,6 +39,7 @@ namespace Rob
                 {
                     tassieModel.prey = chicken.transform;
                     tassieModel.isLooking = false;
+                    tassieModel.isMoving = true;
                     Finish();
                 }
             }

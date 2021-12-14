@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1183116927532342442}
   m_RootOrder: 2
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541bb2398d113d14d9211b84ad0f1f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   speed: 0
 --- !u!114 &3294328559912015751
 MonoBehaviour:
@@ -58,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3ad93a71874a14db98685f33c0e028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   torque: 0
   checkDist: 0
   checkDistLeft: 0
@@ -74,7 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f1f721484bb5d43b47ae690b9694e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomOffset: 0
+  rb: {fileID: 0}
+  turningAmount: 0
 --- !u!1 &1183116927532342443
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1183116927532342442}
+  - component: {fileID: 2795303815415625205}
   - component: {fileID: 2356582299866801059}
   - component: {fileID: 8048906245288645218}
   - component: {fileID: 942582001}
@@ -107,6 +112,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.45677, y: -1.2015464, z: -12.9025135}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2967253096225574466}
   - {fileID: 370728329238419445}
@@ -114,6 +120,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2795303815415625205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183116927532342443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fcd3b4b950a1624298be608f253da10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatAmI: 1
+  allegiance: []
 --- !u!114 &2356582299866801059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +151,9 @@ MonoBehaviour:
   isHungry: 0
   isMoving: 0
   isLooking: 1
+  atTarget: 0
+  hasChicken: 0
+  isAtFarm: 0
   atPrey: 0
   prey: {fileID: 0}
   hunger: 0
@@ -182,6 +205,7 @@ MonoBehaviour:
   currentIndex: 0
   tassieDevilModel: {fileID: 2356582299866801059}
   turningSpeed: 0
+  wander: {fileID: 0}
 --- !u!114 &6393622567751630315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +259,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4904505062294875608}
   m_Father: {fileID: 1183116927532342442}
@@ -267,6 +292,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.043, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1183116927532342442}
   m_RootOrder: 1

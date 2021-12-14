@@ -25,7 +25,6 @@ public class Wander : MonoBehaviour
         
         perlin = Mathf.PerlinNoise(Time.time + randomOffset, 0f) * 2 - 1;
         rb.AddRelativeTorque(0f, perlin * turningAmount, 0f, ForceMode.VelocityChange);
-        Debug.Log(perlin);
-        
+
     }
 }

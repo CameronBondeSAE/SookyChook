@@ -10,6 +10,7 @@ public class Steering : MonoBehaviour
     public float checkDist;
     public float checkDistLeft;
     public float checkDistRight;
+    
 
 
     private void Start()

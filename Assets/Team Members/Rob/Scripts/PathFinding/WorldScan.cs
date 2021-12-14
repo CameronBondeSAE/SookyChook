@@ -38,6 +38,7 @@ namespace Rob
         private void Awake()
         {
             gridNodeReference = new Node[maxSizeofGrid.x, maxSizeofGrid.z];
+            GlobalEvents.levelStaticsUpdated += aO => ScanWorld();
             ScanWorld();
         }
 
