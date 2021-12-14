@@ -26,7 +26,6 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //seedPlanters = FindObjectsOfType<SeedPlanterModel>();
         description.text = "Increase seed planting productivity";
     }
 
@@ -52,6 +51,7 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
         else
         {
             price.text = "Max Level";
+            description.text = "Seed Planter Fully Upgraded";
             return;
         }
 
@@ -66,13 +66,20 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
 
     public void BuyUpgrade()
     {
-        if(shopManager.totalMoney >= upgradePrice)
+        if (seedPlanter.planterLevel == seedPlanter.maxlevel)
+        {
+            Debug.Log("Max Level");
+            return;
+        }
+
+        if (shopManager.totalMoney >= upgradePrice && seedPlanter.planterLevel != seedPlanter.maxlevel)
         {
             PlanterUpgradedEvent?.Invoke();
             shopManager.totalMoney -= upgradePrice;
             return;
         }
-        else
+
+        if(shopManager.totalMoney < upgradePrice)
         {
             Debug.Log("Too Expensive");
 

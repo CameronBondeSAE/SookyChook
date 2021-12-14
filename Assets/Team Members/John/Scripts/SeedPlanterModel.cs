@@ -21,14 +21,15 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     [SerializeField]
     Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
     public float tractorVelocity;
+    public int maxlevel = 3;
 
     bool isAttached = false;
     bool tractorMoving;
-    int maxlevel = 3;
     TractorModel tractor;
 
     //Events
     public event System.Action LevelUpEvent;
+    public event System.Action MaxLevelEvent;
 
 
     // Start is called before the first frame update
@@ -133,7 +134,8 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
         if(planterLevel == maxlevel)
         {
-            //Max Level Event ?
+            planterLevel = maxlevel;
+            MaxLevelEvent?.Invoke();
         }
     }
 

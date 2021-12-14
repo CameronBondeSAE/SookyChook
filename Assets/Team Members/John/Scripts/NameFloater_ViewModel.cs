@@ -7,36 +7,48 @@ using DG.Tweening;
 
 public class NameFloater_ViewModel : MonoBehaviour
 {
-    public TextMeshPro name;
+    public TextMeshPro nameText;
     public AudioSource audioSource;
     public AudioClip fart;
     float defaultScale = 1f;
 
+    string newGoodName;
+
     //NOTE: All super hacky at the moment- was just mainly playing around with tweening effects
 
-    public void BadName()
+    public void BadName(string name)
     {
         audioSource.clip = fart;
         audioSource.Play();
-        name.text = "Bad Name";
-        name.color = new Color(255, 0, 0);
+        nameText.text = name;
+        nameText.color = new Color(255, 0, 0);
     }
 
-    public void GoodName()
+    public void GoodName(string newName)
     {
-        //name.text = "Good Name";
-        //name.color = new Color(0, 255, 0);
+        //Reference for name as OnComplete doesn't take methods
+        newGoodName = newName;
 
         Sequence goodNameSequence = DOTween.Sequence();
-        goodNameSequence.Append(name.transform.DOScale(0.1f, 1f).SetEase(Ease.InBack).OnComplete(ChangeName));
-        goodNameSequence.Append(name.DOColor(new Color(0, 255, 0), 0.5f));
-        goodNameSequence.Append(name.transform.DOScale(1.5f, 1f).SetEase(Ease.InOutElastic));
+        goodNameSequence.Append(nameText.transform.DOScale(0.1f, 1f).SetEase(Ease.InBack).OnComplete(ChangeName));
+        goodNameSequence.Append(nameText.DOColor(new Color(0, 255, 0), 0.5f));
+        goodNameSequence.Append(nameText.transform.DOScale(1.5f, 1f).SetEase(Ease.InOutElastic));
 
     }
 
     //Using this to change the name as the DoTween shrinks (defintely a better way of doing this)
     void ChangeName()
     {
-        name.text = "Good Name";
+        nameText.text = newGoodName;
+    }
+
+    public void BadNameButton()
+    {
+        BadName("A Bad Name");
+    }
+
+    public void GoodNameButton()
+    {
+        GoodName("A Good Name");
     }
 }
