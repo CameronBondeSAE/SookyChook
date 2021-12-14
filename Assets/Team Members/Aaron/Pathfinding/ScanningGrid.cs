@@ -58,6 +58,9 @@ public class ScanningGrid : ManagerBase<ScanningGrid>
         grid = new Node [worldSize.x, worldSize.z];
         CreateGrid();
         List<Node> neighbours = new List<Node>();
+
+        //not sure if this is right?
+        GlobalEvents.levelStaticsUpdated += o => CreateGrid();
     }
 
     void CreateGrid()

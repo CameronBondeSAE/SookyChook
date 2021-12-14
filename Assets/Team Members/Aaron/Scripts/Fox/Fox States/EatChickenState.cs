@@ -13,6 +13,8 @@ namespace Aaron
         public static event Action EatChickenEvent;
         private float hunger;
 
+        private bool atCarcass = false;
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -25,16 +27,19 @@ namespace Aaron
         {
             base.Enter();
 
-            var foxModel = owner.GetComponent<FoxModel>();
-            
-            foxModel.hunger += 5;
-            if (foxModel.hunger > foxModel.maxHunger)
+            if (atCarcass)
             {
-                foxModel.hunger = foxModel.maxHunger;
+                StartCoroutine(EatingChicken());
             }
 
-            foxModel.chickenGone = true;
-            foxModel.isHunting = false;
+            fox.hunger += 5;
+            if (fox.hunger > fox.maxHunger)
+            {
+                fox.hunger = fox.maxHunger;
+            }
+
+            fox.chickenGone = true;
+            fox.isHunting = false;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -47,6 +52,12 @@ namespace Aaron
             base.Exit();
             
             owner.GetComponent<Wander>().enabled = true;
+        }
+
+        IEnumerator EatingChicken()
+        {
+            EatChickenEvent?.Invoke();
+            yield return new WaitForSeconds(5);
         }
     }
 }
