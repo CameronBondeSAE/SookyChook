@@ -6,7 +6,7 @@ using UnityEngine;
 public class FoxModel : MonoBehaviour
 {
     public AntAIAgent antAIAgent;
-    public GameObject target;
+    public Edible target;
 
     public float maxHunger = 10;
     public float hunger;

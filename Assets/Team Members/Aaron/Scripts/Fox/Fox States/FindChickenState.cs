@@ -10,9 +10,9 @@ namespace Aaron
     {
         //private ChickenManager chickenManager = FindObjectOfType<ChickenManager>();
         public GameObject owner;
-        public GameObject target;
+        public Edible target;
 
-        public List<GameObject> chickensInWorld = new List<GameObject>();
+        public List<Edible> chickensInWorld = new List<Edible>();
 
         public float fov = 45;
         public float distance = 20;
@@ -29,8 +29,14 @@ namespace Aaron
         public override void Enter()
         {
             base.Enter();
-            
-            chickensInWorld = ChickenManager.Instance.chickensList;
+
+            foreach (Edible edibles in Edible.edibles)
+            {
+                if (edibles.GetComponent<ChickenModel>())
+                {
+                    chickensInWorld.Add(edibles);
+                }
+            }
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

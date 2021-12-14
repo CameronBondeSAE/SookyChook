@@ -12,7 +12,7 @@ namespace Aaron
         private event Action EatingChicken ;
         
         public GameObject owner;
-        public GameObject chickenTarget;
+        public Edible chickenTarget;
         
         FoxModel foxModel;
 
