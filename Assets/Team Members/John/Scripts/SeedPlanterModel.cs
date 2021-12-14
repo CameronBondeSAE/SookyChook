@@ -7,6 +7,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     //public TractorModel tractorModel;
     public GameObject seed;
     public SeedPlanter_ShopPanel shop;
+    public float planterSpeed = 3f;
 
     [Header("Attachment offset when on vehicle")]
     [SerializeField]
@@ -19,9 +20,12 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     int seedAmountPerPlant = 1;
     [SerializeField]
     Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
+    public float tractorVelocity;
 
     bool isAttached = false;
+    bool tractorMoving;
     int maxlevel = 3;
+    TractorModel tractor;
 
     //Events
     public event System.Action LevelUpEvent;
@@ -66,14 +70,39 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
             }
 
             //Debug.DrawLine(transform.position + offset, hitinfo.point, Color.green);
-            yield return new WaitForSeconds(1f);
-        }
-        while (isAttached);
+
+            //Only run this while tractor is moving - otherwise wait to continue planting 
+            yield return tractorMoving;
+
+            //Planting is based on tractor velocity - clamp this speed so planting doesn't plant 100 in 1 second
+            Mathf.Clamp(tractorVelocity, 1, planterSpeed + 1.5f);
+            yield return new WaitForSeconds(planterSpeed/tractorVelocity);
+        }            
+
+        while(isAttached);
 	}
+
+    private void FixedUpdate()
+    {
+        if(tractor != null)
+        {
+            tractorVelocity = tractor.GetComponent<Rigidbody>().velocity.magnitude;
+
+            if(tractorVelocity > 0.5)
+            {
+                tractorMoving = true;
+            }
+            else
+            {
+                tractorMoving = false;
+            }
+        }
+    }
 
     public void Attach(TractorModel aTractorModel)
     {
         isAttached = true;
+        tractor = aTractorModel;
         
         transform.parent = aTractorModel.transform;
         transform.localPosition = attachOffset;
@@ -86,6 +115,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     public void Detach()
     {
         isAttached = false;
+        tractor = null;
         StopCoroutine(PlantSeeds());
 
         //Update pathfinding when no longer in use

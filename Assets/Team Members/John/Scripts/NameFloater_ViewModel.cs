@@ -39,15 +39,4 @@ public class NameFloater_ViewModel : MonoBehaviour
     {
         name.text = "Good Name";
     }
-
-    /*
-    IEnumerator Name()
-    {
-        BadName();
-
-        yield return new WaitForSeconds(1.5f);
-
-        GoodName();
-    }
-    */
 }
