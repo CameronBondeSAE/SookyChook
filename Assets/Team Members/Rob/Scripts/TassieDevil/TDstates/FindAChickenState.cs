@@ -21,13 +21,14 @@ namespace Rob
             
             fov = owner.GetComponent<FOV>();
             tassieModel = owner.GetComponent<TassieDevilModel>();
+            
         }
 
         public override void Enter()
         {
             base.Enter();
+            owner.GetComponentInChildren<Wander>().turningAmount = 150;
             tassieModel.atTarget = false;
-            tassieModel.isAtFarm = true;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -37,6 +38,7 @@ namespace Rob
             {
                 if (fov.CanISee(chicken.transform))
                 {
+                    tassieModel.seeChicken = true;
                     tassieModel.prey = chicken.transform;
                     tassieModel.isLooking = false;
                     tassieModel.isMoving = true;

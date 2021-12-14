@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace Rob
     {
         private TassieDevilModel tassieModel;
         private Transform pathTowardsTransform;
-        private Rigidbody rb;
+        
+        [SerializeField]private Rigidbody rb;
 
         public List<WorldScan.Node> path;
         public int currentIndex;
@@ -31,29 +33,32 @@ namespace Rob
         public override void Enter()
         {
             base.Enter();
-
             //followPath.SetPath(tassieModel.prey);
+            tassieModel.isAtFarm = false;
+            owner.GetComponentInChildren<Wander>().enabled = false;
+            owner.GetComponentInChildren<Forward>().speed = 60f;
+
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
             //followPath.TakePath();
-
-
-            if (Vector3.Distance(transform.position, tassieModel.prey.position) >= 1f)
+            
+            Vector3 targetWorldPosition = transform.InverseTransformPoint(tassieModel.prey.position);
+            float turningDirection = targetWorldPosition.x;
+            rb.AddTorque(Vector3.up * 100 * turningDirection, ForceMode.Acceleration);
+            
+            //rb.AddForce(owner.transform.forward * 1000 * Time.fixedDeltaTime, ForceMode.Acceleration);
+            float dist = Vector3.Distance(owner.transform.position, tassieModel.prey.position);
+            if (dist <= 2f)
             {
-                transform.LookAt(tassieModel.prey);
-                //transform.Translate(0, 0, Time.deltaTime * 5, Space.Self);
-                Vector3.MoveTowards(transform.position, tassieModel.prey.position, .5f);
-            }
-            else
-            {
-                tassieModel.isMoving = false;
                 tassieModel.atPrey = true;
-
+                tassieModel.isMoving = false;
+                owner.GetComponentInChildren<Forward>().enabled = false;
                 Finish();
             }
+            
         }
 
         public override void Exit()

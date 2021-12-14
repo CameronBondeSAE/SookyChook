@@ -37,12 +37,12 @@ public class TassieSense : MonoBehaviour, ISense
 
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
-        aWorldState.Set(TassieDevilPlanner.seeChicken, SeeChicken());
+        aWorldState.Set(TassieDevilPlanner.seeChicken, aAgent.GetComponent<TassieDevilModel>().seeChicken);
         aWorldState.Set(TassieDevilPlanner.seeRooster, false);
         aWorldState.Set(TassieDevilPlanner.pathClear, false);
         aWorldState.Set(TassieDevilPlanner.devilNear, false);
         aWorldState.Set(TassieDevilPlanner.seePlayer, false);
-        aWorldState.Set(TassieDevilPlanner.returnHome, ReturnHome());
+        aWorldState.Set(TassieDevilPlanner.returnHome, aAgent.GetComponent<TassieDevilModel>().returnHome);
         aWorldState.Set(TassieDevilPlanner.isLooking, aAgent.GetComponent<TassieDevilModel>().isLooking);
         aWorldState.Set(TassieDevilPlanner.fightingDevil, false);
         aWorldState.Set(TassieDevilPlanner.isHungry, aAgent.GetComponent<TassieDevilModel>().isHungry);
@@ -54,17 +54,7 @@ public class TassieSense : MonoBehaviour, ISense
 
     
 
-    private bool SeeChicken()
-    {
-        if (tassieDevilModel.prey != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    
 
 
     private bool SeeRooster()

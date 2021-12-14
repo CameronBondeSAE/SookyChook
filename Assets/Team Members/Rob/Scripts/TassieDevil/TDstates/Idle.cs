@@ -21,6 +21,7 @@ namespace Rob
         public override void Enter()
         {
             base.Enter();
+            owner.GetComponentInChildren<Wander>().turningAmount = 90;
 
         }
 

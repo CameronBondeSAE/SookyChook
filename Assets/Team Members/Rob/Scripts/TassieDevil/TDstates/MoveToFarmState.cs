@@ -39,6 +39,7 @@ public class MoveToFarmState : SookyAntAIState
         if (tassieDevilModel.atTarget)
         {
             tassieDevilModel.isAtFarm = true;
+            tassieDevilModel.GetComponentInChildren<Wander>().enabled = true;
             Finish();
         }
     }
