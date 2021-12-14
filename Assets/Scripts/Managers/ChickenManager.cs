@@ -40,9 +40,7 @@ namespace Aaron
             
             chickensList = new List<GameObject>();
             chickensList = spawner.spawned;
-            
 
-            
             roostersList = new List<GameObject>();
             fertilisedEggsList = new List<GameObject>();
 
