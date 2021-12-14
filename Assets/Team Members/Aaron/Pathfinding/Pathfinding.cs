@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Tanks;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor;
@@ -20,14 +21,6 @@ namespace Aaron
         public Transform beginningVectorPos;
         public Transform finishVectorPos;
 
-        /*private int beginningX;
-        private int beginningY;
-        private int beginningZ;
-        
-        private int finishX;
-        private int finishY;
-        private int finishZ;*/
-
         private int distanceX;
         private int distanceZ;
         
@@ -42,12 +35,19 @@ namespace Aaron
         private void Start()
         {
             grid = ScanningGrid.Instance;
+
+            beginningVectorPos = this.transform;
             
             //Beginning = this.transform;
             beginning = VectorToInt(beginningVectorPos.position);
             finish = VectorToInt(finishVectorPos.position);
 
             FindPath(beginning, finish);        
+        }
+
+        private void Update()
+        {
+            finishVectorPos = GetComponent<FoxModel>().target.transform;
         }
 
         //get start and finish points in Node Space
@@ -161,7 +161,7 @@ namespace Aaron
             return distance.x * 14 + 10 * (distance.z-distance.x);
         }
 
-        private Vector3Int VectorToInt(Vector3 coords)
+        public Vector3Int VectorToInt(Vector3 coords)
         {
             //cleaner way than below
             return new Vector3Int(Mathf.RoundToInt(coords.x), Mathf.RoundToInt(coords.y), Mathf.RoundToInt(coords.z));

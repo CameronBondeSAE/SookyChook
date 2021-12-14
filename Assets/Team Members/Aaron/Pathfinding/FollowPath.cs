@@ -19,16 +19,7 @@ namespace Aaron
         // Update is called once per frame
         void Update()
         {
-            //follow path
-            //if path != null
-            if (pathfinding.path != null)
-            {
-                //find final node; if not final node
-                if (this.transform.position != pathfinding.finish)
-                {
-                    //find next node in path, move there
-                }
-            }
+            
         }
     }
 }

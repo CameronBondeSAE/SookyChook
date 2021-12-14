@@ -6,7 +6,7 @@ using UnityEngine;
 public class FoxModel : MonoBehaviour
 {
     public AntAIAgent antAIAgent;
-    public GameObject target;
+    public Edible target;
 
     public float maxHunger = 10;
     public float hunger;
@@ -16,6 +16,7 @@ public class FoxModel : MonoBehaviour
     public bool inRange;
     public bool eatingChicken;
     public bool chickenGone;
+    public bool willAttack;
 
     // Start is called before the first frame update
     void Start()

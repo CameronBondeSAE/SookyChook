@@ -36,7 +36,7 @@ namespace Aaron
         {
 
             //spawner = GetComponent<Spawner>();
-            spawner.SpawnMultiple();
+            // spawner.SpawnMultiple();
             
             chickensList = new List<GameObject>();
             chickensList = spawner.spawned;

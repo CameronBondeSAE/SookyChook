@@ -18,7 +18,8 @@ public class FoxSense : MonoBehaviour, ISense
         chickenGone = 6,
         inRangeOfChicken = 7,
         canSeeHidingSpot = 8,
-        isHunting = 9
+        isHunting = 9,
+        willAttack = 10
     }
     
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
@@ -35,6 +36,7 @@ public class FoxSense : MonoBehaviour, ISense
         aWorldState.Set(FoxBools.inRangeOfChicken, aAgent.GetComponent<FoxModel>().inRange);
         aWorldState.Set(FoxBools.canSeeHidingSpot, false);
         aWorldState.Set(FoxBools.isHunting, aAgent.GetComponent<FoxModel>().isHunting);
+        aWorldState.Set(FoxBools.willAttack, aAgent.GetComponent<FoxModel>().willAttack);
 
         aWorldState.EndUpdate();
     }

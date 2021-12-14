@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     public CharacterModel characterModel;
 
     public PlayerInput playerInput;
-
-    // Start is called before the first frame update
+    
+    
     void Start()
     {
         // playerInput.GetComponent<PlayerInput>();
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
         playerInput.actions.FindAction("Jump").performed += aContext => characterModel.Jump();
         playerInput.actions.FindAction("Interact").performed += aContext => characterModel.Interact();
         playerInput.actions.FindAction("Pickup").performed += aContext => characterModel.PickUpCheck();
-        playerInput.actions.FindAction("Cry").performed += aContext => characterModel.CryCoroutine();
+        playerInput.actions.FindAction("Cry").performed += aContext => characterModel.Cry();
         
         playerInput.actions.FindAction("Movement").performed += OnMovementOnperformed;
         playerInput.actions.FindAction("Movement").canceled += OnMovementOnperformed;

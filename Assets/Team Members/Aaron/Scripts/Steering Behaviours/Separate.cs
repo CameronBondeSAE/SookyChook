@@ -17,8 +17,7 @@ namespace Aaron
         {
             rb = GetComponent<Rigidbody>();
         }
-
-        // Update is called once per frame
+        
         void FixedUpdate()
         {
             rb.AddRelativeTorque(new Vector3(avoidMovement.x, 0, avoidMovement.z), ForceMode.VelocityChange);

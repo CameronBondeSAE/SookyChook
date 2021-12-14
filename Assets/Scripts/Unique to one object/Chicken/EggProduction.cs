@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 //WOULD HAVE LOVED TO USE INHERITANCE BUT IT WAS PRETTY MESSY?
@@ -9,6 +10,8 @@ public class EggProduction : MonoBehaviour
 {
     private ChickenModel chicken;
     public GameObject egg;
+
+    public bool canLay;
 
     public int layTime = 10;
     
@@ -19,12 +22,17 @@ public class EggProduction : MonoBehaviour
     {
         chicken = GetComponent<ChickenModel>();
         StartCoroutine("LayTimer");
-
-        layTimeMulitplier = (1f - chicken.hungerLevel) / 10;
     }
 
     private void Update()
     {
+        if (chicken.hungerThreshold < 0.2f)
+        {
+            canLay = false;
+        }
+        canLay = true;
+        
+        layTimeMulitplier = (1f - chicken.hungerLevel) / 10;
     }
 
     private IEnumerator LayTimer()

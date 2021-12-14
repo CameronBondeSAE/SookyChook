@@ -31,7 +31,13 @@ namespace Tom
         {
             CalculateGrid();
 
-            GlobalEvents.levelStaticsUpdated += o => CalculateGrid();
+            GlobalEvents.levelStaticsUpdated += GlobalEventsOnlevelStaticsUpdated;
+        }
+
+        // Just a middle man to ignore the parameters coming from event
+        private void GlobalEventsOnlevelStaticsUpdated(GameObject obj)
+        {
+	        CalculateGrid();
         }
 
         public void CalculateGrid()

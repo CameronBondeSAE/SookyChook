@@ -12,7 +12,7 @@ namespace Aaron
         private event Action EatingChicken ;
         
         public GameObject owner;
-        public GameObject chickenTarget;
+        public Edible chickenTarget;
         
         FoxModel foxModel;
 
@@ -46,12 +46,15 @@ namespace Aaron
             if (distance <= 1f)
             {
                 attackRange = true;
+                foxModel.GetComponent<MoveForward>().enabled = false;
             }
             if (distance > 1)
             {
                 attackRange = false;
                 foxModel.GetComponent<FoxModel>().inRange = false;
-                foxModel.GetComponent<Wander>().enabled = true;
+                //owner.GetComponent<Wander>().enabled = true;
+                foxModel.GetComponent<TurnTowards>().enabled = true;
+                foxModel.GetComponent<MoveForward>().enabled = true;
             }
             
             if (attackRange)

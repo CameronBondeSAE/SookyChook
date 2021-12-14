@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -12,7 +14,8 @@ public class Health : MonoBehaviour
     [SerializeField]
     float deathThreshold;
 
-    [SerializeField]
+    [Header("Debug")]
+    [ReadOnly]
     public bool isAlive;
 
     //DEATH EVENT
@@ -28,6 +31,12 @@ public class Health : MonoBehaviour
     //Manage Object Health (Can both increase or decrease health)
     public void ChangeHealth(float amount)
     {
+	    // Don't do anything if you're dead
+	    if (!isAlive)
+	    {
+		    return;
+	    }
+	    
         currentHealth += amount;
 
         if (currentHealth > maxHealth)
@@ -40,11 +49,23 @@ public class Health : MonoBehaviour
         {
             isAlive = false;
             DeathEvent?.Invoke(gameObject);
+            Die();
         }
         else
         {
             isAlive = true;
         }
+    }
+
+    public virtual void Die()
+    {
+	    
+    }
+
+    [Button]
+    public void ForceDie()
+    {
+	    ChangeHealth(-float.MaxValue);
     }
 
     //GET HEALTH

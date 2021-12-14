@@ -63,6 +63,12 @@ public class CharacterModel : MonoBehaviour
     [SerializeField]
     private bool isCrying;
 
+
+    private void OnEnable()
+    {
+	    GlobalEvents.chickenDiedEvent += go => Cry();
+    }
+
     void FixedUpdate()
     {
         if (!onGround)
@@ -297,13 +303,13 @@ public class CharacterModel : MonoBehaviour
         IVehicleReference.Exit();
     }
 
-    public void CryCoroutine()
+    public void Cry()
     {
         if(cryCoroutine!=null) StopCoroutine(cryCoroutine);
-        cryCoroutine = StartCoroutine(Cry());
+        cryCoroutine = StartCoroutine(CryCoroutine());
     }
 
-    public IEnumerator Cry()
+    public IEnumerator CryCoroutine()
     {
         cryTimerValue = cryTimer;
 

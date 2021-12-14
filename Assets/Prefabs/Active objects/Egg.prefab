@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1947998050277949711}
   m_Father: {fileID: 8730826715450350500}
@@ -71,6 +72,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.9839824, y: 0, z: 1.8782448}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3740084995161586463}
   m_Father: {fileID: 0}
@@ -90,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chicken: {fileID: 1648933817718183396, guid: 192fa124a1e5ab94fb102b31187dd616, type: 3}
   isFertilised: 1
-  hatchTimer: 5
+  hatchTimer: 10
 --- !u!1001 &2054227034364045028
 PrefabInstance:
   m_ObjectHideFlags: 0

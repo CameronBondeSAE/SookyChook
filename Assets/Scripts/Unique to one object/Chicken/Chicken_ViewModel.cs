@@ -10,6 +10,8 @@ public class Chicken_ViewModel : MonoBehaviour
 	public AudioClip    pickedUp;
 	public AudioClip    putDown;
 
+	public List<AudioClip> dyingSounds;
+
 	public Animator animator;
 	
 	// Start is called before the first frame update
@@ -17,6 +19,14 @@ public class Chicken_ViewModel : MonoBehaviour
 	{
 		chickenModel.InteractEvent += ChickenModelOnInteractEvent;
 		chickenModel.PickUpEvent += ChickenModelOnPickUpEvent;
+		
+		chickenModel.GetComponent<Health>().DeathEvent += OnDeathEvent;
+	}
+
+	private void OnDeathEvent(GameObject gameobject)
+	{
+		audioSource.clip = dyingSounds[Random.Range(0, dyingSounds.Count)];
+		audioSource.Play();
 	}
 
 	void ChickenModelOnPickUpEvent(bool pickingUp)

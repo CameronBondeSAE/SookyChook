@@ -40,9 +40,10 @@ public class ChickenGrowingMode : GameModeBase
     public override void Activate()
     {
         base.Activate();
-        
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
         ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
+        
+        DayNightManager.Instance.ChangePhase(DayNightManager.DayPhase.Morning);
     }
     
     public void ChickenCheck()

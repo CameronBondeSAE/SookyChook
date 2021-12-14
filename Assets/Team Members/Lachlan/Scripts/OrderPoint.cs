@@ -1,19 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class OrderPoint : MonoBehaviour
 {
     // Start is called before the first frame update
-    [Header("Text Properties")]
-    public Text orderText;
-    
+    [Header("Menu Properties")]
+    public GameObject orderMenu;
+
+    public float orderLateTime = 10.0f;
+
+    [SerializeField]
+    private GameObject orderIcon;
+
+    [SerializeField]
+    private Transform orderIconPos;
     void Start()
     {
         FindObjectOfType<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
-        DayNightManager.Instance.PhaseChangeEvent += OrderMenu2;
     }
 
     // Update is called once per frame
@@ -24,18 +32,23 @@ public class OrderPoint : MonoBehaviour
 
     void OrderMenu(ChickenGrowingMode.Order amount)
     {
-        Debug.Log("test");
-        orderText.text = amount.ToString();
-        Debug.Log(amount);
-        Debug.Log("Check");
-        
-        
+        //Playing around with colors and tweening
+        //TODO: Need to stack the list for the order. Probably requires instantiating new text.
+        GameObject orderMenu = Instantiate(orderIcon, orderIconPos);
+        GetComponentInChildren<TextMeshProUGUI>().text = amount.productType.ToString();
+        transform.DOMove(Vector3.one, 2, false);
+        GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.white, 0);
+        StartCoroutine(OrderUI());
+        //Debug for Order
+        Debug.Log(amount.productType.ToString());
+
     }
 
-    void OrderMenu2(DayNightManager.DayPhase order)
+    public IEnumerator OrderUI()
     {
-        Debug.Log("test");
-        orderText.text = order.ToString();
-        Debug.Log(order);
+        yield return new WaitForSeconds(orderLateTime);
+        GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.red, 2.0f);
+        StopCoroutine(OrderUI());
     }
+    
 }

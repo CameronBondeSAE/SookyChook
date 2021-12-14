@@ -7,12 +7,19 @@ public class GrassEdible : Edible
 {
 	public ParticleSystem particleSystem;
 	
-	public override void BeingEaten()
+	public override void BeingEaten(float amount)
 	{
-		base.BeingEaten();
+		base.BeingEaten(amount);
 
 		// transform.localScale /= 1.5f;
 		transform.DOShakeScale(0.5f, 1f);
 		particleSystem.Emit(10);
+	}
+
+	public override void Eaten()
+	{
+		base.Eaten();
+		
+		Debug.Log("Do something cool");
 	}
 }

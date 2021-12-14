@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting;
 using Anthill.AI;
 using Tanks;
 using UnityEditor.MPE;
@@ -11,8 +13,12 @@ namespace Aaron
 {
     public class MoveToChickenState : AntAIState
     {
+        public ScanningGrid.Node currentNodeTarget;
         public GameObject owner;
-        public GameObject chickenTarget;
+        public Edible chickenTarget;
+        private TurnTowards turnTowards;
+        private Wander wander;
+        private MoveForward moveForward;
 
         public Rigidbody rb;
 
@@ -23,6 +29,9 @@ namespace Aaron
 
         public float speed = 20;
         public float turnSpeed = 10;
+        private float distance;
+
+        private int currentNodeIndex;
 
         public override void Create(GameObject aGameObject)
         {
@@ -35,42 +44,47 @@ namespace Aaron
         {
             base.Enter();
 
+            //owner.GetComponent<Pathfinding>().enabled = true;
+
+            //Steering Behaviour changes
+            wander = owner.GetComponent<Wander>();
+            wander.enabled = false;
+            turnTowards = owner.GetComponent<TurnTowards>();
+            turnTowards.enabled = true;
+            moveForward = owner.GetComponent<MoveForward>();
+            moveForward.enabled = true;
+
             chickenTarget = owner.GetComponent<FoxModel>().target;
             rb = owner.GetComponent<Rigidbody>();
+            
+            turnTowards.target = chickenTarget.transform.position;
 
-            rotateTowards = true;
-            moveTowards = true;
+            /*//Pathfinding info
+            Vector3Int foxLocation = new Vector3Int(Mathf.RoundToInt(owner.transform.position.x),
+                Mathf.RoundToInt(owner.transform.position.y), Mathf.RoundToInt(owner.transform.position.z));
+            Vector3Int targetLocation = new Vector3Int(Mathf.RoundToInt(chickenTarget.transform.position.x),
+                Mathf.RoundToInt(chickenTarget.transform.position.y),
+                Mathf.RoundToInt(chickenTarget.transform.position.z));
+            owner.GetComponent<Pathfinding>().FindPath(foxLocation, targetLocation);*/
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            //rotate towards target
-            if(rotateTowards)
-            {
-                targetPosition = transform.InverseTransformPoint(chickenTarget.transform.position);
-                
-                float turnDirection = targetPosition.x;
-                
-                rb.AddTorque(Vector3.up * turnDirection * turnSpeed * Time.deltaTime,
-                    ForceMode.VelocityChange);
-            }
-
-            //TODO change to addForce
-            if(moveTowards)
-            {
-                //having issues with addForce
-                //rb.AddForce(owner.transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-
-                owner.GetComponent<Wander>().enabled = false;
-
-                owner.transform.position = Vector3.MoveTowards(owner.transform.position, chickenTarget.transform.position, (speed*Time.deltaTime)/2);
-            }
 
             //Probs Hacks?
-            float distance = Vector3.Distance(chickenTarget.transform.position, owner.transform.position);
-            if (distance <= 0.5f)
+            distance = Vector3.Distance(chickenTarget.transform.position, owner.transform.position);
+            CheckDistance();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        void CheckDistance()
+        {
+            if (distance <= 0.8f)
             {
                 rotateTowards = false;
                 moveTowards = false;
@@ -79,17 +93,21 @@ namespace Aaron
             if (distance <= 1)
             {
                 owner.GetComponent<FoxModel>().inRange = true;
+                if (!chickenTarget.GetComponent<Health>().isAlive)
+                {
+                    owner.GetComponent<FoxModel>().willAttack = false;
+                    owner.GetComponent<FoxModel>().eatingChicken = true;
+                }
+                else
+                {
+                    owner.GetComponent<FoxModel>().willAttack = true;
+                }
             }
 
             if (distance > 1)
             {
                 owner.GetComponent<FoxModel>().inRange = false;
             }
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
         }
     }
 }
