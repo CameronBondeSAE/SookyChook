@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Rob
 {
-    public class WildLifeManager : MonoBehaviour
+    public class WildLifeManager : ManagerBase<WildLifeManager>
     {
         [System.Serializable]
         public class WildLife
