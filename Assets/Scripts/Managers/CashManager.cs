@@ -15,6 +15,7 @@ public class CashManager : ManagerBase<CashManager>
     public AudioSource audioSource;
     public AudioClip buySound;
     public AudioClip collectMoneySound;
+    public AudioClip tooExpensiveSound;
 
 
     // Update is called once per frame
@@ -53,6 +54,7 @@ public class CashManager : ManagerBase<CashManager>
             canPlayEFX = false;
             moneyUI.transform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f, 1).OnComplete(ResetPlayEffects);
             moneyUI.DOColor(Color.red, 0.2f).OnComplete(ResetColor);
+            PlayMoneySound(tooExpensiveSound);
         }
     }
 

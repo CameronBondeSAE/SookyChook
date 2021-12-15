@@ -1250,6 +1250,7 @@ MonoBehaviour:
   audioSource: {fileID: 1325564986}
   buySound: {fileID: 8300000, guid: 3edb7ccff2a90cf44802226aff81c588, type: 3}
   collectMoneySound: {fileID: 8300000, guid: 3b5fefe62cdab1b4dae5f0bb89e0bdca, type: 3}
+  tooExpensiveSound: {fileID: 8300000, guid: 024d6fc14f69648498c35f699f451282, type: 3}
 --- !u!1 &6073556575266732868
 GameObject:
   m_ObjectHideFlags: 0
