@@ -5,15 +5,13 @@ using UnityEngine;
 
 namespace Tom
 {
-    public class MoveToChickenState : AntAIState
+    public class MoveToTargetState : AntAIState
     {
         public GameObject owner;
         private Rooster_Model rooster;
-        private Rigidbody rb;
         private PathfindingAgent agent;
         private TurnToward turn;
         private MoveForward move;
-        public float speed = 50f;
         private PathfindingGrid.Node targetNode;
         public float followRange = 1.5f;
 
@@ -23,7 +21,6 @@ namespace Tom
 
             owner = aGameObject;
             rooster = owner.GetComponent<Rooster_Model>();
-            rb = owner.GetComponent<Rigidbody>();
             agent = owner.GetComponent<PathfindingAgent>();
             turn = owner.GetComponentInChildren<TurnToward>();
             move = owner.GetComponentInChildren<MoveForward>();
@@ -50,23 +47,24 @@ namespace Tom
             {
                 // Finds the next node in the path
                 int nodeIndex = agent.path.IndexOf(targetNode);
-                if (nodeIndex > 0)
+                if (nodeIndex < agent.path.Count - 1)
                 {
-                    targetNode = agent.path[nodeIndex - 1];
+                    targetNode = agent.path[nodeIndex + 1];
                     turn.target = new Vector3(targetNode.coordinates.x, 0, targetNode.coordinates.y);
                 }
                 else
                 {
-                    rooster.targetChicken = null;
+                    rooster.target = null;
                     Finish();
                 }
             }
-
-            if (rooster.targetChicken != null &&
-                Vector2.Distance(position, agent.ConvertPositionToNodeCoordinates(rooster.targetChicken.position))
+            
+            // Additional check if pathfinding goal is reached but planner isn't updated
+            if (rooster.target != null &&
+                Vector2.Distance(position, agent.ConvertPositionToNodeCoordinates(rooster.target.position))
                 < 1.5f)
             {
-                rooster.targetChicken = null;
+                rooster.target = null;
                 Finish();
             }
         }
@@ -81,10 +79,9 @@ namespace Tom
 
         public void FindNewPath(GameObject go)
         {
-            agent.FindPath(agent.ConvertPositionToNodeCoordinates(transform.position),
-                agent.ConvertPositionToNodeCoordinates(rooster.targetChicken.position));
+            agent.FindPath(transform.position,rooster.target.position);
 
-            targetNode = agent.path[agent.path.Count - 1];
+            targetNode = agent.path[0];
             turn.target = new Vector3(targetNode.coordinates.x, 0, targetNode.coordinates.y);
         }
     }

@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: RoosterPlanner
+  m_EditorClassIdentifier: 
+  conditions:
+    list:
+    - id: 0
+      name: canSeeEnemy
+    - id: 1
+      name: canSeeChicken
+    - id: 2
+      name: chickenNearby
+    - id: 3
+      name: enemyNearby
+    - id: 4
+      name: isHungry
+    - id: 5
+      name: foodNearby
+    - id: 6
+      name: foundFood
+  actions:
+  - name: Move to Chicken
+    isDefault: 0
+    state: {fileID: 6380970111144934406, guid: 2a01ea630279e6c4c96028590370d863, type: 3}
+    cost: 5
+    position: {x: 282, y: 162}
+    pre:
+    - id: 1
+      value: 1
+    - id: 2
+      value: 0
+    post:
+    - id: 2
+      value: 1
+  - name: Move to Enemy
+    isDefault: 0
+    state: {fileID: 6380970111144934406, guid: 2a01ea630279e6c4c96028590370d863, type: 3}
+    cost: 0
+    position: {x: 751, y: 163}
+    pre:
+    - id: 0
+      value: 1
+    - id: 3
+      value: 0
+    post:
+    - id: 3
+      value: 1
+  - name: Attack Enemy
+    isDefault: 0
+    state: {fileID: 1559015483753033875, guid: b86bef4adc1eb3a4d8ec8692c2c03556, type: 3}
+    cost: 0
+    position: {x: 980, y: 162}
+    pre:
+    - id: 3
+      value: 1
+    post:
+    - id: 0
+      value: 0
+    - id: 3
+      value: 0
+  - name: Find Chicken
+    isDefault: 1
+    state: {fileID: 4477861139392217575, guid: 6b29d02f0f9e4404aba114a5fe9ce879, type: 3}
+    cost: 5
+    position: {x: 518, y: 160}
+    pre:
+    - id: 1
+      value: 0
+    post:
+    - id: 1
+      value: 1
+  - name: Move to Food
+    isDefault: 0
+    state: {fileID: 6380970111144934406, guid: 2a01ea630279e6c4c96028590370d863, type: 3}
+    cost: 1
+    position: {x: 507, y: 392}
+    pre:
+    - id: 4
+      value: 1
+    - id: 5
+      value: 0
+    - id: 6
+      value: 1
+    post:
+    - id: 5
+      value: 1
+  - name: Eat Food
+    isDefault: 0
+    state: {fileID: 7784703468561543898, guid: 650444deccb476242a78ef599e31afd7, type: 3}
+    cost: 1
+    position: {x: 747, y: 396}
+    pre:
+    - id: 5
+      value: 1
+    post:
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+  - name: Find Food
+    isDefault: 0
+    state: {fileID: 4477861139392217575, guid: c5e38bf7f80f8bc4e8057c1d79298ead, type: 3}
+    cost: 1
+    position: {x: 279, y: 396}
+    pre:
+    - id: 4
+      value: 1
+    - id: 6
+      value: 0
+    post:
+    - id: 6
+      value: 1
+  goals:
+  - name: Protect Chickens
+    isDefault: 1
+    position: {x: 278, y: 662}
+    conditions:
+    - id: 0
+      value: 0
+    - id: 2
+      value: 1
+    - id: 4
+      value: 0
+  worldStates:
+  - position: {x: 497, y: 660}
+    isAutoUpdate: 1
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 3
+      value: 0
+    - id: 4
+      value: 1
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0

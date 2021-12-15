@@ -18,6 +18,13 @@ namespace Tom
         {
             targetLocalPosition = transform.InverseTransformPoint(target);
             float turnDirection = targetLocalPosition.x;
+            
+            // Prevents object going straight when facing the exact opposite direction
+            // by checking if the target is directly behind it in the local Z axis
+            if (turnDirection < 0.01f && turnDirection > -0.01f && targetLocalPosition.z < 0)
+            {
+                turnDirection = 1f;
+            }
 
             rb.AddTorque(Vector3.up * turnDirection * turnSpeed * Time.fixedDeltaTime,
                 ForceMode.VelocityChange);
