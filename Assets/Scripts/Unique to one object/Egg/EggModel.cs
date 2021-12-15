@@ -57,7 +57,7 @@ public class EggModel : MonoBehaviour, ISellable
         Instantiate(copy, this.transform.position, copy.transform.rotation);
 
         //add to chicken list in chicken manager
-        ChickenManager.Instance.chickensList.Add(copy);
+        ChickenManager.Instance.chickensList.Add(copy.GetComponent<ChickenModel>());
         
         //remove this object
         ChickenManager.Instance.fertilisedEggsList.Remove(this.gameObject);

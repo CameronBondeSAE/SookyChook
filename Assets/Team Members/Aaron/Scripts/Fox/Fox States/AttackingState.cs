@@ -43,7 +43,6 @@ namespace Aaron
             
             float distance = Vector3.Distance(chickenTarget.transform.position, owner.transform.position);
             
-            
             if (distance <= 1f)
             {
                 attackRange = true;

@@ -28,8 +28,8 @@ namespace Tom
         {
             base.Enter();
 
-            List<GameObject> chickens = ChickenManager.Instance.chickensList;
-            targetChicken = chickens[Random.Range(0, chickens.Count)].transform;
+            List<ChickenModel> chickens = ChickenManager.Instance.chickensList;
+            targetChicken = chickens[Random.Range(0, chickens.Count)].gameObject.transform;
 
             agent.FindPath(agent.ConvertPositionToNodeCoordinates(transform.position), 
                 agent.ConvertPositionToNodeCoordinates(targetChicken.position));

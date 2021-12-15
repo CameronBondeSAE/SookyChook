@@ -34,9 +34,9 @@ namespace Rob
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            foreach (GameObject chicken in ChickenManager.Instance.chickensList)
+            foreach (ChickenModel chicken in ChickenManager.Instance.chickensList)
             {
-                if (fov.CanISee(chicken.transform))
+                if (fov.CanISee(chicken.gameObject.transform))
                 {
                     tassieModel.seeChicken = true;
                     tassieModel.prey = chicken.transform;

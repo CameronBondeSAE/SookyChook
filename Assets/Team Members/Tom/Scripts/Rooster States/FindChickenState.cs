@@ -37,10 +37,10 @@ namespace Tom
 
             if (rooster.target == null)
             {
-                List<GameObject> chickens = ChickenManager.Instance.chickensList;
+                List<ChickenModel> chickens = ChickenManager.Instance.chickensList;
                 if (chickens.Count > 0)
                 {
-                    rooster.target = chickens[Random.Range(0, chickens.Count)].transform;
+                    rooster.target = chickens[Random.Range(0, chickens.Count)].gameObject.transform;
                     Finish();
                 }
             }

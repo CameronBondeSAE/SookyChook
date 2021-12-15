@@ -14,7 +14,7 @@ namespace Aaron
     {
         public GameObject target;
         
-        public List<GameObject> chickensInWorld = new List<GameObject>();
+        public List<ChickenModel> chickensInWorld = new List<ChickenModel>();
 
         public bool canSeeTarget;
 
@@ -54,12 +54,6 @@ namespace Aaron
             }*/
         }
         
-        
-        
-        
-        
-        
-
         /*void CheckFOV()
         {
             Vector3 directionToTarget = target.transform.position - transform.position;
