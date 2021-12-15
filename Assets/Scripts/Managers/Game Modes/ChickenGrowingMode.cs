@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Aaron;
 using Tom;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public enum ProductType
@@ -43,6 +44,7 @@ public class ChickenGrowingMode : GameModeBase
         base.Activate();
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
         ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
+        orderPoint.OrderPointEvent += CompleteOrder;
 
         // Resets to starting time so game starts at morning and orders start appearing
         DayNightManager.Instance.ChangePhase(DayNightManager.DayPhase.Morning);
@@ -52,6 +54,7 @@ public class ChickenGrowingMode : GameModeBase
     {
         if (ChickenManager.Instance.chickensList.Count <= 0)
         {
+            MessagesManager.Instance.Show("All your chickens are DEAD!");
             EndMode();
         }
     }
@@ -60,6 +63,7 @@ public class ChickenGrowingMode : GameModeBase
     {
         if (currentOrders.Count >= maxOrders)
         {
+            MessagesManager.Instance.Show("You didn't fulfil enough orders!");
             EndMode();
         }
     }
@@ -133,6 +137,12 @@ public class ChickenGrowingMode : GameModeBase
         base.EndMode();
         
         StopCoroutine(acceptingOrders);
-        
+        StartCoroutine(RestartScene());
+    }
+
+    private IEnumerator RestartScene()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(0);
     }
 }
