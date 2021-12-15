@@ -25,17 +25,17 @@ namespace Rob
             float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
             if (angleToEnemy < fov / 2)
             {
+                Debug.DrawRay(transform.position,directionToEnemy,Color.black);
                 if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit hit, Mathf.Infinity))
                 {
                     if (hit.transform == target)
                     {
-                        Debug.DrawRay(transform.position, target.position - transform.position, Color.green, .5f);
+                        Debug.DrawRay(transform.position, directionToEnemy, Color.green);
                         return true;
                     }
                     else
                     {
-                        Debug.DrawRay(transform.position, target.position - transform.position, Color.red,
-                            .5f);
+                        Debug.DrawRay(transform.position, directionToEnemy, Color.red);
                         return false;
                     }
                 }

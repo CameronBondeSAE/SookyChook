@@ -14,8 +14,12 @@ namespace Rob
         public TassieDevilModel tassieDevilModel;
         public float turningSpeed;
 
+        public float newSpeed;
+        public float oldSpeed;
+
         public Wander wander;
         public Forward forward;
+        
         
 
         List<WorldScan.Node> path;
@@ -27,6 +31,7 @@ namespace Rob
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            oldSpeed = forward.speed;
         }
 
 
@@ -44,13 +49,11 @@ namespace Rob
             if (PathFinding.Instance.path.Count > 0 && !tassieDevilModel.atTarget)
             {
                 wander.enabled = false;
-                //HACK change later
+                forward.speed = newSpeed;
                 Vector3 targetNodeWorld = PathFinding.Instance.ConvertGridToWorldSpace(targetPathNode.gridPos);
                 Vector3 targetWorldPosition = transform.InverseTransformPoint(targetNodeWorld);
                 float turningDirection = targetWorldPosition.x;
                 rb.AddTorque(Vector3.up * turningSpeed * turningDirection, ForceMode.Acceleration);
-                //transform.LookAt(targetNodeWorld);
-                //transform.Translate(0, 0, Time.deltaTime * 5, Space.Self);
                 if (Vector3.Distance(transform.position, targetNodeWorld) < distanceToNode)
                 {
                     currentIndex++;
@@ -60,6 +63,7 @@ namespace Rob
                         currentIndex = path.Count - 1;
                         tassieDevilModel.atTarget = true;
                         wander.enabled = true;
+                        forward.speed = oldSpeed;
                     }
 
                     targetPathNode = path[currentIndex];

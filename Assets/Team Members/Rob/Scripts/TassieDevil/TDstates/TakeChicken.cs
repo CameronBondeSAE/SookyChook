@@ -24,7 +24,8 @@ namespace Rob
         {
             base.Enter();
             tassieModel.prey.gameObject.GetComponent<Health>().ChangeHealth(-1000);
-            owner.GetComponentInChildren<Forward>().speed = 45f;
+            owner.GetComponentInChildren<Forward>().enabled = true;
+            tassieModel.hunger = tassieModel.maxHunger;
             foreach (SpawnPoint spawnPoint in SpawnPoint.spawnPoints)
             {
                 if (spawnPoint.typeOfPointOfPoint == SpawnPoint.TypeOfPoint.Forest)

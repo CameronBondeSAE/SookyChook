@@ -159,8 +159,8 @@ MonoBehaviour:
   atPrey: 0
   returnHome: 0
   prey: {fileID: 0}
-  hunger: 0
-  hungerthreshhold: 0
+  hunger: 30
+  hungerthreshhold: 20
 --- !u!114 &8048906245288645218
 MonoBehaviour:
   m_ObjectHideFlags: 0

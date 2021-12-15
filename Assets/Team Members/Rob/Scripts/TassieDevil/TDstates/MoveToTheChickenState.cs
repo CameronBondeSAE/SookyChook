@@ -36,7 +36,6 @@ namespace Rob
             //followPath.SetPath(tassieModel.prey);
             tassieModel.isAtFarm = false;
             owner.GetComponentInChildren<Wander>().enabled = false;
-            owner.GetComponentInChildren<Forward>().speed = 60f;
 
         }
 

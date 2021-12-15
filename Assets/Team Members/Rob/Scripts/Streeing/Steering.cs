@@ -29,19 +29,19 @@ public class Steering : MonoBehaviour
         if (Physics.Raycast(rayForward, out hit, checkDist))
         {
             float distanceTo = (checkDist - hit.distance) * multiplyer;
-            rb.AddRelativeTorque(Vector3.up * torque * checkDist * multiplyer, ForceMode.Acceleration);
+            rb.AddRelativeTorque(Vector3.up * torque * checkDist * multiplyer, ForceMode.VelocityChange);
         }
 
         if (Physics.Raycast(rayRight, out hit, checkDistRight))
         {
             float distanceTo = (checkDistRight - hit.distance) * multiplyer;
-            rb.AddRelativeTorque(Vector3.up * torque * checkDistRight * multiplyer, ForceMode.Acceleration);
+            rb.AddRelativeTorque(Vector3.up * torque * (checkDistRight) * multiplyer, ForceMode.VelocityChange);
         }
 
         if (Physics.Raycast(rayLeft, out hit, checkDistLeft))
         {
             float distanceTo = (checkDistLeft - hit.distance) * multiplyer;
-            rb.AddRelativeTorque(Vector3.up * torque * checkDistLeft * multiplyer, ForceMode.Acceleration);
+            rb.AddRelativeTorque(Vector3.up * torque * (checkDistLeft) * multiplyer, ForceMode.VelocityChange);
             
         }
     }

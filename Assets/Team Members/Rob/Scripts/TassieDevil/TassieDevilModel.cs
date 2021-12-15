@@ -23,6 +23,31 @@ public class TassieDevilModel : MonoBehaviour
 
     public int hunger;
     public int hungerthreshhold;
+    public int maxHunger;
 
-    
+
+    private void Start()
+    {
+        hunger = maxHunger;
+        StartCoroutine(DecreaseHunger());
+    }
+
+    private IEnumerator DecreaseHunger()
+    {
+        yield return new WaitForSeconds(1f);
+        hunger -= 1;
+        if (hunger <= 0)
+        {
+            hunger = 0;
+        }
+        StartCoroutine(DecreaseHunger());
+    }
+
+    private void Update()
+    {
+        if (hunger <= hungerthreshhold)
+        {
+            isHungry = true;
+        }
+    }
 }

@@ -36,7 +36,7 @@ namespace Rob
             base.Execute(aDeltaTime, aTimeScale);
             foreach (ChickenModel chicken in ChickenManager.Instance.chickensList)
             {
-                if (fov.CanISee(chicken.gameObject.transform))
+                if (fov.CanISee(chicken.transform))
                 {
                     tassieModel.seeChicken = true;
                     tassieModel.prey = chicken.transform;
