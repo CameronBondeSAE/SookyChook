@@ -15,8 +15,6 @@ public enum ProductType
 
 public class ChickenGrowingMode : GameModeBase
 {
-    //public OrderDropoffZone orderZone;
-
     [Serializable]
     public class Order
     {
@@ -24,10 +22,13 @@ public class ChickenGrowingMode : GameModeBase
         public int amount;
     }
 
+    public OrderPoint orderPoint;
+
     public List<Order> possibleOrders;
     public List<Order> currentOrders;
 
     public event Action<Order> NewOrderEvent;
+    public event Action<Order> OrderCompleteEvent;
     
     [Tooltip("Time between orders in real-time seconds, NOTE: Does not account for DayNightManager time dilation")]
     public Vector2 orderDelayRange = new Vector2(10, 15);
@@ -42,7 +43,7 @@ public class ChickenGrowingMode : GameModeBase
         base.Activate();
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
         ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
-        
+
         // Resets to starting time so game starts at morning and orders start appearing
         DayNightManager.Instance.ChangePhase(DayNightManager.DayPhase.Morning);
     }
@@ -71,6 +72,41 @@ public class ChickenGrowingMode : GameModeBase
         OrderCheck();
     }
 
+    public void CompleteOrder(CharacterModel player)
+    {
+        if (player.holdingObject != null)
+        {
+            GameObject heldObject = (player.holdingObject as MonoBehaviour).gameObject;
+
+            if (heldObject.GetComponent<ISellable>() == null)
+            {
+                MessagesManager.Instance.Show("You can't sell that!");
+                return;
+            }
+            
+            //HACK: Hard-coded to prevent player selling alive chickens
+            if (heldObject.GetComponent<ChickenModel>() && heldObject.GetComponent<Health>().isAlive)
+            {
+                MessagesManager.Instance.Show("You need to KILL that poor chicken!");
+                return;
+            }
+
+            foreach (Order order in currentOrders)
+            {
+                if (heldObject.GetComponent<ISellable>().GetProductType() == order.productType)
+                {
+                    OrderCompleteEvent?.Invoke(order);
+                    player.Drop(false);
+                    Destroy(heldObject);
+                    currentOrders.Remove(order);
+                    return;
+                }
+            }
+            
+            MessagesManager.Instance.Show("I don't want that!");
+        }
+    }
+
     public IEnumerator AcceptOrders()
     {
         while (true)
@@ -90,5 +126,13 @@ public class ChickenGrowingMode : GameModeBase
         {
             StopCoroutine(acceptingOrders);
         }
+    }
+
+    public override void EndMode()
+    {
+        base.EndMode();
+        
+        StopCoroutine(acceptingOrders);
+        
     }
 }

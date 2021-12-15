@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
-public class EggModel : MonoBehaviour
+public class EggModel : MonoBehaviour, ISellable
 {
     public GameObject chicken;
 
@@ -62,5 +62,10 @@ public class EggModel : MonoBehaviour
         //remove this object
         ChickenManager.Instance.fertilisedEggsList.Remove(this.gameObject);
         Destroy(this.gameObject);
+    }
+
+    public ProductType GetProductType()
+    {
+        return ProductType.Egg;
     }
 }
