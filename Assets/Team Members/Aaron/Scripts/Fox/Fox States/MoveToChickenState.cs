@@ -53,13 +53,14 @@ namespace Aaron
             
             turnTowards.target = chickenTarget.transform.position;
 
-            /*//Pathfinding info
+            //Pathfinding info
             Vector3Int foxLocation = new Vector3Int(Mathf.RoundToInt(owner.transform.position.x),
                 Mathf.RoundToInt(owner.transform.position.y), Mathf.RoundToInt(owner.transform.position.z));
             Vector3Int targetLocation = new Vector3Int(Mathf.RoundToInt(chickenTarget.transform.position.x),
                 Mathf.RoundToInt(chickenTarget.transform.position.y),
                 Mathf.RoundToInt(chickenTarget.transform.position.z));
-            owner.GetComponent<Pathfinding>().FindPath(foxLocation, targetLocation);*/
+            
+            owner.GetComponent<Pathfinding>().FindPath(foxLocation, targetLocation);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

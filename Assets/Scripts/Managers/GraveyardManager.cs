@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Tanks;
 using UnityEngine;
 
@@ -11,25 +12,30 @@ public class GraveyardManager : MonoBehaviour
     public GameObject ghost;
 
     //TODO sub to chicken murder event from somewhere; instantiate (to be enabled/disabled per relevant time cycle)
+
+    private void Awake()
+    {
+        DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChange;
+    }
+
+    void InstanceOnPhaseChange(DayNightManager.DayPhase obj)
+    {
+        if (obj == DayNightManager.DayPhase.Night || obj == DayNightManager.DayPhase.Midnight)
+        {
+            ReleaseGhosts();
+        }
+        
+        if (obj == DayNightManager.DayPhase.Morning)
+        {
+            ClearGhostChickens();
+        }
+    }
     private void SpawnGhosts()
     {
         GameObject copy = ghost;
         //TODO set spawn point
         Instantiate(copy, new Vector3(), copy.transform.rotation);
         ghostChickens.Add(copy);
-    }
-
-    private void Update()
-    {
-        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Night || DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Midnight)
-        {
-            ReleaseGhosts();
-        }
-
-        if (DayNightManager.Instance.currentPhase == DayNightManager.DayPhase.Morning)
-        {
-            ClearGhostChickens();
-        }
     }
 
     //On night cycle begin
