@@ -8,7 +8,10 @@ namespace Tom
     public class AttackEnemyState : AntAIState
     {
         public GameObject owner;
-    
+        private float attackTimer;
+        public float attackTime = 1f;
+        public float damage = 5f;
+        
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -24,9 +27,13 @@ namespace Tom
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            // Used for testing until enemy health is in
-            transform.root.Rotate(Vector3.up, 360 * Time.deltaTime);
+            attackTimer -= aDeltaTime;
+
+            if (attackTimer <= 0)
+            {
+                owner.GetComponent<Rooster_Model>().target.GetComponent<Health>().ChangeHealth(-damage);
+                attackTimer = attackTime;
+            }
         }
 
         public override void Exit()

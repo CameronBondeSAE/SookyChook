@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Anthill.AI;
 using Rob;
 using Tom;
 using UnityEngine;
@@ -10,6 +11,11 @@ public class Rooster_Model : AnimalBase
     public Vision vision;
     public Allegiances allegiances;
     public Transform target;
+
+    private void Awake()
+    {
+        GetComponent<Health>().DeathEvent += o => Death();
+    }
 
     public List<GameObject> FindEnemies()
     {
@@ -62,6 +68,14 @@ public class Rooster_Model : AnimalBase
 
         target = null;
         GetComponent<RoosterSense>().food = null;
+    }
+
+    public void Death()
+    {
+        GetComponent<Health>().isAlive = false;
+        GetComponent<AntAIAgent>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 90f);
     }
 
     public override void ReachedMaxHungry()

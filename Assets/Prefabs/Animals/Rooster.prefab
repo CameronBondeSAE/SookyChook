@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 1288111039}
   - component: {fileID: 1330411812580052518}
   - component: {fileID: 1395298930}
+  - component: {fileID: 1316894724}
   m_Layer: 0
   m_Name: Rooster
   m_TagString: Untagged
@@ -395,6 +396,19 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &1316894724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6557673940817428339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ca68f1a712d064b9956ff53d188e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodAmount: 1
 --- !u!1001 &6557673941351742158
 PrefabInstance:
   m_ObjectHideFlags: 0
