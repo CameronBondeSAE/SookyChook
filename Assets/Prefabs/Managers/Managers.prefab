@@ -1757,7 +1757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968138018486730030, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
       propertyPath: timeDilation
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4968138018486730030, guid: ddc995201da1c9545bf49fa72afa8dcb, type: 3}
       propertyPath: serializationData.Prefab
@@ -1887,6 +1887,10 @@ PrefabInstance:
     - target: {fileID: 2476738275429557678, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: m_LocalPosition.z
       value: -26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565702964615632914, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
+      propertyPath: skip
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2565702964615632914, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: orderPoint
@@ -2055,11 +2059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f40c3c0cb50574cb6f3e51402ab197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &910207172581546026 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3980623862539787676, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
-  m_PrefabInstance: {fileID: 4296346950470256054}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5487563337540801745 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8626659440781644135, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
@@ -2078,23 +2077,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.53550136, z: 2}
   m_Center: {x: 0, y: 0.26775068, z: 0.025000006}
---- !u!114 &218113613
-MonoBehaviour:
+--- !u!65 &8004335036962452836
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5487563337540801745}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f40c3c0cb50574cb6f3e51402ab197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderMenu: {fileID: 0}
-  refObject: {fileID: 0}
-  orderLateTime: 10
-  orderIcon: {fileID: 0}
-  orderIconPos: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7833811400849825135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6280543731218372825, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
