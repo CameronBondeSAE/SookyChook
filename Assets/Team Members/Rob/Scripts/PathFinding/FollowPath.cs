@@ -53,7 +53,7 @@ namespace Rob
                 Vector3 targetNodeWorld = PathFinding.Instance.ConvertGridToWorldSpace(targetPathNode.gridPos);
                 Vector3 targetWorldPosition = transform.InverseTransformPoint(targetNodeWorld);
                 float turningDirection = targetWorldPosition.x;
-                rb.AddTorque(Vector3.up * turningSpeed * turningDirection, ForceMode.Acceleration);
+                rb.AddRelativeTorque(Vector3.up * turningSpeed * turningDirection, ForceMode.Acceleration);
                 if (Vector3.Distance(transform.position, targetNodeWorld) < distanceToNode)
                 {
                     currentIndex++;
