@@ -86,6 +86,9 @@ public class OrderPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        OrderPointEvent?.Invoke(null);
+        if (other.GetComponent<CharacterModel>())
+        {
+            OrderPointEvent?.Invoke(other.GetComponent<CharacterModel>());
+        }
     }
 }
