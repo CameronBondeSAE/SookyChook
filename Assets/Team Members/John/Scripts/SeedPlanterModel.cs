@@ -6,7 +6,6 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 {
     //public TractorModel tractorModel;
     public GameObject seed;
-    public SeedPlanter_ShopPanel shop;
     public float planterSpeed = 3f;
     public Transform[] plantPositions;
 
@@ -46,7 +45,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     // Start is called before the first frame update
     void Start()
     {
-        if (shop is { }) shop.PlanterUpgradedEvent += Upgrade;
+        //if (shop is { }) shop.PlanterUpgradedEvent += Upgrade;
 
         //Default (lvl 1) plant positions used for only planting 2 seeds
         currentPlantPositions.Add(plantPositions[2]);

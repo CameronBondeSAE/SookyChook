@@ -44,6 +44,12 @@ public class CashManager : ManagerBase<CashManager>
         PlayMoneySound(collectMoneySound);
     }
 
+    public void TooExpensive()
+    {
+        moneyUI.transform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f, 1);
+        moneyUI.DOColor(Color.red, 0.2f).OnComplete(ResetColor);
+    }
+
     private void ResetColor()
     {
         moneyUI.DOColor(Color.white, 0.5f);

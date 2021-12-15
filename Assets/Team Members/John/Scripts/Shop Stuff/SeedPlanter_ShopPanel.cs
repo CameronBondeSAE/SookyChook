@@ -75,30 +75,32 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
         upgradePriceText.text = "BUY: " + upgradePrice;
     }
 
+    //Buying Planter Upgrades
     public void BuyUpgrade()
     {
+        //Do not upgrade if already max level
         if (seedPlanter.planterLevel == seedPlanter.maxlevel)
         {
             Debug.Log("Max Level");
             return;
         }
 
+        //If can afford & seed planter is not max level upgrade the seed planter
         if (CashManager.Instance.totalMoney >= upgradePrice && seedPlanter.planterLevel != seedPlanter.maxlevel)
         {
-            PlanterUpgradedEvent?.Invoke();
+            seedPlanter.Upgrade();
             CashManager.Instance.TakeMoney(upgradePrice);
             return;
         }
 
+        //If cannot afford
         if(CashManager.Instance.totalMoney < upgradePrice)
         {
-            Debug.Log("Too Expensive");
-
-            //Trigger EFX/SFX if item is too expensive to purcase (Player feedback)
-            TooExpensiveEvent?.Invoke();
+            CashManager.Instance.TooExpensive();
         }
     }
 
+    //Buying Seed Refills
     public void BuySeedRefill()
     {
         if(seedPlanter.seedsAvailable < seedPlanter.maxSeeds && CashManager.Instance.totalMoney > seedRefillPrice)
