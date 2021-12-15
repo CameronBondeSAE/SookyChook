@@ -72,23 +72,17 @@ namespace Aaron
             Debug.Log(JsonUtility.ToJson(this));
         }
 
-        private void OnEnable()
-        {
-            foreach (var chicken in chickensList)
-            {
-                chicken.GetComponent<Health>().DeathEvent += RemoveChicken;
-            }
-        }
-
         public void RemoveChicken(GameObject chicken)
         {
+	        chicken.GetComponent<Health>().DeathEvent -= RemoveChicken;
+	        chickensList.Remove(chicken.GetComponent<ChickenModel>());
             ChickenDeathEvent?.Invoke();
-            chickensList.Remove(chicken.GetComponent<ChickenModel>());
         }
 
         public void AddChicken(ChickenModel chicken)
         {
             chickensList.Add(chicken);
+            chicken.GetComponent<Health>().DeathEvent += RemoveChicken;
         }
         
         private void FixedUpdate()

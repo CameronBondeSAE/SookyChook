@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 8466676385385379710}
   - component: {fileID: 4195831418780715697}
   - component: {fileID: 156555025977368526}
+  - component: {fileID: 1290145012959781973}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -477,6 +478,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1916d0d9b24592459aa5f944675ad06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1290145012959781973
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648933817718183396}
+  m_Material: {fileID: 13400000, guid: 5bb2eb2321ca27c4d973d6cabda7b3c9, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3793912, y: 0.5190827, z: 0.36407477}
+  m_Center: {x: -0.00453496, y: 0.35123953, z: -0.0018419325}
 --- !u!1 &1648991387308690618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1050,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2212341911486942333}
-  - component: {fileID: 4378229690760209803}
   - component: {fileID: 5428111375497805965}
   m_Layer: 0
   m_Name: Colliders
@@ -1060,19 +1073,6 @@ Transform:
   m_Father: {fileID: 1651082032513863914}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4378229690760209803
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3417233862682901905}
-  m_Material: {fileID: 13400000, guid: 5bb2eb2321ca27c4d973d6cabda7b3c9, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.25831914, y: 0.40461478, z: 0.36407477}
-  m_Center: {x: 0.0031696558, y: 0.4084735, z: -0.0018419325}
 --- !u!135 &5428111375497805965
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1084,8 +1084,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Center: {x: 0, y: 0.204, z: 0}
+  m_Radius: 0.14
+  m_Center: {x: 0, y: 0.14, z: 0}
 --- !u!1 &4499624867795886379
 GameObject:
   m_ObjectHideFlags: 0
