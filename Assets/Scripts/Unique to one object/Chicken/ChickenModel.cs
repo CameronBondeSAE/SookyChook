@@ -16,7 +16,7 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable
 
 	public event Action InteractEvent;
 	public event Action<bool> PickUpEvent;
-
+	
 	Rigidbody rb;
 
 	[SerializeField]

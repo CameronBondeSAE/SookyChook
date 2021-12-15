@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
@@ -42,6 +43,7 @@ public class Seeds : MonoBehaviour, IWaterable
             
         //Destroy Seeds and Grow Grass
         GameObject.Destroy(gameObject);
-        GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
+        GameObject newGrass = GameObject.Instantiate(grassSpawn, transform.localPosition, Quaternion.identity);
+        newGrass.transform.DOShakeRotation(0.5f);
     }
 }

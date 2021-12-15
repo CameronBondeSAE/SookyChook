@@ -22,8 +22,11 @@ public class GoToFood_State : SookyAntAIState
         turnToward.enabled = true;
 
         chickenModel = owner.GetComponent<ChickenModel>();
-        Vector3 destination = chickenModel.targetEdible.transform.position;
-        owner.GetComponent<PathfindingAgent>().FindPath(chickenModel.transform.position, destination);
+        if (chickenModel.targetEdible != null)
+        {
+	        Vector3 destination = chickenModel.targetEdible.transform.position;
+	        owner.GetComponent<PathfindingAgent>().FindPath(chickenModel.transform.position, destination);
+        }
 
         List<PathfindingGrid.Node> path = owner.GetComponent<PathfindingAgent>().path;
 
