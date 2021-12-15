@@ -19,7 +19,7 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
     public int seedRefillPrice = 250;
 
 
-    public SeedPlanterModel seedPlanter;
+    SeedPlanterModel seedPlanter;
 
     //Event
     public event Action PlanterUpgradedEvent;
@@ -29,6 +29,9 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
     void Start()
     {
         description.text = "Increase seed planting productivity";
+
+        //Find the seedPlanter in the scene
+        seedPlanter = FindObjectOfType<SeedPlanterModel>();
     }
 
     // Update is called once per frame
