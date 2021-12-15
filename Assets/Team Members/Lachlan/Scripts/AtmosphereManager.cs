@@ -33,26 +33,19 @@ public class AtmosphereManager : MonoBehaviour
         
         // Sun Rotation
         transform.rotation=Quaternion.Euler(sunPosition, 0, 0);
-        //Quaternion.Euler(sunPosition, 0, 0);
-        //if (Sun == true && Moon==false)
-        //{
-            //Sun = currentState;
-        //}
-        //if (Moon == true && Sun ==false)
-        //{
-            //Moon = currentState;
-        //}
+
+        //time is dawn
+        if (sunPosition >= -95)
+        {
+            Sun.SetActive(true);
+        }
         
         // if time is morning
         if (sunPosition >= -75)
         {
-            //Sun = Sun.GetComponent<Light>().enabled;
-            //currentState = Sun;
             Moon.SetActive(false);
-            Sun.SetActive(true);
+            //Sun.SetActive(true);
             currentState = Sun;
-            //sunLight.enabled = true;
-            //moonLight.enabled = false;
         }
         
         // if time is noon  
