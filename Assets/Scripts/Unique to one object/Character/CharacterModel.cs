@@ -237,8 +237,8 @@ public class CharacterModel : MonoBehaviour
 
     private void Pickup(GameObject pickupGO)
     {
-        holdingObjectGO = pickupGO;
-        holdingObject = pickupGO.GetComponent<IPickupable>();
+        holdingObjectGO = pickupGO.GetComponentInParent<Root>().gameObject;
+        holdingObject = pickupGO.GetComponentInParent<Root>().GetComponent<IPickupable>();
         holdingObject.PickUp();
         holdingObjectGO.transform.parent = holdingMount;
         holdingObjectGO.transform.localPosition = Vector3.zero;
@@ -247,8 +247,10 @@ public class CharacterModel : MonoBehaviour
 
     public void Drop(bool throwInFront, bool reposition = true)
     {
+	    // Unattach from Character
         holdingObjectGO.transform.parent = null;
         holdingObjectGO.transform.rotation = transform.rotation;
+
         holdingObjectGO.GetComponent<IPickupable>().PutDown();
         if (throwInFront)
             holdingObjectGO.GetComponent<Rigidbody>().velocity =

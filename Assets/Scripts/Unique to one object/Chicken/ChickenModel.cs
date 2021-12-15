@@ -66,7 +66,7 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 	public void PutDown()
 	{
 		GetComponent<Rigidbody>().isKinematic = false;
-		GetComponent<Collider>().enabled = true;
+		//GetComponentsInChildren<Collider>().enabled = true;
 		PickUpEvent?.Invoke(false);
 	}
 	
