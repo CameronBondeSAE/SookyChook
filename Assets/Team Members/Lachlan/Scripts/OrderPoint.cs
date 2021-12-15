@@ -38,6 +38,7 @@ public class OrderPoint : MonoBehaviour
     void Start()
     {
         refObject.GetComponent<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
+        refObject.GetComponent<ChickenGrowingMode>().OrderCompleteEvent += RemoveOrderMenu;
     }
 
     void RemoveOrderMenu(ChickenGrowingMode.Order order)
@@ -49,12 +50,13 @@ public class OrderPoint : MonoBehaviour
             if (order == orderUIText.order)
             {
                 OrderUIText sameOrder = new OrderUIText();
-                orderUITexts.Add(sameOrder);
+                orderUITexts.Remove(sameOrder);
             }
             
         }
 
-        Destroy(orderIcon);
+        //if()
+        //Destroy(orderIcon);
 
     }
 
@@ -65,7 +67,7 @@ public class OrderPoint : MonoBehaviour
         orderMenu = Instantiate(orderIcon, orderIconPos);
         OrderUIText orderUIText = new OrderUIText();
         orderUIText.uiTextGameObject = orderMenu;
-        RemoveOrderMenu(order);
+        //RemoveOrderMenu(order);
 
 
         GetComponentInChildren<TextMeshProUGUI>().text = order.productType.ToString();
