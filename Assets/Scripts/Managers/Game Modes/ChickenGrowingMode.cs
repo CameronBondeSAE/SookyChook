@@ -21,6 +21,7 @@ public class ChickenGrowingMode : GameModeBase
     {
         public ProductType productType;
         public int amount;
+        public int sellPrice;
     }
 
     public OrderPoint orderPoint;
@@ -45,9 +46,6 @@ public class ChickenGrowingMode : GameModeBase
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
         ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
         orderPoint.OrderPointEvent += CompleteOrder;
-
-        // Resets to starting time so game starts at morning and orders start appearing
-        DayNightManager.Instance.ChangePhase(DayNightManager.DayPhase.Morning);
     }
     
     public void ChickenCheck()
@@ -100,6 +98,7 @@ public class ChickenGrowingMode : GameModeBase
                 if (heldObject.GetComponent<ISellable>().GetProductType() == order.productType)
                 {
                     OrderCompleteEvent?.Invoke(order);
+                    CashManager.Instance.AddMoney(order.sellPrice);
                     player.Drop(false);
                     Destroy(heldObject);
                     currentOrders.Remove(order);

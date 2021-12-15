@@ -55,8 +55,10 @@ MonoBehaviour:
   possibleOrders:
   - productType: 0
     amount: 1
+    sellPrice: 250
   - productType: 1
     amount: 1
+    sellPrice: 100
   currentOrders: []
   orderDelayRange: {x: 10, y: 15}
   maxOrders: 10
