@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: -7356258711812787271}
-  deliveryTruck: {fileID: 0}
+  deliveryTruck: {fileID: 6880129374932396767, guid: 49e4664fd2e4a194a83cd49f8db1fe48, type: 3}
   deliveryTruckPos: {fileID: 0}
   deliveryTime: 11.8
   truckSpeed: 1

@@ -173,9 +173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderMenu: {fileID: 839125658032789676}
+  refObject: {fileID: 177049242536628545}
   orderLateTime: 10
   orderIcon: {fileID: 1491903589189090477}
-  orderIconPos: {fileID: 0}
+  orderIconPos: {fileID: 7263088223543755435}
 --- !u!1 &839125658032789676
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,8 +374,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
