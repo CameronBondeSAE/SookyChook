@@ -62,8 +62,9 @@ public class ChickenGrow_Intro : MonoBehaviour
 		MessagesManager.Instance.Show("Oh no! That chicken looks mighty hungry.. but there's no grass! Oh woe!");
 		yield return new WaitForSeconds(7f);
 		chickenModel.GetComponent<Health>().ForceDie();
-		MessagesManager.Instance.Show("YOU MONSTER. You WANTED that chicken DEAD. Use your guilty tears to grow the grass BASTARD");
 		yield return new WaitForSeconds(2f);
+		MessagesManager.Instance.Show("YOU MONSTER. You WANTED that chicken DEAD. Use your guilty tears to grow the grass BASTARD");
+		yield return new WaitForSeconds(10f);
 		MessagesManager.Instance.Show("Well.. seeing as you're now a chicken MURDERER, you may as well sell their INNOCENT FLESH");
 		yield return new WaitForSeconds(7f);
 		spawnerChickens.SpawnMultiple();

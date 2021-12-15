@@ -16,16 +16,16 @@ namespace Tom
             
             GUILayout.Label("Set Phase");
             
+            if (GUILayout.Button("Dawn"))
+            {
+	            ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Dawn);
+            }
+        
             if (GUILayout.Button("Morning"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Morning);
             }
             
-            if (GUILayout.Button("Dawn"))
-            {
-                ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Dawn);
-            }
-        
             if (GUILayout.Button("Noon"))
             {
                 ((DayNightManager)target).ChangePhase(DayNightManager.DayPhase.Noon);

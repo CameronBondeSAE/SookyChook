@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 9.05, y: 1.79, z: 0.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostChickens: []
-  ghost: {fileID: 0}
+  ghostPrefab: {fileID: 700925700284736248, guid: d3dfc517ddd4a60478c0a23cbaa0fa25, type: 3}
