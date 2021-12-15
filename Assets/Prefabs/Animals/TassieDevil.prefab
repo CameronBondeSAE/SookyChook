@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 942582001}
-  speed: 45
+  speed: 20
 --- !u!114 &3294328559912015751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,8 +64,8 @@ MonoBehaviour:
   multiplyer: 3
   torque: 2
   checkDist: 5
-  checkDistLeft: 3
-  checkDistRight: 3
+  checkDistLeft: 1
+  checkDistRight: 1
 --- !u!114 &7419186840531261515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiAgent: {fileID: 8048906245288645218}
   seeChicken: 0
-  isHungry: 0
+  isHungry: 1
   isMoving: 0
   isLooking: 1
   atTarget: 0
@@ -159,8 +159,9 @@ MonoBehaviour:
   atPrey: 0
   returnHome: 0
   prey: {fileID: 0}
-  hunger: 30
+  hunger: 0
   hungerthreshhold: 20
+  maxHunger: 30
 --- !u!114 &8048906245288645218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +209,8 @@ MonoBehaviour:
   currentIndex: 0
   tassieDevilModel: {fileID: 2356582299866801059}
   turningSpeed: 100
+  newSpeed: 60
+  oldSpeed: 0
   wander: {fileID: 7419186840531261515}
   forward: {fileID: 1526219752414524807}
 --- !u!114 &6393622567751630315
