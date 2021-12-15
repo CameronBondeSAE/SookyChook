@@ -49,7 +49,7 @@ public interface ITractorAttachment
 
 public interface ISellable
 {
-	void GetProductType(ProductType productType);
+	ProductType GetProductType();
 }
 
 public interface IUpgradeable

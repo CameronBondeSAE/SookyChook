@@ -245,7 +245,7 @@ public class CharacterModel : MonoBehaviour
         holdingObjectGO.transform.rotation = holdingMount.rotation;
     }
 
-    void Drop(bool throwInFront, bool reposition = true)
+    public void Drop(bool throwInFront, bool reposition = true)
     {
         holdingObjectGO.transform.parent = null;
         holdingObjectGO.transform.rotation = transform.rotation;

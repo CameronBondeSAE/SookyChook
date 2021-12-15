@@ -4,7 +4,7 @@ using Tom;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ChickenModel : AnimalBase, IInteractable, IPickupable
+public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 {
 	public bool foundFood;
 	public bool atFood;
@@ -65,6 +65,11 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable
 		GetComponent<Rigidbody>().isKinematic = false;
 		GetComponent<Collider>().enabled = true;
 		PickUpEvent?.Invoke(false);
+	}
+	
+	public ProductType GetProductType()
+	{
+		return ProductType.Chicken;
 	}
 
 	public void Death(GameObject aGameObject)
