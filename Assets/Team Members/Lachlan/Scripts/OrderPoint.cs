@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -78,5 +79,9 @@ public class OrderPoint : MonoBehaviour
         GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.red, 2.0f);
         StopCoroutine(OrderUI());
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if()
+    }
 }

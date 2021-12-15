@@ -2130,6 +2130,14 @@ PrefabInstance:
       propertyPath: m_ShadowAngle
       value: 35.4
       objectReference: {fileID: 0}
+    - target: {fileID: 6363891112465978065, guid: 2dacd1a40ea8a6b4791fadb4f894eed1, type: 3}
+      propertyPath: m_ShadowAngle
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363891112465978067, guid: 2dacd1a40ea8a6b4791fadb4f894eed1, type: 3}
+      propertyPath: m_AngularDiameter
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6365689200345595399, guid: 2dacd1a40ea8a6b4791fadb4f894eed1, type: 3}
       propertyPath: m_Name
       value: AtmosphereManager

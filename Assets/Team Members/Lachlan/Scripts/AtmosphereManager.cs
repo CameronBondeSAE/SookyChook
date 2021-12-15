@@ -65,10 +65,14 @@ public class AtmosphereManager : MonoBehaviour
         if (sunPosition >= 75)
         {
             currentState = Moon;
-            Sun.SetActive(false);
+            //Sun.SetActive(false);
             Moon.SetActive(true);
         }
-        
+
+        if (sunPosition >= 100)
+        {
+            Sun.SetActive(false);
+        }
         
         // if time is night
         if (sunPosition>=135)
