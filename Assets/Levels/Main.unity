@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3.5869827, g: 3.6770325, b: 4.4573746, a: 1}
+  m_IndirectSpecularColor: {r: 3.5878239, g: 3.678463, b: 4.4606323, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1020,30 +1020,6 @@ PrefabInstance:
       propertyPath: field of view
       value: 24.18
       objectReference: {fileID: 0}
-    - target: {fileID: 1049785893, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.27465674
-      objectReference: {fileID: 0}
-    - target: {fileID: 1049785893, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.15385646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1049785893, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.04457065
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494798400, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.27465674
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494798400, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.15385646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494798400, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.04457065
-      objectReference: {fileID: 0}
     - target: {fileID: 168134506085575909, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -1072,18 +1048,6 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1984760717852879853, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-    - target: {fileID: 2561181459901149623, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 28.45604
-      objectReference: {fileID: 0}
-    - target: {fileID: 2561181459901149623, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.6201446
-      objectReference: {fileID: 0}
-    - target: {fileID: 2561181459901149623, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.411063
-      objectReference: {fileID: 0}
     - target: {fileID: 4983992865539987788, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 

@@ -11,7 +11,8 @@
                     "id": "4e94a8e8-e91a-475d-a3dc-1bfbefaaed8e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pickup",
@@ -19,7 +20,8 @@
                     "id": "7fe6c25e-4992-414d-847e-43444f010da0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -27,7 +29,8 @@
                     "id": "a1e0a328-c3c2-4f0c-addf-2be3760347c7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Movement",
@@ -35,7 +38,8 @@
                     "id": "482ae73e-6934-4184-920b-e82d1fe550ae",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Cry",
@@ -43,7 +47,8 @@
                     "id": "2e44c5d1-dfcd-4a5f-9095-9a5c951e972b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -268,37 +273,70 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "4ea33bff-e59a-4f7b-837e-f0a664d0b60d",
+                    "name": "One Modifier",
+                    "id": "23bf5c33-614f-4b18-ab7e-f885a9f191bd",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cry",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "cbd905d0-8b7c-4760-9460-a063bb5d88a5",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard WASD",
+                    "action": "Cry",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "aadeaa87-16f4-4c5b-b644-0783404defb0",
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard WASD",
                     "action": "Cry",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "21797b72-d33a-44ef-97d2-047b9c8f40bf",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cry",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "43ec59bb-d87b-4c1e-b0a7-0bc8f88ea490",
+                    "name": "modifier",
+                    "id": "8c1768df-6406-4bf6-bc12-ccb503ae22c3",
+                    "path": "<Keyboard>/rightCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard Arrows",
+                    "action": "Cry",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "f20d6643-6a2d-48da-a90b-86d09e394c8b",
                     "path": "<Keyboard>/slash",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard Arrows",
                     "action": "Cry",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3cc1aa67-16a4-4d7e-9415-fe6a6bb41a71",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Cry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -312,7 +350,8 @@
                     "id": "d3f23263-2e8f-42a2-ae1c-7b207ac96550",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ToggleMenu",
@@ -320,7 +359,8 @@
                     "id": "77651c10-845c-4208-b569-869618abdb1c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
