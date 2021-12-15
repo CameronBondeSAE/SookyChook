@@ -123,9 +123,9 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
                 tractorMoving = false;
             }
         }
-        else if(tractor == null)
+        //else if(tractor == null)
         {
-            tractorMoving = false;
+            //tractorMoving = false;
         }
     }
 
@@ -147,8 +147,10 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     {
         isAttached = false;
         tractor = null;
-        StopCoroutine(plantCoroutine);
         IsAttachedEvent?.Invoke(false);
+
+        //This StopCoroutine seems to be causing a bug with reattaching the planter?
+        //StopCoroutine(plantCoroutine);
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
