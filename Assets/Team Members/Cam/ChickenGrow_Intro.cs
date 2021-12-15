@@ -32,7 +32,7 @@ public class ChickenGrow_Intro : MonoBehaviour
 	private void SkipIntro()
 	{
 		// Rip through the intro
-		orderPoint.gameObject.SetActive(false);
+		//orderPoint.gameObject.SetActive(false);
 		dayNightManager.enabled = false;
 		dayNightManager.ChangePhase(DayNightManager.DayPhase.Morning);
 		spawnerSeeds.SpawnMultiple();

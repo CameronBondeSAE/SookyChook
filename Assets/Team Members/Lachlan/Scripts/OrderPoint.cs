@@ -16,7 +16,7 @@ public class OrderPoint : MonoBehaviour
     public GameObject orderMenu;
     public GameObject refObject;
     
-    public float orderLateTime = 10.0f;
+    public float orderLateTime = 25.0f;
 
     [SerializeField]
     private GameObject orderIcon;
@@ -49,14 +49,18 @@ public class OrderPoint : MonoBehaviour
         {
             if (order == orderUIText.order)
             {
-                OrderUIText sameOrder = new OrderUIText();
-                orderUITexts.Remove(sameOrder);
+                OrderUIText sameOrder = orderUIText;
+                orderUITexts.Add(sameOrder);
             }
-            
         }
 
-        //if()
-        //Destroy(orderIcon);
+        //orderUITexts.Remove(orderUITexts.Find(foundOrderUIText.uiTextGameObject);
+
+
+        //if(orderUITexts == order.productType.ToString())
+        //{
+        // orderUITexts.Remove(foundOrderUIText.uiTextGameObject(order));
+        //}
 
     }
 
@@ -81,6 +85,7 @@ public class OrderPoint : MonoBehaviour
 
     public IEnumerator OrderUI()
     {
+        transform.DOPunchPosition(Vector3.one, 1, 50);
         yield return new WaitForSeconds(orderLateTime);
         GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.red, 2.0f);
         StopCoroutine(OrderUI());

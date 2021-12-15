@@ -1026,6 +1026,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 8654394293049248899}
     m_Modifications:
     - target: {fileID: -6631753516900096408, guid: 1f1d4f853c1dd4944989b7873ae013df, type: 3}
+      propertyPath: truckSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6631753516900096408, guid: 1f1d4f853c1dd4944989b7873ae013df, type: 3}
       propertyPath: deliveryTruck
       value: 
       objectReference: {fileID: 0}
@@ -1836,6 +1840,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chicken Growing Mode
       objectReference: {fileID: 0}
+    - target: {fileID: 783291470590428079, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
+      propertyPath: m_fontSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 783291470590428079, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1012832290871376248, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2028,7 +2040,9 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7261137626591601153, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
+    - {fileID: 1869755132572132114, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
 --- !u!114 &700147588402226941 stripped
 MonoBehaviour:

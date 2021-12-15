@@ -32,6 +32,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     bool isAttached = false;
     bool tractorMoving;
     TractorModel tractor;
+    Coroutine plantCoroutine;
 
     //Events
     public event System.Action LevelUpEvent;
@@ -122,6 +123,10 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
                 tractorMoving = false;
             }
         }
+        //else if(tractor == null)
+        {
+            //tractorMoving = false;
+        }
     }
 
     public void Attach(TractorModel aTractorModel)
@@ -129,12 +134,12 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         isAttached = true;
         tractor = aTractorModel;
         
-        transform.parent = aTractorModel.transform;
+        transform.parent = aTractorModel.attachmentMount.transform;
         transform.localPosition = attachOffset;
         transform.rotation = aTractorModel.transform.rotation;
         
         
-        StartCoroutine(PlantSeeds());
+        plantCoroutine = StartCoroutine(PlantSeeds());
         IsAttachedEvent?.Invoke(true);
     }
 
@@ -142,8 +147,10 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     {
         isAttached = false;
         tractor = null;
-        StopCoroutine(PlantSeeds());
         IsAttachedEvent?.Invoke(false);
+
+        //This StopCoroutine seems to be causing a bug with reattaching the planter?
+        //StopCoroutine(plantCoroutine);
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);

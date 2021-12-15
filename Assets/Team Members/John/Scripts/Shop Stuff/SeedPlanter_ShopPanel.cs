@@ -106,8 +106,16 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
     //Buying Seed Refills
     public void BuySeedRefill()
     {
+        //If seed planter is already full of seeds - don't both checking if player can afford to buy
+        if(seedPlanter.seedsAvailable >= seedPlanter.maxSeeds)
+        {
+            Debug.Log("Seeds already max");
+            //UI Tween here
+            return;
+        }
+
         //Too Expensive don't buy
-        if(CashManager.Instance.totalMoney < seedRefillPrice)
+        if(CashManager.Instance.totalMoney < seedRefillPrice && seedPlanter.seedsAvailable < seedPlanter.maxSeeds)
         {
             CashManager.Instance.TooExpensive();
             return;
