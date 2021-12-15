@@ -18,6 +18,7 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
     int upgradePrice;
     public int seedRefillPrice = 250;
 
+
     public SeedPlanterModel seedPlanter;
 
     //Event

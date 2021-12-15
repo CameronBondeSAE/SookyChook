@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     public bool autoRun = false;
     
     public GameObject menuView;
+    public GameObject shop;
     [SerializeField]
     private GameObject gameModeButton;
 
@@ -49,6 +50,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame(int numberOfPlayers)
     {
         menuView.SetActive(false);
+        shop.SetActive(true);
         
         GameManager.Instance.SpawnPlayers(numberOfPlayers);
 

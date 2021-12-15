@@ -288,12 +288,14 @@ MonoBehaviour:
   - {fileID: 5831686633869387956}
   - {fileID: 7317720330215834401}
   - {fileID: 3588331998082356444}
+  seedsAvailable: 50
+  maxSeeds: 50
+  seedSpawnOffset: {x: 0, y: 0.6, z: 0}
   attachOffset: {x: 0, y: 0, z: -3}
   planterLevel: 1
   raycastOffset: {x: 0, y: 0.5, z: 0}
   tractorVelocity: 0
   maxlevel: 3
-  seedsAvailable: 50
 --- !u!1 &5188470844778316782
 GameObject:
   m_ObjectHideFlags: 0

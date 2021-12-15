@@ -13,6 +13,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     [Header("Seeds Variables")]
     public int seedsAvailable = 50;
     public int maxSeeds = 50;
+    public Vector3 seedSpawnOffset = new Vector3(0, 1f, 0);
 
 
     [Header("Attachment offset when on vehicle")]
@@ -82,7 +83,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
                 if(newHit.collider)
                 {
                     Debug.Log("PLanting Seed");
-                    GameObject newSeed = Instantiate(seed, newHit.point, Quaternion.identity);
+                    GameObject newSeed = Instantiate(seed, newHit.point + seedSpawnOffset, Quaternion.identity);
                 }
 
                 //hits.Remove(newHit);
