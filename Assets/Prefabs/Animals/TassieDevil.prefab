@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541bb2398d113d14d9211b84ad0f1f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  speed: 0
+  rb: {fileID: 942582001}
+  speed: 45
 --- !u!114 &3294328559912015751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,11 +60,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3ad93a71874a14db98685f33c0e028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  torque: 0
-  checkDist: 0
-  checkDistLeft: 0
-  checkDistRight: 0
+  rb: {fileID: 942582001}
+  multiplyer: 3
+  torque: 2
+  checkDist: 5
+  checkDistLeft: 3
+  checkDistRight: 3
 --- !u!114 &7419186840531261515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,8 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f1f721484bb5d43b47ae690b9694e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  turningAmount: 0
+  rb: {fileID: 942582001}
+  turningAmount: 90
 --- !u!1 &1183116927532342443
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +96,7 @@ GameObject:
   - component: {fileID: 519455911}
   - component: {fileID: 6393622567751630315}
   - component: {fileID: 1360365784}
+  - component: {fileID: 6237370321019249155}
   m_Layer: 0
   m_Name: TassieDevil
   m_TagString: Untagged
@@ -155,6 +157,7 @@ MonoBehaviour:
   hasChicken: 0
   isAtFarm: 0
   atPrey: 0
+  returnHome: 0
   prey: {fileID: 0}
   hunger: 0
   hungerthreshhold: 0
@@ -187,7 +190,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &519455911
 MonoBehaviour:
@@ -196,16 +199,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183116927532342443}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a82253abef5a7274e948ff578234aafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToNode: 0.5
+  distanceToNode: 2
   currentIndex: 0
   tassieDevilModel: {fileID: 2356582299866801059}
-  turningSpeed: 0
-  wander: {fileID: 0}
+  turningSpeed: 100
+  wander: {fileID: 7419186840531261515}
+  forward: {fileID: 1526219752414524807}
 --- !u!114 &6393622567751630315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +237,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tassieDevilModel: {fileID: 2356582299866801059}
+--- !u!114 &6237370321019249155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183116927532342443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4712953eb7c34ea41a7f43191041ee64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 10
+  deathThreshold: 0
+  isAlive: 0
 --- !u!1 &2458460363309185224
 GameObject:
   m_ObjectHideFlags: 0
