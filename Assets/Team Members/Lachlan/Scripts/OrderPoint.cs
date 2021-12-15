@@ -48,9 +48,9 @@ public class OrderPoint : MonoBehaviour
             }
             
         }
-        
-        
-        
+
+        Destroy(orderIcon);
+
     }
 
     public void OrderMenu(ChickenGrowingMode.Order order)
