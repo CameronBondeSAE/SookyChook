@@ -19,18 +19,12 @@ namespace Aaron
         private TurnTowards turnTowards;
         private Wander wander;
         private MoveForward moveForward;
-
-        public Rigidbody rb;
-
+        private Rigidbody rb;
+        private Vector3 targetPosition;
+        
         private bool rotateTowards = false;
         private bool moveTowards = false;
-
-        private Vector3 targetPosition;
-
-        public float speed = 20;
-        public float turnSpeed = 10;
         private float distance;
-
         private int currentNodeIndex;
 
         public override void Create(GameObject aGameObject)
