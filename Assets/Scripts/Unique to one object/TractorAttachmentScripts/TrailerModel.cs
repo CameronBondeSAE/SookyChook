@@ -27,7 +27,7 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
 
     public void Attach(TractorModel aTractorModel)
     {
-        hingeJoint.connectedBody = aTractorModel.GetComponent<Rigidbody>();
+        //hingeJoint.connectedBody = aTractorModel.attachmentMount.GetComponent<Rigidbody>();
 
         // wheels.SetActive(true);
     }
