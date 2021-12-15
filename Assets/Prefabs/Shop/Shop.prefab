@@ -1245,7 +1245,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  totalMoney: 5000
+  totalMoney: 500
   moneyUI: {fileID: 6073556575303909029}
   audioSource: {fileID: 1325564986}
   buySound: {fileID: 8300000, guid: 3edb7ccff2a90cf44802226aff81c588, type: 3}

@@ -9,6 +9,7 @@ public class CashManager : ManagerBase<CashManager>
 {
     public int totalMoney = 5000;
     public TMP_Text moneyUI;
+    bool canPlayEFX = true;
 
     //Audio
     public AudioSource audioSource;
@@ -46,13 +47,24 @@ public class CashManager : ManagerBase<CashManager>
 
     public void TooExpensive()
     {
-        moneyUI.transform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f, 1);
-        moneyUI.DOColor(Color.red, 0.2f).OnComplete(ResetColor);
+        //Only play effects after the effect is done playing to prevent UI bug
+        if(canPlayEFX)
+        {
+            canPlayEFX = false;
+            moneyUI.transform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f, 1).OnComplete(ResetPlayEffects);
+            moneyUI.DOColor(Color.red, 0.2f).OnComplete(ResetColor);
+        }
     }
 
     private void ResetColor()
     {
         moneyUI.DOColor(Color.white, 0.5f);
+    }
+
+    //Prevent UI bug that stops text from returning to normal size if TooExpensive() is spammed
+    void ResetPlayEffects()
+    {
+        canPlayEFX = true;
     }
 
     //Play Whatever audio is called
