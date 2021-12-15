@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 
 public class OrderPoint : MonoBehaviour
@@ -11,36 +12,63 @@ public class OrderPoint : MonoBehaviour
     // Start is called before the first frame update
     [Header("Menu Properties")]
     public GameObject orderMenu;
-
+    public GameObject refObject;
+    
     public float orderLateTime = 10.0f;
 
     [SerializeField]
     private GameObject orderIcon;
-
+    
     [SerializeField]
     private Transform orderIconPos;
-    void Start()
+
+    public List<OrderUIText> orderUITexts = new List<OrderUIText>();
+
+    public class OrderUIText
     {
-        FindObjectOfType<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
+        public ChickenGrowingMode.Order order;
+        public GameObject uiTextGameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
+        refObject.GetComponent<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
+    }
+
+    void RemoveOrderMenu(ChickenGrowingMode.Order order)
+    {
+        OrderUIText foundOrderUIText = null;
+        
+        foreach (OrderUIText orderUIText in orderUITexts)
+        {
+            if (order == orderUIText.order)
+            {
+                OrderUIText sameOrder = new OrderUIText();
+                orderUITexts.Add(sameOrder);
+            }
+            
+        }
+        
+        
         
     }
 
-    void OrderMenu(ChickenGrowingMode.Order amount)
+    public void OrderMenu(ChickenGrowingMode.Order order)
     {
         //Playing around with colors and tweening
-        //TODO: Need to stack the list for the order. Probably requires instantiating new text.
-        GameObject orderMenu = Instantiate(orderIcon, orderIconPos);
-        GetComponentInChildren<TextMeshProUGUI>().text = amount.productType.ToString();
+        //Spawns Texts and Saves it in a List
+        orderMenu = Instantiate(orderIcon, orderIconPos);
+        OrderUIText orderUIText = new OrderUIText();
+        orderUIText.uiTextGameObject = orderMenu;
+        RemoveOrderMenu(order);
+
+
+        GetComponentInChildren<TextMeshProUGUI>().text = order.productType.ToString();
         transform.DOMove(Vector3.one, 2, false);
         GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.white, 0);
         StartCoroutine(OrderUI());
         //Debug for Order
-        Debug.Log(amount.productType.ToString());
+        Debug.Log(order.productType.ToString());
 
     }
 

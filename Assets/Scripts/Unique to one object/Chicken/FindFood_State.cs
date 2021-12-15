@@ -29,7 +29,7 @@ public class FindFood_State : SookyAntAIState
 		}
 
 
-		if (imInterestedInThese != null)
+		if (imInterestedInThese.Count>0)
 			owner.GetComponent<ChickenModel>().targetEdible =
 				imInterestedInThese[Random.Range(0, imInterestedInThese.Count)];
 		owner.GetComponent<ChickenModel>().foundFood    = true;

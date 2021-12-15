@@ -43,6 +43,7 @@ public class ChickenGrowingMode : GameModeBase
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
         ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
         
+        // Resets to starting time so game starts at morning and orders start appearing
         DayNightManager.Instance.ChangePhase(DayNightManager.DayPhase.Morning);
     }
     

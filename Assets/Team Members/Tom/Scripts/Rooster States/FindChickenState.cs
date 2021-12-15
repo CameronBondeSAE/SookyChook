@@ -10,6 +10,8 @@ namespace Tom
     {
         public GameObject owner;
         private Rooster_Model rooster;
+        private MoveForward forward;
+        private Wander wander;
     
         public override void Create(GameObject aGameObject)
         {
@@ -17,23 +19,28 @@ namespace Tom
 
             owner = aGameObject;
             rooster = owner.GetComponent<Rooster_Model>();
+            forward = owner.GetComponentInChildren<MoveForward>();
+            wander = owner.GetComponentInChildren<Wander>();
         }
 
         public override void Enter()
         {
             base.Enter();
+
+            wander.enabled = true;
+            forward.enabled = true;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
 
-            if (rooster.targetChicken == null)
+            if (rooster.target == null)
             {
                 List<GameObject> chickens = ChickenManager.Instance.chickensList;
                 if (chickens.Count > 0)
                 {
-                    rooster.targetChicken = chickens[Random.Range(0, chickens.Count)].transform;
+                    rooster.target = chickens[Random.Range(0, chickens.Count)].transform;
                     Finish();
                 }
             }
@@ -42,6 +49,9 @@ namespace Tom
         public override void Exit()
         {
             base.Exit();
+
+            wander.enabled = false;
+            forward.enabled = false;
         }
     }
 }

@@ -35,14 +35,12 @@ namespace Aaron
         void Start()
         {
 
-            //spawner = GetComponent<Spawner>();
+            spawner = FindObjectOfType<Spawner>();
             // spawner.SpawnMultiple();
             
             chickensList = new List<GameObject>();
             chickensList = spawner.spawned;
-            
 
-            
             roostersList = new List<GameObject>();
             fertilisedEggsList = new List<GameObject>();
 

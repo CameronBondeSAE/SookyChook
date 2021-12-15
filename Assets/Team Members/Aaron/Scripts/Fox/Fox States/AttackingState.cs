@@ -25,6 +25,7 @@ namespace Aaron
 
             owner = aGameObject;
             foxModel = owner.GetComponent<FoxModel>();
+            ChickenManager.Instance.ChickenDeathEvent += EatChicken;
         }
 
         public override void Enter()
@@ -74,11 +75,6 @@ namespace Aaron
         public override void Exit()
         {
             base.Exit();
-        }
-
-        private void OnEnable()
-        {
-            ChickenManager.Instance.ChickenDeathEvent += EatChicken;
         }
 
         void Attack()

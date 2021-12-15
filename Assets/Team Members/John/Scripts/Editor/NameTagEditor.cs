@@ -13,12 +13,12 @@ public class NameTagEditor : Editor
 
 		if (GUILayout.Button("Bad Name"))
 		{
-			(target as NameFloater_ViewModel)?.BadName();
+			(target as NameFloater_ViewModel)?.BadNameButton();
 		}
 
 		if (GUILayout.Button("Good Name"))
 		{
-			(target as NameFloater_ViewModel)?.GoodName();
+			(target as NameFloater_ViewModel)?.GoodNameButton();
 		}
 	}
 }

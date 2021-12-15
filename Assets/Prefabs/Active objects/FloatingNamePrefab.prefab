@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -19.590002}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed934dd325db71448938a6d05a5bcff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 7482787563748552553}
+  nameText: {fileID: 0}
   audioSource: {fileID: 1315720448}
   fart: {fileID: 8300000, guid: c6301b436b2062748be7c6ad101f677d, type: 3}
 --- !u!114 &7482787563748552553

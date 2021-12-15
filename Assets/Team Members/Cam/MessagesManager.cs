@@ -10,6 +10,8 @@ public class MessagesManager : ManagerBase<MessagesManager>
 
 	public float timeToShow = 2f;
 
+	public Coroutine coroutine;
+	
 	public override void Awake()
 	{
 		base.Awake();
@@ -19,12 +21,13 @@ public class MessagesManager : ManagerBase<MessagesManager>
 
 	public void Show(string message)
 	{
-		StartCoroutine(ShowCoroutine(message));
+		if (coroutine != null) StopCoroutine(coroutine);
+		coroutine = StartCoroutine(ShowCoroutine(message));
 	}
 
 	private IEnumerator ShowCoroutine(string message)
 	{
-		textMeshProUGUI.text = message;
+			textMeshProUGUI.text = message;
 		textMeshProUGUI.transform.localScale = Vector3.one * 2f;
 		textMeshProUGUI.transform.DOPunchScale(Vector3.one, 0.5f);
 		yield return new WaitForSeconds(timeToShow * (message.Length/20f));

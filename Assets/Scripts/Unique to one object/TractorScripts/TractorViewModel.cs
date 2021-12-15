@@ -32,7 +32,8 @@ public class TractorViewModel : MonoBehaviour
         //Rotate each turning wheel to simulate the vehicle turning
         foreach (Transform t in wheelGraphic)
         {
-            t.DOLocalRotateQuaternion(Quaternion.Euler(0, tractorModel.steeringAngle / 2, 0), turnSpeed);
+            // t.DOLocalRotateQuaternion(Quaternion.Euler(0, tractorModel.steeringAngle / 2, 0), turnSpeed);
+            t.rotation = Quaternion.Slerp( t.rotation, Quaternion.Euler(0, tractorModel.steeringAngle / 2, 0), turnSpeed);
             //t.DORotateQuaternion(Quaternion.Euler(0, tractorModel.steeringAngle/2, 0), 1f);
             //t.localRotation = Quaternion.Euler(0, tractorModel.steeringAngle / 2, 0);
         }

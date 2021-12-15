@@ -31,10 +31,10 @@ public class ChickenGrow_Intro : MonoBehaviour
 		spawnerSeeds.SpawnMultiple();
 		MessagesManager.Instance.Show("Hmm, those look like grass seeds. I wonder how you water them?");
 		yield return new WaitForSeconds(6f);
-		MessagesManager.Instance.Show("Oh no! That chicken looks mighty hungry.. but there's no grass!");
+		MessagesManager.Instance.Show("Oh no! That chicken looks mighty hungry.. but there's no grass! Oh woe!");
 		yield return new WaitForSeconds(7f);
 		chickenModel.GetComponent<Health>().ForceDie();
-		MessagesManager.Instance.Show("YOU MONSTER. You WANTED that chicken DEAD. Use your tears to grow the grass BASTARD");
+		MessagesManager.Instance.Show("YOU MONSTER. You WANTED that chicken DEAD. Use your guilty tears to grow the grass BASTARD");
 		yield return new WaitForSeconds(7f);
 		spawnerChickens.SpawnMultiple();
 

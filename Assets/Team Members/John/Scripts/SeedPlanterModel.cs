@@ -8,6 +8,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     public GameObject seed;
     public SeedPlanter_ShopPanel shop;
     public float planterSpeed = 3f;
+    public Transform[] plantPositions;
 
     [Header("Attachment offset when on vehicle")]
     [SerializeField]
@@ -21,29 +22,29 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     [SerializeField]
     Vector3 raycastOffset = new Vector3(0, 0.5f, 0);
     public float tractorVelocity;
+    public int maxlevel = 3;
 
     bool isAttached = false;
     bool tractorMoving;
-    int maxlevel = 3;
     TractorModel tractor;
 
     //Events
     public event System.Action LevelUpEvent;
+    public event System.Action MaxLevelEvent;
+
+    //List of plant positions used for planting corresponding amount of seeds (upgrades per level)
+    List<Transform> currentPlantPositions = new List<Transform>();
 
 
     // Start is called before the first frame update
     void Start()
     {
         if (shop is { }) shop.PlanterUpgradedEvent += Upgrade;
-        //tractorModel.TractorAttachableEvent += OnAttached;
-    }
 
-    /*
-    void OnAttached(bool plant)
-    {
-        StartCoroutine(PlantSeeds(plant));
+        //Default (lvl 1) plant positions used for only planting 2 seeds
+        currentPlantPositions.Add(plantPositions[2]);
+        currentPlantPositions.Add(plantPositions[3]);
     }
-    */
 
     IEnumerator PlantSeeds()
     {
@@ -53,19 +54,38 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         do
         {
             //Shoot raycast down & store what we hit in hitinfo
-            RaycastHit hitinfo;
-            hitinfo = new RaycastHit();
+            List<RaycastHit> hits = new List<RaycastHit>();
+            RaycastHit hit = new RaycastHit();
+            //hits = new RaycastHit();
+                
+            foreach(Transform plantPos in currentPlantPositions)
+            {
+                Debug.Log("Shooting Ray");
+                Physics.Raycast(plantPos.position, -transform.up, out hit, 3, 255, QueryTriggerInteraction.Ignore);
+                hits.Add(hit);
+            }
 
             //Using height offset to make sure raycase isn't shooting under ground
-            Physics.Raycast(transform.position + raycastOffset, -transform.up, out hitinfo, 3, 255, QueryTriggerInteraction.Ignore);
+            foreach(RaycastHit newHit in hits)
+            {
+                if(newHit.collider)
+                {
+                    Debug.Log("PLanting Seed");
+                    GameObject newSeed = Instantiate(seed, newHit.point, Quaternion.identity);
+                }
+
+                //hits.Remove(newHit);
+            }
+
+            //hits.RemoveAll();
+            hits.Clear();
 
             //if we hit something, spawn grass at that hit position (should check if dirt?)
-            if (hitinfo.collider)
+            //if (hits.collider)
             {
                 //plant the desired amount of seeds per plant cycle
-                for(int i = 0; i < seedAmountPerPlant; i++)
+                //for(int i = 0; i < seedAmountPerPlant; i++)
                 {
-                    GameObject newSeed = Instantiate(seed, hitinfo.point, Quaternion.identity);
                 }
             }
 
@@ -133,7 +153,8 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
         if(planterLevel == maxlevel)
         {
-            //Max Level Event ?
+            planterLevel = maxlevel;
+            MaxLevelEvent?.Invoke();
         }
     }
 
@@ -144,13 +165,17 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
         if(newLevel == 2)
         {
-            seedAmountPerPlant = 2;
+            //seedAmountPerPlant = 2;
+            currentPlantPositions.Add(plantPositions[1]);
+            currentPlantPositions.Add(plantPositions[4]);
             return;
         }
 
         if(newLevel == maxlevel)
         {
-            seedAmountPerPlant = 4;
+            //seedAmountPerPlant = 4;
+            currentPlantPositions.Add(plantPositions[0]);
+            currentPlantPositions.Add(plantPositions[5]);
         }
     }
 
