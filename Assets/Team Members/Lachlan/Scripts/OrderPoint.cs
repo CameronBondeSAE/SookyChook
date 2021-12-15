@@ -30,6 +30,9 @@ public class OrderPoint : MonoBehaviour
         public ChickenGrowingMode.Order order;
         public GameObject uiTextGameObject;
     }
+    
+    //events
+    public event Action OrderPointEvent;
 
     void Start()
     {
@@ -82,6 +85,9 @@ public class OrderPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if()
+        if (other.GetComponent<CharacterModel>())
+        {
+            OrderPointEvent?.Invoke();
+        }
     }
 }
