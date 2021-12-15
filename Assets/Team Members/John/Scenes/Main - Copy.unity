@@ -2970,6 +2970,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3604638497175885085, guid: 48926f6eca29573439f3d81dceb9b48d, type: 3}
+      propertyPath: attachOffset.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3604638497175885159, guid: 48926f6eca29573439f3d81dceb9b48d, type: 3}
       propertyPath: m_Name
       value: SeedPlanterAttachment (1)
