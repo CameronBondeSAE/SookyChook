@@ -27,6 +27,9 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 	{
 		base.Start();
 
+		// REVIEW: Does it need to be global?
+		GlobalEvents.OnChickenSpawned(this);
+		
 		rb = GetComponent<Rigidbody>();
 		GetComponent<Health>().DeathEvent += Death;
 	}
