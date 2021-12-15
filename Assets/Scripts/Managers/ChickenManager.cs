@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Aaron
@@ -16,7 +17,7 @@ namespace Aaron
     {
         public Spawner spawner;
         
-        public List<GameObject> chickensList;
+        public List<ChickenModel> chickensList;
         public List<GameObject> roostersList;
         public List<GameObject> fertilisedEggsList;
 
@@ -34,11 +35,12 @@ namespace Aaron
 
         void Start()
         {
-
+            GlobalEvents.chickenSpawned += AddChicken;
+            
             // spawner = FindObjectOfType<Spawner>();
             // spawner.SpawnMultiple();
             
-            chickensList = new List<GameObject>();
+            chickensList = new List<ChickenModel>();
             // chickensList = spawner.spawned;
 
             roostersList = new List<GameObject>();
@@ -81,7 +83,12 @@ namespace Aaron
         public void RemoveChicken(GameObject chicken)
         {
             ChickenDeathEvent?.Invoke();
-            chickensList.Remove(chicken);
+            chickensList.Remove(chicken.GetComponent<ChickenModel>());
+        }
+
+        public void AddChicken(ChickenModel chicken)
+        {
+            chickensList.Add(chicken);
         }
         
         private void FixedUpdate()

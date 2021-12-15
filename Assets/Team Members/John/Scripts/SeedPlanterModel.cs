@@ -10,6 +10,11 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     public float planterSpeed = 3f;
     public Transform[] plantPositions;
 
+    [Header("Seeds Variables")]
+    public int seedsAvailable = 50;
+    public int maxSeeds = 50;
+
+
     [Header("Attachment offset when on vehicle")]
     [SerializeField]
     [Tooltip("Offset when attaching onto tractor/vehicle")]
@@ -31,6 +36,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     //Events
     public event System.Action LevelUpEvent;
     public event System.Action MaxLevelEvent;
+    public event System.Action<bool> IsAttachedEvent;
 
     //List of plant positions used for planting corresponding amount of seeds (upgrades per level)
     List<Transform> currentPlantPositions = new List<Transform>();
@@ -44,6 +50,8 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         //Default (lvl 1) plant positions used for only planting 2 seeds
         currentPlantPositions.Add(plantPositions[2]);
         currentPlantPositions.Add(plantPositions[3]);
+
+        seedsAvailable = maxSeeds;
     }
 
     IEnumerator PlantSeeds()
@@ -63,6 +71,9 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
                 Debug.Log("Shooting Ray");
                 Physics.Raycast(plantPos.position, -transform.up, out hit, 3, 255, QueryTriggerInteraction.Ignore);
                 hits.Add(hit);
+
+                //Minus a seed for each planterPos planting a seed
+                seedsAvailable -= 1;
             }
 
             //Using height offset to make sure raycase isn't shooting under ground
@@ -79,6 +90,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
             //hits.RemoveAll();
             hits.Clear();
+            Debug.Log(seedsAvailable);
 
             //if we hit something, spawn grass at that hit position (should check if dirt?)
             //if (hits.collider)
@@ -98,8 +110,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
             Mathf.Clamp(tractorVelocity, 1, planterSpeed + 1.5f);
             yield return new WaitForSeconds(planterSpeed/tractorVelocity);
         }            
-
-        while(isAttached);
+        while(isAttached && seedsAvailable > 0);
 	}
 
     private void FixedUpdate()
@@ -130,6 +141,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         
         
         StartCoroutine(PlantSeeds());
+        IsAttachedEvent?.Invoke(true);
     }
 
     public void Detach()
@@ -137,6 +149,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         isAttached = false;
         tractor = null;
         StopCoroutine(PlantSeeds());
+        IsAttachedEvent?.Invoke(false);
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
