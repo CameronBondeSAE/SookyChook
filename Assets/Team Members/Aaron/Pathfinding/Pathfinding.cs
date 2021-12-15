@@ -48,7 +48,7 @@ namespace Aaron
 
         private void Update()
         {
-            finishVectorPos = GetComponent<FoxModel>().target.transform;
+            
         }
 
         //get start and finish points in Node Space
@@ -60,6 +60,8 @@ namespace Aaron
             path.Clear();
             openSet.Clear();
             closedSet.Clear();
+            
+            //Herein lies the issue
             ScanningGrid.Node endNode = grid.grid[end.x, end.z];
             currentNode = grid.grid[start.x, start.z];
 
