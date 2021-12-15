@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Tanks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -32,7 +33,7 @@ public class OrderPoint : MonoBehaviour
     }
     
     //events
-    public event Action OrderPointEvent;
+    public event Action<CharacterModel> OrderPointEvent;
 
     void Start()
     {
@@ -85,9 +86,6 @@ public class OrderPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<CharacterModel>())
-        {
-            OrderPointEvent?.Invoke();
-        }
+        OrderPointEvent?.Invoke(null);
     }
 }
