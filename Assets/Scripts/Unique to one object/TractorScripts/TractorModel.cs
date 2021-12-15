@@ -207,11 +207,12 @@ public class TractorModel : MonoBehaviour, IVehicle
         attachment.transform.parent = null;
         attachment.transform.rotation = transform.rotation;
         attachment = null;
-        tractorAttachment = null;
         hasAttachment = false;
 
         //Call the attachments Detach to let it do what it needs to
         tractorAttachment.Detach();
+        tractorAttachment = null;
+
     }
 
     //Old interface
