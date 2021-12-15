@@ -36,14 +36,11 @@ namespace Aaron
         private void Start()
         {
             grid = ScanningGrid.Instance;
-
-            beginningVectorPos = this.transform;
             
-            //Beginning = this.transform;
             beginning = VectorToInt(beginningVectorPos.position);
             finish = VectorToInt(finishVectorPos.position);
             
-            FindPath(beginning, finish);        
+            FindPath(beginning, finish);       
         }
 
         private void Update()
@@ -54,15 +51,15 @@ namespace Aaron
         //get start and finish points in Node Space
         public void FindPath(Vector3Int start, Vector3Int end)
         {
-            beginning = VectorToInt(beginningVectorPos.position);
-            finish = VectorToInt(finishVectorPos.position);
+            beginning = VectorToInt(start);
+            finish = VectorToInt(end);
             
             path.Clear();
             openSet.Clear();
             closedSet.Clear();
             
             //Herein lies the issue
-            ScanningGrid.Node endNode = grid.grid[end.x, end.z];
+            //ScanningGrid.Node endNode = grid.grid[end.x, end.z];
             currentNode = grid.grid[start.x, start.z];
 
             openSet.Add(currentNode);

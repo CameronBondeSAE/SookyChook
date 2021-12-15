@@ -64,11 +64,10 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
             //Shoot raycast down & store what we hit in hitinfo
             List<RaycastHit> hits = new List<RaycastHit>();
             RaycastHit hit = new RaycastHit();
-            //hits = new RaycastHit();
-                
+
+            //For each plant position the player has unlocked - shoot a raycast & store each hit point
             foreach(Transform plantPos in currentPlantPositions)
             {
-                Debug.Log("Shooting Ray");
                 Physics.Raycast(plantPos.position, -transform.up, out hit, 3, 255, QueryTriggerInteraction.Ignore);
                 hits.Add(hit);
 
@@ -76,21 +75,16 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
                 seedsAvailable -= 1;
             }
 
-            //Using height offset to make sure raycase isn't shooting under ground
+            //For each hit point - spawn a seed
             foreach(RaycastHit newHit in hits)
             {
                 if(newHit.collider)
                 {
-                    Debug.Log("PLanting Seed");
                     GameObject newSeed = Instantiate(seed, newHit.point + seedSpawnOffset, Quaternion.identity);
                 }
-
-                //hits.Remove(newHit);
             }
 
-            //hits.RemoveAll();
             hits.Clear();
-            Debug.Log(seedsAvailable);
 
             //if we hit something, spawn grass at that hit position (should check if dirt?)
             //if (hits.collider)

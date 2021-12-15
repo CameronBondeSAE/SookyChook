@@ -103,6 +103,14 @@ public class SeedPlanter_ShopPanel : MonoBehaviour
     //Buying Seed Refills
     public void BuySeedRefill()
     {
+        //Too Expensive don't buy
+        if(CashManager.Instance.totalMoney < seedRefillPrice)
+        {
+            CashManager.Instance.TooExpensive();
+            return;
+        }
+
+        //If can afford & seed planter not already full - refill seed planter
         if(seedPlanter.seedsAvailable < seedPlanter.maxSeeds && CashManager.Instance.totalMoney > seedRefillPrice)
         {
             seedPlanter.seedsAvailable = seedPlanter.maxSeeds;
