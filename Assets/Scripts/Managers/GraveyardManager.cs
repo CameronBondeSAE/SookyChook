@@ -15,9 +15,9 @@ public class GraveyardManager : MonoBehaviour
 
     private void Start()
     {
-        DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChange;
+        // DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChange;
         
-        GlobalEvents.chickenDiedEvent += GlobalEventsOnchickenDiedEvent;
+        // GlobalEvents.chickenDiedEvent += GlobalEventsOnchickenDiedEvent;
     }
 
     private void GlobalEventsOnchickenDiedEvent(GameObject obj)

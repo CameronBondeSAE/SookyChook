@@ -67,8 +67,8 @@ public class ChickenGrowingMode : GameModeBase
     {
         if (ChickenManager.Instance.chickensList.Count <= 0)
         {
-            MessagesManager.Instance.Show("All your chickens are DEAD!");
-            EndMode();
+            // MessagesManager.Instance.Show("All your chickens are DEAD!");
+            // EndMode();
         }
     }
 

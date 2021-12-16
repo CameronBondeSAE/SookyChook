@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
         //If health ever drops to 0 or below fire off DeathEvent
         if(currentHealth <= deathThreshold)
         {
-            isAlive = false;
+	        isAlive = false;
             DeathEvent?.Invoke(gameObject);
             Die();
         }

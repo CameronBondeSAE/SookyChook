@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chicken: {fileID: 1648933817718183396, guid: 192fa124a1e5ab94fb102b31187dd616, type: 3}
   isFertilised: 1
-  hatchTimer: 10
+  hatchTimer: 30
 --- !u!1001 &2054227034364045028
 PrefabInstance:
   m_ObjectHideFlags: 0

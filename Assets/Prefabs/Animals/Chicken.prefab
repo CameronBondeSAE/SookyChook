@@ -331,7 +331,7 @@ MonoBehaviour:
   hungerLevel: 0
   hungerThreshold: 0.1
   isHungry: 0
-  hungerIncreaseInterval: 1
+  hungerIncreaseInterval: 100
   foundFood: 0
   atFood: 0
   isFull: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   egg: {fileID: 9064495301548624989, guid: ab9561320e347af4bab2d8b3d2370f46, type: 3}
   canLay: 0
-  layTime: 10
+  layTime: 30
 --- !u!114 &979957324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1086741024555083841}
-  speed: 3
+  speed: 10
 --- !u!114 &156555025977368526
 MonoBehaviour:
   m_ObjectHideFlags: 0

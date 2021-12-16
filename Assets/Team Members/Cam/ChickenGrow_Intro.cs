@@ -53,7 +53,7 @@ public class ChickenGrow_Intro : MonoBehaviour
 		yield return new WaitForSeconds(6f*skipTime);
 		MessagesManager.Instance.Show("Oh no! That chicken looks mighty hungry.. but there's no grass! Oh woe!");
 		yield return new WaitForSeconds(7f*skipTime);
-		// chickenModel.GetComponent<Health>().ForceDie();
+		chickenModel.GetComponent<Health>().ChangeHealth(-10000);
 		yield return new WaitForSeconds(2f*skipTime);
 		MessagesManager.Instance.Show("YOU MONSTER. You WANTED that chicken DEAD. Use your guilty tears to grow the grass BASTARD");
 		yield return new WaitForSeconds(10f*skipTime);
@@ -66,7 +66,7 @@ public class ChickenGrow_Intro : MonoBehaviour
 
 		yield return new WaitForSeconds(3f*skipTime);
 		MessagesManager.Instance.Show("Plant more seeds and keep wild animals out... or whatever I don't care anymore");
-		// yield return new WaitForSeconds(7f*skipTime);
+		yield return new WaitForSeconds(3f*skipTime);
 
 		chickenGrowingMode.ActivateRestOfGameModeRules();
 		

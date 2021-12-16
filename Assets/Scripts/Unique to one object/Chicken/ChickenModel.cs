@@ -91,14 +91,15 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 
 	public void Death(GameObject aGameObject)
 	{
-		if (GetComponent<Health>().isAlive)
+		// if (GetComponent<Health>().isAlive)
 		{
-			GetComponent<Health>().ForceDie();
+			GetComponent<Health>().ChangeHealth(-10000);
+			// GetComponent<Health>().ForceDie();
 			GetComponent<Health>().DeathEvent -= Death;
-			GlobalEvents.OnChickenDiedEvent(gameObject);
-		
 			// This takes time, so I don't want to die twice!
 			StartCoroutine(DeathSequence());
+			GlobalEvents.OnChickenDiedEvent(gameObject);
+		
 			// Destroy(gameObject);
 		}
 	}
