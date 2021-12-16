@@ -214,6 +214,18 @@ public class TractorModel : MonoBehaviour, IVehicle
         tractorAttachment.Detach();
     }
 
+    public bool canEnter()
+    {
+        if(playerInTractor)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     //Old interface
     /*
     public Vector3 Offset()

@@ -22,6 +22,8 @@ public interface IVehicle
 	/// </summary>
 	/// <returns></returns>
 	Transform GetVehicleExitPoint();
+
+	bool canEnter();
 }
 
 public interface IInteractable

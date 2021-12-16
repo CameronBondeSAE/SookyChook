@@ -49,8 +49,10 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
 
     private void OnTriggerEnter(Collider other)
     {
+        //HACK: Hardcoded to chickens only
         if(other.GetComponent<ChickenModel>() != null)
         {
+            //if this chicken is not already in the list add it to the list
             if(!objectsInTrailer.Contains(other.gameObject))
             {
                 other.gameObject.transform.position = mounts[0].transform.position;
