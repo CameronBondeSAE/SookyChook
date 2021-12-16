@@ -78,7 +78,7 @@ public class OrderPoint : MonoBehaviour
         orderUITexts.Add(orderUIText);
 
         GetComponentInChildren<TextMeshProUGUI>().text = order.productType.ToString();
-        transform.DOMove(Vector3.one, 2, false);
+        // transform.DOMove(Vector3.one, 2, false);
         GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.white, 0);
         StartCoroutine(OrderUI());
         //Debug for Order
@@ -88,7 +88,7 @@ public class OrderPoint : MonoBehaviour
 
     public IEnumerator OrderUI()
     {
-        transform.DOPunchPosition(Vector3.one, 1, 50);
+        transform.DOPunchScale(Vector3.one, 1, 50);
         yield return new WaitForSeconds(orderLateTime);
         GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.red, 2.0f);
         StopCoroutine(OrderUI());

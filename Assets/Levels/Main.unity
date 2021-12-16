@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5.6944237, g: 5.3451004, b: 6.282898, a: 1}
+  m_IndirectSpecularColor: {r: 5.694893, g: 5.3475113, b: 6.2878113, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1317,8 +1317,28 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1116069404871925224, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+    - target: {fileID: 1409633447728580505, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_Spacing
+      value: -26.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409633447728580505, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1730654982346644900, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: skip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855646457131655192, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855646457131655192, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855646457131655192, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1984760717852879853, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
@@ -1353,6 +1373,30 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4983992865539987788, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+    - target: {fileID: 6900996237389852912, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900996237389852912, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900996237389852912, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 116.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900996237389852912, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 320.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900996237389852912, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.3500366
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900996237389852912, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.600021
+      objectReference: {fileID: 0}
     - target: {fileID: 7268006216195420760, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -1412,6 +1456,30 @@ PrefabInstance:
     - target: {fileID: 8654394293049248908, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860915445122184732, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860915445122184732, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860915445122184732, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9104540611050133549, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: orderDelayRange.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9104540611050133549, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: orderDelayRange.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9104540611050133549, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: possibleOrders.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9104540611050133549, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: playerSpawns.Array.data[0]
