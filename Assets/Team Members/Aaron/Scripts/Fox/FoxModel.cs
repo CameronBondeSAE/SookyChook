@@ -1,5 +1,8 @@
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Aaron;
 using Anthill.AI;
 using UnityEngine;
 
@@ -25,6 +28,9 @@ public class FoxModel : MonoBehaviour
 
         hunger = maxHunger * 0.7f;
         StartCoroutine(FoxHunger());
+
+        GetComponent<Pathfinding>().beginningVectorPos = this.transform;
+        GetComponent<Pathfinding>().finishVectorPos = this.transform;
     }
 
     // Update is called once per frame
