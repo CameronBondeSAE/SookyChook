@@ -46,7 +46,7 @@ public class DeliverySequence : MonoBehaviour
             if (deliveryTruck != null)
             {
                 deliveryTruck.transform.position = deliveryTruckPos.position;
-                deliveryTruck.transform.localRotation = deliveryTruckPos.rotation;
+                deliveryTruck.transform.localRotation = deliveryTruckPos.rotation.normalized;
             
                 deliveryTruck.SetActive(true);
                 //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
