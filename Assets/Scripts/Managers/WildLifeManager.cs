@@ -78,7 +78,7 @@ namespace Rob
 		                    {
 			                    Vector3 newSpawnPos = spawnedWildlife.transform.position;
 			                    Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
-			                    Debug.Log(hit.distance);
+			                    // Debug.Log(hit.distance);
 			                    newSpawnPos = new Vector3(newSpawnPos.x,
 				                    newSpawnPos.y - (hit.distance - groundOffset),
 				                    newSpawnPos.z);

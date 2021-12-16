@@ -15,30 +15,22 @@ public class ChickenGrow_Intro : MonoBehaviour
 	public ChickenModel chickenModel;
 	public DayNightManager dayNightManager;
 	public OrderPoint orderPoint;
+
+	float skipTime;
 	
 	private void Awake()
 	{
 		if (skip)
 		{
-			chickenGrowingMode.ActivateEvent += SkipIntro;
+			skipTime = 0;
 		}
 		else
 		{
-			chickenGrowingMode.ActivateEvent += StartIntro;
+
+			skipTime = 1f;
 		}
 		
-	}
-
-	private void SkipIntro()
-	{
-		// Rip through the intro
-		//orderPoint.gameObject.SetActive(false);
-		dayNightManager.enabled = false;
-		dayNightManager.ChangePhase(DayNightManager.DayPhase.Morning);
-		spawnerSeeds.SpawnMultiple();
-		chickenModel.GetComponent<Health>().ForceDie();
-		dayNightManager.enabled = true;
-		orderPoint.gameObject.SetActive(true);
+		chickenGrowingMode.ActivateEvent += StartIntro;
 	}
 
 	public void StartIntro()
@@ -53,29 +45,29 @@ public class ChickenGrow_Intro : MonoBehaviour
 		dayNightManager.enabled = false;
 		dayNightManager.ChangePhase(DayNightManager.DayPhase.Morning);
 
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(2f*skipTime);
 		MessagesManager.Instance.Show("Welcome to your farm!");
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(5f*skipTime);
 		spawnerSeeds.SpawnMultiple();
 		MessagesManager.Instance.Show("Hmm, those look like grass seeds. I wonder how you water them?");
-		yield return new WaitForSeconds(6f);
+		yield return new WaitForSeconds(6f*skipTime);
 		MessagesManager.Instance.Show("Oh no! That chicken looks mighty hungry.. but there's no grass! Oh woe!");
-		yield return new WaitForSeconds(7f);
-		chickenModel.GetComponent<Health>().ForceDie();
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(7f*skipTime);
+		// chickenModel.GetComponent<Health>().ForceDie();
+		yield return new WaitForSeconds(2f*skipTime);
 		MessagesManager.Instance.Show("YOU MONSTER. You WANTED that chicken DEAD. Use your guilty tears to grow the grass BASTARD");
-		yield return new WaitForSeconds(10f);
+		yield return new WaitForSeconds(10f*skipTime);
 		MessagesManager.Instance.Show("Well.. seeing as you're now a chicken MURDERER, you may as well sell their INNOCENT FLESH");
-		yield return new WaitForSeconds(7f);
+		yield return new WaitForSeconds(7f*skipTime);
 		spawnerChickens.SpawnMultiple();
 		dayNightManager.enabled = true;
 
 		orderPoint.gameObject.SetActive(true);
 
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(3f*skipTime);
 		MessagesManager.Instance.Show("Plant more seeds and keep wild animals out... or whatever I don't care anymore");
-		// yield return new WaitForSeconds(7f);
+		// yield return new WaitForSeconds(7f*skipTime);
 
-		
+		chickenGrowingMode.ActivateRestOfGameModeRules();
 	}
 }

@@ -41,13 +41,26 @@ public class ChickenGrowingMode : GameModeBase
 
     private Coroutine acceptingOrders;
 
+    private void Awake()
+    {
+	    orderPoint.gameObject.SetActive(false);
+	    shop.SetActive(false);
+    }
+
     public override void Activate()
     {
         base.Activate();
-        DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
-        ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
-        orderPoint.OrderPointEvent += CompleteOrder;
-        shop.SetActive(true);
+    }
+
+    public void ActivateRestOfGameModeRules()
+    {
+	    DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
+        
+	    orderPoint.OrderPointEvent += CompleteOrder;
+	    orderPoint.gameObject.SetActive(true);
+	    shop.SetActive(true);
+        
+	    ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
     }
     
     public void ChickenCheck()
@@ -143,7 +156,7 @@ public class ChickenGrowingMode : GameModeBase
 
     private IEnumerator RestartScene()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
         SceneManager.LoadScene(0);
     }
 }

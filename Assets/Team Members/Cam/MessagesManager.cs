@@ -34,8 +34,8 @@ public class MessagesManager : ManagerBase<MessagesManager>
 		textMeshProUGUI.transform.localScale = Vector3.one * 2f;
 		textMeshProUGUI.transform.DOPunchScale(Vector3.one, 0.5f);
 		yield return new WaitForSeconds(timeToShow * (message.Length / 15f));
-		textMeshProUGUI.transform.DOMove(transform.position + new Vector3(0,100,0), 0.5f).SetEase(Ease.OutFlash);
-		yield return new WaitForSeconds(0.5f);
+		textMeshProUGUI.transform.DOScale(Vector3.zero, 0.25f).SetEase(Ease.OutCubic);
+		yield return new WaitForSeconds(0.25f);
 		textMeshProUGUI.text = "";
 	}
 }

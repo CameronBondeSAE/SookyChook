@@ -13,8 +13,9 @@ public class OrderPoint : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Menu Properties")]
-    public GameObject orderMenu;
-    public GameObject refObject;
+    public GameObject orderMenuParent;
+    GameObject newOrder;
+    public GameObject gameModeGO;
     
     public float orderLateTime = 25.0f;
 
@@ -37,8 +38,8 @@ public class OrderPoint : MonoBehaviour
 
     void Start()
     {
-        refObject.GetComponent<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
-        refObject.GetComponent<ChickenGrowingMode>().OrderCompleteEvent += RemoveOrderMenu;
+        gameModeGO.GetComponent<ChickenGrowingMode>().NewOrderEvent += OrderMenu;
+        gameModeGO.GetComponent<ChickenGrowingMode>().OrderCompleteEvent += RemoveOrderMenu;
     }
 
     void RemoveOrderMenu(ChickenGrowingMode.Order order)
@@ -49,8 +50,8 @@ public class OrderPoint : MonoBehaviour
         {
             if (order == orderUIText.order)
             {
-                OrderUIText sameOrder = orderUIText;
-                orderUITexts.Add(sameOrder);
+	            Destroy(orderUIText.uiTextGameObject);
+                orderUITexts.Remove(orderUIText);
             }
         }
 
@@ -68,11 +69,13 @@ public class OrderPoint : MonoBehaviour
     {
         //Playing around with colors and tweening
         //Spawns Texts and Saves it in a List
-        orderMenu = Instantiate(orderIcon, orderIconPos);
-        OrderUIText orderUIText = new OrderUIText();
-        orderUIText.uiTextGameObject = orderMenu;
-        //RemoveOrderMenu(order);
+        newOrder = Instantiate(orderIcon);
+        newOrder.transform.parent = orderMenuParent.transform;
 
+        OrderUIText orderUIText = new OrderUIText();
+        orderUIText.uiTextGameObject = newOrder;
+        orderUIText.order = order;
+        orderUITexts.Add(orderUIText);
 
         GetComponentInChildren<TextMeshProUGUI>().text = order.productType.ToString();
         transform.DOMove(Vector3.one, 2, false);
