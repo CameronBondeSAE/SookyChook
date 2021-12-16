@@ -18,24 +18,24 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
     [Tooltip("Reference to the parent object of all wheels - used for turning off physics when not in use")]
     public GameObject wheels;
 
-    public HingeJoint hingeJoint;
-
-    private void Start()
-    {
-        TurnOffPhysics();
-    }
+    public ConfigurableJoint configurableJoint;
 
     public void Attach(TractorModel aTractorModel)
     {
-        //hingeJoint.connectedBody = aTractorModel.attachmentMount.GetComponent<Rigidbody>();
+        transform.parent = aTractorModel.attachmentMount.transform;
+        transform.localPosition = attachOffset;
+        transform.rotation = aTractorModel.transform.rotation;
+
+        configurableJoint.connectedBody = aTractorModel.attachmentMount.GetComponent<Rigidbody>();
+        //hingeJoint.autoConfigureConnectedAnchor = false;
+        //hingeJoint.connectedAnchor = transform.parent.position;
 
         // wheels.SetActive(true);
     }
 
     public void Detach()
     {
-        hingeJoint.connectedBody = null;
-        TurnOffPhysics();
+        configurableJoint.connectedBody = null;
     }
 
     //Old Interface
@@ -45,9 +45,4 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
         return attachOffset;
     }
     */
-
-    void TurnOffPhysics()
-    {
-        // wheels.SetActive(false);
-    }
 }

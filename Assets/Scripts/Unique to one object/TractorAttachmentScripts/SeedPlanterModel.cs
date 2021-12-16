@@ -8,6 +8,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     public GameObject seed;
     public float planterSpeed = 3f;
     public Transform[] plantPositions;
+    public ConfigurableJoint configurableJoint;
 
     [Header("Seeds Variables")]
     public int seedsAvailable = 50;
@@ -134,11 +135,13 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         isAttached = true;
         tractor = aTractorModel;
         
+        //Attaching to tractor
         transform.parent = aTractorModel.attachmentMount.transform;
         transform.localPosition = attachOffset;
         transform.rotation = aTractorModel.transform.rotation;
-        
-        
+        configurableJoint.connectedBody = aTractorModel.attachmentMount.GetComponent<Rigidbody>();
+
+        //Do Planter Stuff
         plantCoroutine = StartCoroutine(PlantSeeds());
         IsAttachedEvent?.Invoke(true);
     }
@@ -149,6 +152,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         tractor = null;
         IsAttachedEvent?.Invoke(false);
         StopCoroutine(plantCoroutine);
+        configurableJoint.connectedBody = null;
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
