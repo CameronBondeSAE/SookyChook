@@ -20,7 +20,14 @@ public class DeliverySpawn : MonoBehaviour
     {
         if (obj == DayNightManager.DayPhase.Noon)
         {
-            spawner.SpawnMultiple();
+            StartCoroutine(FenceSpawn());
         }
+    }
+
+    private IEnumerator FenceSpawn()
+    {
+        yield return new WaitForSeconds(2.0f);
+        spawner.SpawnMultiple();
+        StopCoroutine(FenceSpawn());
     }
 }

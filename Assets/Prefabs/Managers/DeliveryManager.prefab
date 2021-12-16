@@ -65,6 +65,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoStart: 0
   radius: 5
-  groupInfos: []
+  groupInfos:
+  - prefabs:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    spawnPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    countPerGroup: 1
   groundOffset: 0
   spawned: []

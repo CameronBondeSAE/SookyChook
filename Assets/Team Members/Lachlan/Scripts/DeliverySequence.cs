@@ -43,13 +43,15 @@ public class DeliverySequence : MonoBehaviour
         {
             //TODO: Need to make truck move back and forward consistently. Need to orient position of truck
 
-            //deliveryTruck.isStatic = false;
-            deliveryTruck.transform.position = deliveryTruckPos.position;
-            deliveryTruck.transform.localRotation = deliveryTruckPos.rotation;
+            if (deliveryTruck != null)
+            {
+                deliveryTruck.transform.position = deliveryTruckPos.position;
+                deliveryTruck.transform.localRotation = deliveryTruckPos.rotation;
             
-            deliveryTruck.SetActive(true);
-            //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
-            StartCoroutine(Delivery(new float()));
+                deliveryTruck.SetActive(true);
+                //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
+                StartCoroutine(Delivery(new float()));
+            }
         }
     }
 
