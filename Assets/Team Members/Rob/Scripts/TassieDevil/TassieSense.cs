@@ -41,7 +41,7 @@ public class TassieSense : MonoBehaviour, ISense
         aWorldState.Set(TassieDevilPlanner.seeRooster, aAgent.GetComponent<TassieDevilModel>().seeRooster);
         aWorldState.Set(TassieDevilPlanner.pathClear, false);
         aWorldState.Set(TassieDevilPlanner.devilNear, false);
-        aWorldState.Set(TassieDevilPlanner.seePlayer, SeePlayer());
+        aWorldState.Set(TassieDevilPlanner.seePlayer, false);
         aWorldState.Set(TassieDevilPlanner.returnHome, aAgent.GetComponent<TassieDevilModel>().returnHome);
         aWorldState.Set(TassieDevilPlanner.isLooking, aAgent.GetComponent<TassieDevilModel>().isLooking);
         aWorldState.Set(TassieDevilPlanner.fightingDevil, false);
@@ -54,16 +54,16 @@ public class TassieSense : MonoBehaviour, ISense
 
     private bool SeePlayer()
     {
-        foreach (CharacterModel player in GameManager.Instance.players)
-        {
-            if (player != null)
-            {
-                if (tassieFOV.CanISee(player.transform))
-                {
-                    return true;
-                }
-            }
-        }
+        // foreach (CharacterModel player in GameManager.Instance.players)
+        // {
+        //     if (player != null)
+        //     {
+        //         if (tassieFOV.CanISee(player.transform))
+        //         {
+        //             return true;
+        //         }
+        //     }
+        // }
 
         return false;
     }
