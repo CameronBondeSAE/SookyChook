@@ -646,7 +646,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2609289, y: 1}
+    m_SensorSize: {x: 1.9741379, y: 1}
     Iso: 200
     ShutterSpeed: 0.68
     Aperture: 17.2
@@ -2049,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 5027815690734542235, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: orderPoint
       value: 
-      objectReference: {fileID: 700147588402226941}
+      objectReference: {fileID: 218113613}
     - target: {fileID: 5027815690734542235, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: playerSpawns.Array.size
       value: 4
@@ -2102,6 +2102,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6864213625917437934, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6864213625917437934, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
     - target: {fileID: 7263088223543755435, guid: 61cee5eaa54c1ea47850d1a6adf8cf1a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

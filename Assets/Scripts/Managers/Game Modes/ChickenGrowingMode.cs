@@ -25,6 +25,7 @@ public class ChickenGrowingMode : GameModeBase
     }
 
     public OrderPoint orderPoint;
+    public GameObject shop;
 
     public List<Order> possibleOrders;
     public List<Order> currentOrders;
@@ -46,6 +47,7 @@ public class ChickenGrowingMode : GameModeBase
         DayNightManager.Instance.PhaseChangeEvent += SetAcceptingOrders;
         ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
         orderPoint.OrderPointEvent += CompleteOrder;
+        shop.SetActive(true);
     }
     
     public void ChickenCheck()

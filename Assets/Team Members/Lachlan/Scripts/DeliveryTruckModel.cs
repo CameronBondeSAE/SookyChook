@@ -24,6 +24,13 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     private float steering;
     
     
+    [Header("View")]
+    public AudioSource audioSource;
+    public AudioClip enter;
+    public AudioClip running;
+    public AudioClip exit;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -54,16 +61,40 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
             v.DOLocalRotateQuaternion(Quaternion.Euler(0, steering * maxSteeringAngle, 0), acceleration);
         }
     }
-    
+
+    private Coroutine co;
     public void Enter()
     {
         Tires.SetActive(true);
         rb.isKinematic = false;
+        
+        co = StartCoroutine(StartSequence());
+    }
+
+    private IEnumerator StartSequence()
+    {
+	    // HACK: Move View
+	    audioSource.clip = enter;
+	    audioSource.loop = false;
+	    audioSource.Play();
+	    yield return new WaitForSeconds(enter.length);
+	    audioSource.loop = true;
+	    audioSource.clip = running;
+	    audioSource.Play();
     }
 
     public void Exit()
     {
         Tires.SetActive(false);
+        
+        // HACK: Move View
+        // Stops the starting sounds sequence
+        StopCoroutine(co);
+
+        audioSource.clip = exit;
+        audioSource.loop = false;
+        audioSource.Play();
+        //Debug.Log("Exited");
     }
 
     public void Steer(float amount)
@@ -79,6 +110,5 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public Transform GetVehicleExitPoint()
     {
         return exitPoint;
-    }
-    
+    } 
 }

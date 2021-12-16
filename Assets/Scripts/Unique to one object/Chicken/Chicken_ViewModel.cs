@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chicken_ViewModel : MonoBehaviour
 {
 	public ChickenModel chickenModel;
+	public Material deathMaterial;
 	public AudioSource  audioSource;
 	public AudioClip    interactedWith;
 	public AudioClip    pickedUp;
@@ -55,6 +56,8 @@ public class Chicken_ViewModel : MonoBehaviour
 		{
 			audioSource.clip = interactedWith;
 			audioSource.Play();
+
+			if (deathMaterial != null) GetComponentInParent<Renderer>().material = deathMaterial;
 		}
 	}
 }
