@@ -31,6 +31,8 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public AudioClip exit;
     public AudioClip[] honks;
 
+    bool playerInVehicle;
+
     
     // Start is called before the first frame update
     void Start()
@@ -74,6 +76,7 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     {
         Tires.SetActive(true);
         rb.isKinematic = false;
+        playerInVehicle = true;
         
         co = StartCoroutine(StartSequence());
     }
@@ -93,6 +96,7 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public void Exit()
     {
         Tires.SetActive(false);
+        playerInVehicle = false;
         
         // HACK: Move View
         // Stops the starting sounds sequence
@@ -117,5 +121,17 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public Transform GetVehicleExitPoint()
     {
         return exitPoint;
-    } 
+    }
+
+    public bool canEnter()
+    {
+        if(playerInVehicle)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

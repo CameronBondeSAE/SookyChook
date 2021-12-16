@@ -152,7 +152,7 @@ public class CharacterModel : MonoBehaviour
         IVehicleReference = hit.collider.gameObject.GetComponentInParent<IVehicle>();
         if (IVehicleReference != null)
         {
-            if (!inVehicle)
+            if (!inVehicle && IVehicleReference.canEnter() == true)
                 GetInVehicle();
         }
 
