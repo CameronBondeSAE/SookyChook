@@ -83,7 +83,7 @@ namespace Aaron
 
         void EatChicken(GameObject o)
         {
-            owner.GetComponent<FoxModel>().eatingChicken = true;
+            // owner.GetComponent<FoxModel>().eatingChicken = true;
         }
 
         private IEnumerator AttackCooldown()
