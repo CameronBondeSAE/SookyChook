@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5.6972466, g: 5.3470154, b: 6.2839966, a: 1}
+  m_IndirectSpecularColor: {r: 5.694893, g: 5.3475113, b: 6.2879944, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1180,13 +1180,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 350579312, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: gridDebug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 350579312, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: maxSizeofGrid.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 350579312, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: maxSizeofGrid.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 350579312, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: maxSizeofGrid.z
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 350579313, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -42.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 350579313, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.488079
+      objectReference: {fileID: 0}
+    - target: {fileID: 350579313, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -48.01742
+      objectReference: {fileID: 0}
     - target: {fileID: 350579319, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 350579319, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
     - target: {fileID: 1049785892, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 24.18
       objectReference: {fileID: 0}
     - target: {fileID: 168134506085575909, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: serializationData.Prefab
