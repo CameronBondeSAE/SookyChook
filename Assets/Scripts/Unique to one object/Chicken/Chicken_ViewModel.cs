@@ -26,10 +26,10 @@ public class Chicken_ViewModel : MonoBehaviour
 
 	private void OnDeathEvent(GameObject gameobject)
 	{
-		audioSource.clip = dyingSounds[Random.Range(0, dyingSounds.Count)];
-		audioSource.Play();
 		// if (deathMaterial != null) GetComponentInParent<Renderer>().material.color = deathMaterial;
 		GetComponentInChildren<Renderer>().material.color = Color.red;
+		audioSource.clip = dyingSounds[Random.Range(0, dyingSounds.Count)];
+		audioSource.Play();
 	}
 
 	void ChickenModelOnPickUpEvent(bool pickingUp)

@@ -60,8 +60,8 @@ public class ChickenGrow_Intro : MonoBehaviour
 		MessagesManager.Instance.Show("Well.. seeing as you're now a chicken MURDERER, you may as well sell their INNOCENT FLESH");
 		yield return new WaitForSeconds(7f*skipTime);
 		spawnerChickens.SpawnMultiple();
-		dayNightManager.enabled = true;
 
+		
 		orderPoint.gameObject.SetActive(true);
 
 		yield return new WaitForSeconds(3f*skipTime);
@@ -69,5 +69,8 @@ public class ChickenGrow_Intro : MonoBehaviour
 		// yield return new WaitForSeconds(7f*skipTime);
 
 		chickenGrowingMode.ActivateRestOfGameModeRules();
+		
+		dayNightManager.enabled = true;
+		dayNightManager.ChangePhase(DayNightManager.DayPhase.Morning);
 	}
 }

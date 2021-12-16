@@ -1,3 +1,4 @@
+using System;
 using Anthill.AI;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,14 +7,28 @@ using UnityEngine;
 public class Eating_State : SookyAntAIState
 {
 	ChickenModel chickenModel;
+
+	Coroutine coroutine;
 	
 	public override void Enter()
 	{
 		base.Enter();
 
 		chickenModel = owner.GetComponent<ChickenModel>();
-		
-		StartCoroutine(EatCoroutine());
+
+		if (coroutine!=null)
+		{
+			StopCoroutine(coroutine);
+		}
+		coroutine = StartCoroutine(EatCoroutine());
+	}
+
+	private void OnDestroy()
+	{
+		if (coroutine!=null)
+		{
+			StopCoroutine(coroutine);
+		}
 	}
 
 	private IEnumerator EatCoroutine()

@@ -21,7 +21,7 @@ namespace Aaron
         public List<GameObject> roostersList;
         public List<GameObject> fertilisedEggsList;
 
-        public event Action ChickenDeathEvent;
+        // public event Action ChickenDeathEvent;
 
         [Serializable]
         public class Names
@@ -76,7 +76,9 @@ namespace Aaron
         {
 	        chicken.GetComponent<Health>().DeathEvent -= RemoveChicken;
 	        chickensList.Remove(chicken.GetComponent<ChickenModel>());
-            ChickenDeathEvent?.Invoke();
+            
+	        // GlobalEvents.OnChickenDiedEvent(chicken);
+	        // ChickenDeathEvent?.Invoke();
         }
 
         public void AddChicken(ChickenModel chicken)

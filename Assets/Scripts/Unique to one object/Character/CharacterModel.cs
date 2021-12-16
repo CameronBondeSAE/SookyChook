@@ -149,18 +149,21 @@ public class CharacterModel : MonoBehaviour
 
         // Vehicles?
         // Review: This won't work if it has multiple IVehicle
-        IVehicleReference = hit.collider.gameObject.GetComponentInParent<IVehicle>();
-        if (IVehicleReference != null)
+        if (hit.collider != null)
         {
-            if (!inVehicle && IVehicleReference.canEnter() == true)
-                GetInVehicle();
-        }
+	        IVehicleReference = hit.collider.gameObject.GetComponentInParent<IVehicle>();
+	        if (IVehicleReference != null)
+	        {
+		        if (!inVehicle && IVehicleReference.canEnter() == true)
+			        GetInVehicle();
+	        }
 
-        // Review: This won't work if it has multiple IInteractables
-        IInteractable interactable = hit.collider.gameObject.GetComponentInParent<IInteractable>();
-        if (interactable != null)
-        {
-            interactable.Interact();
+	        // Review: This won't work if it has multiple IInteractables
+	        IInteractable interactable = hit.collider.gameObject.GetComponentInParent<IInteractable>();
+	        if (interactable != null)
+	        {
+		        interactable.Interact();
+	        }
         }
     }
 
@@ -319,6 +322,7 @@ public class CharacterModel : MonoBehaviour
     {
         if(cryCoroutine!=null) StopCoroutine(cryCoroutine);
         cryCoroutine = StartCoroutine(CryCoroutine());
+        Debug.Log("Cry");
     }
 
     public IEnumerator CryCoroutine()

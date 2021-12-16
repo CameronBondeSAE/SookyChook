@@ -46,14 +46,20 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 	{
 		base.ReachedMaxHungry();
 
-		// Just die
-		GetComponent<Health>().ChangeHealth(-100f);
+		if (GetComponent<Health>().isAlive)
+		{
+			// Just die
+			GetComponent<Health>().ChangeHealth(-100f);
+		}
 	}
 
 	public void Interact()
 	{
-		InteractEvent?.Invoke();
-		Death(gameObject);
+		if (GetComponent<Health>().isAlive)
+		{
+			InteractEvent?.Invoke();
+			Death(gameObject);
+		}
 	}
 
 	public void PickUp()
@@ -85,12 +91,16 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 
 	public void Death(GameObject aGameObject)
 	{
-		GetComponent<Health>().DeathEvent -= Death;
-		GlobalEvents.OnChickenDiedEvent(gameObject);
+		if (GetComponent<Health>().isAlive)
+		{
+			GetComponent<Health>().ForceDie();
+			GetComponent<Health>().DeathEvent -= Death;
+			GlobalEvents.OnChickenDiedEvent(gameObject);
 		
-		// This takes time, so I don't want to die twice!
-		StartCoroutine(DeathSequence());
-		// Destroy(gameObject);
+			// This takes time, so I don't want to die twice!
+			StartCoroutine(DeathSequence());
+			// Destroy(gameObject);
+		}
 	}
 
 	public IEnumerator DeathSequence()

@@ -60,10 +60,10 @@ public class ChickenGrowingMode : GameModeBase
 	    orderPoint.gameObject.SetActive(true);
 	    shop.SetActive(true);
         
-	    ChickenManager.Instance.ChickenDeathEvent += ChickenCheck;
+	    GlobalEvents.chickenDiedEvent += ChickenCheck;
     }
     
-    public void ChickenCheck()
+    public void ChickenCheck(GameObject o)
     {
         if (ChickenManager.Instance.chickensList.Count <= 0)
         {

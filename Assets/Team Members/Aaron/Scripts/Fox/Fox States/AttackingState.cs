@@ -25,7 +25,7 @@ namespace Aaron
 
             owner = aGameObject;
             foxModel = owner.GetComponent<FoxModel>();
-            ChickenManager.Instance.ChickenDeathEvent += EatChicken;
+            GlobalEvents.chickenDiedEvent += EatChicken;
         }
 
         public override void Enter()
@@ -81,7 +81,7 @@ namespace Aaron
             chickenTarget.GetComponent<Health>().ChangeHealth(-5);
         }
 
-        void EatChicken()
+        void EatChicken(GameObject o)
         {
             owner.GetComponent<FoxModel>().eatingChicken = true;
         }
