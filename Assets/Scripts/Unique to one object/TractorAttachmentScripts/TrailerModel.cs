@@ -38,6 +38,27 @@ public class TrailerModel : MonoBehaviour, ITractorAttachment
         configurableJoint.connectedBody = null;
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        //Remove objects from list when they fall out of trailer
+        if(objectsInTrailer.Contains(other.gameObject))
+        {
+            objectsInTrailer.Remove(other.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<ChickenModel>() != null)
+        {
+            if(!objectsInTrailer.Contains(other.gameObject))
+            {
+                other.gameObject.transform.position = mounts[0].transform.position;
+                objectsInTrailer.Add(other.gameObject);
+            }
+        }
+    }
+
     //Old Interface
     /*
     public Vector3 Offset()
