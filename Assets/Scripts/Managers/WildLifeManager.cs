@@ -59,7 +59,6 @@ namespace Rob
 		                    spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
 		                    Vector3 randomSpot = Random.insideUnitCircle * 5;
 		                    randomSpot.z = randomSpot.y; //hack, im sure there is an easier way to do this
-		                    Debug.Log(randomSpot);
 		                    GameObject randomWildlife =
 			                    currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
 		                    GameObject spawnedWildlife;
