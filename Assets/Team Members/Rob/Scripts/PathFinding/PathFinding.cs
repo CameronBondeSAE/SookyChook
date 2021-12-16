@@ -72,7 +72,6 @@ namespace Rob
 
                 if (currentNode == endNode)
                 {
-                    Debug.Log("Reached End");
                     RetracePath(startNode, endNode);
                     return path;
                 }
