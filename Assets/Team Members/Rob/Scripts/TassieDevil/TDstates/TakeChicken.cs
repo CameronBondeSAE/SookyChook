@@ -10,6 +10,8 @@ namespace Rob
         private TassieDevilModel tassieModel;
         private FollowPath followPath;
 
+        public List<Transform> forrestSpawns;
+
         public Transform forrestSpawnPoint;
 
 
@@ -30,11 +32,12 @@ namespace Rob
             {
                 if (spawnPoint.typeOfPointOfPoint == SpawnPoint.TypeOfPoint.Forest)
                 {
-                    forrestSpawnPoint = spawnPoint.transform;
+                    forrestSpawns.Add(spawnPoint.transform);
+                    forrestSpawnPoint = forrestSpawns[Random.Range(0,forrestSpawns.Count)];
                 }
             }
+
             followPath.SetPath(forrestSpawnPoint);
-            
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -58,7 +61,6 @@ namespace Rob
         public override void Exit()
         {
             base.Exit();
-            
         }
     }
 }

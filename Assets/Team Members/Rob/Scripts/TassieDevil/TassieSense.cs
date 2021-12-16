@@ -56,9 +56,12 @@ public class TassieSense : MonoBehaviour, ISense
     {
         foreach (CharacterModel player in GameManager.Instance.players)
         {
-            if (tassieFOV.CanISee(player.transform))
+            if (player != null)
             {
-                return true;
+                if (tassieFOV.CanISee(player.transform))
+                {
+                    return true;
+                }
             }
         }
 
@@ -97,5 +100,4 @@ public class TassieSense : MonoBehaviour, ISense
     {
         throw new System.NotImplementedException();
     }
-    
 }

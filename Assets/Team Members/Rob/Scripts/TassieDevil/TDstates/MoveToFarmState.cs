@@ -6,6 +6,7 @@ using UnityEngine;
 public class MoveToFarmState : SookyAntAIState
 {
     public Transform farmSpawnPoint;
+    public List<Transform> mainFarmSpawn;
 
     private FollowPath followPath;
     private TassieDevilModel tassieDevilModel;
@@ -17,6 +18,7 @@ public class MoveToFarmState : SookyAntAIState
         followPath = owner.GetComponent<FollowPath>();
         tassieDevilModel = owner.GetComponent<TassieDevilModel>();
         
+        
     }
 
     public override void Enter()
@@ -26,7 +28,8 @@ public class MoveToFarmState : SookyAntAIState
         {
             if (spawnPoint.typeOfPointOfPoint == SpawnPoint.TypeOfPoint.MainFarm)
             {
-                farmSpawnPoint = spawnPoint.transform;
+                mainFarmSpawn.Add(spawnPoint.transform);
+                farmSpawnPoint = mainFarmSpawn[Random.Range(0, mainFarmSpawn.Count)];
             }
         }
         followPath.SetPath(farmSpawnPoint);
