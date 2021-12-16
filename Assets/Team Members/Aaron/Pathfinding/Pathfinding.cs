@@ -32,25 +32,12 @@ namespace Aaron
 
         private ScanningGrid grid;
         private ScanningGrid.Node currentNode;
-
-        private void Start()
-        {
-            grid = ScanningGrid.Instance;
-            
-            beginning = VectorToInt(beginningVectorPos.position);
-            finish = VectorToInt(finishVectorPos.position);
-            
-            FindPath(beginning, finish);       
-        }
-
-        private void Update()
-        {
-            
-        }
-
+        
         //get start and finish points in Node Space
         public void FindPath(Vector3Int start, Vector3Int end)
         {
+            grid = ScanningGrid.Instance;
+            
             beginning = VectorToInt(start);
             finish = VectorToInt(end);
             
