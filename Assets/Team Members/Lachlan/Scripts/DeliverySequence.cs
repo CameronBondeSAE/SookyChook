@@ -72,7 +72,6 @@ public class DeliverySequence : MonoBehaviour
 	    //Reverse
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(-truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(-truckSpeed);
-        Debug.Log("Back");
         yield return new WaitForSeconds(1f);
 
 	    // Match the velocity of the spawned delivery items
@@ -89,7 +88,6 @@ public class DeliverySequence : MonoBehaviour
         //Accelerate
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(truckSpeed);
-        Debug.Log("Forward");
         yield return new WaitForSeconds(3.5f);
 
         
