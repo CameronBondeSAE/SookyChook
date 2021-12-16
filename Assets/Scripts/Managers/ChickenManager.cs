@@ -65,7 +65,7 @@ namespace Aaron
             // JSON SAVE AND LOAD
             ChickenManager chickenManager = this;
             string json = JsonUtility.ToJson(this);
-            chickenManager = JsonUtility.FromJson<ChickenManager>(json);
+            // chickenManager = JsonUtility.FromJson<ChickenManager>(json);
             //string chickenNames = this.ToString();
             //JsonUtility.FromJson<ChickenManager>(chickenNames);
 

@@ -48,7 +48,7 @@ public class GameManager : ManagerBase<GameManager>
 	    {
 		    foreach (var characterModel in players)
 		    {
-			    cinemachineTargetGroup.AddMember(characterModel.transform, 1f, 2f);
+			    cinemachineTargetGroup.AddMember(characterModel.transform, 1f, 3f);
 		    }
 	    }
     }

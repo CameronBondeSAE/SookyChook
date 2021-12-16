@@ -9,13 +9,20 @@ public class GraveyardManager : MonoBehaviour
 {
     public List<GameObject> ghostChickens = new List<GameObject>();
 
-    public GameObject ghost;
+    public GameObject ghostPrefab;
 
     //TODO sub to chicken murder event from somewhere; instantiate (to be enabled/disabled per relevant time cycle)
 
     private void Awake()
     {
         DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChange;
+        
+        GlobalEvents.chickenDiedEvent += GlobalEventsOnchickenDiedEvent;
+    }
+
+    private void GlobalEventsOnchickenDiedEvent(GameObject obj)
+    {
+	    SpawnGhost(obj.transform.position, obj.transform.rotation);
     }
 
     void InstanceOnPhaseChange(DayNightManager.DayPhase obj)
@@ -30,12 +37,10 @@ public class GraveyardManager : MonoBehaviour
             ClearGhostChickens();
         }
     }
-    private void SpawnGhosts()
+    private void SpawnGhost(Vector3 position, Quaternion rotation)
     {
-        GameObject copy = ghost;
         //TODO set spawn point
-        Instantiate(copy, new Vector3(), copy.transform.rotation);
-        ghostChickens.Add(copy);
+        ghostChickens.Add(Instantiate(ghostPrefab, position, rotation));
     }
 
     //On night cycle begin

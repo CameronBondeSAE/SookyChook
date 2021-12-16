@@ -134,8 +134,8 @@ public class ChickenGrowingMode : GameModeBase
     public override void EndMode()
     {
         base.EndMode();
-        
-        StopCoroutine(acceptingOrders);
+
+        if (acceptingOrders != null) StopCoroutine(acceptingOrders);
         StartCoroutine(RestartScene());
     }
 

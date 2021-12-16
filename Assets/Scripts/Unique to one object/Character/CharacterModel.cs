@@ -66,7 +66,17 @@ public class CharacterModel : MonoBehaviour
 
     private void OnEnable()
     {
-	    GlobalEvents.chickenDiedEvent += go => Cry();
+	    GlobalEvents.chickenDiedEvent += GlobalEventsOnchickenDiedEvent;
+    }
+
+    private void OnDisable()
+    {
+	    GlobalEvents.chickenDiedEvent -= GlobalEventsOnchickenDiedEvent;
+    }
+
+    private void GlobalEventsOnchickenDiedEvent(GameObject obj)
+    {
+	    Cry();
     }
 
     void FixedUpdate()

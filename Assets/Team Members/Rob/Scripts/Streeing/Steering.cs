@@ -7,7 +7,6 @@ public class Steering : MonoBehaviour
 {
     public Rigidbody rb;
     public float multiplyer;
-    public float torque;
     public float checkDist;
     public float checkDistLeft;
     public float checkDistRight;
@@ -28,20 +27,20 @@ public class Steering : MonoBehaviour
 
         if (Physics.Raycast(rayForward, out hit, checkDist))
         {
-            float distanceTo = (checkDist - hit.distance) * multiplyer;
-            rb.AddRelativeTorque(Vector3.up * torque * checkDist * multiplyer, ForceMode.VelocityChange);
+            float distanceTo = checkDist - hit.distance;
+            rb.AddRelativeTorque(Vector3.up  * distanceTo * multiplyer, ForceMode.VelocityChange);
         }
 
         if (Physics.Raycast(rayRight, out hit, checkDistRight))
         {
-            float distanceTo = (checkDistRight - hit.distance) * multiplyer;
-            rb.AddRelativeTorque(Vector3.up * torque * (checkDistRight) * multiplyer, ForceMode.VelocityChange);
+            float distanceToRight = checkDistRight - hit.distance;
+            rb.AddRelativeTorque(Vector3.up   * distanceToRight * -multiplyer, ForceMode.VelocityChange);
         }
 
         if (Physics.Raycast(rayLeft, out hit, checkDistLeft))
         {
-            float distanceTo = (checkDistLeft - hit.distance) * multiplyer;
-            rb.AddRelativeTorque(Vector3.up * torque * (checkDistLeft) * multiplyer, ForceMode.VelocityChange);
+            float distanceToLeft = checkDistLeft - hit.distance;
+            rb.AddRelativeTorque(Vector3.up   * distanceToLeft * multiplyer, ForceMode.VelocityChange);
             
         }
     }
