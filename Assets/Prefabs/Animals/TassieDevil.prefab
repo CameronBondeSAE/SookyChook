@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1526219752414524807}
   - component: {fileID: 3294328559912015751}
   - component: {fileID: 7419186840531261515}
+  - component: {fileID: 232268078655043295}
   m_Layer: 0
   m_Name: Steering Behaviour
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 942582001}
-  speed: 20
+  speed: 50
 --- !u!114 &3294328559912015751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,11 +62,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 942582001}
-  multiplyer: 3
-  torque: 2
-  checkDist: 5
-  checkDistLeft: 1
-  checkDistRight: 1
+  multiplyer: 2
+  checkDist: 2
+  checkDistLeft: 3
+  checkDistRight: 3
 --- !u!114 &7419186840531261515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +80,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 942582001}
   turningAmount: 90
+--- !u!114 &232268078655043295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492414658441941460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f34f0fe1ad61644a6df37c87591e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 942582001}
+  target: {fileID: 0}
+  torque: 100
+  turnTowardsActive: 0
 --- !u!1 &1183116927532342443
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiAgent: {fileID: 8048906245288645218}
   seeChicken: 0
-  isHungry: 1
+  isHungry: 0
   isMoving: 0
   isLooking: 1
   atTarget: 0
@@ -158,6 +174,7 @@ MonoBehaviour:
   isAtFarm: 0
   atPrey: 0
   returnHome: 0
+  seePlayer: 0
   prey: {fileID: 0}
   hunger: 0
   hungerthreshhold: 20
@@ -327,7 +344,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7398924746385229120}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5bb2eb2321ca27c4d973d6cabda7b3c9, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5970292

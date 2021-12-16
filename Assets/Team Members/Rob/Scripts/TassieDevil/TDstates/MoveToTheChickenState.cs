@@ -12,20 +12,17 @@ namespace Rob
     {
         private TassieDevilModel tassieModel;
         private Transform pathTowardsTransform;
+        private TurnTowards turnTowards;
         
-        [SerializeField]private Rigidbody rb;
-
-        public List<WorldScan.Node> path;
-        public int currentIndex;
-        public FollowPath followPath;
+        
+        
 
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
-            followPath = owner.GetComponent<FollowPath>();
             tassieModel = owner.GetComponent<TassieDevilModel>();
-            rb = owner.GetComponent<Rigidbody>();
+            turnTowards = owner.GetComponentInChildren<TurnTowards>();
 
             //currentIndex = 0;
         }
@@ -36,6 +33,8 @@ namespace Rob
             //followPath.SetPath(tassieModel.prey);
             tassieModel.isAtFarm = false;
             owner.GetComponentInChildren<Wander>().enabled = false;
+            turnTowards.target = tassieModel.prey;
+            turnTowards.turnTowardsActive = true;
 
         }
 
@@ -44,9 +43,7 @@ namespace Rob
             base.Execute(aDeltaTime, aTimeScale);
             //followPath.TakePath();
             
-            Vector3 targetWorldPosition = transform.InverseTransformPoint(tassieModel.prey.position);
-            float turningDirection = targetWorldPosition.x;
-            rb.AddTorque(Vector3.up * 100 * turningDirection, ForceMode.Acceleration);
+            
             
             //rb.AddForce(owner.transform.forward * 1000 * Time.fixedDeltaTime, ForceMode.Acceleration);
             float dist = Vector3.Distance(owner.transform.position, tassieModel.prey.position);
@@ -55,6 +52,7 @@ namespace Rob
                 tassieModel.atPrey = true;
                 tassieModel.isMoving = false;
                 owner.GetComponentInChildren<Forward>().enabled = false;
+                turnTowards.turnTowardsActive = false;
                 Finish();
             }
             

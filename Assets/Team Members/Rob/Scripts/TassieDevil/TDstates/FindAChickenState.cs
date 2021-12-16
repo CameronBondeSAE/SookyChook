@@ -34,8 +34,14 @@ namespace Rob
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            if (ChickenManager.Instance.chickensList.Count <= 0)
+            {
+                Finish();
+            }
+            
             foreach (ChickenModel chicken in ChickenManager.Instance.chickensList)
             {
+                
                 if (fov.CanISee(chicken.transform))
                 {
                     tassieModel.seeChicken = true;
