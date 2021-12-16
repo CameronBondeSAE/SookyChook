@@ -132,9 +132,10 @@ public class TractorModel : MonoBehaviour, IVehicle
     private void OnTriggerExit(Collider other)
     {
         //Reset prevent attachment after tractor leaves trigger zone to prevent insta-reattach
-        if(tractorAttachment == null & !hasAttachment)
+        if(tractorAttachment != null & !hasAttachment)
         {
             preventAttachment = false;
+            tractorAttachment = null;
         }
     }
 
@@ -211,8 +212,6 @@ public class TractorModel : MonoBehaviour, IVehicle
 
         //Call the attachments Detach to let it do what it needs to
         tractorAttachment.Detach();
-        tractorAttachment = null;
-
     }
 
     //Old interface
