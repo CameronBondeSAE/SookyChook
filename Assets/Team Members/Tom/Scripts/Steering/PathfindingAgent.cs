@@ -15,7 +15,7 @@ namespace Tom
         
         public List<PathfindingGrid.Node> path = new List<PathfindingGrid.Node>();
 
-        private void Start()
+        private void Awake()
         {
             grid = FindObjectOfType<PathfindingGrid>();
             //FindPath(start, destination);
@@ -23,6 +23,11 @@ namespace Tom
 
         public List<PathfindingGrid.Node> FindPath(Vector2Int start, Vector2Int destination)
         {
+            // BIGGEST HACK EVER
+            start = ClampToGrid(start);
+            destination = ClampToGrid(destination);
+
+            
             foreach (PathfindingGrid.Node node in grid.nodes)
             {
                 node.parent = null;
@@ -54,7 +59,7 @@ namespace Tom
                 openNodes.Remove(currentNode);
                 closedNodes.Add(currentNode);
 
-                if (currentNode == grid.nodes[destination.x - grid.gridStartX, destination.y - grid.gridStartY])
+                if (currentNode.coordinates == ClampToGrid(new Vector2Int(destination.x - grid.gridStartX, destination.y - grid.gridStartY)))
                 {
                     break;
                 }
@@ -66,7 +71,9 @@ namespace Tom
                     {
                         if (i >= grid.gridStartX && i <= grid.gridEndX && j >= grid.gridStartY && j <= grid.gridEndY)
                         {
-                            PathfindingGrid.Node neighbour = grid.nodes[i - grid.gridStartX, j - grid.gridStartY];
+                            Vector2Int neighbourPos =
+                                ClampToGrid(new Vector2Int(i - grid.gridStartX, j - grid.gridStartY));
+                            PathfindingGrid.Node neighbour = grid.nodes[neighbourPos.x,neighbourPos.y];
                             // Ignore neighbour if blocked or closed
                             if (neighbour.blocked || closedNodes.Contains(neighbour))
                             {
@@ -132,6 +139,13 @@ namespace Tom
         public Vector3 ConvertNodeCoordinatesToPosition(Vector2Int coordinates)
         {
             return new Vector3(coordinates.x, 0, coordinates.y);
+        }
+
+        public Vector2Int ClampToGrid(Vector2Int vector)
+        {
+            vector.x = Mathf.Clamp(vector.x, grid.gridStartX, grid.gridEndX);
+            vector.y = Mathf.Clamp(vector.y, grid.gridStartY, grid.gridEndY);
+            return vector;
         }
 
         private void OnDrawGizmosSelected()

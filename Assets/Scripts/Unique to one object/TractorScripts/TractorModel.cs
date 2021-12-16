@@ -206,7 +206,7 @@ public class TractorModel : MonoBehaviour, IVehicle
     {
         //Offload all references to the attachment
         attachment.transform.parent = null;
-        attachment.transform.rotation = transform.rotation;
+        //attachment.transform.rotation = transform.rotation;
         attachment = null;
         hasAttachment = false;
 
