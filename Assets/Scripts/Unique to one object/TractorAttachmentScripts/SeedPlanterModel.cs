@@ -60,6 +60,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     {
         //Wait before planting first grass for attachment to stablise onto tractor
         yield return new WaitForSeconds(1f);
+        yield return seedsAvailable > 0;
 
         do
         {
@@ -101,6 +102,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
             //Only run this while tractor is moving - otherwise wait to continue planting 
             yield return tractorMoving;
+            yield return seedsAvailable > 0;
 
             //Planting is based on tractor velocity - clamp this speed so planting doesn't plant 100 in 1 second
             Mathf.Clamp(tractorVelocity, 1, planterSpeed + 1.5f);
@@ -141,6 +143,10 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         transform.rotation = aTractorModel.transform.rotation;
         configurableJoint.connectedBody = aTractorModel.attachmentMount.GetComponent<Rigidbody>();
 
+        //stop the planter from jumping everywhere when attaching
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+
         //Do Planter Stuff
         plantCoroutine = StartCoroutine(PlantSeeds());
         IsAttachedEvent?.Invoke(true);
@@ -153,6 +159,9 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         IsAttachedEvent?.Invoke(false);
         StopCoroutine(plantCoroutine);
         configurableJoint.connectedBody = null;
+
+        //stop the planter from jumping everywhere when detaching
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);
