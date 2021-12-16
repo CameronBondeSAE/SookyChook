@@ -13,7 +13,7 @@ public class GraveyardManager : MonoBehaviour
 
     //TODO sub to chicken murder event from somewhere; instantiate (to be enabled/disabled per relevant time cycle)
 
-    private void Awake()
+    private void Start()
     {
         DayNightManager.Instance.PhaseChangeEvent += InstanceOnPhaseChange;
         

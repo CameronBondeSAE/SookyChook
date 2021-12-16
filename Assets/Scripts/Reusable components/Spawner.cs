@@ -62,13 +62,14 @@ namespace Rob
 							randomTransform = _currentGroupInfo.spawnPoints[Random.Range(0, _currentGroupInfo.spawnPoints.Length)];
 
 						Vector3 spawnPos = randomTransform.position;
-						spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
+						spawnPos = new Vector3(spawnPos.x, spawnPos.y, spawnPos.z);
 						Vector3 randomSpot = Random.insideUnitCircle * radius;
 						randomSpot.z = randomSpot.y; //hack, im sure there is an easier way to do this
+						randomSpot.y = 0;
 						// Debug.Log(randomSpot);
 						GameObject randomPrefab =
 							_currentGroupInfo.prefabs[Random.Range(0, _currentGroupInfo.prefabs.Length)];
-						GameObject spawnedPrefab = SpawnSingle(randomPrefab, spawnPos + randomSpot, randomTransform);
+						GameObject spawnedPrefab = SpawnSingle(randomPrefab, spawnPos + randomSpot, randomTransform.rotation);
 
 						spawned.Add(spawnedPrefab);
 					}
@@ -78,20 +79,25 @@ namespace Rob
 			return spawned;
 		}
 
-		public GameObject SpawnSingle(GameObject prefab, Vector3 pos, Transform rotation)
+		public GameObject SpawnSingle(GameObject prefab, Vector3 pos, Quaternion rotation)
 		{
 			Vector3 randomSpot;
 			GameObject spawnedPrefab = Instantiate(prefab, pos,
-				rotation.rotation);
+				rotation);
 
-			if (Physics.Raycast(spawnedPrefab.transform.position, Vector3.down, out RaycastHit hit, 20))
+			// Start much higher
+			Vector3 startRay = spawnedPrefab.transform.position + Vector3.up * 100f;
+			if (Physics.Raycast(startRay, Vector3.down, out RaycastHit hit))
 			{
 				Vector3 newSpawnPos = spawnedPrefab.transform.position;
-				Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
+				Debug.DrawRay(startRay, Vector3.down * hit.distance, Color.blue);
 				// Debug.Log(hit.distance);
-				newSpawnPos = new Vector3(newSpawnPos.x,
-					newSpawnPos.y - (hit.distance - groundOffset),
-					newSpawnPos.z);
+
+				// Add offset from detected ground point
+				newSpawnPos = hit.point + Vector3.up * groundOffset;
+				// newSpawnPos = new Vector3(newSpawnPos.x,
+					// newSpawnPos.y - (hit.distance - groundOffset),
+					// newSpawnPos.z);
 				spawnedPrefab.transform.position = newSpawnPos;
 			}
 

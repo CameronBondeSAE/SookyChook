@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ca68f1a712d064b9956ff53d188e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodAmount: 0
+  foodAmount: 10
 --- !u!114 &979957326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,6 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chickenModel: {fileID: 3438443056123701457}
+  deathMaterial: {fileID: 0}
   audioSource: {fileID: 4593154216289649056}
   interactedWith: {fileID: 8300000, guid: 71db26ad5c9119f4a9c7c3ec7a1a4f55, type: 3}
   pickedUp: {fileID: 8300000, guid: 4632169fdade72047bff69408846cfe7, type: 3}

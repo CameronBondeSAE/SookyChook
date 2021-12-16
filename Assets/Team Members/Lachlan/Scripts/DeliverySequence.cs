@@ -35,6 +35,8 @@ public class DeliverySequence : MonoBehaviour
             // hasSpawned = true;
         // }
         //Instantiate(deliveryTruck, deliveryTruckPos.position, Quaternion.Euler(0,-90,0));
+        
+        deliveryTruck.SetActive(false);
     }
 
     private void InstanceOnPhaseChangeEvent(DayNightManager.DayPhase obj)
@@ -57,12 +59,20 @@ public class DeliverySequence : MonoBehaviour
 
     public IEnumerator Delivery(float amount)
     {
-        //Reverse
+	    deliveryTruck.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+	    //Reverse
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(-truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(-truckSpeed);
         Debug.Log("Back");
         yield return new WaitForSeconds(2.5f);
-        
+
+	    // Match the velocity of the spawned delivery items
+        foreach (GameObject o in spawner.SpawnMultiple())
+        {
+	        o.GetComponent<Rigidbody>().velocity = deliveryTruck.GetComponent<Rigidbody>().velocity;
+        }
+
         //Accelerate
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(truckSpeed);

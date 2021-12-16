@@ -35,7 +35,11 @@ namespace Rob
 
         private void Start()
         {
-            FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
+	        if (wildLife.Length <=0)
+	        {
+		        return;
+	        }
+            DayNightManager.Instance.PhaseChangeEvent += ChangePhase;
         }
 
         public void ChangePhase(DayNightManager.DayPhase timeOfDay)
@@ -48,38 +52,41 @@ namespace Rob
 
                     for (int j = 0; j < currentWildLife.animalCount; j++)
                     {
-                        Transform randomTransform = currentWildLife.spawnPoints[Random.Range(0, currentWildLife.spawnPoints.Length)];
-                        Vector3 spawnPos = randomTransform.position;
-                        spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
-                        Vector3 randomSpot = Random.insideUnitCircle * 5;
-                        randomSpot.z = randomSpot.y; //hack, im sure there is an easier way to do this
-                        Debug.Log(randomSpot);
-                        GameObject randomWildlife =
-                            currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
-                        GameObject spawnedWildlife;
-                        if (randomSpawnRotation)
-                        {
-                            spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
-                                Quaternion.Euler(0,Random.Range(0,360),0));
-                        }
-                        else
-                        {
-                            spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
-                                randomTransform.rotation);
-                        }
+	                    if (currentWildLife.spawnPoints.Length > 0)
+	                    {
+		                    Transform randomTransform = currentWildLife.spawnPoints[Random.Range(0, currentWildLife.spawnPoints.Length)];
+		                    Vector3 spawnPos = randomTransform.position;
+		                    spawnPos = new Vector3(spawnPos.x, spawnPos.y + 5, spawnPos.z);
+		                    Vector3 randomSpot = Random.insideUnitCircle * 5;
+		                    randomSpot.z = randomSpot.y; //hack, im sure there is an easier way to do this
+		                    Debug.Log(randomSpot);
+		                    GameObject randomWildlife =
+			                    currentWildLife.animals[Random.Range(0, currentWildLife.animals.Length)];
+		                    GameObject spawnedWildlife;
+		                    if (randomSpawnRotation)
+		                    {
+			                    spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
+				                    Quaternion.Euler(0,Random.Range(0,360),0));
+		                    }
+		                    else
+		                    {
+			                    spawnedWildlife = Instantiate(randomWildlife, spawnPos + randomSpot,
+				                    randomTransform.rotation);
+		                    }
 
-                        if (Physics.Raycast(spawnedWildlife.transform.position, Vector3.down, out RaycastHit hit, 20))
-                        {
-                            Vector3 newSpawnPos = spawnedWildlife.transform.position;
-                            Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
-                            Debug.Log(hit.distance);
-                            newSpawnPos = new Vector3(newSpawnPos.x,
-                                newSpawnPos.y - (hit.distance - groundOffset),
-                                newSpawnPos.z);
-                            spawnedWildlife.transform.position = newSpawnPos;
-                        }
+		                    if (Physics.Raycast(spawnedWildlife.transform.position, Vector3.down, out RaycastHit hit, 20))
+		                    {
+			                    Vector3 newSpawnPos = spawnedWildlife.transform.position;
+			                    Debug.DrawRay(newSpawnPos, Vector3.down * hit.distance, Color.blue);
+			                    Debug.Log(hit.distance);
+			                    newSpawnPos = new Vector3(newSpawnPos.x,
+				                    newSpawnPos.y - (hit.distance - groundOffset),
+				                    newSpawnPos.z);
+			                    spawnedWildlife.transform.position = newSpawnPos;
+		                    }
                         
-                        animalsSpawned.Add(spawnedWildlife);
+		                    animalsSpawned.Add(spawnedWildlife);
+	                    }
                     }
                 }
             }

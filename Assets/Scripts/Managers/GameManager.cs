@@ -65,19 +65,22 @@ public class GameManager : ManagerBase<GameManager>
                         .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
 
         // HACK hardcoded spawn
-        p1.transform.position = gameMode.playerSpawns[0].transform.position;
-        p1.transform.rotation = gameMode.playerSpawns[0].transform.rotation;
-        
-        
-        if (numberOfPlayers>1)
+        if (gameMode.playerSpawns.Count>=2)
         {
-	        PlayerInput p2 = PlayerInput.Instantiate(playerPrefab, 2, "Keyboard Arrows", -1, Keyboard.current);
-	        players.Add(p2
-		        .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
-	        
-	        // HACK hardcoded spawn
-	        p2.transform.position = gameMode.playerSpawns[1].transform.position;
-	        p2.transform.rotation = gameMode.playerSpawns[1].transform.rotation;
+	        p1.transform.position = gameMode.playerSpawns[0].transform.position;
+	        p1.transform.rotation = gameMode.playerSpawns[0].transform.rotation;
+
+
+	        if (numberOfPlayers > 1)
+	        {
+		        PlayerInput p2 = PlayerInput.Instantiate(playerPrefab, 2, "Keyboard Arrows", -1, Keyboard.current);
+		        players.Add(p2
+			        .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
+
+		        // HACK hardcoded spawn
+		        p2.transform.position = gameMode.playerSpawns[1].transform.position;
+		        p2.transform.rotation = gameMode.playerSpawns[1].transform.rotation;
+	        }
         }
     }
 

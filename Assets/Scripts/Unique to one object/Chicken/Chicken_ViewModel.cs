@@ -28,6 +28,8 @@ public class Chicken_ViewModel : MonoBehaviour
 	{
 		audioSource.clip = dyingSounds[Random.Range(0, dyingSounds.Count)];
 		audioSource.Play();
+		// if (deathMaterial != null) GetComponentInParent<Renderer>().material.color = deathMaterial;
+		GetComponentInChildren<Renderer>().material.color = Color.red;
 	}
 
 	void ChickenModelOnPickUpEvent(bool pickingUp)
@@ -56,8 +58,6 @@ public class Chicken_ViewModel : MonoBehaviour
 		{
 			audioSource.clip = interactedWith;
 			audioSource.Play();
-
-			if (deathMaterial != null) GetComponentInParent<Renderer>().material = deathMaterial;
 		}
 	}
 }

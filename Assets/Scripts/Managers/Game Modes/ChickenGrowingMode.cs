@@ -129,7 +129,7 @@ public class ChickenGrowingMode : GameModeBase
         }
         if (phase == DayNightManager.DayPhase.Evening)
         {
-            StopCoroutine(acceptingOrders);
+	        if (acceptingOrders != null) StopCoroutine(acceptingOrders);
         }
     }
 

@@ -361,7 +361,7 @@ public class CharacterModel : MonoBehaviour
 
         if (hitinfo.collider != null)
         {
-            Debug.Log(hitinfo.collider.gameObject.name);
+            // Debug.Log(hitinfo.collider.gameObject.name);
             IWaterable waterable = hitinfo.collider.GetComponent<IWaterable>();
             if (waterable != null)
             {

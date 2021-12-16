@@ -59,7 +59,11 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 	public void PickUp()
 	{
 		GetComponent<Rigidbody>().isKinematic = true;
-		GetComponent<Collider>().enabled = false;
+		foreach (Collider child in GetComponentsInChildren<Collider>())
+		{
+			child.enabled = false;
+		}
+		enabled = false;
 		PickUpEvent?.Invoke(true);
 	}
 
@@ -67,6 +71,10 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 	{
 		GetComponent<Rigidbody>().isKinematic = false;
 		//GetComponentsInChildren<Collider>().enabled = true;
+		foreach (Collider child in GetComponentsInChildren<Collider>())
+		{
+			child.enabled = true;
+		}
 		PickUpEvent?.Invoke(false);
 	}
 	

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2541867661163480372}
   - component: {fileID: -6631753516900096408}
-  - component: {fileID: -7356258711812787271}
   m_Layer: 0
   m_Name: DeliveryManager
   m_TagString: Untagged
@@ -45,35 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d09cad58c976b46a8d0b0b80e041f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: -7356258711812787271}
+  spawner: {fileID: 0}
   deliveryTruck: {fileID: 0}
   deliveryTruckPos: {fileID: 0}
   deliveryTime: 11.8
   truckSpeed: 0.7
   deliveryEvent: 0
---- !u!114 &-7356258711812787271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814082341017035697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42342a0b9409a3e46bc706a39c1adee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoStart: 0
-  radius: 5
-  groupInfos:
-  - prefabs:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    countPerGroup: 1
-  groundOffset: 0
-  spawned: []
