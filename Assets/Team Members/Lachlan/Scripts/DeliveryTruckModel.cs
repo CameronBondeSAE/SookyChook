@@ -29,12 +29,19 @@ public class DeliveryTruckModel : MonoBehaviour, IVehicle
     public AudioClip enter;
     public AudioClip running;
     public AudioClip exit;
+    public AudioClip[] honks;
 
     
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void Honk()
+    {
+	    audioSource.clip = honks[Random.Range(0,honks.Length)];
+	    audioSource.Play();
     }
 
     // Update is called once per frame

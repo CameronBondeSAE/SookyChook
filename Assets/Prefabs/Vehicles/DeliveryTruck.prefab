@@ -845,6 +845,10 @@ MonoBehaviour:
   enter: {fileID: 8300000, guid: 1634c5a05defc53478c2e26d1b593c11, type: 3}
   running: {fileID: 8300000, guid: bb61a1020645e5042a34854ee6c02217, type: 3}
   exit: {fileID: 8300000, guid: ee62a8892833b9c43aa7ae0f77d33ea0, type: 3}
+  honks:
+  - {fileID: 8300000, guid: ba40d1b7a803a704a8a26b095af711a4, type: 3}
+  - {fileID: 8300000, guid: bf537797d7ce1de4a80dd23df9c8b1d7, type: 3}
+  - {fileID: 8300000, guid: fcfbd6103ab1c494bb245ce701f13155, type: 3}
 --- !u!114 &8577010391462542454
 MonoBehaviour:
   m_ObjectHideFlags: 0

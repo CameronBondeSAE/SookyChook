@@ -39,6 +39,7 @@ public class DeliverySequence : MonoBehaviour
         deliveryTruck.SetActive(false);
     }
 
+    Coroutine coroutine;
     private void InstanceOnPhaseChangeEvent(DayNightManager.DayPhase obj)
     {
         if (obj == DayNightManager.DayPhase.Noon)
@@ -52,7 +53,12 @@ public class DeliverySequence : MonoBehaviour
             
                 deliveryTruck.SetActive(true);
                 //Instantiate(deliveryTruck, transform.localPosition, Quaternion.identity);
-                StartCoroutine(Delivery(new float()));
+
+                if (coroutine!=null)
+                {
+	                StopCoroutine(coroutine);
+                }
+                coroutine = StartCoroutine(Delivery(new float()));
             }
         }
     }
@@ -61,11 +67,13 @@ public class DeliverySequence : MonoBehaviour
     {
 	    deliveryTruck.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+	    deliveryTruck.GetComponent<DeliveryTruckModel>().Enter();
+	    
 	    //Reverse
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(-truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(-truckSpeed);
         Debug.Log("Back");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1f);
 
 	    // Match the velocity of the spawned delivery items
         foreach (GameObject o in spawner.SpawnMultiple())
@@ -73,12 +81,21 @@ public class DeliverySequence : MonoBehaviour
 	        o.GetComponent<Rigidbody>().velocity = deliveryTruck.GetComponent<Rigidbody>().velocity;
         }
 
+        yield return new WaitForSeconds(2f);
+
+        deliveryTruck.GetComponent<DeliveryTruckModel>().Honk();
+        
+        
         //Accelerate
         deliveryTruck.GetComponentInParent<DeliveryTruckModel>().Accelerate(truckSpeed);
         //FindObjectOfType<DeliveryTruckModel>().Accelerate(truckSpeed);
         Debug.Log("Forward");
         yield return new WaitForSeconds(3.5f);
 
+        
+        deliveryTruck.GetComponent<DeliveryTruckModel>().Exit();
+        yield return new WaitForSeconds(1f);
+        
         deliveryTruck.SetActive(false);
         //deliveryTruck.isStatic = true;
         //TODO: remove box collider to make fences splurge out, also adjust spawn radius of fences in prefab.

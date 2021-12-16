@@ -377,7 +377,7 @@ public class CharacterModel : MonoBehaviour
         // Ray        ray = new Ray(transform.position + transform.TransformPoint(interactRayOffset), transform.forward);
         // NOTE: TransformPoint I THINK includes the main position, so you don't have to add world position to the final
         Vector3 transformPoint = transform.TransformPoint(interactRayOffset);
-        Debug.Log(transformPoint);
+        // Debug.Log(transformPoint);
         Ray ray = new Ray(transformPoint, transform.forward);
 
         Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.green, 2f);
