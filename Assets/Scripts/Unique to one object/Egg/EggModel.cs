@@ -15,9 +15,6 @@ public class EggModel : NetworkBehaviour, ISellable
 	public GameObject chicken;
     public GameObject egg;
 
-    //added for testing without sound
-    public ParticleSystem eggHatchParticles;
-
     public AudioSource audioSource;
     public AudioClip eggCracking;
 
@@ -71,17 +68,11 @@ public class EggModel : NetworkBehaviour, ISellable
         if (NetworkManager.Singleton.IsServer)
         {
 	        audioSource.Play();
-	        //Particles just for testing without sounds
-	        eggHatchParticles.Play();
-	        
-	        //instantiate chicken
-	        GameObject copy = chicken;
-	        Instantiate(copy, transform.position, copy.transform.rotation);
-	        
-	        //This is an issue - "Object already spawned"
-	        copy.GetComponent<NetworkObject>().Spawn();
-	        
-	        soundLength = audioSource.clip.length;
+            
+            GameObject copy = Instantiate(chicken, egg.transform.position, chicken.transform.rotation);
+            copy.GetComponent<NetworkObject>().Spawn();
+
+            soundLength = audioSource.clip.length;
 
 	        Destroy(egg, soundLength);
 
