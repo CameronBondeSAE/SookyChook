@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
-public class EggModel : MonoBehaviour, ISellable
+public class EggModel : NetworkBehaviour, ISellable
 {
 	public GameObject chicken;
     public GameObject egg;
@@ -27,7 +27,7 @@ public class EggModel : MonoBehaviour, ISellable
     private float soundLength;
     
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         if (NetworkManager.Singleton.IsClient)
         {
@@ -44,21 +44,14 @@ public class EggModel : MonoBehaviour, ISellable
             isFertilised = false; 
         }
 
-        if (isFertilised)
+        /*if (isFertilised)
         {
             //add to fertilised egg list in chicken manager
             if (ChickenManager.Instance.fertilisedEggsList != null)
                 ChickenManager.Instance.fertilisedEggsList.Add(this.gameObject);
             //start timer for hatching
             StartCoroutine("HatchingTimer");
-        }
-
-    }
-    
-    
-    private void Start()
-    {
-        egg = this.gameObject;
+        }*/
     }
 
     private IEnumerator HatchingTimer()
@@ -73,7 +66,7 @@ public class EggModel : MonoBehaviour, ISellable
 
 
     [Button]
-    void HatchEgg()
+    public void HatchEgg()
     {
         if (NetworkManager.Singleton.IsServer)
         {
@@ -84,6 +77,9 @@ public class EggModel : MonoBehaviour, ISellable
 	        //instantiate chicken
 	        GameObject copy = chicken;
 	        Instantiate(copy, transform.position, copy.transform.rotation);
+	        
+	        //This is an issue - "Object already spawned"
+	        copy.GetComponent<NetworkObject>().Spawn();
 	        
 	        soundLength = audioSource.clip.length;
 
