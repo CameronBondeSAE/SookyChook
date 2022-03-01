@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Aaron;
+using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
@@ -11,6 +13,10 @@ using Random = UnityEngine.Random;
 public class EggModel : MonoBehaviour, ISellable
 {
     public GameObject chicken;
+    public GameObject egg;
+
+    public AudioSource audioSource;
+    public AudioClip eggCracking;
 
     public bool isFertilised;
 
@@ -19,6 +25,11 @@ public class EggModel : MonoBehaviour, ISellable
     // Start is called before the first frame update
     private void Awake()
     {
+        if (NetworkManager.Singleton.IsClient)
+        {
+            return;
+        }
+
         int randomNumber = Random.Range(0, 19);
         if (randomNumber < 9)
         {
@@ -38,6 +49,13 @@ public class EggModel : MonoBehaviour, ISellable
             StartCoroutine("HatchingTimer");
         }
     }
+    
+    
+    private void Start()
+    {
+        egg = this.gameObject;
+        audioSource.clip = eggCracking;
+    }
 
     private IEnumerator HatchingTimer()
     {
@@ -49,19 +67,27 @@ public class EggModel : MonoBehaviour, ISellable
         HatchEgg();
     }
 
+
+    [Button]
     void HatchEgg()
     {
-        //instantiate chicken
-        GameObject copy = chicken;
-        //copy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        Instantiate(copy, this.transform.position, copy.transform.rotation);
+        if (NetworkManager.Singleton.IsServer)
+        {
+            audioSource.Play();
+            
+            //instantiate chicken
+            GameObject copy = chicken;
+            //copy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            Instantiate(copy, transform.position, copy.transform.rotation);
 
-        //add to chicken list in chicken manager
-        ChickenManager.Instance.chickensList.Add(copy.GetComponent<ChickenModel>());
-        
-        //remove this object
-        ChickenManager.Instance.fertilisedEggsList.Remove(this.gameObject);
-        Destroy(this.gameObject);
+            Destroy(egg);
+            
+            //REMOVED FOR NETWORK TESTING
+            //add to chicken list in chicken manager
+            //ChickenManager.Instance.chickensList.Add(copy.GetComponent<ChickenModel>());
+            //remove this object
+            //ChickenManager.Instance.fertilisedEggsList.Remove(this.gameObject);
+        }
     }
 
     public ProductType GetProductType()
