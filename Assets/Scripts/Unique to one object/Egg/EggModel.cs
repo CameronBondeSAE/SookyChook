@@ -12,8 +12,11 @@ using Random = UnityEngine.Random;
 
 public class EggModel : MonoBehaviour, ISellable
 {
-    public GameObject chicken;
+	public GameObject chicken;
     public GameObject egg;
+
+    //added for testing without sound
+    public ParticleSystem eggHatchParticles;
 
     public AudioSource audioSource;
     public AudioClip eggCracking;
@@ -21,6 +24,7 @@ public class EggModel : MonoBehaviour, ISellable
     public bool isFertilised;
 
     public float hatchTimer;
+    private float soundLength;
     
     // Start is called before the first frame update
     private void Awake()
@@ -48,13 +52,13 @@ public class EggModel : MonoBehaviour, ISellable
             //start timer for hatching
             StartCoroutine("HatchingTimer");
         }
+
     }
     
     
     private void Start()
     {
         egg = this.gameObject;
-        audioSource.clip = eggCracking;
     }
 
     private IEnumerator HatchingTimer()
@@ -73,16 +77,19 @@ public class EggModel : MonoBehaviour, ISellable
     {
         if (NetworkManager.Singleton.IsServer)
         {
-            audioSource.Play();
-            
-            //instantiate chicken
-            GameObject copy = chicken;
-            //copy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            Instantiate(copy, transform.position, copy.transform.rotation);
+	        audioSource.Play();
+	        //Particles just for testing without sounds
+	        eggHatchParticles.Play();
+	        
+	        //instantiate chicken
+	        GameObject copy = chicken;
+	        Instantiate(copy, transform.position, copy.transform.rotation);
+	        
+	        soundLength = audioSource.clip.length;
 
-            Destroy(egg);
-            
-            //REMOVED FOR NETWORK TESTING
+	        Destroy(egg, soundLength);
+
+			//REMOVED FOR NETWORK TESTING
             //add to chicken list in chicken manager
             //ChickenManager.Instance.chickensList.Add(copy.GetComponent<ChickenModel>());
             //remove this object
