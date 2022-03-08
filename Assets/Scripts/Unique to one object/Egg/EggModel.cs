@@ -15,6 +15,8 @@ public class EggModel : NetworkBehaviour, ISellable
 	public GameObject chicken;
     public GameObject egg;
 
+    private Mesh EggMesh;
+
     public AudioSource audioSource;
     public AudioClip eggCracking;
 
@@ -26,6 +28,8 @@ public class EggModel : NetworkBehaviour, ISellable
     // Start is called before the first frame update
     private void Start()
     {
+        //EggMesh = GetComponentInChildren<Mesh>();
+        
         if (NetworkManager.Singleton.IsClient)
         {
             return;
@@ -60,21 +64,17 @@ public class EggModel : NetworkBehaviour, ISellable
 
         HatchEgg();
     }
-
-
+    
     [Button]
     public void HatchEgg()
     {
         if (NetworkManager.Singleton.IsServer)
         {
 	        audioSource.Play();
-            
-            GameObject copy = Instantiate(chicken, egg.transform.position, chicken.transform.rotation);
-            copy.GetComponent<NetworkObject>().Spawn();
-
             soundLength = audioSource.clip.length;
 
-	        Destroy(egg, soundLength);
+            Invoke("SpawnChicken", soundLength);
+            Destroy(egg, soundLength);
 
 			//REMOVED FOR NETWORK TESTING
             //add to chicken list in chicken manager
@@ -82,6 +82,12 @@ public class EggModel : NetworkBehaviour, ISellable
             //remove this object
             //ChickenManager.Instance.fertilisedEggsList.Remove(this.gameObject);
         }
+    }
+
+    public void SpawnChicken()
+    {
+        GameObject copy = Instantiate(chicken, egg.transform.position, chicken.transform.rotation);
+        copy.GetComponent<NetworkObject>().Spawn();
     }
 
     public ProductType GetProductType()
