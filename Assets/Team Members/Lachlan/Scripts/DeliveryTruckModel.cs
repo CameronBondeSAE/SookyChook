@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class DeliveryTruckModel : MonoBehaviour, IVehicle
+public class DeliveryTruckModel : MonoBehaviour, IDrivable
 {
     [Header ("DeliveryTruck Attributes")]
     public Rigidbody rb;

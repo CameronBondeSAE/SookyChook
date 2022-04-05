@@ -26,7 +26,7 @@ public class CharacterModel : MonoBehaviour
     public bool onGround = true;
 
     public bool inVehicle = false;
-    public IVehicle IVehicleReference;
+    public IDrivable drivableReference;
     public Vector3 lookMovementDirection;
 
 
@@ -118,8 +118,8 @@ public class CharacterModel : MonoBehaviour
     {
         if (inVehicle)
         {
-            IVehicleReference.Accelerate(direction.y);
-            IVehicleReference.Steer(direction.x);
+            drivableReference.Accelerate(direction.y);
+            drivableReference.Steer(direction.x);
         }
         else
         {
@@ -151,10 +151,10 @@ public class CharacterModel : MonoBehaviour
         // Review: This won't work if it has multiple IVehicle
         if (hit.collider != null)
         {
-	        IVehicleReference = hit.collider.gameObject.GetComponentInParent<IVehicle>();
-	        if (IVehicleReference != null)
+	        drivableReference = hit.collider.gameObject.GetComponentInParent<IDrivable>();
+	        if (drivableReference != null)
 	        {
-		        if (!inVehicle && IVehicleReference.canEnter() == true)
+		        if (!inVehicle && drivableReference.canEnter() == true)
 			        GetInVehicle();
 	        }
 
@@ -233,7 +233,7 @@ public class CharacterModel : MonoBehaviour
 
         // HACK: Hardcoded to tractor. Should be able to use interface
         // Note: Characters only need to tell tractors to DETACH. Tractors auto attach on contact
-        TractorModel tractorModel = IVehicleReference as TractorModel;
+        TractorModel tractorModel = drivableReference as TractorModel;
         if (inVehicle && tractorModel.hasAttachment)
         {
             tractorModel.Detach();
@@ -285,11 +285,11 @@ public class CharacterModel : MonoBehaviour
 
 
         // Lock me to the vehicle, just so the camera doesn't need to retarget anything. I don't actually need to be a child
-        MonoBehaviour vehicleComponent = IVehicleReference as MonoBehaviour;
+        MonoBehaviour vehicleComponent = drivableReference as MonoBehaviour;
         transform.parent = vehicleComponent.transform;
         transform.localPosition = Vector3.zero;
 
-        IVehicleReference.Enter();
+        drivableReference.Enter();
     }
 
     public void GetOutOfVehicle()
@@ -305,8 +305,8 @@ public class CharacterModel : MonoBehaviour
         transform.parent = null;
 
         // Put player at exit point on vehicle
-        transform.position = IVehicleReference.GetVehicleExitPoint().position;
-        transform.rotation = IVehicleReference.GetVehicleExitPoint().rotation;
+        transform.position = drivableReference.GetVehicleExitPoint().position;
+        transform.rotation = drivableReference.GetVehicleExitPoint().rotation;
 
         // HACK: Just make the animation look better, fake a jump!
         rb.drag = 0f;
@@ -315,7 +315,7 @@ public class CharacterModel : MonoBehaviour
         Jump();
         onGround = false;
 
-        IVehicleReference.Exit();
+        drivableReference.Exit();
     }
 
     public void Cry()
