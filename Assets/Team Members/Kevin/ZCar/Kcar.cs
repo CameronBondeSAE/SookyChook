@@ -6,23 +6,15 @@ public class Kcar : MonoBehaviour, IDrivable
 {
     public Rigidbody carPrefabRigidbody;
     
-    public KeyCode accelerate;
     public float accelerationSpeed = 5f;
-
-    public KeyCode brake;
-
-    public KeyCode left;
-
-    public KeyCode right;
-
-    public KeyCode boost;
-
+    
     public GameObject[] frontTyres; 
     public Vector3 localVelocity;
 
     public bool driverIn;
     public PlayerController playerController;
-    
+
+    public Transform exitPoint; 
     public virtual void Activate()
     {
         Debug.Log("Activated");
@@ -40,7 +32,7 @@ public class Kcar : MonoBehaviour, IDrivable
     
     void Start()
     {
-        ActivatedCar();
+        //ActivatedCar();
         carPrefabRigidbody = GetComponent<Rigidbody>();
     }
     
@@ -65,12 +57,13 @@ public class Kcar : MonoBehaviour, IDrivable
         playerController.RightCarEvent -= Right;*/
     }
 
+    /*
     private void RedCamera()
     {
         GetComponentInChildren<Camera>().enabled = true;
-    }
+    }*/
 
-    private void Accelerate()
+    /*private void Accelerate()
     {
         if (driverIn)
         {
@@ -103,7 +96,7 @@ public class Kcar : MonoBehaviour, IDrivable
             carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, 5f, 0f));
         }
         
-    }
+    }*/
     
 
     // Update is called once per frame
@@ -117,32 +110,42 @@ public class Kcar : MonoBehaviour, IDrivable
 
     public void Enter()
     {
-        throw new System.NotImplementedException();
+        driverIn = true;
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        driverIn = false;
     }
 
     public void Steer(float amount)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void Accelerate(float amount)
+    public void Accelerate(float input)
     {
-        throw new System.NotImplementedException();
+        if (driverIn)
+        {
+            carPrefabRigidbody.AddRelativeForce(new Vector3(0f, 0f, accelerationSpeed*2));
+        }
     }
 
     public Transform GetVehicleExitPoint()
     {
-        throw new System.NotImplementedException();
+        return exitPoint; 
     }
 
     public bool canEnter()
     {
-        throw new System.NotImplementedException();
+        if(driverIn)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 
