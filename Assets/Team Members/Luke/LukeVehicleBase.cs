@@ -81,25 +81,27 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
     public virtual void Start()
     {
 	    foreach (var t in wheels)
-	    { 
-		    t.acceleratingForce = acceleratingForce;
-		    t.brakingForce = brakingForce;
-		    t.reversingForce = reversingForce;
-		    t.maxRotation = maxWheelRotation;
-		    t.longitudinalFrictionCoefficient = longitudinalFrictionCoefficient;
-		    t.lateralFrictionCoefficient = lateralFrictionCoefficient;
-		    t.springCoefficient = springCoefficient;
-		    t.dampingCoefficient = dampingCoefficient;
-		    t.restingWheelHeight = restingWheelHeight;
-		    t.wheelExtensionFactor = wheelExtensionFactor;
-		    t.maxFullSteerVelocity = maxFullSteerVelocity;
-		    t.minSteerFactor = minSteerFactor;
-	    }
+        	    { 
+        		    t.acceleratingForce = acceleratingForce;
+        		    t.brakingForce = brakingForce;
+        		    t.reversingForce = reversingForce;
+        		    t.maxRotation = maxWheelRotation;
+        		    t.longitudinalFrictionCoefficient = longitudinalFrictionCoefficient;
+        		    t.lateralFrictionCoefficient = lateralFrictionCoefficient;
+        		    t.springCoefficient = springCoefficient;
+        		    t.dampingCoefficient = dampingCoefficient;
+        		    t.restingWheelHeight = restingWheelHeight;
+        		    t.wheelExtensionFactor = wheelExtensionFactor;
+        		    t.maxFullSteerVelocity = maxFullSteerVelocity;
+        		    t.minSteerFactor = minSteerFactor;
+        	    }
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
+	    
+	    
 	    if (!active && drivingMode != DrivingModes.Neutral)
 	    {
 		    drivingMode = DrivingModes.Neutral;
@@ -113,13 +115,16 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
 	    {
 		    isMaxPlayerCapacity = true;
 	    }
-	    
+
+	    active = true;
     }
 
     public void Exit()
     {
 	    playersInside--;
 	    isMaxPlayerCapacity = false;
+	    active = false;
+
     }
 
     public void Steer(float amount)

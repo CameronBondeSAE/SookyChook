@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247441641338510158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5258832, y: 3.5672336, z: -1.0926695}
+  m_LocalPosition: {x: 0.838, y: 1, z: 0}
   m_LocalScale: {x: 0.16856726, y: 0.564402, z: 0.09042277}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -333,7 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheels: []
-  Camera: {fileID: 0}
+  exitTransform: {fileID: 5439587152362478446}
+  playersInside: 0
+  maxPlayerCapacity: 1
+  isMaxPlayerCapacity: 0
   acceleratingForce: 14
   brakingForce: 20
   reversingForce: 6
