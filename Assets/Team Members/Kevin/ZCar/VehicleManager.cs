@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class VehicleManager : MonoBehaviour
 {
-    public List<VehicleBase> vehicles;
+    public List<Kcar> vehicles;
 
     private void Start()
     {
-        foreach (VehicleBase vehicleBase in vehicles)
+        foreach (Kcar vehicleBase in vehicles)
         {
             vehicleBase.Activate();
         }

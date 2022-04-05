@@ -6,8 +6,8 @@ using Quaternion = UnityEngine.Quaternion;
 
 public class SceneManager : MonoBehaviour
 {
-    public List<VehicleBase> carPrefabs;
-    public VehicleBase cO;
+    public List<Kcar> carPrefabs;
+    public Kcar cO;
     public List<GameObject> mainCamera;
     public List<GameObject> mC;
     public GameObject mC1;
