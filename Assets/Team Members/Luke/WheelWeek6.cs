@@ -7,7 +7,7 @@ public class WheelWeek6 : MonoBehaviour
 {
 	public GameObject car;
 	private Rigidbody chassis;
-	private VehicleBase carClass;
+	private LukeVehicleBase carClass;
 
 	public bool canSteer;
 	public bool canDrive;
@@ -61,7 +61,7 @@ public class WheelWeek6 : MonoBehaviour
 	{
 		switch (carClass.drivingMode) 
 		{
-			case VehicleBase.DrivingModes.Drive:
+			case LukeVehicleBase.DrivingModes.Drive:
 				if (Vector3.Dot(chassis.velocity, transform.TransformDirection(Vector3.forward)) < 0)
 				{
 					chassis.AddForceAtPosition((brakingForce*transform.TransformDirection(Vector3.forward)), origin, 0);
@@ -74,7 +74,7 @@ public class WheelWeek6 : MonoBehaviour
 					}
 				}
 				break;
-			case VehicleBase.DrivingModes.Reverse:
+			case LukeVehicleBase.DrivingModes.Reverse:
 				if (Vector3.Dot(chassis.velocity, transform.TransformDirection(Vector3.forward)) > 0)
 				{
 					chassis.AddForceAtPosition((-brakingForce*transform.TransformDirection(Vector3.forward)), origin, 0);
@@ -96,13 +96,13 @@ public class WheelWeek6 : MonoBehaviour
 			maxRotation/minSteerFactor, maxRotation);
 		switch (carClass.steeringMode)
 		{
-			case VehicleBase.SteeringModes.Left:
+			case LukeVehicleBase.SteeringModes.Left:
 				steerAngle = new Vector3 (0, -currentRotation, 0);
 				break;
-			case VehicleBase.SteeringModes.Right:
+			case LukeVehicleBase.SteeringModes.Right:
 				steerAngle = new Vector3 (0, currentRotation, 0);
 				break;
-			case VehicleBase.SteeringModes.Neutral:
+			case LukeVehicleBase.SteeringModes.Neutral:
 				steerAngle = Vector3.zero;
 				break;
 		}
@@ -113,7 +113,7 @@ public class WheelWeek6 : MonoBehaviour
     {
 	    car = transform.parent.gameObject;
 	    chassis = GetComponentInParent<Rigidbody>();
-	    carClass = GetComponentInParent<VehicleBase>();
+	    carClass = GetComponentInParent<LukeVehicleBase>();
 	    carClass.wheels.Add(this);
 	    // should I even have this, or should I just set the bool in the prefab?
 	    if (transform.InverseTransformDirection(transform.position).z < transform.InverseTransformDirection(transform.parent.position).z)
