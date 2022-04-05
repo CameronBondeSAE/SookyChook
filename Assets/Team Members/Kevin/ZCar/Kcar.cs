@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VehicleBase : MonoBehaviour
+public class Kcar : MonoBehaviour, IDrivable
 {
     public Rigidbody carPrefabRigidbody;
     
@@ -51,18 +51,18 @@ public class VehicleBase : MonoBehaviour
 
     private void ActivatedCar()
     {
-        playerController.AccelCarEvent += Accelerate;
+        /*playerController.AccelCarEvent += Accelerate;
         playerController.DecelerateCarEvent += Decelerate;
         playerController.LeftCarEvent += Left;
-        playerController.RightCarEvent += Right;
+        playerController.RightCarEvent += Right;*/
     }
 
     private void DeactivateCar()
     {
-        playerController.AccelCarEvent -= Accelerate;
+        /*playerController.AccelCarEvent -= Accelerate;
         playerController.DecelerateCarEvent -= Decelerate;
         playerController.LeftCarEvent -= Left;
-        playerController.RightCarEvent -= Right;
+        playerController.RightCarEvent -= Right;*/
     }
 
     private void RedCamera()
@@ -113,56 +113,36 @@ public class VehicleBase : MonoBehaviour
         localVelocity = transform.InverseTransformDirection(carPrefabRigidbody.velocity);
         
         carPrefabRigidbody.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
-        
-        /*
-        //Debug.Log(localVelocity);
-        
-        /*if (Input.GetKey(accelerate) && driverIn)
-        {
-            
-            carPrefabRigidbody.AddRelativeForce(new Vector3(0f, 0f, accelerationSpeed));
-            if (Input.GetKey(accelerate) && Input.GetKey(boost))
-            {
-           
-                carPrefabRigidbody.AddRelativeForce(new Vector3(0f, 0f, accelerationSpeed*2));
-            }
-        }#1#
+    }
 
-        if (Input.GetKey(brake)&& driverIn)
-        {
-            /*frontTyres[0].transform.localRotation =  Quaternion.Euler(0f,0f,0f);
-            frontTyres[1].transform.localRotation =  Quaternion.Euler(0f,0f,0f);#1#
-            carPrefabRigidbody.AddRelativeForce(new Vector3(0f, 0f, -5f));
-        }
-        
-        if (Input.GetKey(left)&& driverIn)
-        {
-            //frontTyres[0].transform.localRotation =  Quaternion.Euler(0f,0f,60f);
-            //frontTyres[1].transform.localRotation =  Quaternion.Euler(0f,0f,60f);
-            //rightFrontTyre.transform.localRotation = Quaternion.Euler(0f,45f,0f);
-            //leftFrontTyre.transform.localRotation = Quaternion.Euler(0f,45f,0f);
-            carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, -5f, 0f));
-        }
+    public void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
 
-        if (Input.GetKey(right)&& driverIn)
-        {
-            //frontTyres[0].transform.localRotation =  Quaternion.Euler(0f,0f,-60f);
-            //frontTyres[1].transform.localRotation =  Quaternion.Euler(0f,0f,-60f);
-            //rightFrontTyre.transform.localRotation = Quaternion.Euler(0f,-45f,0f);
-            //leftFrontTyre.transform.localRotation = Quaternion.Euler(0f,-45f,0f);
-            carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, 5f, 0f));
-        }
+    public void Exit()
+    {
+        throw new System.NotImplementedException();
+    }
 
-        /*if (Input.GetKey(left))
-        {
-            
-            carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, -5f, 0f));
-        }
+    public void Steer(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
 
-        if (Input.GetKey(right))
-        {
-            carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, 5f, 0f));
-        }#1#*/
+    public void Accelerate(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Transform GetVehicleExitPoint()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool canEnter()
+    {
+        throw new System.NotImplementedException();
     }
 }
 

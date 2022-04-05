@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-public class BlueCar : VehicleBase
+public class BlueCar : Kcar
 {
   public override void Deactivate()
   {
