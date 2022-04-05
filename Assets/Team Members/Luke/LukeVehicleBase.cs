@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LukeVehicleBase : MonoBehaviour
+public class LukeVehicleBase : MonoBehaviour, IDrivable
 {
 	/*
 	public PlayerWeek6 player;
 	*/
 	public List<WheelWeek6> wheels;
-	public Camera Camera;
+	public Transform exitTransform;
 
+	public int playersInside = 0;
+	public int maxPlayerCapacity = 1;
+	public bool isMaxPlayerCapacity = false;
+	
 	public float acceleratingForce;
 	public float brakingForce;
 	public float reversingForce;
@@ -71,14 +75,11 @@ public class LukeVehicleBase : MonoBehaviour
 		player.DeactivateVehicleEvent -= DeactivateVehicle;
 		player = null;*/
 		active = false;
-		Camera.enabled = false;
 	}
 	
     // Start is called before the first frame update
     public virtual void Start()
     {
-	    Camera = GetComponentInChildren<Camera>();
-	    Camera.enabled = false;
 	    foreach (var t in wheels)
 	    { 
 		    t.acceleratingForce = acceleratingForce;
@@ -103,5 +104,57 @@ public class LukeVehicleBase : MonoBehaviour
 	    {
 		    drivingMode = DrivingModes.Neutral;
 	    }
+    }
+
+    public void Enter()
+    {
+	    playersInside++;
+	    if (playersInside == maxPlayerCapacity)
+	    {
+		    isMaxPlayerCapacity = true;
+	    }
+	    
+    }
+
+    public void Exit()
+    {
+	    playersInside--;
+	    isMaxPlayerCapacity = false;
+    }
+
+    public void Steer(float amount)
+    {
+	    if (amount > 0)
+	    {
+		    steeringMode = SteeringModes.Right;
+	    }
+	    else
+	    {
+		    steeringMode = SteeringModes.Left;
+	    }
+    }
+
+    public void Accelerate(float amount)
+    {
+	    if (amount > 0)
+	    {
+		    drivingMode = DrivingModes.Drive;
+	    }
+	    else
+	    {
+		    drivingMode = DrivingModes.Reverse;
+	    }
+    }
+
+    public Transform GetVehicleExitPoint()
+    {
+
+	    return exitTransform;
+
+    }
+
+    public bool canEnter()
+    {
+	    return !isMaxPlayerCapacity;
     }
 }

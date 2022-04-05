@@ -84,6 +84,37 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247134170480446070}
   m_Enabled: 0
+--- !u!1 &3247441641338510158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5439587152362478446}
+  m_Layer: 0
+  m_Name: ExitTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5439587152362478446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247441641338510158}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.5258832, y: 3.5672336, z: -1.0926695}
+  m_LocalScale: {x: 0.16856726, y: 0.564402, z: 0.09042277}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5975111160745004278}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5975111160074966194
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +237,7 @@ Transform:
   - {fileID: 5272962959906971194}
   - {fileID: 4510655565004834173}
   - {fileID: 3686440881506302126}
+  - {fileID: 5439587152362478446}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -300,7 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2107007b1eba43418ad041cb5053fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   wheels: []
   Camera: {fileID: 0}
   acceleratingForce: 14
@@ -308,7 +339,7 @@ MonoBehaviour:
   reversingForce: 6
   maxWheelRotation: 25
   longitudinalFrictionCoefficient: 0.1
-  lateralFrictionCoefficient: 0.5
+  lateralFrictionCoefficient: 1.5
   springCoefficient: 5
   dampingCoefficient: 1.5
   restingWheelHeight: 1
