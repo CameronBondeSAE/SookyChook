@@ -157,6 +157,6 @@ public class ChickenGrowingMode : GameModeBase
     private IEnumerator RestartScene()
     {
         yield return new WaitForSeconds(6f);
-        SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }
