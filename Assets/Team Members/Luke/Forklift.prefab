@@ -206,6 +206,7 @@ Transform:
   - {fileID: 5272962959906971194}
   - {fileID: 4510655565004834173}
   - {fileID: 6540247652845489958}
+  - {fileID: 7937460238920737702}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -300,9 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309dd8a21ba4caf44be7317a214922e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   wheels: []
-  Camera: {fileID: 0}
+  exitTransform: {fileID: 0}
+  playersInside: 0
+  maxPlayerCapacity: 1
+  isMaxPlayerCapacity: 0
   acceleratingForce: 8
   brakingForce: 20
   reversingForce: 8
@@ -318,6 +321,37 @@ MonoBehaviour:
   active: 0
   drivingMode: 0
   steeringMode: 0
+--- !u!1 &6762273785712836360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7937460238920737702}
+  m_Layer: 0
+  m_Name: ExitTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7937460238920737702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762273785712836360}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.838, y: 1, z: 0}
+  m_LocalScale: {x: 0.15104464, y: 0.40678954, z: 0.12529893}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5975111160745004278}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1650598100116720161
 PrefabInstance:
   m_ObjectHideFlags: 0
