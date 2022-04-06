@@ -26,8 +26,6 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
 	public float wheelExtensionFactor;
 	public float maxFullSteerVelocity;
 	public float minSteerFactor;
-	
-	public bool active;
 
 	public enum DrivingModes
 	{
@@ -58,54 +56,30 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
 		transform.localRotation = Quaternion.Euler(Vector3.Scale(transform.localEulerAngles, new Vector3 (0f,1f,0f)));
 	}
 
-	public virtual void ActivateVehicle()
-	{
-		/*player.DriveEvent += ChangeDriveModes;
-		player.SteerEvent += ChangeSteerModes;
-		player.ResetEvent += ResetVehicle;
-		player.DeactivateVehicleEvent += DeactivateVehicle;*/
-		active = true;
-	}
-	
-	public virtual void DeactivateVehicle()
-	{
-		/*player.DriveEvent -= ChangeDriveModes;
-		player.SteerEvent -= ChangeSteerModes;
-		player.ResetEvent -= ResetVehicle;
-		player.DeactivateVehicleEvent -= DeactivateVehicle;
-		player = null;*/
-		active = false;
-	}
-	
-    // Start is called before the first frame update
+	// Start is called before the first frame update
     public virtual void Start()
     {
 	    foreach (var t in wheels)
-        	    { 
-        		    t.acceleratingForce = acceleratingForce;
-        		    t.brakingForce = brakingForce;
-        		    t.reversingForce = reversingForce;
-        		    t.maxRotation = maxWheelRotation;
-        		    t.longitudinalFrictionCoefficient = longitudinalFrictionCoefficient;
-        		    t.lateralFrictionCoefficient = lateralFrictionCoefficient;
-        		    t.springCoefficient = springCoefficient;
-        		    t.dampingCoefficient = dampingCoefficient;
-        		    t.restingWheelHeight = restingWheelHeight;
-        		    t.wheelExtensionFactor = wheelExtensionFactor;
-        		    t.maxFullSteerVelocity = maxFullSteerVelocity;
-        		    t.minSteerFactor = minSteerFactor;
-        	    }
+	    { 
+        	    t.acceleratingForce = acceleratingForce;
+        	    t.brakingForce = brakingForce;
+        	    t.reversingForce = reversingForce;
+        	    t.maxRotation = maxWheelRotation;
+        	    t.longitudinalFrictionCoefficient = longitudinalFrictionCoefficient;
+        	    t.lateralFrictionCoefficient = lateralFrictionCoefficient;
+        	    t.springCoefficient = springCoefficient;
+        	    t.dampingCoefficient = dampingCoefficient;
+        	    t.restingWheelHeight = restingWheelHeight;
+        	    t.wheelExtensionFactor = wheelExtensionFactor;
+        	    t.maxFullSteerVelocity = maxFullSteerVelocity;
+        	    t.minSteerFactor = minSteerFactor;
+	    }
     }
 
     // Update is called once per frame
-    public virtual void Update()
+    public virtual void FixedUpdate()
     {
 	    
-	    
-	    if (!active && drivingMode != DrivingModes.Neutral)
-	    {
-		    drivingMode = DrivingModes.Neutral;
-	    }
     }
 
     public void Enter()
@@ -116,14 +90,18 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
 		    isMaxPlayerCapacity = true;
 	    }
 
-	    active = true;
+	    GetComponent<Rigidbody>().isKinematic = false;
     }
 
     public void Exit()
     {
 	    playersInside--;
 	    isMaxPlayerCapacity = false;
-	    active = false;
+	    
+	    drivingMode = DrivingModes.Neutral;
+	    steeringMode = SteeringModes.Neutral;
+	    
+	    GetComponent<Rigidbody>().isKinematic = true;
 
     }
 
@@ -133,9 +111,14 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
 	    {
 		    steeringMode = SteeringModes.Right;
 	    }
-	    else
+	    else if (amount < 0)
 	    {
 		    steeringMode = SteeringModes.Left;
+	    }
+	    else
+	    {
+		    steeringMode = SteeringModes.Neutral;
+
 	    }
     }
 
@@ -145,9 +128,13 @@ public class LukeVehicleBase : MonoBehaviour, IDrivable
 	    {
 		    drivingMode = DrivingModes.Drive;
 	    }
-	    else
+	    else if (amount < 0)
 	    {
 		    drivingMode = DrivingModes.Reverse;
+	    }
+	    else
+	    {
+		    drivingMode = DrivingModes.Neutral;
 	    }
     }
 
