@@ -108,6 +108,31 @@ public class WheelWeek6 : MonoBehaviour
 		}
 	}
 
+	private void DoWheelThings()
+	{
+		origin = transform.position;
+		direction = transform.TransformDirection(Vector3.down);
+		Ray = new Ray(origin, direction);
+		localVelocity = transform.InverseTransformDirection(chassis.velocity);
+
+		if (CheckGroundContact())
+		{
+			ApplyDriveForce();
+			if (canSteer)
+			{
+				ApplySteering();
+				if (isRearWheel)
+				{
+					transform.localEulerAngles = -steerAngle;
+				}
+				else
+				{
+					transform.localEulerAngles = steerAngle;
+				}
+			}
+		}
+	}
+	
 // Start is called before the first frame update
     void Awake()
     {
@@ -125,29 +150,9 @@ public class WheelWeek6 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-	    origin = transform.position;
-	    direction = transform.TransformDirection(Vector3.down);
-	    Ray = new Ray(origin, direction);
-	    localVelocity = transform.InverseTransformDirection(chassis.velocity);
-
-	    if (CheckGroundContact())
+	    if (!chassis.isKinematic)
 	    {
-		    ApplyDriveForce();
-		    
-		    if (canSteer)
-		    {
-			    ApplySteering();
-			    if (isRearWheel)
-			    {
-				    transform.localEulerAngles = -steerAngle;
-			    }
-			    else
-			    {
-				    transform.localEulerAngles = steerAngle;
-			    }
-		    }
-		    
-		    
+		    DoWheelThings();
 	    }
-	}
+    }
 }

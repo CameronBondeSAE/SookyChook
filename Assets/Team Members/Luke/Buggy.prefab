@@ -231,7 +231,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 10
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -264,7 +264,6 @@ MonoBehaviour:
   wheelExtensionFactor: 2.5
   maxFullSteerVelocity: 15
   minSteerFactor: 2
-  active: 0
   drivingMode: 0
   steeringMode: 0
 --- !u!1001 &1650598100116720161
