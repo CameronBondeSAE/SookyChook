@@ -7,14 +7,21 @@ public class Kcar : MonoBehaviour, IDrivable
     public Rigidbody carPrefabRigidbody;
     
     public float accelerationSpeed = 5f;
-    
+
+    public GameObject kCar; 
     public GameObject[] frontTyres; 
     public Vector3 localVelocity;
 
     public bool driverIn;
     public PlayerController playerController;
+    
+    public Rigidbody rb; 
+    public Transform exitPoint;
 
-    public Transform exitPoint; 
+    public bool drive;
+    public bool brake;
+    public bool left;
+    public bool right; 
     public virtual void Activate()
     {
         Debug.Log("Activated");
@@ -108,27 +115,90 @@ public class Kcar : MonoBehaviour, IDrivable
         carPrefabRigidbody.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
     }
 
+    void FixedUpdate()
+    {
+        if (drive)
+        {
+            Drive();
+        }
+
+        if (brake)
+        {
+            Brake();
+        }
+
+        if (left)
+        {
+            Left();
+        }
+
+        if (right)
+        {
+            Right();
+        }
+    }
+
+    void Drive()
+    {
+        carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, -5f, 0f)); 
+    }
+
+    void Brake()
+    {
+        carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, 5f, 0f));
+    }
+
+    void Left()
+    {
+        carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, -5f, 0f)); 
+    }
+
+    void Right()
+    {
+        carPrefabRigidbody.AddRelativeTorque(new Vector3(0f, 5f, 0f));
+    }
+    
     public void Enter()
     {
         driverIn = true;
+        kCar.SetActive(true);
+        rb.isKinematic = false;
     }
 
     public void Exit()
     {
         driverIn = false;
+        //kCar.SetActive(false);
     }
-
+    
     public void Steer(float amount)
     {
-        
+        if (amount > 0 && driverIn && drive)
+        {
+            left = true;
+            right = false;
+        }
+        else
+        {
+            left = false;
+            right = true;
+        }
     }
 
-    public void Accelerate(float input)
+    public void Accelerate(float amount)
     {
-        if (driverIn)
+        if (amount > 0 && driverIn)
         {
-            carPrefabRigidbody.AddRelativeForce(new Vector3(0f, 0f, accelerationSpeed*2));
+            drive = true;
+            brake = false;
         }
+        else
+        {
+            drive = false;
+            brake = true;
+        }
+        
+       
     }
 
     public Transform GetVehicleExitPoint()

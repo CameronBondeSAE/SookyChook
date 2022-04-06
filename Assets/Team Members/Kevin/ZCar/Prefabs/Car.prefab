@@ -555,12 +555,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57b8612c7ee5334ba9d2ebfc50ebf56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carPrefabRigidbody: {fileID: 0}
+  carPrefabRigidbody: {fileID: 5674298203766330676}
   accelerationSpeed: 5
+  kCar: {fileID: 4043159898707031411}
   frontTyres: []
   localVelocity: {x: 0, y: 0, z: 0}
   driverIn: 1
   playerController: {fileID: 0}
+  rb: {fileID: 5674298203766330676}
   exitPoint: {fileID: 767881796854706603}
 --- !u!1 &4105356286875614120
 GameObject:
