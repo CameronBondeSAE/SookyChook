@@ -1,89 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3247134170480446070
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3686440881506302126}
-  - component: {fileID: 1661694372497913879}
-  - component: {fileID: 4300494413340102513}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3686440881506302126
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247134170480446070}
-  m_LocalRotation: {x: 0.041687228, y: 0, z: 0.0000000018626449, w: 0.9991307}
-  m_LocalPosition: {x: 0, y: 2.22, z: -2.064}
-  m_LocalScale: {x: 0.28450456, y: 0.5543753, z: 0.16671155}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5975111160745004278}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 4.778, y: 0, z: 0}
---- !u!20 &1661694372497913879
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247134170480446070}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &4300494413340102513
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247134170480446070}
-  m_Enabled: 0
 --- !u!1 &3247441641338510158
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5975111160745004278}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5975111160074966194
 GameObject:
@@ -228,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 5975111160745004283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.22, z: 0}
-  m_LocalScale: {x: 5.9323506, y: 1.7717868, z: 11.059161}
+  m_LocalScale: {x: 1.6921908, y: 0.5053985, z: 3.154603}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5975111160074966193}
@@ -236,7 +152,6 @@ Transform:
   - {fileID: 6092402864761273661}
   - {fileID: 5272962959906971194}
   - {fileID: 4510655565004834173}
-  - {fileID: 3686440881506302126}
   - {fileID: 5439587152362478446}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -316,7 +231,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 10
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -337,19 +252,18 @@ MonoBehaviour:
   playersInside: 0
   maxPlayerCapacity: 1
   isMaxPlayerCapacity: 0
-  acceleratingForce: 14
+  acceleratingForce: 20
   brakingForce: 20
-  reversingForce: 6
+  reversingForce: 10
   maxWheelRotation: 25
-  longitudinalFrictionCoefficient: 0.1
-  lateralFrictionCoefficient: 1.5
-  springCoefficient: 5
-  dampingCoefficient: 1.5
+  longitudinalFrictionCoefficient: 1
+  lateralFrictionCoefficient: 3
+  springCoefficient: 25
+  dampingCoefficient: 15
   restingWheelHeight: 1
   wheelExtensionFactor: 2.5
   maxFullSteerVelocity: 15
   minSteerFactor: 2
-  active: 0
   drivingMode: 0
   steeringMode: 0
 --- !u!1001 &1650598100116720161

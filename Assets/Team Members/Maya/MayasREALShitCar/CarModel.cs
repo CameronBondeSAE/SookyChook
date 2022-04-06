@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarModel : MonoBehaviour, IDrivable
 {
+    public Transform exitPoint;
+    public bool inCar;
     public float speed;
     void Start()
     {
@@ -12,14 +14,22 @@ public class CarModel : MonoBehaviour, IDrivable
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.forward * (speed/5));
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * (speed/5));
-        }
+
+
+    }
+
+    public void Enter()
+    {
+        inCar = true;
+    }
+
+    public void Exit()
+    {
+        inCar = false;
+    }
+
+    public void Steer(float amount)
+    {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {        
             if (Input.GetKey(KeyCode.A))
@@ -33,33 +43,29 @@ public class CarModel : MonoBehaviour, IDrivable
         }
     }
 
-    public void Enter()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Exit()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Steer(float amount)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void Accelerate(float amount)
     {
-        throw new System.NotImplementedException();
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.forward * (speed/5));
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.back * (speed/5));
+        }
     }
 
     public Transform GetVehicleExitPoint()
     {
-        throw new System.NotImplementedException();
+        return exitPoint;
     }
 
     public bool canEnter()
     {
-        throw new System.NotImplementedException();
+        if (inCar)
+            return false;
+        else
+            return true;
+
     }
 }
