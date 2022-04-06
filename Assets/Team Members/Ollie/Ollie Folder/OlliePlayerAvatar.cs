@@ -62,7 +62,7 @@ public class OlliePlayerAvatar : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.GetComponent<VehicleBase>() != null)
+        if (other.transform.GetComponent<OllieVehicleBase>() != null)
         {
             touchingCarEvent?.Invoke(other.gameObject);
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class OllieVehicleBase : MonoBehaviour, IDrivable
@@ -14,9 +15,19 @@ public class OllieVehicleBase : MonoBehaviour, IDrivable
     public Transform exitPoint;
     public GameObject car;
 
+    private bool forward, backward, left, right;
+
     public delegate void ExitVehicle();
 
     public static event ExitVehicle exitVehicleEvent;
+
+    private void Start()
+    {
+        forward = false;
+        backward = false;
+        left = false;
+        right = false;
+    }
 
     private void Update()
     {
@@ -27,38 +38,50 @@ public class OllieVehicleBase : MonoBehaviour, IDrivable
         }
     }
 
+    private void FixedUpdate()
+    {
+        Forward();
+        Backward();
+        Left();
+        Right();
+    }
+
     public void Forward()
     {
-        if (grounded && playerInVehicle)
-        {
-            rb.AddRelativeForce(0, 0, forwardSpeed);
-        }
+        if(forward)
+            if (grounded && playerInVehicle)
+            {
+                rb.AddRelativeForce(Vector3.forward * forwardSpeed);
+            }
     }
 
     public void Backward()
     {
-        if (grounded && playerInVehicle)
-        {
-            rb.AddRelativeForce(0,0,-forwardSpeed);
-        }
+        if(backward)
+            if (grounded && playerInVehicle)
+            {
+                rb.AddRelativeForce(Vector3.back * forwardSpeed);
+            }
     }
 
     public void Left()
     {
-        if (grounded && playerInVehicle)
-        {
-            rb.AddRelativeForce(-localVelocity/5);
-            rb.AddRelativeTorque(0, -turnSpeed,0);
-        }
+        if(left)
+            if (grounded && playerInVehicle)
+            {
+                rb.AddRelativeForce(-localVelocity/5);
+                rb.AddRelativeTorque(0, -turnSpeed,0);
+            }
     }
     
     public void Right()
     {
-        if (grounded && playerInVehicle)
-        {
-            rb.AddRelativeForce(-localVelocity/5);
-            rb.AddRelativeTorque(0, turnSpeed,0);
-        }
+        if(right)
+            if (grounded && playerInVehicle)
+            {
+                rb.AddRelativeForce(-localVelocity/5);
+                rb.AddRelativeTorque(0, turnSpeed,0);
+            }
     }
 
     public void Enter()
@@ -70,25 +93,48 @@ public class OllieVehicleBase : MonoBehaviour, IDrivable
     public void Exit()
     {
         playerInVehicle = false;
-        //car.SetActive(false);
     }
 
     public void Steer(float amount)
     {
-        if(amount >= 0)
-            Left();
+        if (amount > 0)
+        {
+            right = true;
+            left = false;
+        }
+           
+        else if (amount < 0)
+        {
+            right = false;
+            left = true;
+        }
         else
-            Right();
+        {
+            right = false;
+            left = false;
+        }
     }
 
     public void Accelerate(float amount)
     {
-        if(amount >= 0)
-            Forward();
+        print("accelerating " + amount);
+        if (amount > 0)
+        {
+            forward = true;
+            backward = false;
+        }
+        else if (amount < 0)
+        {
+            forward = false;
+            backward = true;
+        }
         else
-            Backward();
+        {
+            forward = false;
+            backward = false;
+        }
+            
     }
-    
 
     public Transform GetVehicleExitPoint()
     {
