@@ -123,7 +123,7 @@ public class WheelWeek6 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 	    origin = transform.position;
 	    direction = transform.TransformDirection(Vector3.down);

@@ -10,8 +10,8 @@ public class Forklift : LukeVehicleBase
 		base.Start();
 	}
 
-	public override void Update()
+	public override void FixedUpdate()
 	{
-		base.Update();
+		base.FixedUpdate();
 	}
 }
