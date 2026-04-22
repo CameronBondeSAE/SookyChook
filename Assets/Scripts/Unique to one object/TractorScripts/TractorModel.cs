@@ -70,7 +70,7 @@ public class TractorModel : MonoBehaviour, IDrivable
         }
 
         //Once the player has stopped moving and player is not in tractor - lock it back up
-        if (rb.velocity.magnitude < 0.1f && !playerInTractor)
+        if (rb.linearVelocity.magnitude < 0.1f && !playerInTractor)
         {
             TurnOffTractor();
         }

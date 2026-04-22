@@ -109,14 +109,14 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 		// Disable all chicken things. NOTE: You could just spawn a death chicken prefab
 
 		rb.constraints = RigidbodyConstraints.None;
-		rb.angularDrag = 0;
-		rb.drag = 0;
+		rb.angularDamping = 0;
+		rb.linearDamping = 0;
 		rb.angularVelocity = new Vector3(Random.Range(-deathFling, deathFling), Random.Range(-deathFling, deathFling),
 			Random.Range(-deathFling, deathFling));
-		rb.velocity = Vector3.up * deathFling / 4f;
+		rb.linearVelocity = Vector3.up * deathFling / 4f;
 		foreach (Collider child in GetComponentsInChildren<Collider>())
 		{
-			child.material = new PhysicMaterial();
+			child.material = new PhysicsMaterial();
 		}
 
 		Aaron.Wander wander = GetComponent<Aaron.Wander>();
@@ -126,8 +126,8 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 
 		yield return new WaitForSeconds(2f);
 		
-		rb.angularDrag = 0;
-		rb.drag = 1;
+		rb.angularDamping = 0;
+		rb.linearDamping = 1;
 	}
 
 	#endregion

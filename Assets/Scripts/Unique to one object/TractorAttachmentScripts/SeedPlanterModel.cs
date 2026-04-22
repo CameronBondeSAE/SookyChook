@@ -115,7 +115,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     {
         if(tractor != null)
         {
-            tractorVelocity = tractor.GetComponent<Rigidbody>().velocity.magnitude;
+            tractorVelocity = tractor.GetComponent<Rigidbody>().linearVelocity.magnitude;
 
             if(tractorVelocity > 0.5)
             {
@@ -144,7 +144,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         configurableJoint.connectedBody = aTractorModel.attachmentMount.GetComponent<Rigidbody>();
 
         //stop the planter from jumping everywhere when attaching
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
 
 
         //Do Planter Stuff
@@ -161,7 +161,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
         configurableJoint.connectedBody = null;
 
         //stop the planter from jumping everywhere when detaching
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
 
         //Update pathfinding when no longer in use
         GlobalEvents.OnLevelStaticsUpdated(gameObject);

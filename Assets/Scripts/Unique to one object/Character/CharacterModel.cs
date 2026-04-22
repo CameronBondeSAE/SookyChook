@@ -83,12 +83,12 @@ public class CharacterModel : MonoBehaviour
     {
         if (!onGround)
         {
-            rb.drag = 0f;
+            rb.linearDamping = 0f;
             return;
         }
         else
         {
-            rb.drag = onGroundDrag;
+            rb.linearDamping = onGroundDrag;
         }
 
         Vector3 movementDirectionFinal = new Vector3(movementDirection.x, 0, movementDirection.y);
@@ -132,7 +132,7 @@ public class CharacterModel : MonoBehaviour
         if (!onGround)
             return;
 
-        rb.drag = 0f;
+        rb.linearDamping = 0f;
         rb.AddForce(0, jumpHeight, 0, ForceMode.VelocityChange);
         JumpEvent?.Invoke();
     }
@@ -266,8 +266,8 @@ public class CharacterModel : MonoBehaviour
 
         holdingObjectGO.GetComponent<IPickupable>().PutDown();
         if (throwInFront)
-            holdingObjectGO.GetComponent<Rigidbody>().velocity =
-                rb.velocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
+            holdingObjectGO.GetComponent<Rigidbody>().linearVelocity =
+                rb.linearVelocity + transform.forward * throwForce; // Throw it out a little + whatever velocity you had
         holdingObjectGO = null;
         holdingObject = null;
 
@@ -309,7 +309,7 @@ public class CharacterModel : MonoBehaviour
         transform.rotation = drivableReference.GetVehicleExitPoint().rotation;
 
         // HACK: Just make the animation look better, fake a jump!
-        rb.drag = 0f;
+        rb.linearDamping = 0f;
         rb.AddForce(transform.forward * exitVehicleForce, ForceMode.Acceleration);
         onGround = true;
         Jump();

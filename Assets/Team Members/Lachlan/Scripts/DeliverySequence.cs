@@ -65,7 +65,7 @@ public class DeliverySequence : MonoBehaviour
 
     public IEnumerator Delivery(float amount)
     {
-	    deliveryTruck.GetComponent<Rigidbody>().velocity = Vector3.zero;
+	    deliveryTruck.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
 
 	    deliveryTruck.GetComponent<DeliveryTruckModel>().Enter();
 	    
@@ -77,7 +77,7 @@ public class DeliverySequence : MonoBehaviour
 	    // Match the velocity of the spawned delivery items
         foreach (GameObject o in spawner.SpawnMultiple())
         {
-	        o.GetComponent<Rigidbody>().velocity = deliveryTruck.GetComponent<Rigidbody>().velocity;
+	        o.GetComponent<Rigidbody>().linearVelocity = deliveryTruck.GetComponent<Rigidbody>().linearVelocity;
         }
 
         yield return new WaitForSeconds(2f);

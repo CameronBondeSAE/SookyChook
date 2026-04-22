@@ -29,7 +29,7 @@ public class Body : MonoBehaviour
     void Update()
     {
         //Debug.DrawRay(transform.position,Vector3.,Color.green);
-        localVelocity = transform.InverseTransformDirection(carPrefabRigidbody.velocity);
+        localVelocity = transform.InverseTransformDirection(carPrefabRigidbody.linearVelocity);
         
         carPrefabRigidbody.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
         

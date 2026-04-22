@@ -31,8 +31,8 @@ public class OllieVehicleBase : MonoBehaviour, IDrivable
 
     private void Update()
     {
-        localVelocity = transform.InverseTransformDirection(rb.velocity);
-        if (rb.velocity == (Vector3.zero))
+        localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
+        if (rb.linearVelocity == (Vector3.zero))
         {
             exitVehicleEvent?.Invoke();
         }

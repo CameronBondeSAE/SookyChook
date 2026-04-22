@@ -52,6 +52,6 @@ public class InputSystemExample : MonoBehaviour
         rb.AddRelativeForce(movement.x * speed, 0, movement.y * speed);
         
         
-        Debug.Log(rb.velocity);
+        Debug.Log(rb.linearVelocity);
     }
 }

@@ -41,7 +41,7 @@ public class WheelWeek6 : MonoBehaviour
 		{
 			//suspension
 			chassis.AddForceAtPosition((springCoefficient * (restingWheelHeight - RaycastHit.distance)
-			                            - dampingCoefficient * Vector3.Dot(chassis.velocity,
+			                            - dampingCoefficient * Vector3.Dot(chassis.linearVelocity,
 				                            car.transform.TransformDirection(Vector3.up)))
 			                           * transform.TransformDirection(Vector3.up), origin, 0);
 			//longitudinal friction
@@ -62,7 +62,7 @@ public class WheelWeek6 : MonoBehaviour
 		switch (carClass.drivingMode) 
 		{
 			case LukeVehicleBase.DrivingModes.Drive:
-				if (Vector3.Dot(chassis.velocity, transform.TransformDirection(Vector3.forward)) < 0)
+				if (Vector3.Dot(chassis.linearVelocity, transform.TransformDirection(Vector3.forward)) < 0)
 				{
 					chassis.AddForceAtPosition((brakingForce*transform.TransformDirection(Vector3.forward)), origin, 0);
 				}
@@ -75,7 +75,7 @@ public class WheelWeek6 : MonoBehaviour
 				}
 				break;
 			case LukeVehicleBase.DrivingModes.Reverse:
-				if (Vector3.Dot(chassis.velocity, transform.TransformDirection(Vector3.forward)) > 0)
+				if (Vector3.Dot(chassis.linearVelocity, transform.TransformDirection(Vector3.forward)) > 0)
 				{
 					chassis.AddForceAtPosition((-brakingForce*transform.TransformDirection(Vector3.forward)), origin, 0);
 				}
@@ -113,7 +113,7 @@ public class WheelWeek6 : MonoBehaviour
 		origin = transform.position;
 		direction = transform.TransformDirection(Vector3.down);
 		Ray = new Ray(origin, direction);
-		localVelocity = transform.InverseTransformDirection(chassis.velocity);
+		localVelocity = transform.InverseTransformDirection(chassis.linearVelocity);
 
 		if (CheckGroundContact())
 		{

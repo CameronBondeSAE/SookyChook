@@ -80,7 +80,7 @@ public class PlayerViewModel : MonoBehaviour
 
         if (characterModel.onGround)
         {
-            int velocityMagnitude = (int) (characterModel.rb.velocity.magnitude * 10f * Time.deltaTime);
+            int velocityMagnitude = (int) (characterModel.rb.linearVelocity.magnitude * 10f * Time.deltaTime);
             particleSystem.Emit(velocityMagnitude);
         }
     }

@@ -28,7 +28,7 @@ public class Wheel : MonoBehaviour
     void FixedUpdate()
     {
         
-        localVelocity = transform.InverseTransformDirection(rb.velocity);
+        localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
         xVelocity = localVelocity.x;
         
         //Frictional Force for lateral movement

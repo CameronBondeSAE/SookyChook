@@ -27,7 +27,7 @@ public class WheelModel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Container for useful info coming from casting functions (note ‘out’ below)
+        // Container for useful info coming from casting functions (note ï¿½outï¿½ below)
         RaycastHit hitinfo;
         hitinfo = new RaycastHit();
 
@@ -53,7 +53,7 @@ public class WheelModel : MonoBehaviour
             }
 
             //Applying lateral forces - Get vehicles velocity
-            localVelocity = transform.InverseTransformDirection(rb.velocity);
+            localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
             xVelocity = localVelocity.x;
 
             //Add a force to the vehicles local x velocity (left & right) so vehicle can only travel forwards

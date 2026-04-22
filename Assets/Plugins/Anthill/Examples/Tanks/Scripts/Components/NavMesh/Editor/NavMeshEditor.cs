@@ -774,7 +774,7 @@ namespace Tanks
 		private Vector2 DotHandle(Vector2 aPosition, float aSize = 0.05f)
 		{
 			float s = HandleUtility.GetHandleSize(aPosition) * aSize;
-			return Handles.FreeMoveHandle(aPosition, Quaternion.identity, s, Vector3.zero, Handles.DotHandleCap);
+			var fmh_777_45_639124672620446799 = Quaternion.identity; return Handles.FreeMoveHandle(aPosition, s, Vector3.zero, Handles.DotHandleCap);
 		}
 		
 		#endregion
