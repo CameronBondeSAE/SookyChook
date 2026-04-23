@@ -1,15 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using Sirenix.OdinInspector;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEngine.Rendering.VirtualTexturing;
-using UnityEngine.Serialization;
 using Color = UnityEngine.Color;
 
 public class ScanningGrid : ManagerBase<ScanningGrid>

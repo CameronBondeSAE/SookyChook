@@ -18,6 +18,8 @@ public class LightAutomatic : MonoBehaviour
 		ChangeState(phase);
 	}
 
+	
+	// TODO RPC network this
 	private void ChangeState(DayNightManager.DayPhase phase)
 	{
 		if (phase == DayNightManager.DayPhase.Dawn || phase == DayNightManager.DayPhase.Evening || phase == DayNightManager.DayPhase.Night ||

@@ -67,6 +67,6 @@ public class DayNightManager : ManagerBase<DayNightManager>
         currentPhase = newPhase;
         currentTime = (float) newPhase;
         PhaseChangeEvent?.Invoke(newPhase);
-        print(newPhase);
+        // print(newPhase);
     }
 }

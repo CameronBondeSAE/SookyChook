@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Tanks;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 
+[Serializable]
+public class OrderUIText
+{
+	public ChickenGrowingMode.Order order;
+	public GameObject               uiTextGameObject;
+}
+    
 public class OrderPoint : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -27,12 +31,6 @@ public class OrderPoint : MonoBehaviour
 
     public List<OrderUIText> orderUITexts = new List<OrderUIText>();
 
-    public class OrderUIText
-    {
-        public ChickenGrowingMode.Order order;
-        public GameObject uiTextGameObject;
-    }
-    
     //events
     public event Action<CharacterModel> OrderPointEvent;
 
@@ -82,7 +80,7 @@ public class OrderPoint : MonoBehaviour
         GetComponentInChildren<TextMeshProUGUI>().DOColor(Color.white, 0);
         StartCoroutine(OrderUI());
         //Debug for Order
-        Debug.Log(order.productType.ToString());
+        Debug.Log("New order : "+order.productType.ToString());
 
     }
 

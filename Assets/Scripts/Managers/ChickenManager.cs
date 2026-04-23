@@ -1,14 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Rob;
-using Tanks;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Aaron
 {
@@ -63,13 +56,13 @@ namespace Aaron
             
             //TODO: Try and fix this up (Lachlan Stuff)
             // JSON SAVE AND LOAD
-            ChickenManager chickenManager = this;
-            string json = JsonUtility.ToJson(this);
+            // ChickenManager chickenManager = this;
+            // string json = JsonUtility.ToJson(this);
             // chickenManager = JsonUtility.FromJson<ChickenManager>(json);
             //string chickenNames = this.ToString();
             //JsonUtility.FromJson<ChickenManager>(chickenNames);
 
-            Debug.Log(JsonUtility.ToJson(this));
+            // Debug.Log(JsonUtility.ToJson(this));
         }
 
         public void RemoveChicken(GameObject chicken)

@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Rob;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChickenGrow_Intro : MonoBehaviour
@@ -66,7 +63,7 @@ public class ChickenGrow_Intro : MonoBehaviour
 
 		yield return new WaitForSeconds(3f*skipTime);
 		MessagesManager.Instance.Show("Plant more seeds and keep wild animals out... or whatever I don't care anymore");
-		yield return new WaitForSeconds(3f*skipTime);
+		yield return new WaitForSeconds(5f*skipTime);
 
 		chickenGrowingMode.ActivateRestOfGameModeRules();
 		
