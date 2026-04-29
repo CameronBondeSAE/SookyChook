@@ -1639,6 +1639,10 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 2346845948007713436, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2561181459901149623, guid: 997f9e747bec2af448ceba8e263f3d6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.789221
@@ -4269,6 +4273,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scenePrefabInstances:
+  - _gameObject: {fileID: 1830574954}
+    _prefab: Assets/Prefabs/Managers/Networking/NetworkManager.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410017}
+    _prefab: Assets/Team Members/Howard/Prefabs/Lobby/LobbyUI.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410018}
+    _prefab: Assets/Team Members/Howard/Prefabs/Networking/Lobby system.prefab
+  - _gameObject: {fileID: 1260410016}
+    _prefab: Assets/Team Members/Howard/Prefabs/BootstrapManager/BootstrapManager.prefab
+  - _gameObject: {fileID: 1260410015}
+    _prefab: Assets/Team Members/Howard/Prefabs/PlayerSpawnManager/PlayerSpawnManager.prefab
+  - _gameObject: {fileID: 1260410014}
+    _prefab: Assets/Team Members/Howard/Prefabs/Lobby/LobbyManager.prefab
   - _gameObject: {fileID: 218113637}
     _prefab: Assets/Prefabs/Managers/Managers.prefab
   - _gameObject: {fileID: 218113636}
@@ -7680,6 +7712,144 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7068733562459782167, guid: 09e1b5f82475c694d87aa56fb9a9fae7, type: 3}
   m_PrefabInstance: {fileID: 1255071909}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1260410013
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 348148240211699333, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4174182732
+      objectReference: {fileID: 0}
+    - target: {fileID: 747958021950517600, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 831
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557062111558524237, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_Name
+      value: Lobby system
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250645460541281791, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621467995648516094, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2549376491
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995082316020449767, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205664612569299067, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286494580704889365, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+--- !u!1 &1260410014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8120835592770868179, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+  m_PrefabInstance: {fileID: 1260410013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1260410015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5979389388320341364, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+  m_PrefabInstance: {fileID: 1260410013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1260410016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5112508417236129426, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+  m_PrefabInstance: {fileID: 1260410013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1260410017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3613355410210407799, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+  m_PrefabInstance: {fileID: 1260410013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1260410018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2557062111558524237, guid: b5324c55f25ca674ab529a149fc863a5, type: 3}
+  m_PrefabInstance: {fileID: 1260410013}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1277211944
 Mesh:
   m_ObjectHideFlags: 0
@@ -10750,149 +10920,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6336531168752968447, guid: 09e1b5f82475c694d87aa56fb9a9fae7, type: 3}
   m_PrefabInstance: {fileID: 2072522423}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1830574954
+--- !u!1 &1830574954 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 342224014539809016, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+  m_PrefabInstance: {fileID: 5805273530551625044}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1830574956}
-  - component: {fileID: 1830574955}
-  - component: {fileID: 1830574958}
-  - component: {fileID: 1830574957}
-  m_Layer: 0
-  m_Name: NetworkManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1830574955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830574954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593a2fe42fa9d37498c96f9a383b6521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkManagerExpanded: 0
-  NetworkConfig:
-    ProtocolVersion: 0
-    NetworkTransport: {fileID: 1830574958}
-    PlayerPrefab: {fileID: 8909449322511247403, guid: 24dd48baf168fc84590b5bc12512ac2f, type: 3}
-    Prefabs:
-      NetworkPrefabsLists:
-      - {fileID: 11400000, guid: 85da8f3dff20e2d4ca31a1f5e6f3a2b2, type: 2}
-    TickRate: 5
-    ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
-    ConnectionData: 
-    EnableTimeResync: 0
-    TimeResyncInterval: 30
-    EnsureNetworkVariableLengthSafety: 0
-    EnableSceneManagement: 1
-    ForceSamePrefabs: 1
-    RecycleNetworkIds: 1
-    NetworkIdRecycleDelay: 120
-    RpcHashSize: 0
-    LoadSceneTimeOut: 120
-    SpawnTimeout: 10
-    EnableNetworkLogs: 1
-    NetworkTopology: 0
-    UseCMBService: 0
-    AutoSpawnPlayerPrefabClientSide: 1
-    NetworkMessageMetrics: 1
-    NetworkProfilingMetrics: 1
-    OldPrefabList: []
-  RunInBackground: 1
-  LogLevel: 1
---- !u!4 &1830574956
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830574954}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.46513605, y: -6.5324345, z: 7.3684163}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1830574957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830574954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d9db9626104da59357651088226725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PresetAsset: {fileID: 0}
-  m_PresetReference:
-    rid: 243688722499633475
-  m_Scenario:
-    rid: -2
-  m_IsScenarioSettingsFolded: 0
-  AutoRunScenario: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 243688722499633475
-      type: {class: NetworkSimulatorPreset, ns: Unity.Multiplayer.Tools.NetworkSimulator.Runtime, asm: Unity.Multiplayer.Tools.NetworkSimulator.Runtime}
-      data:
-        <Name>k__BackingField: 'Home Satellite [low Earth orbit]'
-        <Description>k__BackingField: Low Earth orbit satellite network scenario
-          for desktop and console platforms. Bad ping, good jitter and no packet
-          loss.
-        <PacketDelayMs>k__BackingField: 100
-        <PacketJitterMs>k__BackingField: 10
-        <PacketLossInterval>k__BackingField: 0
-        <PacketLossPercent>k__BackingField: 0
---- !u!114 &1830574958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830574954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ProtocolType: 0
-  m_UseWebSockets: 0
-  m_UseEncryption: 0
-  m_MaxPacketQueueSize: 128
-  m_MaxPayloadSize: 6144
-  m_HeartbeatTimeoutMS: 500
-  m_ConnectTimeoutMS: 1000
-  m_MaxConnectAttempts: 60
-  m_DisconnectTimeoutMS: 30000
-  ConnectionData:
-    Address: 127.0.0.1
-    Port: 7777
-    WebSocketPath: /
-    ServerListenAddress: 127.0.0.1
-    ClientBindPort: 0
-  DebugSimulator:
-    PacketDelayMS: 0
-    PacketJitterMS: 0
-    PacketDropRate: 0
 --- !u!1001 &1835735557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13350,11 +13382,189 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3473653077093125056, guid: be805b51b27a50143a48c840f3838e9a, type: 3}
   m_PrefabInstance: {fileID: 4392571769436185274}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5805273530551625044
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 342224014539809016, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_Name
+      value: NetworkManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_PresetReference
+      value: 243688723562103343
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: 'managedReferences[243688722499633479]'
+      value: Unity.Multiplayer.Tools.NetworkSimulator.Runtime Unity.Multiplayer.Tools.NetworkSimulator.Runtime.NetworkSimulatorPreset
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: 'managedReferences[243688723562103341]'
+      value: Unity.Multiplayer.Tools.NetworkSimulator.Runtime Unity.Multiplayer.Tools.NetworkSimulator.Runtime.NetworkSimulatorPreset
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: 'managedReferences[243688723562103342]'
+      value: Unity.Multiplayer.Tools.NetworkSimulator.Runtime Unity.Multiplayer.Tools.NetworkSimulator.Runtime.NetworkSimulatorPreset
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: 'managedReferences[243688723562103343]'
+      value: Unity.Multiplayer.Tools.NetworkSimulator.Runtime Unity.Multiplayer.Tools.NetworkSimulator.Runtime.NetworkSimulatorPreset
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688722499633479].<Name>k__BackingField
+      value: 'Home Satellite [low Earth orbit]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103341].<Name>k__BackingField
+      value: 'Home Satellite [low Earth orbit]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103342].<Name>k__BackingField
+      value: 'Home Satellite [low Earth orbit]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103343].<Name>k__BackingField
+      value: 'Home Satellite [low Earth orbit]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688722499633479].<Description>k__BackingField
+      value: Low Earth orbit satellite network scenario for desktop and console platforms.
+        Bad ping, good jitter and no packet loss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103341].<Description>k__BackingField
+      value: Low Earth orbit satellite network scenario for desktop and console platforms.
+        Bad ping, good jitter and no packet loss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103342].<Description>k__BackingField
+      value: Low Earth orbit satellite network scenario for desktop and console platforms.
+        Bad ping, good jitter and no packet loss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103343].<Description>k__BackingField
+      value: Low Earth orbit satellite network scenario for desktop and console platforms.
+        Bad ping, good jitter and no packet loss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688722499633479].<PacketDelayMs>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103341].<PacketDelayMs>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103342].<PacketDelayMs>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103343].<PacketDelayMs>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688722499633479].<PacketJitterMs>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103341].<PacketJitterMs>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103342].<PacketJitterMs>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103343].<PacketJitterMs>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688722499633479].<PacketLossPercent>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103341].<PacketLossPercent>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103342].<PacketLossPercent>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103343].<PacketLossPercent>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688722499633479].<PacketLossInterval>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103341].<PacketLossInterval>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103342].<PacketLossInterval>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846248899588797233, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: managedReferences[243688723562103343].<PacketLossInterval>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.46513605
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.5324345
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.3684163
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174626823515869509, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53bc53c8b51c11f4a90021a3a036a6f2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1830574956}
+  - {fileID: 5805273530551625044}
+  - {fileID: 1260410013}
   - {fileID: 218113611}
   - {fileID: 1249324407}
   - {fileID: 1620327940}
