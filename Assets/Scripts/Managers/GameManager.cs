@@ -24,10 +24,10 @@ public class GameManager : ManagerBase<GameManager>
     public void StartGame()
     {
 	    // TODO: Get gamemodes to do this
-	    if (debugForceSpawnPlayersAndCamera)
-	    {
-		    SpawnPlayers(2);
-	    }
+	    // if (debugForceSpawnPlayersAndCamera)
+	    // {
+		    // SpawnPlayers(2);
+	    // }
         
 	    AssignPlayersToCameraGroup();
 	    
@@ -63,7 +63,7 @@ public class GameManager : ManagerBase<GameManager>
         players.Add(p1
                         .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
 
-        // HACK hardcoded spawn
+        // TODO: HACK hardcoded spawn
         if (gameMode.playerSpawns.Count>=2)
         {
 	        p1.transform.position = gameMode.playerSpawns[0].transform.position;

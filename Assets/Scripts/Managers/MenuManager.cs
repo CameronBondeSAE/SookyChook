@@ -33,10 +33,10 @@ public class MenuManager : MonoBehaviour
 	        newButton.GetComponentInChildren<Button>().onClick.AddListener(delegate { GameManager.Instance.SetGameMode(gameMode); });
         }
         
-        if (autoRun)
-        {
-            StartGame(2);
-        }
+        // if (autoRun)
+        // {
+            // StartGame(2);
+        // }
     }
 
     private void ToggleMenuOnperformed(InputAction.CallbackContext aObj)
