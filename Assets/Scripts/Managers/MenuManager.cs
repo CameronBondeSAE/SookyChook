@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     public bool autoRun = false;
     
     public GameObject menuView;
+    public GameObject lobbyView;
     public GameObject shop;
     [SerializeField]
     private GameObject gameModeButton;
@@ -66,10 +67,12 @@ public class MenuManager : MonoBehaviour
     public void ShowMenu()
     {
         menuView.SetActive(true);
+        lobbyView.SetActive(true);
     }
 
     public void HideMenu()
     {
         menuView.SetActive(false);
+        lobbyView.SetActive(false);
     }
 }
