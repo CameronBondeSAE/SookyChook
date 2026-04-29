@@ -72,7 +72,7 @@ public class LobbyManager : MonoBehaviour
     {
         //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
         HandleLobbyHeartbeat();
-        HandleLobbyPolling();
+        // HandleLobbyPolling();
     }
 
     public async void Authenticate(string playerName)
@@ -151,7 +151,7 @@ public class LobbyManager : MonoBehaviour
                     return;
                 }
 
-                if (!hasStartedGame && joinedLobby.Data[KEY_START_GAME].Value != "0")
+                // if (!hasStartedGame) //TODO CAM-I don't know what this is or why it's never true   && joinedLobby.Data[KEY_START_GAME].Value != "0")
                 {
                     hasStartedGame = true;
 
@@ -457,8 +457,6 @@ public class LobbyManager : MonoBehaviour
             {
                 Debug.Log("StartGame");
 
-                hasStartedGame = true;
-
                 string relayCode = await TestRelay.Instance.CreatRelay();
 
                 Lobby lobby = await LobbyService.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
@@ -469,7 +467,10 @@ public class LobbyManager : MonoBehaviour
                 }
                 });
 
+                hasStartedGame = true;
+
                 joinedLobby = lobby;
+                OnGameStarted?.Invoke(this, new LobbyEventArgs { lobby = lobby });
             }
             catch (LobbyServiceException e)
             {

@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using Tanks;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PopupInfo : MonoBehaviour
@@ -28,7 +29,7 @@ public class PopupInfo : MonoBehaviour
 
 	private void Start()
 	{
-		textMesh.text = message;
+		textMesh.text        = message;
 		transform.localScale = Vector3.zero;
 
 		spriteRenderer.size = new Vector2(2f + message.Length / 3f, 1);
@@ -37,23 +38,18 @@ public class PopupInfo : MonoBehaviour
 
 	void Update()
 	{
+		NetworkObject localClientPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
+		
+		if(localClientPlayerObject == null)
+			return;
+		
 		if (onlyShowOnce && shownOnce)
 		{
 			return;
 		}
 
-		// Only pay attention to the closest player
-		float distance = float.MaxValue;
-		CharacterModel characterModel = null;
-		foreach (CharacterModel _characterModel in GameManager.Instance.players)
-		{
-			float checkDistance = Vector3.Distance(_characterModel.transform.position, transform.position);
-			if (checkDistance < distance)
-			{
-				characterModel = _characterModel;
-				distance = checkDistance;
-			}
-		}
+		float distance = Vector3.Distance(localClientPlayerObject.transform.position,
+		                                  transform.position);
 
 		if (!poppedUp && distance < distanceThreshold)
 		{
@@ -68,7 +64,7 @@ public class PopupInfo : MonoBehaviour
 
 	private void Popup()
 	{
-		poppedUp = true;
+		poppedUp             = true;
 		transform.localScale = Vector3.one;
 		transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), .5f);
 		transform.DOShakeRotation(0.5f, 10f);

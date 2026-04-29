@@ -1,6 +1,8 @@
+using System;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,43 +15,74 @@ public class GameManager : ManagerBase<GameManager>
 
     public GameModeBase[] gameModes;
     public GameModeBase gameMode;
-    public List<CharacterModel> players;
+    // public List<CharacterModel> players;
 
     public bool inGame = false;
 
     [SerializeField]
     private bool debugForceSpawnPlayersAndCamera = false;
 
-    [Button]
+    private void OnEnable()
+    {
+	    NetworkManager.Singleton.OnClientConnectedCallback += SpawnPlayer;
+	    LobbyManager.Instance.OnGameStarted += OnGameStarted;
+    }
+
+    private void OnDisable()
+    {
+	    // NetworkManager.Singleton.OnClientConnectedCallback -= SpawnPlayer;
+	    // LobbyManager.Instance. -= OnJoinedLobby;
+    }
+
+    private void OnGameStarted(object sender, LobbyManager.LobbyEventArgs e)
+    {
+	    StartGame();
+    }
+
+    // [Button]
     public void StartGame()
     {
 	    // TODO: Get gamemodes to do this
 	    // if (debugForceSpawnPlayersAndCamera)
 	    // {
-		    // SpawnPlayers(2);
+	    // SpawnPlayers(2);
 	    // }
         
-	    AssignPlayersToCameraGroup();
+	    // AssignLocalMultiplayerPlayersToCameraGroup();
 	    
-        gameMode.Activate();
+	    AssignLocalPlayerCamera_Rpc();
+	    
+	    gameMode.Activate();
 
-        inGame = true;
+	    inGame = true;
     }
 
-    public void AssignPlayersToCameraGroup()
+    [Rpc(SendTo.ClientsAndHost, Delivery = RpcDelivery.Reliable)]
+    private void AssignLocalPlayerCamera_Rpc()
     {
-	    // HACK: to make a single player camera zoom out more
-	    if (players.Count == 1)
+	    foreach (KeyValuePair<ulong, NetworkClient> character in NetworkManager.Singleton.ConnectedClients)
 	    {
-		    cinemachineTargetGroup.AddMember(players[0].transform, 1f, 6f);
-	    }
-	    else
-	    {
-		    foreach (var characterModel in players)
+		    if (character.Value.PlayerObject.IsLocalPlayer)
 		    {
-			    cinemachineTargetGroup.AddMember(characterModel.transform, 1f, 3f);
+			    cinemachineTargetGroup.AddMember(character.Value.PlayerObject.transform, 1f, 6f);
 		    }
 	    }
+    }
+
+    public void AssignLocalMultiplayerPlayersToCameraGroup()
+    {
+	    // HACK: to make a single player camera zoom out more
+	    // if (players.Count == 1)
+	    // {
+		    // cinemachineTargetGroup.AddMember(players[0].transform, 1f, 6f);
+	    // }
+	    // else
+	    // {
+		    // foreach (var characterModel in players)
+		    // {
+			    // cinemachineTargetGroup.AddMember(characterModel.transform, 1f, 3f);
+		    // }
+	    // }
     }
 
     public void SetGameMode(GameModeBase _gameMode)
@@ -57,46 +90,35 @@ public class GameManager : ManagerBase<GameManager>
 	    gameMode = _gameMode;
     }
 
-    public void SpawnPlayers(int numberOfPlayers)
+    public void SpawnPlayer(ulong clientId)
     {
-        PlayerInput p1 = PlayerInput.Instantiate(playerPrefab, 1, "Keyboard WASD", -1, Keyboard.current);
-        players.Add(p1
-                        .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
-
+        PlayerInput newPlayer = PlayerInput.Instantiate(playerPrefab, 1, "Keyboard Arrows", -1, Keyboard.current);
+        // PlayerInput newPlayer = PlayerInput.Instantiate(playerPrefab, 1, "Keyboard WASD", -1, Keyboard.current);
+        // players.Add(newPlayer
+                        // .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
+        newPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
+                  
         // TODO: HACK hardcoded spawn
-        if (gameMode.playerSpawns.Count>=2)
+        if (gameMode.playerSpawns.Count>=NetworkManager.Singleton.ConnectedClients.Count)
         {
-	        p1.transform.position = gameMode.playerSpawns[0].transform.position;
-	        p1.transform.rotation = gameMode.playerSpawns[0].transform.rotation;
-
-
-	        if (numberOfPlayers > 1)
-	        {
-		        PlayerInput p2 = PlayerInput.Instantiate(playerPrefab, 2, "Keyboard Arrows", -1, Keyboard.current);
-		        players.Add(p2
-			        .GetComponent<CharacterModel>()); // HACK: Could make more generic I guess, but don't have a character base class
-
-		        // HACK hardcoded spawn
-		        p2.transform.position = gameMode.playerSpawns[1].transform.position;
-		        p2.transform.rotation = gameMode.playerSpawns[1].transform.rotation;
-	        }
+	        newPlayer.transform.position = gameMode.playerSpawns[NetworkManager.Singleton.ConnectedClients.Count-1].transform.position;
+	        newPlayer.transform.rotation = gameMode.playerSpawns[NetworkManager.Singleton.ConnectedClients.Count-1].transform.rotation;
+        }
+        else
+        {
+	        Debug.LogWarning("Not enough spawn points for players : " + NetworkManager.Singleton.ConnectedClients.Count);
         }
     }
 
     [Button]
     public void EndGame()
     {
-        foreach (var characterModel in players)
+        foreach (var characterModel in NetworkManager.Singleton.ConnectedClients)
         {
-            Destroy(characterModel.gameObject);
+            Destroy(characterModel.Value.PlayerObject.gameObject);
+            cinemachineTargetGroup.RemoveMember(characterModel.Value.PlayerObject.transform);
         }
-        players.Clear();
 
-        foreach (var characterModel in players)
-        {
-            cinemachineTargetGroup.RemoveMember(characterModel.transform);
-        }
- 
         gameMode.EndMode();
 
         inGame = false;

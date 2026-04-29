@@ -123,7 +123,7 @@ public class SeedPlanterModel : NetworkBehaviour, ITractorAttachment, IUpgradeab
 
     private void FixedUpdate()
     {
-        if(isServer)    // 
+        if(IsServer)    // 
         {
             if(tractor != null)
             {

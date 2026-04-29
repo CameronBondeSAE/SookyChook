@@ -53,7 +53,7 @@ public class MenuManager : MonoBehaviour
         menuView.SetActive(false);
         if (shop != null) shop.SetActive(true);
 
-        GameManager.Instance.SpawnPlayers(numberOfPlayers);
+//        GameManager.Instance.SpawnPlayers(numberOfPlayers);
 
         // Just restart if already playing
         if (GameManager.Instance.inGame)

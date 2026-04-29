@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Anthill.AI;
 using Rob;
 using Tom;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Rooster_Model : AnimalBase
@@ -27,9 +28,9 @@ public class Rooster_Model : AnimalBase
         {
             possibleEnemies.Add(animal.GetComponent<Allegiances>());
         }
-        foreach (CharacterModel player in GameManager.Instance.players)
+        foreach (KeyValuePair<ulong, NetworkClient> player in NetworkManager.Singleton.ConnectedClients)
         {
-            possibleEnemies.Add(player.GetComponent<Allegiances>());
+            possibleEnemies.Add(player.Value.PlayerObject.GetComponent<Allegiances>());
         }
 
         // Go through all players and wildlife and find if you can see one that you hate
