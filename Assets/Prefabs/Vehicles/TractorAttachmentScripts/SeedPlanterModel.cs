@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
+public class SeedPlanterModel : NetworkBehaviour, ITractorAttachment, IUpgradeable
 {
     //public TractorModel tractorModel;
     public GameObject seed;
@@ -47,17 +48,25 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
     // Start is called before the first frame update
     void Start()
     {
-        //if (shop is { }) shop.PlanterUpgradedEvent += Upgrade;
+        if(IsServer) // only sets it up in the server
+        {
+            //if (shop is { }) shop.PlanterUpgradedEvent += Upgrade;
 
-        //Default (lvl 1) plant positions used for only planting 2 seeds
-        currentPlantPositions.Add(plantPositions[2]);
-        currentPlantPositions.Add(plantPositions[3]);
+            //Default (lvl 1) plant positions used for only planting 2 seeds
+            currentPlantPositions.Add(plantPositions[2]);
+            currentPlantPositions.Add(plantPositions[3]);
 
-        seedsAvailable = maxSeeds;
+            seedsAvailable = maxSeeds;
+        }
     }
 
     IEnumerator PlantSeeds()
     {
+        if(!IsServer)   // checks if the plants are planting in the server
+        {
+            yield return null;
+        }
+
         //Wait before planting first grass for attachment to stablise onto tractor
         yield return new WaitForSeconds(1f);
         yield return seedsAvailable > 0;
@@ -83,6 +92,7 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
             {
                 if(newHit.collider)
                 {
+                    // only spawns server side
                     GameObject newSeed = Instantiate(seed, newHit.point + seedSpawnOffset, Quaternion.identity);
                 }
             }
@@ -113,27 +123,36 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
     private void FixedUpdate()
     {
-        if(tractor != null)
+        if(isServer)    // 
         {
-            tractorVelocity = tractor.GetComponent<Rigidbody>().linearVelocity.magnitude;
+            if(tractor != null)
+            {
+                // change this to a custom tractor network rigidbody
+                tractorVelocity = tractor.GetComponent<Rigidbody>().linearVelocity.magnitude;
 
-            if(tractorVelocity > 0.5)
-            {
-                tractorMoving = true;
+                if(tractorVelocity > 0.5)
+                {
+                    tractorMoving = true;
+                }
+                else
+                {
+                    tractorMoving = false;
+                }
             }
-            else
+            //else if(tractor == null)
             {
-                tractorMoving = false;
+                //tractorMoving = false;
             }
-        }
-        //else if(tractor == null)
-        {
-            //tractorMoving = false;
         }
     }
 
     public void Attach(TractorModel aTractorModel)
     {
+        if(!IsServer)
+        {
+            return;
+        }
+
         isAttached = true;
         tractor = aTractorModel;
         
@@ -154,6 +173,11 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
     public void Detach()
     {
+        if(!IsServer)
+        {
+            return;
+        }
+
         isAttached = false;
         tractor = null;
         IsAttachedEvent?.Invoke(false);
@@ -169,6 +193,11 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
     public void Upgrade()
     {
+        if(!IsServer)
+        {
+            return;
+        }
+
         //Upgrade to next level
         if(planterLevel < maxlevel)
         {
@@ -185,7 +214,13 @@ public class SeedPlanterModel : MonoBehaviour, ITractorAttachment, IUpgradeable
 
     void PlanterUpgrades(int newLevel)
     {
+        if(!IsServer)
+        {
+            return;
+        }
+
         //Event for whatever EFX/SFX we want to happen on upgrading
+        // this should be moved to a RPC View function
         LevelUpEvent?.Invoke();
 
         if(newLevel == 2)
