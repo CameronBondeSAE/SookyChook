@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class AtmosphereManager : MonoBehaviour
+public class AtmosphereManager : NetworkBehaviour
 {
     // Sun plus Moon Variables
-    public float sunPosition;
+    public NetworkVariable<float> sunPosition = new NetworkVariable<float>(0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public Gradient sunColour;
     
     // Sun and Moon Objects
@@ -28,20 +29,24 @@ public class AtmosphereManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 360 degrees / 24hrs = 15 to calculate day-night cycle. Then - 180 as zero is noon
-        sunPosition=DayNightManager.Instance.currentTime* 15.0f-180.0f;
+        // Only the server should update the sun position
+        if (IsServer)
+        {
+            // 360 degrees / 24hrs = 15 to calculate day-night cycle. Then - 180 as zero is noon
+            sunPosition.Value = DayNightManager.Instance.currentTime.Value * 15.0f - 180.0f;
+        }
         
-        // Sun Rotation
-        transform.rotation=Quaternion.Euler(sunPosition, 0, 0);
+        // Sun Rotation (all clients can rotate based on the networked value)
+        transform.rotation = Quaternion.Euler(sunPosition.Value, 0, 0);
 
         //time is dawn
-        if (sunPosition >= -95)
+        if (sunPosition.Value >= -95)
         {
             Sun.SetActive(true);
         }
         
         // if time is morning
-        if (sunPosition >= -75)
+        if (sunPosition.Value >= -75)
         {
             Moon.SetActive(false);
             //Sun.SetActive(true);
@@ -49,32 +54,32 @@ public class AtmosphereManager : MonoBehaviour
         }
         
         // if time is noon  
-        if (sunPosition >= 0)
+        if (sunPosition.Value >= 0)
         {
             currentState = Sun;
         } 
             
         // if time is evening
-        if (sunPosition >= 75)
+        if (sunPosition.Value >= 75)
         {
             currentState = Moon;
             //Sun.SetActive(false);
             Moon.SetActive(true);
         }
 
-        if (sunPosition >= 100)
+        if (sunPosition.Value >= 100)
         {
             Sun.SetActive(false);
         }
         
         // if time is night
-        if (sunPosition>=135)
+        if (sunPosition.Value >= 135)
         {
             //currentState = Moon;
         }
         
         // if time is midnight
-        if (sunPosition >=-180)
+        if (sunPosition.Value >= -180)
         {
             //currentState = Moon;
         }
@@ -82,5 +87,3 @@ public class AtmosphereManager : MonoBehaviour
         //TODO: Change the values, as it never goes to 360, it changes between 180 and -180
     }
 }
-
-

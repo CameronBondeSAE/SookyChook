@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class DayNightManager : ManagerBase<DayNightManager>
 {
@@ -18,10 +19,16 @@ public class DayNightManager : ManagerBase<DayNightManager>
     }
     
     [Tooltip("Set this to the starting state, it will overwrite the time and call the phase's event")]
-    public DayPhase currentPhase = DayPhase.Morning;
+    private NetworkVariable<int> _currentPhaseNetwork = new NetworkVariable<int>((int)DayPhase.Morning, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    
+    public DayPhase currentPhase
+    {
+        get => (DayPhase)_currentPhaseNetwork.Value;
+        private set => _currentPhaseNetwork.Value = (int)value;
+    }
 
     [Tooltip("Measured as hours in 24h format, i.e. value of 17f = 5pm")]
-    public float currentTime = 7f;
+    public NetworkVariable<float> currentTime = new NetworkVariable<float>(7f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     [Tooltip("How many real-time seconds it takes for 1 in-game hour")]
     public float timeDilation = 10f;
@@ -32,21 +39,41 @@ public class DayNightManager : ManagerBase<DayNightManager>
     /// </summary>
     public event Action<DayPhase> PhaseChangeEvent;
 
+    public override void Awake()
+    {
+        base.Awake();
+        
+        // Subscribe to network variable changes to trigger events on clients
+        _currentPhaseNetwork.OnValueChanged += OnPhaseChanged;
+    }
+
+    private void OnPhaseChanged(int previousValue, int newValue)
+    {
+        // Trigger the event on all clients when phase changes
+        PhaseChangeEvent?.Invoke((DayPhase)newValue);
+    }
+
     private void Start()
     {
-        ChangePhase(currentPhase);
+        if (IsServer)
+        {
+            ChangePhase(DayPhase.Morning);
+        }
     }
 
     private void Update()
     {
+        // Only the server updates the time
+        if (!IsServer) return;
+        
         // Check to ensure no divide by zero errors
         if (timeDilation > 0)
         {
-            currentTime += Time.deltaTime / timeDilation;
+            currentTime.Value += Time.deltaTime / timeDilation;
         }
 
         // Wraps time back to 0 when it hits midnight
-        if (currentTime >= 24f)
+        if (currentTime.Value >= 24f)
         {
             ChangePhase(DayPhase.Midnight);
         }
@@ -55,7 +82,7 @@ public class DayNightManager : ManagerBase<DayNightManager>
         {
             // Checks if time has passed the phase time and that phase is next in the sequence
             // More modular than a bunch of if statements, just add a phase to the enum and this will include it
-            if (currentTime >= (float) phase && (int) phase > (int) currentPhase)
+            if (currentTime.Value >= (float) phase && (int) phase > (int) currentPhase)
             {
                 ChangePhase(phase);
             }
@@ -64,9 +91,11 @@ public class DayNightManager : ManagerBase<DayNightManager>
 
     public void ChangePhase(DayPhase newPhase)
     {
+        if (!IsServer) return; // Only server can change phase
+        
         currentPhase = newPhase;
-        currentTime = (float) newPhase;
-        PhaseChangeEvent?.Invoke(newPhase);
+        currentTime.Value = (float) newPhase;
+        // PhaseChangeEvent will be triggered automatically via OnValueChanged
         // print(newPhase);
     }
 }
