@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Netcode;
 using UnityEngine;
 
 //WOULD HAVE LOVED TO USE INHERITANCE BUT IT WAS PRETTY MESSY?
 //DIDN'T REALLY WANT TO HARD RIP TO A CHICKEN
-public class EggProduction : MonoBehaviour
+public class EggProduction : NetworkBehaviour
 {
     private ChickenModel chicken;
     public GameObject egg;
@@ -21,7 +22,12 @@ public class EggProduction : MonoBehaviour
     void Start()
     {
         chicken = GetComponent<ChickenModel>();
-        StartCoroutine("LayTimer");
+        
+        // Only the server should run the egg laying timer
+        if (IsServer)
+        {
+            StartCoroutine("LayTimer");
+        }
     }
 
     private void Update()
@@ -47,12 +53,25 @@ public class EggProduction : MonoBehaviour
 
     void LayEgg()
     {
+        // Only server can spawn networked objects
+        if (!IsServer)
+        {
+            return;
+        }
+        
         if (egg is { })
         {
             GameObject copy = egg;
             Vector3 chickenLocation = transform.position;
         
-            Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
+            GameObject spawnedEgg = Instantiate(copy, new Vector3(chickenLocation.x, chickenLocation.y, chickenLocation.z), copy.transform.rotation);
+            
+            // Check if egg has NetworkObject component and spawn it on the network
+            NetworkObject networkObject = spawnedEgg.GetComponent<NetworkObject>();
+            if (networkObject != null)
+            {
+                networkObject.Spawn();
+            }
         }
     }
 }
