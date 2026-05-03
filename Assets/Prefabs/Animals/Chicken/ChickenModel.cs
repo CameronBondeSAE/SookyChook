@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Tom;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,7 +23,7 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 	[SerializeField]
 	private float deathFling = 10f;
 
-	// Start is called before the first frame update
+	// Start is called before the first frame update .
 	public override void Start()
 	{
 		base.Start();
@@ -64,6 +65,7 @@ public class ChickenModel : AnimalBase, IInteractable, IPickupable, ISellable
 
 	public void PickUp()
 	{
+		//pickup isn't working for networked objects
 		GetComponent<Rigidbody>().isKinematic = true;
 		foreach (Collider child in GetComponentsInChildren<Collider>())
 		{

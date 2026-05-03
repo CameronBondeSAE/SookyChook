@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 #if UNITY_EDITOR || UNITY_EDITOR_64
 using UnityEditor;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Rob
 {
-	public class Spawner : MonoBehaviour
+	public class Spawner : NetworkBehaviour
 	{
 		[System.Serializable]
 		public class GroupInfo
@@ -36,16 +37,34 @@ namespace Rob
 
 		public List<GameObject> spawned;
 
-		private void Start()
+		public override void OnNetworkSpawn()
 		{
-			if (autoStart) SpawnMultiple();
+			base.OnNetworkSpawn();
 			
-			// FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
+			// Only spawn if we're the server and autoStart is enabled
+			if (IsServer && autoStart)
+			{
+				SpawnMultiple();
+			}
 		}
+
+		// private void Start()
+		// {
+		// 	if (autoStart) SpawnMultiple();
+		// 	
+		// 	// FindObjectOfType<DayNightManager>().PhaseChangeEvent += ChangePhase;
+		// }
 
 		// public void ChangePhase(DayNightManager.DayPhase timeOfDay)
 		public List<GameObject> SpawnMultiple()
 		{
+			// Only the server should spawn objects
+			if (!IsServer)
+			{
+				Debug.LogWarning("SpawnMultiple called on client - only server can spawn objects");
+				return spawned;
+			}
+
 			for (int i = 0; i < groupInfos.Length; i++) //searches through all of wildLife aray
 			{
 				// if (spawnInfos[i].phaseTime == timeOfDay) //if the wildlife dayPhase inside the array matches current day phase
@@ -81,6 +100,9 @@ namespace Rob
 
 		public GameObject SpawnSingle(GameObject prefab, Vector3 pos, Quaternion rotation)
 		{
+			// Check if the prefab has a NetworkObject component
+			NetworkObject networkObject = prefab.GetComponent<NetworkObject>();
+			
 			Vector3 randomSpot;
 			GameObject spawnedPrefab = Instantiate(prefab, pos,
 				rotation);
@@ -99,6 +121,13 @@ namespace Rob
 					// newSpawnPos.y - (hit.distance - groundOffset),
 					// newSpawnPos.z);
 				spawnedPrefab.transform.position = newSpawnPos;
+			}
+
+			// If this is a networked object and we're the server/host, spawn it on the network
+			if (networkObject != null && IsServer)
+			{
+				NetworkObject spawnedNetworkObject = spawnedPrefab.GetComponent<NetworkObject>();
+				spawnedNetworkObject.Spawn();
 			}
 
 			return spawnedPrefab;

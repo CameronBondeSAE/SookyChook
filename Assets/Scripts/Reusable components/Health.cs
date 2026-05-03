@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : NetworkBehaviour
 {
     //Allows each object to have unique health variable
     [SerializeField]
@@ -31,6 +32,13 @@ public class Health : MonoBehaviour
     //Manage Object Health (Can both increase or decrease health)
     public void ChangeHealth(float amount)
     {
+	    // If this is a networked object, only server can change health
+	    if (NetworkObject != null && !IsServer)
+	    {
+		    Debug.LogWarning("Only server can change health on networked objects");
+		    return;
+	    }
+	    
 	    // Don't do anything if you're dead
 	    if (!isAlive)
 	    {
@@ -48,13 +56,31 @@ public class Health : MonoBehaviour
         if(currentHealth <= deathThreshold)
         {
 	        isAlive = false;
-            DeathEvent?.Invoke(gameObject);
-            Die();
+	        
+	        // If networked, notify all clients
+	        if (NetworkObject != null && IsServer)
+	        {
+		        TriggerDeathClientRpc();
+	        }
+	        else
+	        {
+		        // Non-networked object, just invoke locally
+		        DeathEvent?.Invoke(gameObject);
+		        Die();
+	        }
         }
         else
         {
             isAlive = true;
         }
+    }
+
+    [ClientRpc]
+    private void TriggerDeathClientRpc()
+    {
+	    isAlive = false;
+	    DeathEvent?.Invoke(gameObject);
+	    Die();
     }
 
     public virtual void Die()
