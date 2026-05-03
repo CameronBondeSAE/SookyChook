@@ -1,35 +1,69 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class LightAutomatic : MonoBehaviour
+public class LightAutomatic : NetworkBehaviour
 {
 	// Start is called before the first frame update
-	void Start()
+	public override void OnNetworkSpawn()
 	{
+		base.OnNetworkSpawn();
 		// Use the Singleton to get access to it. Use the "Instance" variable
 		// (instead of grab dropping actual instances onto variable, or using FindOfObjectOfType)
-		DayNightManager.Instance.PhaseChangeEvent +=
-			DayNightManagerOnPhaseChangeEvent; // DayNightManagerOnPhaseChangeEvent;
+		
+		// Subscribe on the server only
+		if (IsServer)
+		{
+			DayNightManager.Instance.PhaseChangeEvent += DayNightManagerOnPhaseChangeEvent;
+		}
+		
+		// All clients request initial state when they spawn
+		if (IsClient)
+		{
+			RequestInitialStateServerRpc();
+		}
+	}
+	
+	public override void OnNetworkDespawn()
+	{
+		base.OnNetworkDespawn();
+		
+		if (IsServer && DayNightManager.Instance != null)
+		{
+			DayNightManager.Instance.PhaseChangeEvent -= DayNightManagerOnPhaseChangeEvent;
+		}
+	}
 
-		ChangeState(DayNightManager.Instance.currentPhase);
+	[ServerRpc(RequireOwnership = false)]
+	private void RequestInitialStateServerRpc()
+	{
+		// Server sends current phase to the client that requested it
+		ChangeStateClientRpc(DayNightManager.Instance.currentPhase);
 	}
 
 	private void DayNightManagerOnPhaseChangeEvent(DayNightManager.DayPhase phase)
 	{
-		ChangeState(phase);
+		// Server calls RPC to update all clients
+		ChangeStateClientRpc(phase);
 	}
 
+	[ClientRpc]
+	private void ChangeStateClientRpc(DayNightManager.DayPhase phase)
+	{
+		ChangeState(phase);
+	}
 	
-	// TODO RPC network this
+	// Night lights are now synced
 	private void ChangeState(DayNightManager.DayPhase phase)
 	{
-		if (phase == DayNightManager.DayPhase.Dawn || phase == DayNightManager.DayPhase.Evening || phase == DayNightManager.DayPhase.Night ||
+		if (phase == DayNightManager.DayPhase.Dawn || 
+		    phase == DayNightManager.DayPhase.Evening || 
+		    phase == DayNightManager.DayPhase.Night ||
 		    phase == DayNightManager.DayPhase.Midnight)
 		{
 			GetComponent<Light>().enabled = true;
 		}
-
-		if (phase == DayNightManager.DayPhase.Morning ||
-		    phase == DayNightManager.DayPhase.Noon)
+		else if (phase == DayNightManager.DayPhase.Morning ||
+		         phase == DayNightManager.DayPhase.Noon)
 		{
 			GetComponent<Light>().enabled = false;
 		}
